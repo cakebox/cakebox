@@ -2,13 +2,12 @@
     "require": {
         "php": ">=5.4.0",
         
-        "silex/silex": "~1.1",
+        "silex/silex": "~1.1"
     },
     "config": {
         "bin-dir": "bin",
         "vendor-dir": "tmp/composer/"
     },
     "autoload": {
-        "classmap": ["app/models/"]
     }
 }
