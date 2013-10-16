@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" ng-app="cakebox-light">
+<html lang="fr" ng-app="cakebox">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,28 +12,11 @@
     <link href="components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" media="screen">
 
     <!-- Custom styles for this template -->
-    <link href="resources/poc.css" rel="stylesheet">
-
-    <script>
-    var myapp = angular.module('myapp', ['ui']);
-
-    myapp.controller('controller', function ($scope) {
-        $scope.list = ["one", "two", "three", "four", "five", "six"];
-    });
-
-    angular.bootstrap(document, ['myapp']);
-    
-    </script>
+    <link href="resources/cakebox.css" rel="stylesheet">
 </head> 
 <body>
 
     <div class="container">
-
-        <div class="row" ng:controller="controller">
-            <ul class="graph" ui:sortable ng:model="list">
-                <li ng:repeat="item in list" class="item">{{item}}</li>
-            </ul>
-        </div>
 
         <div class="row">
 
