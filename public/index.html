@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="cakebox-light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Cakebox (light)</title>
+
+    <!-- Bootstrap -->
+    <link href="components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" media="screen">
+
+    <!-- Custom styles for this template -->
+    <link href="resources/poc.css" rel="stylesheet">
+
+    <script>
+    var myapp = angular.module('myapp', ['ui']);
+
+    myapp.controller('controller', function ($scope) {
+        $scope.list = ["one", "two", "three", "four", "five", "six"];
+    });
+
+    angular.bootstrap(document, ['myapp']);
+    
+    </script>
+</head> 
+<body>
+
+    <div class="container">
+
+        <div class="row" ng:controller="controller">
+            <ul class="graph" ui:sortable ng:model="list">
+                <li ng:repeat="item in list" class="item">{{item}}</li>
+            </ul>
+        </div>
+
+        <div class="row">
+
+        </div>
+
+        <!-- Site footer -->
+        <div class="footer">
+            <p>&copy; Company 2013</p>
+        </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- JavaScript plugins (requires jQuery) -->
+    <script src="components/jquery/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+    <script src="components/angular/angular.min.js"></script>
+    <script src="components/angular-ui/build/angular-ui.min.js"></script>
+</body>
+</html>

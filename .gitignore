@@ -1,0 +1,10 @@
+.DS_Store
+
+/composer.lock
+
+/vendor
+/tmp
+/bin
+
+/public/components
+
