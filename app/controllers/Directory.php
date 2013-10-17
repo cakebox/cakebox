@@ -5,21 +5,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\Finder\Finder;
 
-$app->get("/api/directory/list", function (Request $request) use ($app) {
+$app->get("/api/directories/{pathdir}", function (Request $request, $pathdir) use ($app) {
 
 	$directory = array();
 
 	$finder = new Finder();
-	$finder->followLinks()->in($app["dir.path"]);
+	$finder->followLinks()->depth('< 1')->in($app["dir.path"].$pathdir);
 
 	foreach ($finder as $file) {
-		if (!isset($directory[$file->getRelativePath()])) {
-			$keyPath = ($file->getRelativePath() == "") ? "." : $file->getRelativePath();
-			$directory[$keyPath] = array($file->getRelativePathname());
-		}
-    	else
-    		array_push($directory[$file->getRelativePath()], $file->getRelativePathname());
+		array_push($directory, $file->getRelativePathname());
 	}
 
-    return$app->json($directory);
-});
+    return $app->json($directory);
+})->value('pathdir', '')->assert("pathdir", ".*");
