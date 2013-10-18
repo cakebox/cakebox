@@ -10,10 +10,15 @@ $app->get("/api/directories/{pathdir}", function (Request $request, $pathdir) us
 	$directory = array();
 
 	$finder = new Finder();
-	$finder->followLinks()->depth('< 1')->in($app["dir.path"].$pathdir)->sortByName();
+	$finder->followLinks()->depth('< 1')->in($app["dir.path"].$pathdir)->sortByType();
 
 	foreach ($finder as $file) {
-		array_push($directory, $file->getRelativePathname());
+
+		$pathName = $file->getRelativePathname();
+		if ($file->isDir()) // make it pretty
+			$pathName .= '/';
+
+		array_push($directory, $pathName);
 	}
 
     return $app->json($directory);
