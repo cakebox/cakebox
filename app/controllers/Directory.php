@@ -7,19 +7,22 @@ use Symfony\Component\Finder\Finder;
 
 $app->get("/api/directories/{pathdir}", function (Request $request, $pathdir) use ($app) {
 
-	$directory = array();
+	$dirContent = array();
 
 	$finder = new Finder();
 	$finder->followLinks()->depth('< 1')->in($app["dir.path"].$pathdir)->sortByType();
 
 	foreach ($finder as $file) {
 
-		$pathName = $file->getRelativePathname();
-		if ($file->isDir()) // make it pretty
-			$pathName .= '/';
+		$pathInfo = array();
+		$pathInfo["name"] = ($file->isDir()) ? $file->getRelativePathname() . "/" : $file->getRelativePathname(); // make it pretty
+		$pathInfo["path"] = $file->getRelativePathname();
+		$pathInfo["type"] = $file->getType();
+		$pathInfo["mimetype"] = "";
+		$pathInfo["size"] = $file->getSize();
 
-		array_push($directory, $pathName);
+		array_push($dirContent, $pathInfo);
 	}
 
-    return $app->json($directory);
+    return $app->json($dirContent);
 })->value('pathdir', '')->assert("pathdir", ".*");
