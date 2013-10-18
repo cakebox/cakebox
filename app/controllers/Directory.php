@@ -10,7 +10,7 @@ $app->get("/api/directories/{pathdir}", function (Request $request, $pathdir) us
 	$directory = array();
 
 	$finder = new Finder();
-	$finder->followLinks()->depth('< 1')->in($app["dir.path"].$pathdir);
+	$finder->followLinks()->depth('< 1')->in($app["dir.path"].$pathdir)->sortByName();
 
 	foreach ($finder as $file) {
 		array_push($directory, $file->getRelativePathname());
