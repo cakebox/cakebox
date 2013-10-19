@@ -25,3 +25,8 @@ $app->get("/api/directories/{path}", function (Request $request, $path) use ($ap
 
     return $app->json($dirContent);
 })->value('path', '')->assert("path", ".*");
+
+$app->get("/api/file/{path}", function (Request $request, $path) use ($app) {
+
+	return $app->json();
+})->assert("path", ".*");

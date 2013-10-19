@@ -15,7 +15,7 @@ app.config(['$routeProvider',
         templateUrl: 'partials/index.html',
         controller: 'MainCtrl'
       }).
-      when('/play/:path', {
+      when('/play/:path*', {
         templateUrl: 'partials/play.html',
         controller: 'MediaCtrl'
       }).

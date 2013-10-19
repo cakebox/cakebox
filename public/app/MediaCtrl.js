@@ -1,5 +1,5 @@
-cakeboxCtrl.controller('MediaCtrl', ['$scope', '$http', '$location',
-    function($scope, $http, $location) {
+cakeboxCtrl.controller('MediaCtrl', ['$scope', '$http', '$routeParams',
+    function($scope, $http, $routeParams) {
 
-        $scope.location = $location;
+        $scope.mediaPath = $routeParams.path;
 }]);
