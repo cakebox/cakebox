@@ -5,22 +5,27 @@
         </div>
         <ol class="breadcrumb">
             <li ng-repeat="breadcrumb in breadcrumbs.getAll()" ng-class="{'active' : $last}">
-                <ng-switch on="$last">
-                    <a href="#{{ breadcrumb.path }}" ng-switch-default>{{ breadcrumb.name }}</a>
-                    <span ng-switch-when="true">{{ breadcrumb.name }}</span>
-                </ng-switch>
+                <span ng-if="$first">
+                    <a href="#/" ng-class="{'glyphicon glyphicon-home': $first}"></a>
+                </span>
+                <span ng-if="$middle">
+                    <a ng-href="#/get{{ breadcrumb.path }}">{{ breadcrumb.name }}</a>
+                </span>
+                <span ng-if="$last">
+                    <span>{{ breadcrumb.name }}</span>
+                </span>
             </li>
         </ol>
 
         <div ng-repeat="dir in dirs">
             <div ng-if="dir.type == 'dir'">
-                <a ng:href="#/get/{{ currentPath + dir.name }}" >{{ dir.name }}/</a>
+                <a ng-href="#/get/{{ currentPath + dir.name }}" >{{ dir.name }}/</a>
             </div>
             <div ng-if="dir.type == 'file' && dir.isVideo == false">
-                <a href="/access/{{ currentPath + dir.name }}" >{{ dir.name }}</a>
+                <a ng-href="/access/{{ currentPath + dir.name }}" >{{ dir.name }}</a>
             </div>
             <div ng-if="dir.type == 'file' && dir.isVideo == true">
-                <a href="#/play/{{ currentPath + dir.name }}" >{{ dir.name }}</a>
+                <a ng-href="#/play/{{ currentPath + dir.name }}" >{{ dir.name }}</a>
             </div>
         </div>
 

@@ -11,7 +11,7 @@ app.config(['$routeProvider',
         templateUrl: 'partials/index.html',
         controller: 'MainCtrl'
       }).
-      when('/get/:path', {
+      when('/get/:path*', {
         templateUrl: 'partials/index.html',
         controller: 'MainCtrl'
       }).

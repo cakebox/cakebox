@@ -14,7 +14,6 @@ cakeboxCtrl.controller('MainCtrl', ['$scope', '$http', '$routeParams', 'breadcru
 
     $scope.$watch('location.path()', function(event, current) {
 
-        console.log($routeParams.path);
         if ($routeParams.path)
             $scope.currentPath += $routeParams.path + '/';
 
