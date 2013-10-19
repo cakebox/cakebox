@@ -4,7 +4,7 @@
           <h1>Cakebox</h1>
         </div>
         <ol class="breadcrumb">
-            <li ng-repeat="breadcrumb in breadcrumbs" ng-class="{'active' : $last}">
+            <li ng-repeat="breadcrumb in breadcrumbs.getAll()" ng-class="{'active' : $last}">
                 <ng-switch on="$last">
                     <a href="#{{ breadcrumb.path }}" ng-switch-default>{{ breadcrumb.name }}</a>
                     <span ng-switch-when="true">{{ breadcrumb.name }}</span>
@@ -13,7 +13,15 @@
         </ol>
 
         <div ng-repeat="dir in dirs">
-            <a href="#{{ currentPath + '/' + dir.path }}" >{{ dir.name }}</a>
+            <div ng-if="dir.type == 'dir'">
+                <a ng:href="#/get/{{ currentPath + dir.name }}" >{{ dir.name }}/</a>
+            </div>
+            <div ng-if="dir.type == 'file' && dir.isVideo == false">
+                <a href="/access/{{ currentPath + dir.name }}" >{{ dir.name }}</a>
+            </div>
+            <div ng-if="dir.type == 'file' && dir.isVideo == true">
+                <a href="#/play/{{ currentPath + dir.name }}" >{{ dir.name }}</a>
+            </div>
         </div>
 
     </div>

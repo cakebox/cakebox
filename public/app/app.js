@@ -1,11 +1,24 @@
 var app = angular.module('cakebox',  [
   'ngRoute',
-  'cakeboxCtrl'
+  'cakeboxCtrl',
+  'services.breadcrumbs'
 ]);
 
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
+      when('/', {
+        templateUrl: 'partials/index.html',
+        controller: 'MainCtrl'
+      }).
+      when('/get/:path', {
+        templateUrl: 'partials/index.html',
+        controller: 'MainCtrl'
+      }).
+      when('/play/:path', {
+        templateUrl: 'partials/play.html',
+        controller: 'MediaCtrl'
+      }).
       when('/about', {
         templateUrl: 'partials/about.html'
       }).
@@ -13,8 +26,8 @@ app.config(['$routeProvider',
         templateUrl: 'partials/contact.html'
       }).
       otherwise({
-        templateUrl: 'partials/index.html',
-        controller: 'MainCtrl'
+        //redirectTo: '/'
       });
   }]);
 
+var cakeboxCtrl = angular.module('cakeboxCtrl', []);
