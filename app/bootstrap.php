@@ -106,7 +106,7 @@ $app->before(function (Request $request) {
 });
 
 // Inclut la conf, les controllers
-foreach (glob(__DIR__ . "/{providers,config,controllers,models}/*.php", GLOB_BRACE) as $file) {
+foreach (glob(__DIR__ . "/{config,controllers,models}/*.php", GLOB_BRACE) as $file) {
     require_once $file;
 }
 

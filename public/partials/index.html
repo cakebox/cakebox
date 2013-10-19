@@ -1,0 +1,19 @@
+    <div class="container">
+
+        <div class="page-header">
+          <h1>Cakebox</h1>
+        </div>
+        <ol class="breadcrumb">
+            <li ng-repeat="breadcrumb in breadcrumbs" ng-class="{'active' : $last}">
+                <ng-switch on="$last">
+                    <a href="#{{ breadcrumb.path }}" ng-switch-default>{{ breadcrumb.name }}</a>
+                    <span ng-switch-when="true">{{ breadcrumb.name }}</span>
+                </ng-switch>
+            </li>
+        </ol>
+
+        <div ng-repeat="dir in dirs">
+            <a href="#{{ currentPath + '/' + dir.path }}" >{{ dir.name }}</a>
+        </div>
+
+    </div>
