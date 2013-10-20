@@ -18,7 +18,7 @@ $app->get("/api/directories/{path}", function (Request $request, $path) use ($ap
 		$pathInfo["name"] = $file->getRelativePathname();
 		$pathInfo["type"] = $file->getType();
 		$pathInfo["size"] = $file->getSize();
-		$pathInfo["isVideo"] = ( explode("/", mime_content_type($file->getRealpath()) )[0] == "video" ) ? true : false;
+		$pathInfo["isVideo"] = ( explode("/", mime_content_type($file->getRealpath()) )[0] == "video" || $file->getExtension() == "mkv") ? true : false;
 
 		array_push($dirContent, $pathInfo);
 	}
