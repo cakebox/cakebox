@@ -1,7 +1,6 @@
 var app = angular.module('cakebox',  [
   'ngRoute',
-  'cakeboxCtrl',
-  'services.breadcrumbs'
+  'cakeboxCtrl'
 ]);
 
 app.config(['$routeProvider',
@@ -34,4 +33,18 @@ app.config(['$routeProvider',
       });
   }]);
 
-var cakeboxCtrl = angular.module('cakeboxCtrl', []);
+var cakeboxCtrl = angular.module('cakeboxCtrl', [
+  'services.breadcrumbs',
+  'ui.bootstrap'
+]);
+
+// https://gist.github.com/thomseddon/3511330
+cakeboxCtrl.filter('bytes', function() {
+  return function(bytes, precision) {
+    if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
+    if (typeof precision === 'undefined') precision = 1;
+    var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
+      number = Math.floor(Math.log(bytes) / Math.log(1024));
+    return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) +  ' ' + units[number];
+  }
+});
