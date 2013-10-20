@@ -1,0 +1,28 @@
+ <VirtualHost *:80>
+    ServerAdmin your@email.com
+    ServerName cakebox.yourdomain.com
+
+    SetEnv APPLICATION_ENV production #developement
+
+    DocumentRoot "/var/www/cakebox/public/"
+    <Directory "/var/www/cakebox/public/">
+        Options Indexes MultiViews FollowSymLinks
+        AllowOverride none
+        Order allow,deny
+        Allow from all
+
+        RewriteEngine On
+        RewriteBase /
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteRule ^ index.php [L]
+    </Directory>
+
+    Alias /access /hard/link/to/original/directory
+    <Directory /hard/link/to/original/directory>
+        Order allow,deny 
+        Allow from all
+    </Directory>
+
+    ErrorLog "/var/log/apache2/cakebox-error.log"
+    CustomLog "/var/log/apache2/cakebox-access.log" common
+</VirtualHost>
