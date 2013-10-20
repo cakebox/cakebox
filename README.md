@@ -31,6 +31,8 @@ composer install
 bower install
 ```
 
+Pour configurer le repertoire de Cakebox il faut aller dans app/conf/configuration.php, et changer le chemin par le votre.
+
 Il ne reste plus qu'a configurer votre serveur web en vous inspirant des exemples présents dans le dépôt.
 
 **Attention**: /access/ est très important et ne peut être changé dans la configuration du serveur web sans modifications dans le code source de Cakebox !
