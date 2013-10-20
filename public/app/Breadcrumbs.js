@@ -22,7 +22,6 @@ angular.module('services.breadcrumbs').factory('breadcrumbs', ['$rootScope', '$l
     }
 
     breadcrumbs = result;
-    console.log(breadcrumbs);
   };
 
   //we want to update breadcrumbs only when a route is actually changed
