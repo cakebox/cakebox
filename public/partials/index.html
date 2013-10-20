@@ -9,6 +9,7 @@
 
     <table class="files">
         <tbody>
+            <tr ng-show="!dirs.length"><td>Rien dans ce repertoire ...</td></tr>
             <tr class="file" ng-repeat="dir in dirs">
                 <td class="fileInfo">
                     <a class="glyphicon glyphicon-info-sign" popover-placement="left" popover-trigger="mouseenter" data-html="true" popover="Taille: {{ dir.size | bytes }}<br>Permissions: {{ dir.perms }}" ></a>
