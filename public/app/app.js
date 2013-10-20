@@ -26,7 +26,7 @@ app.config(['$routeProvider',
         templateUrl: 'partials/contact.html'
       }).
       otherwise({
-        //redirectTo: '/'
+        redirectTo: '/'
       });
   }]);
 

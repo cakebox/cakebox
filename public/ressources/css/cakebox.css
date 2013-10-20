@@ -16,3 +16,7 @@ body {
 .video {
 	text-align: center;
 }
+
+.file .fileInfo {
+	min-width: 45px;
+}

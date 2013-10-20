@@ -5,13 +5,10 @@
 	</div>
 
 	<div class="video">
-		<object classid="clsid:67DABFBF-D0AB-41fa-9C46-CC0F21721616" codebase="http://go.divx.com/plugin/DivXBrowserPlugin.cab" width="600" height="400">
-			<param name="custommode" value="none" />
-			<param name="autoPlay" value="false" />
-			<param name="src" value="/access/{{ mediaPath }}" />
-			<param name="disableDimmer" value="true" />
-			<embed src="/access/{{ mediaPath }}" width="600" height="400" align="middle" type="video/divx" custommode="none" autoplay="false"  pluginspage="http://go.divx.com/plugin/download/" disabledimmer="true"></embed>
-		</object>
+		<video controls>
+            <source ng-src="{{ mediaPath }}" />
+            <!-- Texte alternatif en cas de non prise en charge de la balise video -->
+            <p>Le format de la vidéo n'est pas pris en charge par votre navigateur</p>
+        </video>
 	</div>
-
 </div>
