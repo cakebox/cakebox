@@ -1,37 +1,39 @@
-        <ol class="breadcrumb">
-            <li ng-repeat="breadcrumb in breadcrumbs.getAll()" ng-class="{'active' : $last}">
-                <span ng-if="$first">
-                    <a href="#/" ng-class="{'glyphicon glyphicon-home': $first}"></a>
-                </span>
-                <span ng-if="$middle">
-                    <a ng-href="#/get{{ breadcrumb.path }}">{{ breadcrumb.name }}</a>
-                </span>
-                <span ng-if="$last">
-                    <span>{{ breadcrumb.name }}</span>
-                </span>
-            </li>
-        </ol>
+ <p>
+    <ol class="breadcrumb">
+        <li ng-repeat="breadcrumb in breadcrumbs.getAll()" ng-class="{'active' : $last}">
+            <span ng-if="$first">
+                <a href="#/" ng-class="{'glyphicon glyphicon-home': $first}"></a>
+            </span>
+            <span ng-if="$middle">
+                <a ng-href="#/get{{ breadcrumb.path }}">{{ breadcrumb.name }}</a>
+            </span>
+            <span ng-if="$last">
+                <span>{{ breadcrumb.name }}</span>
+            </span>
+        </li>
+    </ol>
 
-        <table class="files">
-            <tbody>
-                <tr class="file" ng-repeat="dir in dirs">
-                    <td class="fileInfo">
-                        <div ng-if="dir.type == 'file'">
-                            <a class="glyphicon glyphicon-download" ng-href="/access/{{ currentPath + dir.name }}"></a>
-                            <a class="glyphicon glyphicon-info-sign"></a>
-                        </div>
-                    </td>
-                    <td class="filename">
-                        <div ng-if="dir.type == 'dir'">
-                            <a ng-href="#/get/{{ currentPath + dir.name }}" >{{ dir.name }}/</a>
-                        </div>
-                        <div ng-if="dir.type == 'file' && dir.isVideo == false">
-                            <a ng-href="/access/{{ currentPath + dir.name }}" >{{ dir.name }}</a>
-                        </div>
-                        <div ng-if="dir.type == 'file' && dir.isVideo == true">
-                            <a ng-href="#/play/{{ currentPath + dir.name }}" >{{ dir.name }}</a>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        <table>
+    <table class="files">
+        <tbody>
+            <tr class="file" ng-repeat="dir in dirs">
+                <td class="fileInfo">
+                    <div ng-if="dir.type == 'file'">
+                        <a class="glyphicon glyphicon-download" ng-href="/access/{{ currentPath + dir.name }}"></a>
+                        <a class="glyphicon glyphicon-info-sign"></a>
+                    </div>
+                </td>
+                <td class="filename">
+                    <div ng-if="dir.type == 'dir'">
+                        <a ng-href="#/get/{{ currentPath + dir.name }}" >{{ dir.name }}/</a>
+                    </div>
+                    <div ng-if="dir.type == 'file' && dir.isVideo == false">
+                        <a ng-href="/access/{{ currentPath + dir.name }}" >{{ dir.name }}</a>
+                    </div>
+                    <div ng-if="dir.type == 'file' && dir.isVideo == true">
+                        <a ng-href="#/play/{{ currentPath + dir.name }}" >{{ dir.name }}</a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    <table>
+</p>
