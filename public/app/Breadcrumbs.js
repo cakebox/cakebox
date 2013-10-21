@@ -1,12 +1,11 @@
-angular.module('services.breadcrumbs', []);
-angular.module('services.breadcrumbs').factory('breadcrumbs', ['$rootScope', '$location', '$routeParams', function($rootScope, $location, $routeParams){
+app.factory('breadcrumbs', ['$rootScope', '$location', '$routeParams', function($rootScope, $location, $routeParams){
 
   var breadcrumbs = [];
   var breadcrumbsService = {};
 
   var loadBreadcrumbs = function(event, current){
 
-  if (typeof $routeParams.path == 'undefined')
+  if (angular.isUndefined($routeParams.path))
     $routeParams.path = "";
 
 	  var path = '/'+$routeParams.path;

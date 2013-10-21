@@ -1,4 +1,4 @@
-cakeboxCtrl.controller('NavCtrl', ['$scope', '$location',
+app.controller('NavCtrl', ['$scope', '$location',
     function($scope, $location) {
 
     	$scope.currentPage = "";

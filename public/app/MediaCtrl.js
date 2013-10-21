@@ -1,4 +1,4 @@
-cakeboxCtrl.controller('MediaCtrl', ['$scope', '$http', '$routeParams',
+app.controller('MediaCtrl', ['$scope', '$http', '$routeParams',
     function($scope, $http, $routeParams) {
 
         $scope.mediaPath = '/access/' + $routeParams.path;

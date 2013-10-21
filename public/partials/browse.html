@@ -11,7 +11,7 @@
         <tbody>
             <tr class="file" ng-repeat="dir in dirs">
                 <td class="fileInfo">
-                    <a class="glyphicon glyphicon-info-sign" popover-placement="left" popover-trigger="mouseenter" data-html="true" popover="Taille: {{ dir.size | bytes }}<br>Permissions: {{ dir.perms }}" ></a>
+                    <a><span class="glyphicon glyphicon-info-sign" tooltip-placement="left" tooltip="Taille: {{ dir.size | bytes }}&nbsp;Permissions: {{ dir.perms }}" ></span></a>
                     <a ng-if="dir.type == 'file'" ng-href="/access/{{ currentPath + dir.name }}" class="glyphicon glyphicon-download"></a>
                 </td>
                 <td class="filename">
@@ -20,7 +20,7 @@
                     <a ng-if="dir.type == 'file' && dir.isVideo == true" ng-href="#/play/{{ currentPath + dir.name }}" >{{ dir.name }}</a>
                 </td>
             </tr>
-            <tr ng-show="!dirs.length"><td>Rien dans ce repertoire ...</td></tr>
+            <tr ng-if="getDone == true && !dirs.length"><td>Rien dans ce repertoire ...</td></tr>
         </tbody>
     <table>
 </p>
