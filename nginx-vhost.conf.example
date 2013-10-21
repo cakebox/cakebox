@@ -1,0 +1,44 @@
+server {
+        listen 80;
+        server_name cakebox.yourdomain.com;
+
+        root /var/www/cakebox/public;
+        index index.php;
+
+        charset UTF-8;
+
+        access_log /var/log/nginx/cakebox-access.log;
+        error_log /var/log/nginx/cakebox-error.log;
+
+        #site root is redirected to the app boot script
+        location = / {
+            try_files @site @site;
+        }
+
+        #all other locations try other files first and go to our front controller if none of them exists
+        location / {
+            try_files $uri $uri/ @site;
+        }
+
+        location /access/ {
+            autoindex on;
+            alias /hard/link/to/original/directory;
+
+            # Extract the name and force download
+            if ($uri ~ "^/access/([^/].+\..+)$") {
+                set $filename $1;
+
+                # Set appropriate headers
+                add_header Content-Disposition "attachment; filename=$filename";
+            }
+        }
+
+        location @site {
+            fastcgi_pass   unix:/var/run/php5-fpm.sock;
+            include fastcgi_params;
+            fastcgi_param  SCRIPT_FILENAME $document_root/index.php;
+            fastcgi_param   APPLICATION_ENV  production;
+            #uncomment when running via https
+            #fastcgi_param HTTPS on;
+        }
+}
