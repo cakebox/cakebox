@@ -19,15 +19,7 @@ mv composer.phar /usr/local/bin/composer
 ```
 
 Debian:
-```
-apt-get install python g++ make checkinstall
-mkdir ~/src && cd $_
-wget -N http://nodejs.org/dist/node-latest.tar.gz
-tar xzvf node-latest.tar.gz && cd node-v*
-./configure
-checkinstall #(remove the "v" in front of the version number in the dialog)
-sudo dpkg -i node_*
-```
+https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-lmde
 
 Puis nous aurons besoin de [Bower](http://bower.io/ "Bower")
 ```
@@ -42,7 +34,7 @@ cd /var/www/
 git clone https://github.com/Cakebox/Cakebox-light.git cakebox/
 cd ./cakebox/
 composer install
-bower --allow-root install
+bower install # (rajoutez --allow-root en option si vous êtes en root)
 ```
 
 Pour configurer le repertoire de Cakebox il faut aller dans app/conf/configuration.php, et changer le chemin par le votre.
