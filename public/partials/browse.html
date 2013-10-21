@@ -1,4 +1,4 @@
- <p>
+<div class="view">
     <ol class="breadcrumb">
         <li ng-repeat="breadcrumb in breadcrumbs.getAll()" ng-class="{'active' : $last}">
             <a ng-if="$first" href="#/" ng-class="{'glyphicon glyphicon-home': $first}"></a>
@@ -23,4 +23,4 @@
             <tr ng-if="getDone == true && !dirs.length"><td>Rien dans ce repertoire ...</td></tr>
         </tbody>
     <table>
-</p>
+</div>
