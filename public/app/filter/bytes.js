@@ -5,7 +5,7 @@ app.filter('bytes', function() {
         var units = ['octets', 'ko', 'Mo', 'Go', 'To', 'Po'];
 
         if (bytes == 0 || isNaN(parseFloat(bytes)) || !isFinite(bytes))
-            return '-';
+            return '0 ' + units[0];
 
         if (angular.isUndefined(precision))
             precision = 1;
