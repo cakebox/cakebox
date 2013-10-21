@@ -4,6 +4,10 @@ Car la version principale de Cakebox commence a se faire vieille (et ceci malgr�
 
 On a donc décidé de refaire complètement l'outil que nous vous mettions a disposition, pour le réécrire + proprement et le rendre + performant. Pour cela nous utilisons [AngularJS](http://angularjs.org/ "AngularJS") pour le rendu, et [Silex](http://silex.sensiolabs.org/ "Silex") pour l'API.
 
+Aperçu:
+
+![Cakebox-light](http://i.imgur.com/eML5KZD.png "Cakebox-light")
+
 ## Comment installer Cakebox-light ?
 
 Apres avoir cloné le dépôt, pour installer Cakebox-light il vous avant tout [Composer](https://getcomposer.org/ "Composer") et [NodeJS](http://nodejs.org/ "NodeJS") (Ce dernier fournit le binaire npm).
