@@ -7,15 +7,15 @@ app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/', {
-        templateUrl: 'partials/index.html',
+        templateUrl: 'partials/browse.html',
         controller: 'MainCtrl'
       }).
       when('/browse/', {
-        templateUrl: 'partials/index.html',
+        templateUrl: 'partials/browse.html',
         controller: 'MainCtrl'
       }).
       when('/browse/:path*', {
-        templateUrl: 'partials/index.html',
+        templateUrl: 'partials/browse.html',
         controller: 'MainCtrl'
       }).
       when('/play/:path*', {

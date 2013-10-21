@@ -9,7 +9,6 @@
 
     <table class="files">
         <tbody>
-            <tr ng-show="!dirs.length"><td>Rien dans ce repertoire ...</td></tr>
             <tr class="file" ng-repeat="dir in dirs">
                 <td class="fileInfo">
                     <a class="glyphicon glyphicon-info-sign" popover-placement="left" popover-trigger="mouseenter" data-html="true" popover="Taille: {{ dir.size | bytes }}<br>Permissions: {{ dir.perms }}" ></a>
@@ -21,6 +20,7 @@
                     <a ng-if="dir.type == 'file' && dir.isVideo == true" ng-href="#/play/{{ currentPath + dir.name }}" >{{ dir.name }}</a>
                 </td>
             </tr>
+            <tr ng-show="!dirs.length"><td>Rien dans ce repertoire ...</td></tr>
         </tbody>
     <table>
 </p>
