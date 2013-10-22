@@ -11,6 +11,7 @@ Aperçu:
 ## Comment installer Cakebox-light ?
 
 Apres avoir cloné le dépôt, pour installer Cakebox-light il vous avant tout [Composer](https://getcomposer.org/ "Composer") et [NodeJS](http://nodejs.org/ "NodeJS") (Ce dernier fournit le binaire npm).
+Requière php 5.4 ou plus.
 
 ```
 curl -sS https://getcomposer.org/installer | php
@@ -18,9 +19,7 @@ mv composer.phar /usr/local/bin/composer
 ```
 
 Debian:
-```
-aptitude install nodejs
-```
+https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-lmde
 
 Puis nous aurons besoin de [Bower](http://bower.io/ "Bower")
 ```
@@ -31,8 +30,11 @@ npm install -g bower
 On peut maintenant installer Cakebox.
 
 ```
+cd /var/www/
+git clone https://github.com/Cakebox/Cakebox-light.git cakebox/
+cd ./cakebox/
 composer install
-bower install
+bower install # (rajoutez --allow-root en option si vous êtes en root)
 ```
 
 Pour configurer le repertoire de Cakebox il faut aller dans app/conf/configuration.php, et changer le chemin par le votre.
