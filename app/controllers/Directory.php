@@ -42,7 +42,8 @@ $app->get("/api/file/{path}", function (Request $request, $path) use ($app) {
 	$fileInfo= array();
 
 	$file = new SPLFileInfo($app["dir.path"].$path);
-	$fileInfo["name"] = $file->getFilename();
+	$fileInfo["name"] = $file->getBasename(".".$file->getExtension());
+	$fileInfo["fullname"] = $file->getFilename();
 	$fileInfo["mimetype"] = mime_content_type($file->getPathName());
 
 	return $app->json($fileInfo);

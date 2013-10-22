@@ -77,6 +77,16 @@ code {
 	text-align: center;
 }
 
+.video #legend {
+  font-size: 125%;
+}
+
 .file .fileInfo {
 	min-width: 45px;
+}
+
+.video-header {
+  color: #777;
+  font-size: 150%;
+  text-align: center;
 }
