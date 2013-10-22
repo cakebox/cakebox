@@ -1,13 +1,5 @@
-<div class="container">
-
-	<div class="page-header">
-		<h1>Cakebox</h1>
-	</div>
-
-	<div class="video">
-		<video width="600" height="400" preload="auto" controls>
-            <source ng-src="{{ mediaPath }}" />
-            <p>Le format de la vidéo n'est pas pris en charge par votre navigateur</p>
-        </video>
-	</div>
+<div class="view">
+    <div class="video">
+	   <webplayer video="{{ mediaPath }}" height="340" width="550"></webplayer>
+    </div>
 </div>
