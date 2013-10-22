@@ -5,15 +5,16 @@ app.directive('webplayer', function () {
     transclude: true,
     replace: true,
     scope: {
-      video: '@'
+      video: '@',
+      type: '@'
     },
     templateUrl: "partials/video.html",
     compile: function(elem, attrs, transcludeFn) {
       return function link (scope, element, attrs) {
         // Prevent error when the  player connect source before scope.channel unready. (e.g. When ng-view)
-        scope.$watch('video', function(video) {
+        scope.$watch('video', 'type', function(video, type) {
           element.append('<param name="src" value="' + video + '" />');
-          element.append('<embed type="video/divx" src="' + video + '" custommode="none" height="' + attrs.height + '" width="' + attrs.width + '" autoPlay="false"  pluginspage="http://go.divx.com/plugin/download/"></embed>');
+          element.append('<embed type="' + type + '" src="' + video + '" custommode="none" height="' + attrs.height + '" width="' + attrs.width + '" autoPlay="false"  pluginspage="http://go.divx.com/plugin/download/"></embed>');
         });
       };
     }

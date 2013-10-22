@@ -1,5 +1,7 @@
 <div class="view">
     <div class="video">
-	   <webplayer video="{{ mediaPath }}" height="340" width="550"></webplayer>
+        <video width="320" height="240" controls="controls">
+            <source ng-src="{{ mediaPath }}" type="{{ fileInfo.mimetype }}" />
+        </video>
     </div>
 </div>

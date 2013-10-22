@@ -33,6 +33,3 @@ app.config(['$routeProvider',
       });
   }
 ]);
-
-
-
