@@ -2,10 +2,8 @@
     <div class="video-header">
         {{ fileinfo.name }}
     </div>
-    <div class="video">
-        <video width="{{ player.width }}" height="{{ player.height }}" controls="controls">
-            <source ng-src="{{ fileinfo.access }}" type="{{ fileinfo.mimetype }}" />
-        </video>
+    <div class="player">
+        <webplayer video="{{ fileinfo.access }}" type="{{ fileinfo.mimetype }}" width="{{ player.width }}" height="{{ player.height }}"></webplayer>
         <br>
         <p id="legend">
             <a ng-href="{{ fileinfo.access }}">Télécharcher le fichier</a>

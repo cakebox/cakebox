@@ -6,15 +6,17 @@ app.directive('webplayer', function () {
     replace: true,
     scope: {
       video: '@',
-      type: '@'
+      type: '@',
+      width: '@',
+      height: '@'
     },
     templateUrl: "partials/video.html",
     compile: function(elem, attrs, transcludeFn) {
       return function link (scope, element, attrs) {
         // Prevent error when the  player connect source before scope.channel unready. (e.g. When ng-view)
-        scope.$watch('video', 'type', function(video, type) {
-          element.append('<param name="src" value="' + video + '" />');
-          element.append('<embed type="' + type + '" src="' + video + '" custommode="none" height="' + attrs.height + '" width="' + attrs.width + '" autoPlay="false"  pluginspage="http://go.divx.com/plugin/download/"></embed>');
+        scope.$watch('video + type', function(video) {
+          if (attrs.video && attrs.type)
+            element.children().append('<source src="' + attrs.video + '" type="' + attrs.type + '" />');
         });
       };
     }

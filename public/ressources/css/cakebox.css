@@ -73,11 +73,11 @@ code {
   padding: 0 15px;
 }
 
-.video {
+.player {
 	text-align: center;
 }
 
-.video #legend {
+.player #legend {
   font-size: 125%;
 }
 
