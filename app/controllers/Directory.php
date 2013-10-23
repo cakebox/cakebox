@@ -15,12 +15,12 @@ function getDirSize($directory) {
     return $size;
 }
 
-$app->get("/api/directories/{path}", function (Request $request, $path) use ($app) {
+$app->get("/api/directories/content/{dir}", function (Request $request, $dir) use ($app) {
 
 	$dirContent = array();
 
 	$finder = new Finder();
-	$finder->followLinks()->depth('< 1')->in($app["dir.path"].$path)->sortByType();
+	$finder->followLinks()->depth('< 1')->in($app["cakebox.root"] . $dir)->sortByType();
 
 	foreach ($finder as $file) {
 
@@ -30,21 +30,13 @@ $app->get("/api/directories/{path}", function (Request $request, $path) use ($ap
 		$pathInfo["size"] = ($file->isFile()) ? $file->getSize() : getDirSize($file->getRealpath());
 		$pathInfo["perms"] = substr(sprintf('%o', $file->getPerms()), -4);
 		$pathInfo["isVideo"] = ( explode("/", mime_content_type($file->getRealpath()) )[0] == "video" || $file->getExtension() == "mkv") ? true : false;
+		$pathInfo["access"] = $app["cakebox.access"] . $dir . $file->getRelativePathname();
 
 		array_push($dirContent, $pathInfo);
 	}
 
     return $app->json($dirContent);
-})->value('path', '')->assert("path", ".*");
+})
+->value("dir", "")
+->assert("dir", ".*");
 
-$app->get("/api/file/{path}", function (Request $request, $path) use ($app) {
-
-	$fileInfo= array();
-
-	$file = new SPLFileInfo($app["dir.path"].$path);
-	$fileInfo["name"] = $file->getBasename(".".$file->getExtension());
-	$fileInfo["fullname"] = $file->getFilename();
-	$fileInfo["mimetype"] = mime_content_type($file->getPathName());
-
-	return $app->json($fileInfo);
-})->assert("path", ".*");

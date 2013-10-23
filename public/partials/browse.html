@@ -12,11 +12,11 @@
             <tr class="file" ng-repeat="dir in dirs">
                 <td class="fileInfo">
                     <a><span class="glyphicon glyphicon-info-sign" tooltip-placement="left" tooltip="Taille: {{ dir.size | bytes }}&nbsp;Permissions: {{ dir.perms }}" ></span></a>
-                    <a ng-if="dir.type == 'file'" ng-href="/access/{{ currentPath + dir.name }}" class="glyphicon glyphicon-download"></a>
+                    <a ng-if="dir.type == 'file'" ng-href="{{ dir.access }}" class="glyphicon glyphicon-download"></a>
                 </td>
                 <td class="filename">
                     <a ng-if="dir.type == 'dir'" ng-href="#/browse/{{ currentPath + dir.name }}" >{{ dir.name }}/</a>
-                    <a ng-if="dir.type == 'file' && dir.isVideo == false" ng-href="/access/{{ currentPath + dir.name }}" >{{ dir.name }}</a>
+                    <a ng-if="dir.type == 'file' && dir.isVideo == false" ng-href="{{ dir.access }}" >{{ dir.name }}</a>
                     <a ng-if="dir.type == 'file' && dir.isVideo == true" ng-href="#/play/{{ currentPath + dir.name }}" >{{ dir.name }}</a>
                 </td>
             </tr>

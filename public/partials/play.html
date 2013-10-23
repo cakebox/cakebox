@@ -1,14 +1,14 @@
 <div class="view">
     <div class="video-header">
-        {{ fileInfo.name }}
+        {{ fileinfo.name }}
     </div>
     <div class="video">
-        <video width="550" height="350" controls="controls">
-            <source ng-src="{{ mediaPath }}" type="{{ fileInfo.mimetype }}" />
+        <video width="{{ player.width }}" height="{{ player.height }}" controls="controls">
+            <source ng-src="{{ fileinfo.access }}" type="{{ fileinfo.mimetype }}" />
         </video>
         <br>
         <p id="legend">
-            <a ng-href="{{ mediaPath }}">Télécharcher le fichier</a>
+            <a ng-href="{{ fileinfo.access }}">Télécharcher le fichier</a>
         </p>
     </div>
 </div>

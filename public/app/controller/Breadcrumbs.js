@@ -8,7 +8,7 @@ app.factory('breadcrumbs', ['$rootScope', '$location', '$routeParams', function(
   if (angular.isUndefined($routeParams.path))
     $routeParams.path = "";
 
-	  var path = '/'+$routeParams.path;
+	  var path = '/' + $routeParams.path;
     var pathElements = path.split('/'), result = [], i;
     var breadcrumbPath = function (index) {
       return '/' + (pathElements.slice(0, index + 1)).join('/');
