@@ -8,15 +8,15 @@ app.config(['$routeProvider',
     $routeProvider.
       when('/', {
         templateUrl: 'partials/browse.html',
-        controller:  'MainCtrl'
+        controller:  'BrowseCtrl'
       }).
       when('/browse/', {
         templateUrl: 'partials/browse.html',
-        controller:  'MainCtrl'
+        controller:  'BrowseCtrl'
       }).
       when('/browse/:path*', {
         templateUrl: 'partials/browse.html',
-        controller:  'MainCtrl'
+        controller:  'BrowseCtrl'
       }).
       when('/play/:path*', {
         templateUrl: 'partials/play.html',

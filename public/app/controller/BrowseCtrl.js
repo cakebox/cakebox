@@ -1,4 +1,4 @@
-app.controller('MainCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs',
+app.controller('BrowseCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs',
     function($scope, $http, $routeParams, breadcrumbs) {
 
         $scope.getDone = false;
