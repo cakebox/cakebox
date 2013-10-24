@@ -23,7 +23,7 @@ body {
 .navbar .navbar-nav > .active > a,
 .navbar .navbar-nav > .active > a:hover,
 .navbar .navbar-nav > .active > a:focus {
-    background-color: rgba(255, 255, 255, 0.45);
+  background-color: rgba(255, 255, 255, 0.45);
 }
 
 .breadcrumb {
@@ -65,12 +65,16 @@ body {
 code {
   font-size: 80%;
 }
- /* Bootstrap end */
+/* Bootstrap end */
 
 .container {
   width: auto;
   max-width: 800px;
   padding: 0 15px;
+}
+
+.loading {
+  text-align: center;
 }
 
 .player {
@@ -91,3 +95,4 @@ code {
   font-size: 150%;
   text-align: center;
 }
+
