@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="fr" ng-app="cakebox">
+<html lang="fr" ng-app="cakebox" ng-controller="MainCtrl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Cakebox (light)</title>
+    <title>Cakebox Light ( {{ appinfo.commitid }})</title>
 
     <!-- Bootstrap -->
     <link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -55,6 +55,7 @@
     <script src="components/angular-bootstrap/ui-bootstrap.js"></script>
     <script src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="app/app.js"></script>
+    <script src="app/controller/MainCtrl.js"></script>
     <script src="app/controller/NavCtrl.js"></script>
     <script src="app/controller/BrowseCtrl.js"></script>
     <script src="app/controller/MediaCtrl.js"></script>
