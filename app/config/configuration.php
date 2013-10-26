@@ -21,3 +21,4 @@ $app["cakebox.access"] = "/access/"; // Alias used in web server for direct acce
 $app["player.type"] = "HTML5";
 $app["player.width"] = "710";
 $app["player.height"] = "400";
+$app["player.preload"] = "auto"; /* auto, metadata, none */

@@ -12,6 +12,7 @@ $app->get("/api/player/settings", function (Request $request) use ($app) {
     $settings["type"] = $app["player.type"];
     $settings["width"] = $app["player.width"];
     $settings["height"] = $app["player.height"];
+    $settings["preload"] = $app["player.preload"];
 
     return $app->json($settings);
 });

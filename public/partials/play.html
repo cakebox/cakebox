@@ -6,10 +6,10 @@
         {{ fileinfo.name }}
     </div>
     <div class="player">
-        <webplayer video="{{ fileinfo.access }}" type="{{ fileinfo.mimetype }}" width="{{ player.width }}" height="{{ player.height }}"></webplayer>
+        <webplayer video="{{ fileinfo.access }}" type="{{ fileinfo.mimetype }}" width="{{ player.width }}" height="{{ player.height }}" preload="{{ player.preload }}"></webplayer>
         <br>
         <p id="legend">
-            <a ng-href="{{ fileinfo.access }}">Télécharcher le fichier</a>
+            <a ng-href="{{ fileinfo.access }}"><span class="glyphicon glyphicon-download"></span> Télécharcher le fichier</a>
         </p>
     </div>
 </div>
