@@ -8,4 +8,5 @@ app.controller('MediaCtrl', ['$scope', '$http', '$routeParams',
         $http.get('/api/player/settings').success(function(data) {
             $scope.player = data;
         });
-}]);
+    }
+]);

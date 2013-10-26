@@ -77,6 +77,13 @@ code {
   text-align: center;
 }
 
+.search {
+  background-color: rgba(255, 255, 255, 0.62);
+  border: 5px;
+  border-radius: 4px;
+  padding-left: 5px;
+}
+
 .player {
   text-align: center;
   margin-top: 20px;
