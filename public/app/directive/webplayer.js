@@ -11,7 +11,7 @@ app.directive('webplayer', function () {
       height: '@',
       preload: '@'
     },
-    templateUrl: "partials/video.html",
+    templateUrl: "partials/webplayer.html",
     compile: function(elem, attrs, transcludeFn) {
       return function link (scope, element, attrs) {
         // Prevent error when the  player connect source before scope.channel unready. (e.g. When ng-view)

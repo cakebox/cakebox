@@ -25,9 +25,6 @@ app.config(['$routeProvider',
       when('/about', {
         templateUrl: 'partials/about.html'
       }).
-      when('/contact', {
-        templateUrl: 'partials/contact.html'
-      }).
       otherwise({
         redirectTo: '/'
       });
