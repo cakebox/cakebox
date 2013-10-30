@@ -85,18 +85,6 @@ $app["json"] = $app->protect(function ($data, $status = 200, $headers = array())
     return $app->json($data, $status, $headers);
 });
 
-//return magic csv
-$app["csv"] = $app->protect(function ($data, $filename = null) use ($app) {
-    if ($filename === null) {
-        return $app["json"](null, 400);
-    }
-    return new Response($data, 200, array(
-        'Content-Type' => 'text/csv',
-        'Content-Length' => strlen($data),
-        'Content-Disposition' => "attachment;filename=\"{$filename}\""
-    ));
-});
-
 // Gere le JSON en body
 $app->before(function (Request $request) {
     if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
@@ -105,8 +93,15 @@ $app->before(function (Request $request) {
     }
 });
 
+// Include specific user conf if needed
+$user = $_SERVER["PHP_AUTH_USER"];
+if (isset($user) && file_exists(__DIR__ . "/config/{$user}.php"))
+    require_once __DIR__ . "/config/{$user}.php";
+else
+    require_once __DIR__ . "/config/default.php";
+
 // Inclut la conf, les controllers
-foreach (glob(__DIR__ . "/{config,controllers,models}/*.php", GLOB_BRACE) as $file) {
+foreach (glob(__DIR__ . "/{controllers,models}/*.php", GLOB_BRACE) as $file) {
     require_once $file;
 }
 
