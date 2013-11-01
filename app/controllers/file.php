@@ -3,7 +3,6 @@
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ParameterBag;
-use Symfony\Component\Finder\Finder;
 
 $app->get("/api/files/info/{filepath}", function (Request $request, $filepath) use ($app) {
 
