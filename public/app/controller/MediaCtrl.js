@@ -14,7 +14,7 @@ app.controller('MediaCtrl', ['$scope', '$http', '$routeParams',
             $http.post('/api/betaseries/watched/' + showname).success(function(data) {
 
                 if (data != "false")
-                    $(e.target).text("Episode vu !");
+                    $(e.target).text("Épisode vu !");
                 else
                     $(e.target).text("Error with BetaSeries API !");
             });

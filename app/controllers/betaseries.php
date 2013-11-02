@@ -6,10 +6,6 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 function fetch($url, $params = array(), $method = "get")
 {
-    global $app;
-
-    $params = array_merge($params, array('key' => $app["bs.apikey"]));
-
     $query = '';
     if ($method == "get") {
         $query = '?' . http_build_query($params);
@@ -25,9 +21,11 @@ function fetch($url, $params = array(), $method = "get")
         curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
     }
 
+    /*
     if ($method != "get" || $method != "post") {
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
     }
+    */
 
     $response = curl_exec($ch);
 
@@ -45,13 +43,13 @@ function fetch($url, $params = array(), $method = "get")
 
 $app->post("/api/betaseries/watched/{name}", function (Request $request, $name) use ($app) {
 
-    $auth = fetch("/members/auth", array('login' => $app["bs.login"], 'password' => md5($app["bs.passwd"])), "post");
+    $auth = fetch("/members/auth", array("key" => $app["bs.apikey"], "login" => $app["bs.login"], "password" => md5($app["bs.passwd"])), "post");
     if ($auth) {
 
-        $episodes = fetch("/episodes/scraper", array("token" => $auth->token, "file" => $name));
+        $episodes = fetch("/episodes/scraper", array("key" => $app["bs.apikey"], "token" => $auth->token, "file" => $name));
         if ($episodes) {
 
-            $watched = fetch("/episodes/watched", array("token" => $auth->token, "id" => $episodes->episode->id, "bulk" => true), "post");
+            $watched = fetch("/episodes/watched", array("key" => $app["bs.apikey"], "token" => $auth->token, "id" => $episodes->episode->id, "bulk" => true), "post");
         }
     }
 
@@ -61,13 +59,13 @@ $app->post("/api/betaseries/watched/{name}", function (Request $request, $name) 
 // not used yet
 $app->delete("/api/betaseries/watched/{name}", function (Request $request, $name) use ($app) {
 
-    $auth = fetch("/members/auth", array('login' => $app["bs.login"], 'password' => md5($app["bs.passwd"])), "post");
+    $auth = fetch("/members/auth", array("key" => $app["bs.apikey"], "login" => $app["bs.login"], "password" => md5($app["bs.passwd"])), "post");
     if ($auth) {
 
-        $episodes = fetch("/episodes/scraper", array("token" => $auth->token, "file" => $name));
+        $episodes = fetch("/episodes/scraper", array("key" => $app["bs.apikey"], "token" => $auth->token, "file" => $name));
         if ($episodes) {
 
-            $watched = fetch("/episodes/watched", array("token" => $auth->token, "id" => $episodes->episode->id), "delete");
+            $watched = fetch("/episodes/watched", array("key" => $app["bs.apikey"], "token" => $auth->token, "id" => $episodes->episode->id), "delete");
         }
     }
 
