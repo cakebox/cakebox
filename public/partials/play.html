@@ -7,7 +7,9 @@
     </div>
     <div class="player">
         <webplayer video="{{ fileinfo.access }}" type="{{ fileinfo.mimetype }}" width="{{ player.width }}" height="{{ player.height }}" preload="{{ player.preload }}"></webplayer>
-        <br>
+        <p id="betaseries">
+            <a id ="pwet"ng-click="watched($event, fileinfo.fullname)">Marquer l'épisode comme vu sur BetaSeries</a>
+        </p>
         <p id="legend">
             <a ng-href="{{ fileinfo.access }}"><span class="glyphicon glyphicon-download"></span> Télécharcher le fichier</a>
         </p>

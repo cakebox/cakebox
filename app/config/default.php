@@ -22,3 +22,11 @@ $app["player.type"] = "HTML5";
 $app["player.width"] = "710";
 $app["player.height"] = "400";
 $app["player.preload"] = "auto"; /* auto, metadata, none */
+
+/*
+  Betaseries account
+  PS: Ask API key here http://www.betaseries.com/api/
+*/
+$app["bs.login"] = "";
+$app["bs.passwd"] = "";
+$app["bs.apikey"] = "";
