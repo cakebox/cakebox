@@ -8,10 +8,10 @@
     <div class="player">
         <webplayer video="{{ fileinfo.access }}" type="{{ fileinfo.mimetype }}" width="{{ player.width }}" height="{{ player.height }}" preload="{{ player.preload }}"></webplayer>
 
-        <div class="betaseries" ng-if="!betaseries.errors.length">
+        <div class="betaseries" ng-if="betaseries.episode && betaseries.errors.length == 0">
             <div id="seen">
-                <a ng-if="!betaseries.episode.user.seen" ng-click="watched($event, betaseries.episode.id)">Marquer l'épisode comme vu sur BetaSeries</a>
-                <span ng-if="betaseries.episode.user.seen" >Episode déjà vu</span>
+                <a ng-if="betaseries.episode.user.seen == false" ng-click="watched($event, betaseries.episode.id)">Marquer l'épisode comme vu sur BetaSeries</a>
+                <span ng-if="betaseries.episode.user.seen == true" >Episode déjà vu</span>
             </div>
             <div id="description">
             Résumé:<br>

@@ -6,11 +6,19 @@ app.controller('MediaCtrl', ['$scope', '$http', '$routeParams',
         });
 
         $http.get('/api/files/info/' + $routeParams.path).success(function(data) {
+
             $scope.fileinfo = data;
 
-            $http.get("/api/betaseries/info/" + data.name).success(function(data){
-                $scope.betaseries = data;
-                console.log(data);
+            $http.get("/api/betaseries/info/" + data.name).success(function(data) {
+
+                if (data.errors && data.errors.length == 0) {
+                    $scope.betaseries = data;
+                }
+                else {
+                    angular.forEach(data.errors, function(value, key) {
+                        console.error("BetaSeries: " + value.text);
+                    });
+                }
             });
         });
 
@@ -18,10 +26,14 @@ app.controller('MediaCtrl', ['$scope', '$http', '$routeParams',
 
             $http.post('/api/betaseries/watched/' + id).success(function(data) {
 
-                if (!data.errors)
+                if (data.errors && data.errors.length == 0) {
                     $(event.target).text("Épisode vu !");
-                else
-                    $(event.target).text("Error with BetaSeries API !");
+                }
+                else {
+                    angular.forEach(data.errors, function(value, key) {
+                        console.error("BetaSeries: " + value.text);
+                    });
+                }
             });
         }
     }

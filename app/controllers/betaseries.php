@@ -60,12 +60,19 @@ $app->delete("/api/betaseries/watched/{name}", function (Request $request, $name
 
 $app->get("/api/betaseries/info/{name}", function (Request $request, $name) use ($app) {
 
-    $auth = fetch("/members/auth", array("key" => $app["bs.apikey"], "login" => $app["bs.login"], "password" => md5($app["bs.passwd"])), "post");
-    if (empty($auth->errors)) {
+    $params = array("key" => $app["bs.apikey"],  "file" => $name);
 
-        $episodes = fetch("/episodes/scraper", array("key" => $app["bs.apikey"], "token" => $auth->token, "file" => $name));
+    if ($app["bs.login"] && $app["bs.passwd"]) {
+        $auth = fetch("/members/auth", array("key" => $app["bs.apikey"], "login" => $app["bs.login"], "password" => md5($app["bs.passwd"])), "post");
+        if (empty($auth->errors)) {
+            $params = array_merge($params, array("token" => $auth->token));
+        }
     }
 
-    return (isset($episodes)) ? $app->json($episodes) : $app->json($auth);
+    $episodes = array();
+    if ($app["bs.apikey"])
+        $episodes = fetch("/episodes/scraper", $params);
+
+    return $app->json($episodes);
 });
 
