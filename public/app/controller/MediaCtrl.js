@@ -7,16 +7,21 @@ app.controller('MediaCtrl', ['$scope', '$http', '$routeParams',
 
         $http.get('/api/files/info/' + $routeParams.path).success(function(data) {
             $scope.fileinfo = data;
+
+            $http.get("/api/betaseries/info/" + data.name).success(function(data){
+                $scope.betaseries = data;
+                console.log(data);
+            });
         });
 
-        $scope.watched = function (e, showname) {
+        $scope.watched = function (event, id) {
 
-            $http.post('/api/betaseries/watched/' + showname).success(function(data) {
+            $http.post('/api/betaseries/watched/' + id).success(function(data) {
 
-                if (data != "false")
-                    $(e.target).text("Épisode vu !");
+                if (!data.errors)
+                    $(event.target).text("Épisode vu !");
                 else
-                    $(e.target).text("Error with BetaSeries API !");
+                    $(event.target).text("Error with BetaSeries API !");
             });
         }
     }

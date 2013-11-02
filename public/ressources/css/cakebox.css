@@ -89,13 +89,20 @@ code {
   margin-top: 20px;
 }
 
-.player #betaseries {
-  font-size: 85%;
+.betaseries {
+  font-size: 90%;
+}
+
+.betaseries #seen{
   text-align: right;
 }
 
-.player #legend {
-  font-size: 125%;
+.betaseries #description{
+  text-align: left;
+}
+
+.player #download {
+  font-size: 130%;
   text-align: center;
   margin-top: 20px;
 }

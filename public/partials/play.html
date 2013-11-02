@@ -7,10 +7,19 @@
     </div>
     <div class="player">
         <webplayer video="{{ fileinfo.access }}" type="{{ fileinfo.mimetype }}" width="{{ player.width }}" height="{{ player.height }}" preload="{{ player.preload }}"></webplayer>
-        <p id="betaseries">
-            <a id ="pwet"ng-click="watched($event, fileinfo.fullname)">Marquer l'épisode comme vu sur BetaSeries</a>
-        </p>
-        <p id="legend">
+
+        <div class="betaseries" ng-if="!betaseries.errors.length">
+            <div id="seen">
+                <a ng-if="!betaseries.episode.user.seen" ng-click="watched($event, betaseries.episode.id)">Marquer l'épisode comme vu sur BetaSeries</a>
+                <span ng-if="betaseries.episode.user.seen" >Episode déjà vu</span>
+            </div>
+            <div id="description">
+            Résumé:<br>
+            <p>{{ betaseries.episode.description }}</p>
+            </div>
+        </div>
+
+        <p id="download">
             <a ng-href="{{ fileinfo.access }}"><span class="glyphicon glyphicon-download"></span> Télécharcher le fichier</a>
         </p>
     </div>

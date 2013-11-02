@@ -34,23 +34,14 @@ function fetch($url, $params = array(), $method = "get")
     $data = substr($response, $headerSize);
     curl_close($ch);
 
-    if ($httpCode != 200) {
-        return false;
-    }
-
     return json_decode($data);
 }
 
-$app->post("/api/betaseries/watched/{name}", function (Request $request, $name) use ($app) {
+$app->post("/api/betaseries/watched/{id}", function (Request $request, $id) use ($app) {
 
     $auth = fetch("/members/auth", array("key" => $app["bs.apikey"], "login" => $app["bs.login"], "password" => md5($app["bs.passwd"])), "post");
-    if ($auth) {
-
-        $episodes = fetch("/episodes/scraper", array("key" => $app["bs.apikey"], "token" => $auth->token, "file" => $name));
-        if ($episodes) {
-
-            $watched = fetch("/episodes/watched", array("key" => $app["bs.apikey"], "token" => $auth->token, "id" => $episodes->episode->id, "bulk" => true), "post");
-        }
+    if (empty($auth->errors)) {
+        $watched = fetch("/episodes/watched", array("key" => $app["bs.apikey"], "token" => $auth->token, "id" => $id, "bulk" => true), "post");
     }
 
     return (isset($watched)) ? $app->json($watched) : $app->json($auth);
@@ -60,14 +51,21 @@ $app->post("/api/betaseries/watched/{name}", function (Request $request, $name) 
 $app->delete("/api/betaseries/watched/{name}", function (Request $request, $name) use ($app) {
 
     $auth = fetch("/members/auth", array("key" => $app["bs.apikey"], "login" => $app["bs.login"], "password" => md5($app["bs.passwd"])), "post");
-    if ($auth) {
-
-        $episodes = fetch("/episodes/scraper", array("key" => $app["bs.apikey"], "token" => $auth->token, "file" => $name));
-        if ($episodes) {
-
-            $watched = fetch("/episodes/watched", array("key" => $app["bs.apikey"], "token" => $auth->token, "id" => $episodes->episode->id), "delete");
-        }
+    if (empty($auth->errors)) {
+        $watched = fetch("/episodes/watched", array("key" => $app["bs.apikey"], "token" => $auth->token, "id" => $id), "delete");
     }
 
     return (isset($watched)) ? $app->json($watched) : $app->json($auth);
 });
+
+$app->get("/api/betaseries/info/{name}", function (Request $request, $name) use ($app) {
+
+    $auth = fetch("/members/auth", array("key" => $app["bs.apikey"], "login" => $app["bs.login"], "password" => md5($app["bs.passwd"])), "post");
+    if (empty($auth->errors)) {
+
+        $episodes = fetch("/episodes/scraper", array("key" => $app["bs.apikey"], "token" => $auth->token, "file" => $name));
+    }
+
+    return (isset($episodes)) ? $app->json($episodes) : $app->json($auth);
+});
+
