@@ -40,7 +40,8 @@ composer install
 bower install # (rajoutez --allow-root en option si vous êtes en root)
 ```
 
-Pour configurer le repertoire de Cakebox il faut aller dans app/conf/configuration.php, et changer le chemin par le votre.
+Cakebox est multiusers, mais le fichier de configuration par défaut se trouve a cet endroit : app/conf/default.php
+Si vous dupliquez ce fichier et que vous le renommé avec le nom d'utilisateur de vos utilisateurs HTTP, le bon fichier de conf sera donc chargé pour tel utilisateur.
 
 Il ne reste plus qu'a configurer votre serveur web en vous inspirant des exemples présents dans le dépôt.
 
