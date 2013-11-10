@@ -89,15 +89,12 @@ code {
   margin-top: 20px;
 }
 
-.betaseries {
-  font-size: 90%;
-}
-
-.betaseries #seen{
+.betaseries #seen {
   text-align: right;
 }
 
-.betaseries #description{
+.betaseries #description {
+  color: #777;
   text-align: left;
 }
 
