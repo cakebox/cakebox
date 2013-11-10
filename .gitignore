@@ -1,10 +1,7 @@
 .DS_Store
+composer.lock
 
-/composer.lock
-
-/vendor
 /tmp
-/bin
-
 /public/components
 
+/app/conf/*.php

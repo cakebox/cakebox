@@ -1,14 +1,5 @@
 <?php
 
-if (!isset($app)) {
-    throw new \Exception('$app is not set');
-}
-
-if (!defined("APPLICATION_ENV")) {
-    throw new \Exception('APPLICATION_ENV is not set');
-}
-
-
 /*
   General configuration of Cakebox
 */
