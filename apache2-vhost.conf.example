@@ -2,7 +2,7 @@
     ServerAdmin your@email.com
     ServerName cakebox.yourdomain.com
 
-    SetEnv APPLICATION_ENV production #developement
+    SetEnv APPLICATION_ENV production 
 
     DocumentRoot "/var/www/cakebox/public/"
     <Directory "/var/www/cakebox/public/">
