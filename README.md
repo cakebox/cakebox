@@ -33,9 +33,15 @@ composer install
 bower install # (rajoutez --allow-root en option si vous êtes en root)
 ```
 
-Cakebox est multiusers, mais le fichier de configuration par défaut se trouve a cet endroit : **app/conf/default.php**
+Cakebox est multiusers, mais le fichier de configuration par défaut se trouve a cet endroit : **app/conf/default.php.list**
 
-Ajouter votre répertoire contenant vos fichiers en modifiant cette ligne 
+Copier le contenu du fichier dans le fichier **default.php**
+
+```
+cp default.php.list default.php
+```
+
+Dans ce fichier ajouter votre répertoire contenant vos fichiers en modifiant cette ligne 
 
 `$app["cakebox.root"] = "/var/www/"; // Root directory Cakebox have to scan`
 
@@ -43,7 +49,7 @@ Exemple :
 
 `$app["cakebox.root"] = "/home/download";`
 
-Si vous dupliquez ce fichier et que vous le renommé avec le nom d'utilisateur de vos utilisateurs HTTP, le bon fichier de conf sera donc chargé pour tel utilisateur.
+Si vous dupliquez ce fichier et que vous le renommé avec le nom d'utilisateur de vos utilisateurs HTTP, le bon fichier de conf sera donc chargé pour tel utilisateur. (Concerne l'utilisation d'un .htaccess)
 
 Il ne reste plus qu'a configurer votre serveur web en vous inspirant des exemples présents dans le dépôt.
 
