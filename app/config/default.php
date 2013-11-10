@@ -29,4 +29,4 @@ $app["player.preload"] = "auto"; /* auto, metadata, none */
 */
 $app["bs.login"] = "";
 $app["bs.passwd"] = "";
-$app["bs.apikey"] = "10e333c5711a";
+$app["bs.apikey"] = "";
