@@ -33,7 +33,7 @@ composer install
 bower install # (rajoutez --allow-root en option si vous êtes en root)
 ```
 
-Cakebox est multiusers, mais le fichier de configuration par défaut se trouve a cet endroit : **app/conf/default.php.list**
+Cakebox est multiusers, mais le fichier de configuration par défaut se trouve a cet endroit : **app/conf/default.php.dist**
 
 Copier le contenu du fichier dans le fichier **default.php**
 
