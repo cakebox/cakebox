@@ -10,10 +10,14 @@ app.controller('BrowseCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs',
             if ($routeParams.path != "")
                 $scope.currentPath += $routeParams.path + "/";
 
-            $http.get('/api/directories/content/' + $scope.currentPath).success(function(data) {
-                $scope.dirs = data;
-                $scope.getDone = true;
-            });
+            $http.get('/api/directories/content/' + $scope.currentPath)
+                .success(function(data, status, headers, config) {
+                    $scope.dirs = data;
+                    $scope.getDone = true;
+                })
+                .error(function(data, status, headers, config) {
+                    console.error("Cakebox: API is unreachable on /api/directories/content/");
+                });
         });
     }
 ]);

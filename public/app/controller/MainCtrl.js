@@ -5,8 +5,12 @@ app.controller('MainCtrl', ['$scope', '$http', '$location',
             $scope.previouspage = oldurl;
         });
 
-        $http.get('/api/app/commitid').success(function(data) {
-            $scope.appinfo = data;
-        });
+        $http.get('/api/app/commitid')
+            .success(function(data, status, headers, config) {
+                $scope.appinfo = data;
+            })
+            .error(function(data, status, headers, config) {
+                console.error("Cakebox: API is unreachable on /api/app/commitid");
+            });
     }
 ]);
