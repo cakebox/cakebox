@@ -1,0 +1,22 @@
+Alias /cakebox /var/www/cakebox/public/
+<Directory /var/www/cakebox/public/>
+    Options Indexes MultiViews FollowSymLinks
+    AllowOverride All
+
+    Order allow,deny
+    Allow from all
+
+    SetEnv APPLICATION_ENV production
+
+    RewriteEngine On
+    RewriteBase /cakebox/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [QSA,L]
+</Directory>
+
+#alias for download and streaming, same path as cakebox.root variable in app/conf/
+Alias /access /home/rtorrent/downloads/files/
+<Directory /home/rtorrent/downloads/files/>
+    Order allow,deny
+    Allow from all
+</Directory>
