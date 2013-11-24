@@ -5,7 +5,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$location',
             $scope.previouspage = oldurl;
         });
 
-        $http.get('/api/app/commitid')
+        $http.get('api/app/commitid')
             .success(function(data, status, headers, config) {
                 $scope.appinfo = data;
             })
