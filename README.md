@@ -12,60 +12,7 @@ Aperçu:
 
 ## Comment installer Cakebox-light ?
 
-Pour installer Cakebox-light il vous avant tout [Composer](https://getcomposer.org/ "Composer") puis [NodeJS](http://nodejs.org/ "NodeJS") (Ce dernier fournit le binaire npm) et pour finir de [Bower](http://bower.io/ "Bower").
-
-Pour cela rendez vous dans le [wiki](https://github.com/Cakebox/Cakebox-light/wiki/packages) de CakeBox-light pour installer les différents packages :
-
-- php 5.4 ou plus.
-- composer
-- node.js & npm 
-- bower
-
-
-
-####Installer Cakebox.
-
-```
-cd /var/www/
-git clone https://github.com/Cakebox/Cakebox-light.git cakebox/
-cd ./cakebox/
-composer install
-bower install # (rajoutez --allow-root en option si vous êtes en root)
-```
-
-Cakebox est multiusers, mais le fichier de configuration par défaut se trouve a cet endroit : **app/conf/default.php.dist**
-
-Copier le contenu du fichier dans le fichier **default.php**
-
-```
-cp default.php.list default.php
-```
-
-Dans ce fichier ajouter votre répertoire contenant vos fichiers en modifiant cette ligne 
-
-```
-$app["cakebox.root"] = "/var/www/"; // Root directory Cakebox have to scan
-```
-
-Exemple : 
-
-```
-$app["cakebox.root"] = "/home/download";
-```
-
-Si vous dupliquez ce fichier et que vous le renommé avec le nom d'utilisateur de vos utilisateurs HTTP, le bon fichier de conf sera donc chargé pour tel utilisateur. (Concerne l'utilisation d'un .htaccess)
-
-Il ne reste plus qu'a configurer votre serveur web en vous inspirant des exemples présents dans le dépôt.
-
-Avec Apache 
-
-`apache2-vhost.conf.example`
-
-Avec nginx
-
-`nginx-vhost.conf.example`
-
-**Attention**: /access/ est très important et ne peut être changé dans la configuration du serveur web sans modifications dans le code source de Cakebox !
+Pour cela rendez vous sur le [wiki](https://github.com/Cakebox/Cakebox-light/wiki) !
 
 ### Authors
 
