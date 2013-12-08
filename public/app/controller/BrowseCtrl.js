@@ -1,9 +1,9 @@
 app.controller('BrowseCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs',
     function($scope, $http, $routeParams, breadcrumbs) {
 
-        $scope.getDone = false;
         $scope.currentPath = "";
         $scope.breadcrumbs = breadcrumbs;
+        $scope.informations = "Chargement des fichiers, veuillez patienter ...";
 
         $scope.$watch('location.path()', function(event, current) {
 
@@ -12,11 +12,12 @@ app.controller('BrowseCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs',
 
             $http.get('api/directories/content/' + $scope.currentPath)
                 .success(function(data, status, headers, config) {
-                    $scope.dirs = data;
-                    $scope.getDone = true;
+                    $scope.informations = "";
+                    $scope.dirs = data || "empty";
                 })
                 .error(function(data, status, headers, config) {
-                    console.error("Cakebox: API is unreachable on /api/directories/content/");
+                    $scope.informations = "Une erreur est survenue (Erreur " + status + ")";
+                    console.error("Cakebox: API is unreachable on /api/directories/content/ (" + status + ")");
                 });
         });
     }

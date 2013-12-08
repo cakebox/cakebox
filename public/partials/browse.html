@@ -7,22 +7,15 @@
         </li>
     </ol>
 
-    <input class="search pull-right" placeholder="Rechercher" ng-model="searchText">
-
-    <div class="loading" ng-if="getDone == false" id="floatingCirclesG">
-        <div class="f_circleG" id="frotateG_01"></div>
-        <div class="f_circleG" id="frotateG_02"></div>
-        <div class="f_circleG" id="frotateG_03"></div>
-        <div class="f_circleG" id="frotateG_04"></div>
-        <div class="f_circleG" id="frotateG_05"></div>
-        <div class="f_circleG" id="frotateG_06"></div>
-        <div class="f_circleG" id="frotateG_07"></div>
-        <div class="f_circleG" id="frotateG_08"></div>
+    <div class="informations">
+        {{ informations }}
     </div>
+
+    <input ng-hide="!dirs" class="search pull-right" placeholder="Rechercher" ng-model="searchText">
 
     <table class="files">
         <tbody>
-            <tr class="file" ng-repeat="dir in dirs | filter:searchText">
+            <tr ng-if="dirs != 'empty'" class="file" ng-repeat="dir in dirs | filter:searchText">
                 <td class="fileInfo">
                     <a><span class="glyphicon glyphicon-info-sign" tooltip-placement="left" tooltip="Taille: {{ dir.size | bytes }}&nbsp;Permissions: {{ dir.perms }}" ></span></a>
                     <a ng-if="dir.type == 'file'" ng-href="{{ dir.access }}" class="glyphicon glyphicon-download"></a>
@@ -33,7 +26,7 @@
                     <a ng-if="dir.type == 'file' && dir.isVideo == true" ng-href="#/play/{{ currentPath + dir.name }}" >{{ dir.name }}</a>
                 </td>
             </tr>
-            <tr ng-if="getDone == true && !dirs.length"><td>Rien dans ce repertoire ...</td></tr>
+            <tr ng-if="dirs == 'empty'"><td>Rien dans ce repertoire.</td></tr>
         </tbody>
-    <table>
+    </table>
 </div>

@@ -12,7 +12,6 @@
     <link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <!-- Custom styles for this template -->
     <link href="ressources/css/cakebox.css" rel="stylesheet">
-    <link href="ressources/css/spinner.css" rel="stylesheet">
 
 </head> 
 <body>
@@ -28,7 +27,7 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li ng-class="{'active': currentPage == 'browse' || currentPage == ''}"><a href="#/browse/">Browse</a></li>
+                        <li ng-class="{'active': !currentPage || currentPage == 'browse'}"><a href="#/browse/">Browse</a></li>
                         <li ng-class="{'active': currentPage == 'about'}"><a href="#/about">About</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
