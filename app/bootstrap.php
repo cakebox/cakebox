@@ -93,14 +93,18 @@ $app->before(function (Request $request) {
     }
 });
 
-// Include specific user conf if needed
+// Include specific user conf
 $user = $_SERVER["PHP_AUTH_USER"];
 if (isset($user) && file_exists(__DIR__ . "/config/{$user}.php"))
     require_once __DIR__ . "/config/{$user}.php";
 else
     require_once __DIR__ . "/config/default.php";
 
-// Inclut la conf, les controllers
+// Append ending slash if needed
+if (substr($app["cakebox.root"], -1) !== '/')
+    $app["cakebox.root"] .= "/";
+
+// Include controllers and models
 foreach (glob(__DIR__ . "/{controllers,models}/*.php", GLOB_BRACE) as $file) {
     require_once $file;
 }
