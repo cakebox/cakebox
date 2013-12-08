@@ -6,6 +6,7 @@ Alias /cakebox /var/www/cakebox/public/
     Order allow,deny
     Allow from all
 
+    # use debug instead of production to get more log
     SetEnv APPLICATION_ENV production
 
     RewriteEngine On
@@ -14,9 +15,10 @@ Alias /cakebox /var/www/cakebox/public/
     RewriteRule ^ index.php [QSA,L]
 </Directory>
 
-#alias for download and streaming, same path as cakebox.root variable in app/conf/
-Alias /access /home/rtorrent/downloads/files/
-<Directory /home/rtorrent/downloads/files/>
+# alias for download and streaming, same path as cakebox.root variable in app/config/
+Alias /access /hard/link/to/original/directory/
+<Directory /hard/link/to/original/directory/>
     Order allow,deny
     Allow from all
+    Satisfy Any
 </Directory>

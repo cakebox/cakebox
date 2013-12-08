@@ -2,12 +2,14 @@
     ServerAdmin your@email.com
     ServerName cakebox.yourdomain.com
 
+    # use debug instead of production to get more log
     SetEnv APPLICATION_ENV production 
 
     DocumentRoot "/var/www/cakebox/public/"
     <Directory "/var/www/cakebox/public/">
         Options Indexes MultiViews FollowSymLinks
         AllowOverride none
+
         Order allow,deny
         Allow from all
 
@@ -17,10 +19,12 @@
         RewriteRule ^ index.php [L]
     </Directory>
 
-    Alias /access /hard/link/to/original/directory
-    <Directory /hard/link/to/original/directory>
+    # alias for download and streaming, same path as cakebox.root variable in app/config/
+    Alias /access /hard/link/to/original/directory/
+    <Directory /hard/link/to/original/directory/>
         Order allow,deny 
         Allow from all
+        Satisfy Any
     </Directory>
 
     ErrorLog "/var/log/apache2/cakebox-error.log"
