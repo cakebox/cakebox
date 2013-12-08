@@ -2,6 +2,7 @@
 composer.lock
 
 /tmp
+/public/.htaccess
 /public/components
 
-/app/conf/*.php
+/app/config/*.php
