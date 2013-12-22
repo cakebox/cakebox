@@ -72,8 +72,8 @@ $app->get("/api/betaseries/info/{name}", function (Request $request, $name) use 
     $data = array();
     if ($app["bs.apikey"]) {
         $data = fetch("/episodes/scraper", array_merge($params, array("file" => $name)));
-        //if (!empty($data->errors))
-            //$data = fetch("/movies/search", array_merge($params, array("title" => $name)));
+        if (!empty($data->errors))
+            $data = fetch("/movies/scraper", array_merge($params, array("file" => $name)));
     }
 
     return $app->json($data);
