@@ -13,7 +13,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$location',
                     alertify.success("Cakebox-light " + data.remote + " disponnible !");
             })
             .error(function(data, status, headers, config) {
-                console.error("Cakebox: API is unreachable on /api/app/commitid");
+                console.error("Cakebox: API is unreachable on /api/app/version");
             });
     }
 ]);
