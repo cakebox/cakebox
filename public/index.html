@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" ng-app="cakebox" ng-controller="MainCtrl">
+<html lang="fr" ng-app="cakebox">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,14 +10,14 @@
 
     <!-- Bootstrap -->
     <link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link rel="stylesheet" href="components/alertify/themes/alertify.core.css" />
-    <link rel="stylesheet" href="components/alertify/themes/alertify.bootstrap.css" />
+    <link href="components/alertify/themes/alertify.core.css" rel="stylesheet">
+    <link href="components/alertify/themes/alertify.bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="ressources/css/cakebox.css" rel="stylesheet">
 
 </head> 
-<body>
+<body ng-controller="AppCtrl">
 
     <!-- Wrap all page content here -->
     <div id="wrap">
@@ -34,6 +34,10 @@
                         <li ng-class="{'active': currentPage == 'about'}"><a href="#/about">About</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
+                <div class="searchbox pull-right">
+                    <span class="glyphicon glyphicon-search"></span>
+                    <input placeholder="Rechercher" ng-model="global.searchText">
+                </div>
             </div>
         </div>
 
@@ -57,7 +61,7 @@
     <script src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="components/alertify/alertify.min.js"></script>
     <script src="app/app.js"></script>
-    <script src="app/controller/MainCtrl.js"></script>
+    <script src="app/controller/AppCtrl.js"></script>
     <script src="app/controller/NavCtrl.js"></script>
     <script src="app/controller/BrowseCtrl.js"></script>
     <script src="app/controller/MediaCtrl.js"></script>

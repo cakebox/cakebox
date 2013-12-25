@@ -54,7 +54,6 @@ body {
 .container .credit {
   margin: 20px 0;
   color: #777;
-
 }
 
 #footer > .container {
@@ -67,6 +66,44 @@ code {
 }
 /* Bootstrap end */
 
+.navbar .container div {
+  float: left;
+}
+
+.searchbox {
+  margin-top: 15px;
+}
+
+.searchbox input {
+  background-color: rgba(255, 255, 255, 0.62);
+  border: 5px;
+  border-radius: 4px;
+  padding-left: 5px;
+}
+
+table {
+    table-layout: fixed;
+    width: 800px;
+}
+
+.table th, .table td { 
+    border-top: none !important; 
+}
+
+td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-download {
+  width: 30px;
+}
+
+.file-size {
+  width: 100px;
+}
+
 .container {
   width: auto;
   max-width: 800px;
@@ -75,13 +112,6 @@ code {
 
 .informations {
   text-align: center;
-}
-
-.search {
-  background-color: rgba(255, 255, 255, 0.62);
-  border: 5px;
-  border-radius: 4px;
-  padding-left: 5px;
 }
 
 .player {
@@ -104,13 +134,8 @@ code {
   margin-top: 20px;
 }
 
-.file .fileInfo {
-	min-width: 45px;
-}
-
 .video-header {
   color: #777;
   font-size: 150%;
   text-align: center;
 }
-

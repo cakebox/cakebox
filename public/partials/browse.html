@@ -11,19 +11,20 @@
         {{ informations }}
     </div>
 
-    <input ng-hide="!dirs" class="search pull-right" placeholder="Rechercher" ng-model="searchText">
-
-    <table class="files">
+    <table class="table table-condensed ">
         <tbody>
-            <tr ng-if="dirs != 'empty'" class="file" ng-repeat="dir in dirs | filter:searchText">
-                <td class="fileInfo">
-                    <a><span class="glyphicon glyphicon-info-sign" tooltip-placement="left" tooltip="Taille: {{ dir.size | bytes }}"></span></a>
+
+            <tr ng-if="dirs != 'empty'" class="file" ng-repeat="dir in dirs | filter:global.searchText">
+                <td class="file-download">
                     <a ng-if="dir.type == 'file'" ng-href="{{ dir.access }}" class="glyphicon glyphicon-download"></a>
                 </td>
-                <td class="filename">
+                <td class="file-name ">
                     <a ng-if="dir.type == 'dir'" ng-href="#/browse/{{ currentPath + dir.name }}" >{{ dir.name }}/</a>
                     <a ng-if="dir.type == 'file' && dir.isVideo == false" ng-href="{{ dir.access }}" >{{ dir.name }}</a>
-                    <a ng-if="dir.type == 'file' && dir.isVideo == true" ng-href="#/play/{{ currentPath + dir.name }}" >{{ dir.name }}</a>
+                    <a ng-if="dir.type == 'file' && dir.isVideo == true" ng-href="#/play/{{ currentPath + dir.name }}">{{ dir.name }}</a>
+                </td>
+                <td class="file-size">
+                    {{ dir.size | bytes }}
                 </td>
             </tr>
             <tr ng-if="dirs == 'empty'"><td>Rien dans ce repertoire.</td></tr>

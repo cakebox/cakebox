@@ -5,6 +5,10 @@ app.controller('BrowseCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs',
         $scope.breadcrumbs = breadcrumbs;
         $scope.informations = "Chargement des fichiers, veuillez patienter ...";
 
+        $scope.$on('$locationChangeSuccess',function(eventt, newurl, oldurl) {
+            $scope.previouspage = oldurl;
+        });
+
         $scope.$watch('location.path()', function(event, current) {
 
             if ($routeParams.path != "")
@@ -13,7 +17,10 @@ app.controller('BrowseCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs',
             $http.get('api/directories/content/' + $scope.currentPath)
                 .success(function(data, status, headers, config) {
                     $scope.informations = "";
-                    $scope.dirs = data || "empty";
+                    if (data.length == 0)
+                        $scope.dirs = "empty";
+                    else
+                        $scope.dirs = data;
                 })
                 .error(function(data, status, headers, config) {
                     $scope.informations = "Une erreur est survenue (Erreur " + status + ")";
