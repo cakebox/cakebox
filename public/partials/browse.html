@@ -17,7 +17,7 @@
         <tbody>
             <tr ng-if="dirs != 'empty'" class="file" ng-repeat="dir in dirs | filter:searchText">
                 <td class="fileInfo">
-                    <a><span class="glyphicon glyphicon-info-sign" tooltip-placement="left" tooltip="Taille: {{ dir.size | bytes }}&nbsp;Permissions: {{ dir.perms }}" ></span></a>
+                    <a><span class="glyphicon glyphicon-info-sign" tooltip-placement="left" tooltip="Taille: {{ dir.size | bytes }}"></span></a>
                     <a ng-if="dir.type == 'file'" ng-href="{{ dir.access }}" class="glyphicon glyphicon-download"></a>
                 </td>
                 <td class="filename">
