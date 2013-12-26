@@ -86,8 +86,8 @@ table {
     width: 800px;
 }
 
-.table th, .table td { 
-    border-top: none !important; 
+.table th, .table td {
+    border-top: none !important;
 }
 
 td {

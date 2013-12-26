@@ -13,6 +13,7 @@ $app->get("/api/files/info/{filepath}", function (Request $request, $filepath) u
     $fileinfo["fullname"] = $file->getFilename();
     $fileinfo["mimetype"] = mime_content_type($file->getPathName());
     $fileinfo["access"] = $app["cakebox.access"] . $filepath;
+    $fileinfo["size"] = $file->getSize();
 
     return $app->json($fileinfo);
 })
