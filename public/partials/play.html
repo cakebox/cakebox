@@ -19,8 +19,8 @@
             <div id="informations">
                 <p>{{ betaseries.episode.description || betaseries.movie.synopsis }}</p>
                 <p>
-                    Noté {{ (betaseries.episode.note.mean || betaseries.movie.notes.mean) | number:1 }} sur 5 ({{ betaseries.episode.note.total || betaseries.movie.note.total }} participant(s))<br>
-                    Diffusé le {{ (betaseries.episode.date || betaseries.movie.date) | date:'dd MMMM yyyy' }}
+                    Noté {{ (betaseries.episode.note.mean || betaseries.movie.notes.mean) | number:1 }} sur 5 ({{ betaseries.episode.note.total || betaseries.movie.notes.total }} participant(s))<br>
+                    Diffusé le {{ (betaseries.episode.date || betaseries.movie.release_date) | date:'dd MMMM yyyy' }}
                 </p>
             </div>
 
