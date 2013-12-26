@@ -114,6 +114,12 @@ td {
   text-align: center;
 }
 
+.video-header {
+  color: #777;
+  font-size: 150%;
+  text-align: center;
+}
+
 .player {
   text-align: center;
   margin-top: 20px;
@@ -123,19 +129,14 @@ td {
   text-align: right;
 }
 
-.betaseries #description {
+.betaseries #informations {
   color: #777;
   text-align: left;
+  margin-top: 10px;
 }
 
 .player #download {
   font-size: 130%;
   text-align: center;
   margin-top: 20px;
-}
-
-.video-header {
-  color: #777;
-  font-size: 150%;
-  text-align: center;
 }
