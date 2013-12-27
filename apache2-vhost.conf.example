@@ -25,6 +25,7 @@
         Order allow,deny 
         Allow from all
         Satisfy Any
+        Header set Content-Disposition "attachment"
     </Directory>
 
     ErrorLog "/var/log/apache2/cakebox-error.log"

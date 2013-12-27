@@ -39,10 +39,6 @@ server {
         location /access/ {
             #same path as cakebox.root variable in app/conf/
             alias /home/rtorrent/downloads/files/;
-
-            #force file download
-            if ($uri ~ "^/access/.+/(.+)$") {
-                add_header Content-Disposition "attachment; filename=$1";
-            }
+            add_header Content-Disposition "attachment";
         }
 }

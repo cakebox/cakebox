@@ -21,4 +21,5 @@ Alias /access /hard/link/to/original/directory/
     Order allow,deny
     Allow from all
     Satisfy Any
+    Header set Content-Disposition "attachment"
 </Directory>
