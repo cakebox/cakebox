@@ -20,8 +20,8 @@
                 </td>
                 <td class="file-name ">
                     <a ng-if="dir.type == 'dir'" ng-href="#/browse/{{ currentPath + dir.name }}" >{{ dir.name }}/</a>
-                    <a ng-if="dir.type == 'file' && dir.isVideo == false" ng-href="{{ dir.access }}" >{{ dir.name }}</a>
-                    <a ng-if="dir.type == 'file' && dir.isVideo == true" ng-href="#/play/{{ currentPath + dir.name }}">{{ dir.name }}</a>
+                    <a ng-if="dir.type == 'file' && !dir.extraType" ng-href="{{ dir.access }}" >{{ dir.name }}</a>
+                    <a ng-if="dir.type == 'file' && dir.extraType == 'video'" ng-href="#/play/{{ currentPath + dir.name }}">{{ dir.name }}</a>
                 </td>
                 <td class="file-size">
                     {{ dir.size | bytes }}

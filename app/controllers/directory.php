@@ -36,8 +36,12 @@ $app->get("/api/directories/content/{dir}", function (Request $request, $dir) us
 		$pathInfo["name"] = $file->getBasename();
 		$pathInfo["type"] = $file->getType();
 		$pathInfo["size"] = ($file->isFile()) ? $file->getSize() : getDirSize($file->getRealpath());
-		$pathInfo["isVideo"] = ( explode("/", mime_content_type($file->getRealpath()) )[0] == "video" || $file->getExtension() == "mkv") ? true : false;
 		$pathInfo["access"] = "{$app['cakebox.access']}{$dir}{$file->getBasename()}";
+
+		// for further support
+		$pathInfo["extraType"] = "";
+		if ( explode("/", mime_content_type($file->getRealpath()) )[0] == "video" || $file->getExtension() == "mkv" )
+			$pathInfo["extraType"] = "video";
 
 		array_push($dirContent, $pathInfo);
 	}
