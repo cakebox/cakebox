@@ -71,7 +71,7 @@ function update () {
     git fetch --tags
     git checkout tags/latest
     composer update
-    bower update
+    bower update --allow-root
 
     echo "Mise à jour terminée."
 }
