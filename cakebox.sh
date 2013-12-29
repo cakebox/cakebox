@@ -68,19 +68,19 @@ function configure-webserver () {
 function update () {
     echo "Mise a jour de Cakebox-light ..."
 
-    cd /var/www/cakebox
-    git pull origin master
-    bower update
+    git fetch --tags
+    git checkout tags/latest
     composer update
+    bower update
 
-    echo "Mise a jour terminée."
+    echo "Mise à jour terminée."
 }
 
 case $1 in
     install)
-        install-prereq
-        install-cakebox
-        configure-webserver
+        #install-prereq
+        #install-cakebox
+        #configure-webserver
         ;;
     update)
         update
