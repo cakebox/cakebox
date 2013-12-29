@@ -6,6 +6,10 @@ app.controller('AppCtrl', ['$scope', '$http', '$location',
             versions: {}
         };
 
+        $scope.$on('$locationChangeSuccess',function(eventt, newurl, oldurl) {
+            $scope.previouspage = oldurl;
+        });
+
         $http.get('api/app/version')
             .success(function(data, status, headers, config) {
                 $scope.global.versions = data;

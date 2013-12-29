@@ -5,10 +5,6 @@ app.controller('BrowseCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs',
         $scope.breadcrumbs = breadcrumbs;
         $scope.informations = "Chargement des fichiers, veuillez patienter ...";
 
-        $scope.$on('$locationChangeSuccess',function(eventt, newurl, oldurl) {
-            $scope.previouspage = oldurl;
-        });
-
         $scope.$watch('location.path()', function(event, current) {
 
             if ($routeParams.path != "")
