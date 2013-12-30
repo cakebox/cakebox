@@ -18,10 +18,11 @@
                 <td class="file-download">
                     <a ng-if="dir.type == 'file'" ng-href="{{ dir.access }}" class="glyphicon glyphicon-download"></a>
                 </td>
-                <td class="file-name ">
+                <td class="file-name">
                     <a ng-if="dir.type == 'dir'" ng-href="#/browse/{{ currentPath + dir.name }}" >{{ dir.name }}/</a>
                     <a ng-if="dir.type == 'file' && !dir.extraType" ng-href="{{ dir.access }}" >{{ dir.name }}</a>
                     <a ng-if="dir.type == 'file' && dir.extraType == 'video'" ng-href="#/play/{{ currentPath + dir.name }}">{{ dir.name }}</a>
+                    <small><span title="Nouveau" class="glyphicon glyphicon-star" ng-if="((currentTS - dir.ctime) / 3600) <= 24"></span></small>
                 </td>
                 <td class="file-size">
                     {{ dir.size | bytes }}

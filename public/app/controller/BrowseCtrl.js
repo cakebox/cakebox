@@ -13,6 +13,7 @@ app.controller('BrowseCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs',
             $http.get('api/directories/content/' + $scope.currentPath)
                 .success(function(data, status, headers, config) {
                     $scope.informations = "";
+                    $scope.currentTS = Math.round(new Date().getTime() / 1000);
                     if (data.length == 0)
                         $scope.dirs = "empty";
                     else

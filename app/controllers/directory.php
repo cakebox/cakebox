@@ -35,6 +35,7 @@ $app->get("/api/directories/content/{dir}", function (Request $request, $dir) us
 		$pathInfo = array();
 		$pathInfo["name"] = $file->getBasename();
 		$pathInfo["type"] = $file->getType();
+		$pathInfo["ctime"] = $file->getCTime();
 		$pathInfo["size"] = ($file->isFile()) ? $file->getSize() : getDirSize($file->getRealpath());
 		$pathInfo["access"] = "{$app['cakebox.access']}{$dir}{$file->getBasename()}";
 
