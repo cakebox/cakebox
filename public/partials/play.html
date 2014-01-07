@@ -8,7 +8,7 @@
     </div>
 
     <div class="player">
-        <webplayer video="{{ fileinfo.access }}" type="{{ fileinfo.mimetype }}" width="{{ player.width }}" height="{{ player.height }}" preload="{{ player.preload }}"></webplayer>
+        <webplayer url="{{ fileinfo.access }}" width="{{ player.width }}" height="{{ player.height }}"></webplayer>
 
         <div class="betaseries" ng-if="(betaseries.episode || betaseries.movie) && betaseries.errors.length == 0">
 

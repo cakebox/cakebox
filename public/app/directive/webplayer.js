@@ -1,26 +1,21 @@
-app.directive('webplayer', function () {
+app.directive('webplayer', ["$location", function ($location) {
 
   return {
     restrict: 'E',
-    transclude: true,
     replace: true,
     scope: {
-      video: '@',
-      type: '@',
-      width: '@',
-      height: '@',
-      preload: '@'
+      url: '@',
     },
-    templateUrl: "partials/webplayer.html",
+    template: '<embed ng-src="{{ url }}" type="video/divx" pluginspage="http://go.divx.com/plugin/download/"></embed>',        
     compile: function(elem, attrs, transcludeFn) {
       return function link (scope, element, attrs) {
-        // Prevent error when the  player connect source before scope.channel unready. (e.g. When ng-view)
-        scope.$watch('video + type', function(video) {
-          if (attrs.video && attrs.type)
-            element.children().prepend('<source src="' + attrs.video + '" type="' + attrs.type + '" />');
+
+        attrs.$observe('url', function(url) {
+              scope.url = $location.protocol() + "://" + $location.host() +  url;
         });
+
       };
     }
   };
 
-});
+}]);

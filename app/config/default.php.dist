@@ -9,10 +9,8 @@ $app["cakebox.access"] = "/access/"; // Alias used in web server for direct acce
 /*
   Web player settings
 */
-$app["player.type"] = "HTML5"; // whatever for now
 $app["player.width"] = "710";
 $app["player.height"] = "400";
-$app["player.preload"] = "auto"; // auto, metadata, none
 
 /*
   Betaseries account
