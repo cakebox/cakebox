@@ -1,5 +1,7 @@
-<div>
-    <video width="{{ width }}" height="{{ height }}" preload="{{ preload }}" controls>
-        <p>Votre navigateur ne supporte pas la balise video.</p>
+<div class="video">
+    <video ng-if="type == 'HTML5'" ng-src="{{ url }}" controls>
+        <p>Votre navigateur ne supporte pas la balise video. {{ type }}</p>
     </video>
+
+    <embed ng-if="type == 'DIVX'" ng-src="{{ url }}" type="video/divx" height="{{ height }}" width="{{ width }}" pluginspage="http://go.divx.com/plugin/download/">
 </div>

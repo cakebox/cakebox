@@ -9,6 +9,7 @@ $app["cakebox.access"] = "/access/"; // Alias used in web server for direct acce
 /*
   Web player settings
 */
+$app["player.type"] = "HTML5"; // HTML5 or DIVX or VLC
 $app["player.width"] = "710";
 $app["player.height"] = "400";
 
