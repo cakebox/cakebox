@@ -4,10 +4,11 @@ app.directive('webplayer', ["$location", function ($location) {
     restrict: 'E',
     replace: true,
     scope: {
-      type: '@',
+      playertype: '@',
       url: '@',
       height: '@',
-      width: '@'
+      width: '@',
+      type: '@'
     },
     templateUrl: "partials/webplayer.html",
     compile: function(elem, attrs, transcludeFn) {

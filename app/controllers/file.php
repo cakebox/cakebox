@@ -11,7 +11,7 @@ $app->get("/api/files/info/{filepath}", function (Request $request, $filepath) u
     $file = new SPLFileInfo($app["cakebox.root"].$filepath);
     $fileinfo["name"] = $file->getBasename(".".$file->getExtension());
     $fileinfo["fullname"] = $file->getFilename();
-    $fileinfo["mimetype"] = mime_content_type($file->getPathName());
+    $fileinfo["mimetype"] = ($app["player.type"] != "DIVX") ? mime_content_type($file->getPathName()) : "video/divx";
     $fileinfo["access"] = $app["cakebox.access"] . $filepath;
     $fileinfo["size"] = $file->getSize();
 
