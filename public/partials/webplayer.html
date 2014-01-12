@@ -3,7 +3,7 @@
         <p>Votre navigateur ne supporte pas la balise video.</p>
     </video>
 
-    <embed ng-if="type == 'DIVX'" type="video/divx" ng-src="{{ url }}" height="{{ height }}" width="{{ width }}" pluginspage="http://go.divx.com/plugin/download/" />
+    <embed ng-if="type == 'DIVX'" type="video/divx" ng-src="{{ url }}" height="{{ height }}" width="{{ width }}" />
 
-    <embed ng-if="type == 'VLC'" type="application/x-vlc-plugin" target="{{ url }}" height="{{ height }}" width="{{ width }}" autoplay="no" pluginspage="http://www.videolan.org" />
+    <embed ng-if="type == 'VLC'" type="application/x-vlc-plugin" target="{{ url }}" height="{{ height }}" width="{{ width }}" autoplay="no" />
 </div>
