@@ -1,9 +1,0 @@
-<div class="video">
-    <video ng-if="playertype == 'HTML5'" ng-src="{{ url }}" type="{{ type }}" controls>
-        <p>Votre navigateur ne supporte pas la balise video.</p>
-    </video>
-
-    <embed ng-if="playertype == 'DIVX'" type="{{ type }}" ng-src="{{ url }}" height="{{ height }}" width="{{ width }}" pluginspage="http://go.divx.com/plugin/download/" />
-
-    <embed ng-if="playertype == 'VLC'" type="application/x-vlc-plugin" target="{{ url }}" height="{{ height }}" width="{{ width }}" autoplay="no" pluginspage="http://www.videolan.org" />
-</div>
