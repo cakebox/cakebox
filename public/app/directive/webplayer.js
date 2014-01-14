@@ -25,7 +25,7 @@ app.directive('webplayer', ["$location", function ($location) {
                     content = '';
 
                 if (scope.playertype == "HTML5") {
-                    content += '<video src="' + scope.url + '" type="' + scope.type + '" controls></video>'; 
+                    content += '<video src="' + scope.url + '" type="' + scope.type + '" width="' + scope.width + '" height="' + scope.height + '" controls></video>'; 
                 }
                 else if (scope.playertype == "DIVX") {
                     content += '<object classid="clsid:67DABFBF-D0AB-41fa-9C46-CC0F21721616" width="' + scope.width + '" height="' + scope.height + '" codebase="http://go.divx.com/plugin/DivXBrowserPlugin.cab">';
