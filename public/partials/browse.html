@@ -11,10 +11,17 @@
         {{ informations }}
     </div>
 
-    <table class="table table-condensed ">
+    <div class="sortInfo pull-right">
+        Trier:
+        <a href="" ng-click="global.predicate = 'ctime'; global.reverse=!global.reverse">par date</a>, 
+        <a href="" ng-click="global.predicate = 'size'; global.reverse=!global.reverse">par taille</a>, 
+        <a href="" ng-click="global.predicate = ''">non trié</a>
+    </div>
+
+    <table class="table table-condensed">
         <tbody>
 
-            <tr ng-if="dirs != 'empty'" class="file" ng-repeat="dir in dirs | filter:global.searchText">
+            <tr ng-if="dirs != 'empty'" class="file" ng-repeat="dir in dirs | orderBy:global.predicate:global.reverse | filter:global.searchText">
                 <td class="file-download">
                     <a ng-if="dir.type == 'file'" ng-href="{{ dir.access }}" class="glyphicon glyphicon-download"></a>
                 </td>
