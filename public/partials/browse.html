@@ -11,7 +11,7 @@
         {{ informations }}
     </div>
 
-    <div class="sortInfo pull-right">
+    <div ng-if="dirs" class="sortInfo pull-right">
         Trier:
         <a href="" ng-click="global.predicate = 'ctime'; global.reverse=!global.reverse">par date</a>, 
         <a href="" ng-click="global.predicate = 'size'; global.reverse=!global.reverse">par taille</a>, 
@@ -36,6 +36,7 @@
                 </td>
             </tr>
             <tr ng-if="dirs == 'empty'"><td>Rien dans ce repertoire.</td></tr>
+
         </tbody>
     </table>
 </div>
