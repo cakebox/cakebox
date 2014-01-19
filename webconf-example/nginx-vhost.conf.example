@@ -1,6 +1,8 @@
 server {
         listen 80;
-        server_name cakebox.yourdomain.com;
+
+        #here replace with the subdomain you have created, you must own YOURDOMAIN.COM
+        server_name SUBDOMAIN.YOURDOMAIN.COM;
 
         root /var/www/$server_name/public/;
 
@@ -10,6 +12,13 @@ server {
         #replacement for htaccess, uncomment if you want
         #auth_basic "Restricted";
         #auth_basic_user_file /etc/nginx/htpasswd;
+
+        #alias for download and streaming
+        #replace /YOUR/PATH with the same path as cakebox.root variable in app/config/
+        location /access/ {
+            alias /YOUR/PATH;
+            add_header Content-Disposition "attachment";
+        }
 
         #site root is redirected to the app boot script
         location = / {
@@ -31,14 +40,8 @@ server {
             fastcgi_pass   unix:/var/run/php5-fpm.sock;
             include fastcgi_params;
             fastcgi_param  SCRIPT_FILENAME $document_root/index.php;
+            #use debug instead of production to get more log
             fastcgi_param  APPLICATION_ENV production;
             #fastcgi_param HTTPS on;
-        }
-
-        #alias for download and streaming
-        location /access/ {
-            #same path as cakebox.root variable in app/conf/
-            alias /home/rtorrent/downloads/files/;
-            add_header Content-Disposition "attachment";
         }
 }

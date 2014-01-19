@@ -1,12 +1,22 @@
  <VirtualHost *:80>
-    ServerAdmin your@email.com
-    ServerName cakebox.yourdomain.com
+    # here replace with the subdomain you have created, you must own YOURDOMAIN.COM
+    ServerName SUBDOMAIN.YOURDOMAIN.COM
 
     # use debug instead of production to get more log
     SetEnv APPLICATION_ENV production 
 
-    DocumentRoot "/var/www/cakebox/public/"
-    <Directory "/var/www/cakebox/public/">
+    # alias for download and streaming, it must point to your download directory
+    # replace /YOUR/PATH with the same path as cakebox.root variable in app/config/
+    Alias /access /YOUR/PATH
+    <Directory /YOUR/PATH/>
+        Order allow,deny 
+        Allow from all
+        Satisfy Any
+        Header set Content-Disposition "attachment"
+    </Directory>
+
+    DocumentRoot /var/www/cakebox/public/
+    <Directory /var/www/cakebox/public/>
         Options Indexes MultiViews FollowSymLinks
         AllowOverride none
 
@@ -17,15 +27,6 @@
         RewriteBase /
         RewriteCond %{REQUEST_FILENAME} !-f
         RewriteRule ^ index.php [L]
-    </Directory>
-
-    # alias for download and streaming, same path as cakebox.root variable in app/config/
-    Alias /access /hard/link/to/original/directory/
-    <Directory /hard/link/to/original/directory/>
-        Order allow,deny 
-        Allow from all
-        Satisfy Any
-        Header set Content-Disposition "attachment"
     </Directory>
 
     ErrorLog "/var/log/apache2/cakebox-error.log"

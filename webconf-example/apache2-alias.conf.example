@@ -15,10 +15,11 @@ Alias /cakebox /var/www/cakebox/public/
     RewriteRule ^ index.php [QSA,L]
 </Directory>
 
-# alias for download and streaming, same path as cakebox.root variable in app/config/
-Alias /access /hard/link/to/original/directory/
-<Directory /hard/link/to/original/directory/>
-    Order allow,deny
+# alias for download and streaming, it must point to your download directory
+# replace /YOUR/PATH with the same path as cakebox.root variable in app/config/
+Alias /access /YOUR/PATH
+<Directory /YOUR/PATH/>
+    Order allow,deny 
     Allow from all
     Satisfy Any
     Header set Content-Disposition "attachment"
