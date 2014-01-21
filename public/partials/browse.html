@@ -13,9 +13,9 @@
 
     <div ng-if="dirs" class="sortInfo pull-right">
         Trier:
+        <a href="" ng-click="global.predicate = ''">par nom</a>, 
         <a href="" ng-click="global.predicate = 'ctime'; global.reverse=!global.reverse">par date</a>, 
-        <a href="" ng-click="global.predicate = 'size'; global.reverse=!global.reverse">par taille</a>, 
-        <a href="" ng-click="global.predicate = ''">non trié</a>
+        <a href="" ng-click="global.predicate = 'size'; global.reverse=!global.reverse">par taille</a>
     </div>
 
     <table class="table table-condensed">
