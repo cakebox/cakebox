@@ -8,7 +8,7 @@ Contrairement à CakeBox original, CakeBox-light n'installe pas Rutorrent. Vous 
 
 Aperçu:
 
-![Cakebox-light](http://i.imgur.com/eML5KZD.png "Cakebox-light")
+![Cakebox-light](http://i.imgur.com/7qEEPNA.png "Cakebox-light")
 
 ## Comment installer Cakebox-light ?
 
