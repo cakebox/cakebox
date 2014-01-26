@@ -20,10 +20,10 @@ function usage () {
 # --------------------------- [ INSTALLATION PREREQUIS ] ---------------------------
 
 function install-prereq () {
-    echo "Installation des pre requis de Cakebox-light :"
+    echo "Installation des prérequis de Cakebox-light :"
     read -p "Appuyer sur une touche pour continuer ..."
 
-    read -p "Quel est votre distribution linux ? (debian = d | ubuntu = u)" DISTRIB
+    read -p "Quelle est votre distribution linux ? (debian = d | ubuntu = u)" DISTRIB
 
     cd /tmp
 
@@ -42,7 +42,7 @@ function install-prereq () {
         apt-get install php5 php5-curl git build-essential
     fi
 
-    echo "Installation ou maj de Composer ..."
+    echo "Installation/Mise à jour de Composer ..."
     read -p "Appuyer sur une touche pour continuer ..."
     if hash composer 2>/dev/null; then
         /usr/local/bin/composer self-update
@@ -52,7 +52,6 @@ function install-prereq () {
         chmod +x /usr/bin/composer
     fi
 
-
     echo "Installation de NodeJS ..."
     read -p "Appuyer sur une touche pour continuer ..."
     wget -N http://nodejs.org/dist/node-latest.tar.gz
@@ -61,7 +60,7 @@ function install-prereq () {
     make
     make install
 
-    echo "Installation ou maj de Bower ..."
+    echo "Installation/Mise à jour de Bower ..."
     read -p "Appuyer sur une touche pour continuer ..."
     if hash bower 2>/dev/null; then
         bower update --allow-root
@@ -78,26 +77,26 @@ function install-cakebox () {
 
     echo "Installation de Cakebox-light ..."
     read -p "Appuyer sur une touche pour continuer ..."
-    cd $1 #repertoire d'installation cakebox passer en parametre
+    cd $1 #répertoire d'installation cakebox passer en parametre
 
     git clone https://github.com/Cakebox/Cakebox-light.git cakebox && cd cakebox
     git checkout tags/latest
-    composer.phar install
+    composer install
     bower install --allow-root
 
     cp app/config/default.php.dist app/config/default.php
 
     # Update Root directory Cakebox have to scan
     sed -i 's%\$app\[\"cakebox.root\"\] = \"\/var\/www\/\"\;%\$app\[\"cakebox.root\"] = \"'$2'\"\;%'  app/config/default.php
-    echo -e "Modification terminé du repertoire de scan cakebox-light terminé.\n\n"
+    echo -e "Modification terminé du répertoire de scan cakebox-light terminé.\n\n"
 
     # update locate for update
     updatedb
 
     echo -e "----------------------- CAKEBOX-LIGHT ---------------------\n"
-    echo -e "Cakebox-light est maintenant installé dans le repertoire "$1".\n"
-    echo -e "Il vous faut maintenant configurer votre serveur pour pouvoir acceder à votre cakebox-light depuis le web\n"
-    echo -e "Pour cela, rendez vous sur le wiki de la cakebox-light rubrique : Comment configurer votre serveur web  ?\n";
+    echo -e "Cakebox-light est maintenant installé dans le répertoire "$1".\n"
+    echo -e "Il vous faut maintenant configurer votre serveur pour pouvoir acceder à cakebox depuis le web\n"
+    echo -e "Pour cela, rendez vous sur le wiki, rubrique : Comment configurer votre serveur web  ?\n";
     echo -e "Bon stream !\n"
     read -p "Appuyer sur une touche pour terminer ..."
     
@@ -106,26 +105,26 @@ function install-cakebox () {
 # --------------------------- [ UPDATE CAKEBOX ] ---------------------------
 
 function update () {
-    echo "Mise a jour de Cakebox-light ..."
+    echo "Mise à jour de Cakebox-light ..."
     read -p "Appuyer sur une touche pour continuer ..."
 
-    echo "recherche de votre repertoire cakebox"
+    echo "Recherche de votre répertoire cakebox"
     REP2=$(locate -i -b "\cakebox")
 
-    read -p "Votre repertoire cakebox-light se trouve dans '$REP2' ? (y/n) " QUES
+    read -p "Votre répertoire cakebox se trouve dans '$REP2' ? (y/n) " QUES
     if [ $QUES == "n" ] ; then
-        read -p "Ou se trouve votre reperoitoire cakebox ?" REP2
+        read -p "Ou se trouve votre répertoire cakebox ?" REP2
     fi 
      
     if cd $REP2 2> /dev/null ; then
 
         git fetch --tags
         git checkout tags/latest
-        /usr/local/bin/composer self-update
+        composer self-update
         bower update --allow-root
-        echo "Mise a jour terminée, vous pouvez de nouveau utiliser votre Cakebox-light. Bon stream !"
+        echo "Mise à jour terminée."
     else
-        echo "Erreur : verifiez le chemin vers votre repertoire cakebox"
+        echo "Erreur : verifiez le chemin vers votre répertoire cakebox"
     fi
 
 }
@@ -146,7 +145,7 @@ fi
 case $1 in
     install)
         
-        # --------------------------- [ REPERTOIRE D'INSTALLATION ] ---------------------------
+        # --------------------------- [ répertoire D'INSTALLATION ] ---------------------------
  
         echo "_________         __         ___.                 "
         echo "\_   ___ \_____  |  | __ ____\_ |__   _______  ___"
@@ -155,25 +154,25 @@ case $1 in
         echo " \______  (____  /__|_ \\___  >___  /\____/__/\_  \\"
         echo "        \/     \/     \/    \/    \/            \/"
         echo -e "\n"
-        echo -e "Debut de l'installation de cakebox-light....\n"
+        echo -e "Début de l'installation de cakebox-light....\n"
 
-        read -p "Entrez le repertoire ou installer Cakebox-light (ex /var/www/): " CAKEREP
+        read -p "Entrez le répertoire ou installer Cakebox-light (ex /var/www/): " CAKEREP
         if cd $CAKEREP 2> /dev/null ; then
-            echo -e "Debut de l'intallation dans le repertoire '$CAKEREP'\n"
+            echo -e "Debut de l'intallation dans le répertoire '$CAKEREP'\n"
         else
             mkdir $CAKEREP
-            echo -e "Le repertoire '$CAKEREP' a été créer \n"
+            echo -e "Le répertoire '$CAKEREP' a été créé \n"
         fi
 
-        # --------------------------- [ REPERTOIRE DE SCAN ] ---------------------------
+        # --------------------------- [ répertoire DE SCAN ] ---------------------------
 
 
-        read -p "Entrez le repertoire a scanner : " REP
+        read -p "Entrez le répertoire a scanner : " REP
         if cd $REP 2> /dev/null ; then
-            echo -e "repertoire scanner par cakebox-light : '$CAKEREP'\n"
+            echo -e "Répertoire scanner par cakebox-light : '$CAKEREP'\n"
         else
             mkdir $REP
-            echo -e "Repertoire de scan : '$REP' creer.\n"
+            echo -e "Répertoire de scan : '$REP' créé.\n"
         fi
 
         chmod -R 0755 $REP
