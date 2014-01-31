@@ -36,7 +36,7 @@ app.directive('webplayer', ["$location", function ($location) {
                     content += '</object>';
                 }
                 else if (scope.playertype == "VLC") {
-                    content += '<embed type="application/x-vlc-plugin" target="' + scope.url + '" width="' + scope.width + '" height="' + scope.height + '"  autoplay="no" pluginspage="http://www.videolan.org" />';
+                    content += '<embed type="application/x-vlc-plugin" version="VideoLAN.VLCPlugin.2" target="' + scope.url + '" width="' + scope.width + '" height="' + scope.height + '"  autoplay="yes" pluginspage="http://www.videolan.org"></embed>';
                 }
 
                 $_current.replaceWith($_clone.html(content));
