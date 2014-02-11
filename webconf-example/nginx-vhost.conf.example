@@ -17,6 +17,8 @@ server {
         #replace /YOUR/PATH with the same path as cakebox.root variable in app/config/
         location /access/ {
             alias /YOUR/PATH;
+            allow all;
+            satisfy any;
             add_header Content-Disposition "attachment";
         }
 
