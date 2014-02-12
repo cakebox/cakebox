@@ -5,14 +5,23 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\Finder\Finder;
 
-function getDirSize($directory) {
 
-	$size = 0;
-	foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory)) as $file) {
-		$size += $file->getSize();
-    }
+function get_Size($file) {
 
-    return $size;
+	if ($file->isFile()) {
+
+		$size = $file->getSize();
+		return ($size != false) ? $size : 0;
+	}
+	else {
+
+		$size = 0;
+		foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($file->getRealpath())) as $f) {
+			$size += $f->getSize();
+		}
+
+		return $size;
+	}
 }
 
 $app->get("/api/directories/content/{dir}", function (Request $request, $dir) use ($app) {
@@ -36,7 +45,7 @@ $app->get("/api/directories/content/{dir}", function (Request $request, $dir) us
 		$pathInfo["name"] = $file->getBasename();
 		$pathInfo["type"] = $file->getType();
 		$pathInfo["ctime"] = $file->getCTime();
-		$pathInfo["size"] = ($file->isFile()) ? $file->getSize() : getDirSize($file->getRealpath());
+		$pathInfo["size"] = get_Size($file);
 		$pathInfo["access"] = "{$app['cakebox.access']}{$dir}{$file->getBasename()}";
 
 		// for further support
