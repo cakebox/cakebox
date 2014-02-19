@@ -8,20 +8,24 @@ use Symfony\Component\Finder\Finder;
 
 function get_Size($file) {
 
+	$size = 0;
+
 	if ($file->isFile()) {
 
-		$size = $file->getSize();
-		return ($size != false) ? $size : 0;
+		try {
+			$size += $file->getSize();
+		} catch (RuntimeException $e) {}
 	}
 	else {
 
-		$size = 0;
 		foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($file->getRealpath())) as $f) {
-			$size += $f->getSize();
+			try {
+				$size += $f->getSize();
+			} catch (RuntimeException $e) {}
 		}
-
-		return $size;
 	}
+
+	return $size;
 }
 
 $app->get("/api/directories/content/{dir}", function (Request $request, $dir) use ($app) {
