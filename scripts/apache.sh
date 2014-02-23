@@ -11,22 +11,22 @@
 #       @Tuxity
 #       @martialdidit
 #
-# Script de création d'un sous domain pour cakebox-light ex : cakebox.domain.com
+# Script de création d'un sous domaine pour cakebox-light ex : cakebox.domain.com
 #
 
-read -p "Avant de lancer ce script, assurez vous d'avoir une version d'Apache installer sur votre serveur et d'avoir deja installé cakebox-light"
-read -p "Appuyer sur une touche pour continuer ou Ctrl-c pour annuler."
+read -p "Avant de lancer ce script, assurez vous d'avoir une version d'Apache installée sur votre serveur et d'avoir déjà installé cakebox-light"
+read -p "Appuyez sur une touche pour continuer ou Ctrl-c pour annuler."
 
-read -p "Apres l'éxécution du script, vous pourrez accéder à cakebox via un sous-domaine ex : cakebox.yourdomain.com"
-read -p "Appuyer sur une touche pour continuer ou Ctrl-c pour annuler."
+read -p "Après l'éxécution du script, vous pourrez accéder à cakebox via un sous-domaine ex : cakebox.yourdomain.com"
+read -p "Appuyez sur une touche pour continuer ou Ctrl-c pour annuler."
 
 read -p "Nom du sous-domaine  (cakebox.exemple.com): " SUBDOMAIN
 read -p "Quel est le répertoire d'installation de cakebox ? (ex : /home/cakebox/) : " CAKEBOXREP
 read -p "Quel est le répertoire de scan de cakebox ? (ex : /home/video/) : " VIDEOREP
 
 
-echo "\n\nDéploiement d'Apache"
-read -p "Appuyer sur une touche pour continuer ..."
+echo "Déploiement d'Apache"
+read -p "Appuyez sur une touche pour continuer ..."
 
 echo '<VirtualHost *:80>
     ServerAdmin postmaster@stats.yt
@@ -64,4 +64,4 @@ echo '<VirtualHost *:80>
 a2ensite $SUBDOMAIN
 /etc/init.d/apache2 restart
 
-echo "\n\nCréation du sous-domain terminé, rendez-vous sur '$SUBDOMAIN' pour streamer !"
+echo "\n\nCréation du sous-domaine terminé, rendez-vous sur '$SUBDOMAIN' pour streamer !"
