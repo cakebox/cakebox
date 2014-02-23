@@ -9,7 +9,7 @@ app.controller('MediaCtrl', ['$scope', '$http', '$routeParams',
                 console.error("Cakebox: API is unreachable on /api/players/settings");
             });
 
-        $http.get('api/files/info/' + $routeParams.path)
+        $http.get('api/file/info/' + $routeParams.path)
             .success(function(data, status, headers, config) {
 
                 $scope.fileinfo = data;
@@ -31,7 +31,7 @@ app.controller('MediaCtrl', ['$scope', '$http', '$routeParams',
                     });
             })
             .error(function(data, status, headers, config) {
-                console.error("Cakebox: API is unreachable on /api/files/info/");
+                console.error("Cakebox: API is unreachable on /api/file/info/");
             });
 
         $scope.watched = function (event, id) {

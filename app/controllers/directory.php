@@ -28,7 +28,7 @@ function get_Size($file) {
     return $size;
 }
 
-$app->get("/api/directories/content/{dir}", function (Request $request, $dir) use ($app) {
+$app->get("/api/directory/content/{dir}", function (Request $request, $dir) use ($app) {
 
     $dirContent = array();
 

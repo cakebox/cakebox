@@ -4,7 +4,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
-$app->get("/api/files/info/{filepath}", function (Request $request, $filepath) use ($app) {
+$app->get("/api/file/info/{filepath}", function (Request $request, $filepath) use ($app) {
 
     $fileinfo = array();
 
