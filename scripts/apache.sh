@@ -58,7 +58,7 @@ echo '<VirtualHost *:80>
     CustomLog "/var/log/apache2/'$SUBDOMAIN'-access.log" common
 </VirtualHost>
 
-' > /etc/apache2/site-available/$SUBDOMAIN
+' > /etc/apache2/sites-available/$SUBDOMAIN
 
 
 a2ensite $SUBDOMAIN
