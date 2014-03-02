@@ -23,7 +23,8 @@
 
             <tr ng-if="dirs != 'empty'" class="file" ng-repeat="dir in dirs | orderBy:global.predicate:global.reverse | filter:global.searchText">
                 <td class="file-type">
-                    <span ng-if="dir.type == 'file'" class="glyphicon glyphicon-file" ></span>
+                    <span ng-if="dir.type == 'file' && dir.extraType == 'video'" class="glyphicon glyphicon-facetime-video" ></span>
+                    <span ng-if="dir.type == 'file' && dir.extraType != 'video'" class="glyphicon glyphicon-file"></span>
                     <span ng-if="dir.type == 'dir'" class="glyphicon glyphicon-folder-open" ></span>
                 </td>
                 <td class="file-name">
