@@ -89,12 +89,17 @@ td {
     white-space: nowrap;
 }
 
+.file-type {
+  width: 30px;
+  color: #428bca;
+}
+
 .file-download {
   width: 30px;
 }
 
 .file-size {
-  width: 100px;
+  width: 85px;
 }
 
 .container {
