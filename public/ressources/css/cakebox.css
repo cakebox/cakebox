@@ -104,12 +104,12 @@ td {
 }
 
 .file-size {
-  width: 85px;
+  width: 90px;
 }
 
 .container {
   width: auto;
-  max-width: 800px;
+  max-width: 1024px;
   padding: 0 15px;
 }
 
