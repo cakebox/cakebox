@@ -37,6 +37,7 @@
                 <form ng-if="currentPage == 'browse' || currentPage == ''" class="navbar-form navbar-right searchbox" role="search">
                     <div class="form-group has-feedback">
                         <input type="text" class="form-control" placeholder="Rechercher" ng-model="global.searchText">
+                        <button ng-if="global.searchText != ''" ng-click="global.searchText = ''" type="button" aria-hidden="true" class="close form-control-feedback close-search">&times;</button>
                         <span class="glyphicon glyphicon-search form-control-feedback"></span>
                     </div>
                 </form>
