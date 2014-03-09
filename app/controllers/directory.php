@@ -53,15 +53,15 @@ $app->get("/api/directory/content/{dir}", function (Request $request, $dir) use 
         $pathInfo["access"] = "{$app['cakebox.access']}{$dir}{$file->getBasename()}";
 
         $pathInfo["extraType"] = false;
-        if (in_array($file->getExtension(), $app["extension.video"]))
+        if (in_array(strtolower($file->getExtension()), $app["extension.video"]))
             $pathInfo["extraType"] = "video";
-        else if (in_array($file->getExtension(), $app["extension.audio"]))
+        else if (in_array(strtolower($file->getExtension()), $app["extension.audio"]))
             $pathInfo["extraType"] = "audio";
-        else if (in_array($file->getExtension(), $app["extension.image"]))
+        else if (in_array(strtolower($file->getExtension()), $app["extension.image"]))
             $pathInfo["extraType"] = "image";
-        else if (in_array($file->getExtension(), $app["extension.archive"]))
+        else if (in_array(strtolower($file->getExtension()), $app["extension.archive"]))
             $pathInfo["extraType"] = "archive";
-        else if (in_array($file->getExtension(), $app["extension.subtitle"]))
+        else if (in_array(strtolower($file->getExtension()), $app["extension.subtitle"]))
             $pathInfo["extraType"] = "subtitle";
 
         array_push($dirContent, $pathInfo);
