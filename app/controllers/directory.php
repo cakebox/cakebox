@@ -53,9 +53,31 @@ $app->get("/api/directory/content/{dir}", function (Request $request, $dir) use 
         $pathInfo["access"] = "{$app['cakebox.access']}{$dir}{$file->getBasename()}";
 
         // for further support
-        $pathInfo["extraType"] = "";
+        $pathInfo["extraType"] = false;
         if ( explode("/", mime_content_type($file->getRealpath()) )[0] == "video" || $file->getExtension() == "mkv" )
             $pathInfo["extraType"] = "video";
+        elseif (
+            $file->getExtension() == 'mp3' ||
+            $file->getExtension() == 'flac' ||
+            $file->getExtension() == 'ogg' ||
+            $file->getExtension() == 'aac' ||
+            $file->getExtension() == 'wma' ) {
+            $pathInfo["extraType"] = 'music';
+        } elseif (
+            $file->getExtension() == 'png' ||
+            $file->getExtension() == 'gif' ||
+            $file->getExtension() == 'jpg' ||
+            $file->getExtension() == 'jpeg') {
+            $pathInfo["extraType"] = 'image';
+        } elseif (
+            $file->getExtension() == 'rar' ||
+            $file->getExtension() == 'zip' ||
+            $file->getExtension() == 'gz' ||
+            $file->getExtension() == 'bz2') {
+            $pathInfo["extraType"] = 'archive';
+        } elseif ($file->getExtension() == 'srt') {
+            $pathInfo["extraType"] = 'subtitle';
+        }
 
         array_push($dirContent, $pathInfo);
     }

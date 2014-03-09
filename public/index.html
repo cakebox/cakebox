@@ -34,7 +34,7 @@
                         <li ng-class="{'active': currentPage == 'about'}"><a href="#/about">A propos</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
-                <form ng-if="currentPage != 'play'" class="navbar-form navbar-right searchbox" role="search">
+                <form ng-if="currentPage == 'browse' || currentPage == ''" class="navbar-form navbar-right searchbox" role="search">
                     <div class="form-group has-feedback">
                         <input type="text" class="form-control" placeholder="Rechercher" ng-model="global.searchText">
                         <span class="glyphicon glyphicon-search form-control-feedback"></span>
