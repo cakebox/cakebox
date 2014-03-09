@@ -16,6 +16,12 @@ if (APPLICATION_ENV != "production") {
     $app["debug"] = true;
 }
 
+$app["extension.video"] = array ("mp4", "mov", "mpg", "flv", "avi", "mkv");
+$app["extension.audio"] = array ("mp3", "flac", "ogg", "aac", "wma");
+$app["extension.image"] = array ("png", "gif", "jpg", "jpeg");
+$app["extension.archive"] = array ("zip", "rar", "gz", "bz2", "7z");
+$app["extension.subtitle"] = array ("srt");
+
 $app["error"] = $app->protect(function ($e) use ($app) {
     $code = $e->getCode();
     if ( $code === 400 || $code === 404 || $code === 403) {

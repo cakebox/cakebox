@@ -52,32 +52,17 @@ $app->get("/api/directory/content/{dir}", function (Request $request, $dir) use 
         $pathInfo["size"] = get_Size($file);
         $pathInfo["access"] = "{$app['cakebox.access']}{$dir}{$file->getBasename()}";
 
-        // for further support
         $pathInfo["extraType"] = false;
-        if ( explode("/", mime_content_type($file->getRealpath()) )[0] == "video" || $file->getExtension() == "mkv" )
+        if (in_array($file->getExtension(), $app["extension.video"]))
             $pathInfo["extraType"] = "video";
-        elseif (
-            $file->getExtension() == 'mp3' ||
-            $file->getExtension() == 'flac' ||
-            $file->getExtension() == 'ogg' ||
-            $file->getExtension() == 'aac' ||
-            $file->getExtension() == 'wma' ) {
-            $pathInfo["extraType"] = 'music';
-        } elseif (
-            $file->getExtension() == 'png' ||
-            $file->getExtension() == 'gif' ||
-            $file->getExtension() == 'jpg' ||
-            $file->getExtension() == 'jpeg') {
-            $pathInfo["extraType"] = 'image';
-        } elseif (
-            $file->getExtension() == 'rar' ||
-            $file->getExtension() == 'zip' ||
-            $file->getExtension() == 'gz' ||
-            $file->getExtension() == 'bz2') {
-            $pathInfo["extraType"] = 'archive';
-        } elseif ($file->getExtension() == 'srt') {
-            $pathInfo["extraType"] = 'subtitle';
-        }
+        else if (in_array($file->getExtension(), $app["extension.audio"]))
+            $pathInfo["extraType"] = "audio";
+        else if (in_array($file->getExtension(), $app["extension.image"]))
+            $pathInfo["extraType"] = "image";
+        else if (in_array($file->getExtension(), $app["extension.archive"]))
+            $pathInfo["extraType"] = "archive";
+        else if (in_array($file->getExtension(), $app["extension.subtitle"]))
+            $pathInfo["extraType"] = "subtitle";
 
         array_push($dirContent, $pathInfo);
     }
@@ -86,4 +71,3 @@ $app->get("/api/directory/content/{dir}", function (Request $request, $dir) use 
 })
 ->value("dir", "")
 ->assert("dir", ".*");
-
