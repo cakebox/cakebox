@@ -42,13 +42,17 @@ body {
 }
 
 /* Set the fixed height of the footer here */
-#footer {
+footer {
   height: 60px;
   background-color: rgba(255, 255, 255, 0.75);
 }
 
 #wrap > .container {
-  padding: 80px 15px 0;
+  padding: 80px 0 0 0;
+}
+
+.container {
+  max-width: 1000px;
 }
 
 .container .credit {
@@ -56,19 +60,12 @@ body {
   color: #777;
 }
 
-#footer > .container {
+footer > .container {
   padding-left: 15px;
   padding-right: 15px;
 }
 
-code {
-  font-size: 80%;
-}
 /* Bootstrap end */
-
-.navbar .container div {
-  float: left;
-}
 
 .searchbox input {
   background-color: rgba(255, 255, 255, 0.62);
@@ -81,7 +78,6 @@ code {
 
 table {
   table-layout: fixed;
-  width: 800px;
 }
 
 .table th, .table td {
@@ -105,12 +101,6 @@ td {
 
 .file-size {
   width: 90px;
-}
-
-.container {
-  width: auto;
-  max-width: 1024px;
-  padding: 0 15px;
 }
 
 .informations {
