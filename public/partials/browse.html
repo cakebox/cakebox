@@ -34,7 +34,7 @@
                 <td class="file-name">
                     <a ng-if="dir.type == 'dir'" ng-href="#/browse/{{ currentPath + dir.name }}" >{{ dir.name }}/</a>
                     <a ng-if="dir.type == 'file' && dir.extraType != 'video'" ng-href="{{ dir.access }}" >{{ dir.name }}</a>
-                    <a ng-if="dir.type == 'file' && dir.extraType == 'video'" ng-href="#/play/{{ currentPath + dir.name }}">{{ dir.name }}</a>
+                    <a ng-if="dir.type == 'file' && dir.extraType == 'video'" ng-href="#/play/{{ currentPath + dir.name }}" title="{{ dir.ctime | date:'d MMM y h:mm:ss' }}">{{ dir.name }}</a>
                     <small><span title="Nouveau" class="glyphicon glyphicon-star" ng-if="dir.type == 'file' && ((currentTS - dir.ctime) / 3600) <= 24"></span></small>
                 </td>
                 <td class="file-size">
