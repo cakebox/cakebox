@@ -37,7 +37,7 @@
                     <a ng-if="dir.type == 'file' && dir.extraType == 'video'" ng-href="#/play/{{ currentPath + dir.name }}">{{ dir.name }}</a>
                     <small><span title="Nouveau" class="glyphicon glyphicon-star" ng-if="dir.type == 'file' && ((currentTS - dir.ctime) / 3600) <= 24"></span></small>
                 </td>
-                <td class="file-size">
+                <td class="file-size hidden-xs">
                     {{ dir.size | bytes }}
                 </td>
                 <td class="file-download">
