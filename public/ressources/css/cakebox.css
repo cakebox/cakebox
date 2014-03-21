@@ -143,9 +143,7 @@ td {
   position: relative;
 }
 
-.video-container #vlc,
-.video-container #divx,
-.video-container #html5 {
+#vlc, #divx, #html5 {
   width: 100%; height: 100%;
   top: 0; left: 0;
   position: absolute;
