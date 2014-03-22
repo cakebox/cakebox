@@ -30,7 +30,7 @@ app.directive('webplayer', ["$location", function ($location) {
                     content += '<param name="custommode" value="none" />';
                     content += '<param name="autoPlay" value="false" />';
                     content += '<param name="src" value="' + scope.url  + '" />';
-                    content += '<embed type="video/divx" src="' + scope.url  + '" autoPlay="false" custommode="none" pluginspage="http://go.divx.com/plugin/download/" />';
+                    content += '<embed type="video/divx" src="' + scope.url  + '" width="100%" height="100%" autoPlay="false" custommode="none" pluginspage="http://go.divx.com/plugin/download/" />';
                     content += '</object>';
                 }
                 else if (scope.playertype == "VLC") {
