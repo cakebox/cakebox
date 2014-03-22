@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-# _________         __         ___.                 
+# _________         __         ___.
 # \_   ___ \_____  |  | __ ____\_ |__   _______  ___
 # /    \  \/\__  \ |  |/ // __ \| __ \ /  _ \  \/  /
-# \     \____/ __ \|    <\  ___/| \_\ (  <_> >    < 
+# \     \____/ __ \|    <\  ___/| \_\ (  <_> >    <
 #  \______  (____  /__|_ \\___  >___  /\____/__/\_ \
 #         \/     \/     \/    \/    \/            \/
 # Version: Light
-# Author: 
+# Author:
 #       @Tuxity
 #       @martialdidit
 #
@@ -36,7 +36,7 @@ function install-prereq () {
         rm dotdeb.gpg
         aptitude update && aptitude upgrade
         aptitude install php5 php5-curl curl git python g++ make
-    else 
+    else
         add-apt-repository ppa:ondrej/php5
         apt-get update
         apt-get install php5 php5-curl git build-essential
@@ -80,7 +80,6 @@ function install-cakebox () {
     cd $1 #répertoire d'installation cakebox passer en parametre
 
     git clone https://github.com/Cakebox/Cakebox-light.git cakebox && cd cakebox
-    git checkout tags/latest
     composer install
     bower install --allow-root
 
@@ -99,7 +98,7 @@ function install-cakebox () {
     echo -e "Pour cela, rendez vous sur le wiki, rubrique : Comment configurer votre serveur web  ?\n";
     echo -e "Bon stream !\n"
     read -p "Appuyer sur une touche pour terminer ..."
-    
+
 }
 
 # --------------------------- [ UPDATE CAKEBOX ] ---------------------------
@@ -114,12 +113,11 @@ function update () {
     read -p "Votre répertoire cakebox se trouve dans '$REP2' ? (y/n) " QUES
     if [ $QUES == "n" ] ; then
         read -p "Ou se trouve votre répertoire cakebox ?" REP2
-    fi 
-     
+    fi
+
     if cd $REP2 2> /dev/null ; then
 
-        git fetch --tags
-        git checkout tags/latest
+        git pull origin master
         composer self-update
         bower update --allow-root
         echo "Mise à jour terminée."
@@ -144,13 +142,13 @@ fi
 
 case $1 in
     install)
-        
+
         # --------------------------- [ répertoire D'INSTALLATION ] ---------------------------
- 
+
         echo "_________         __         ___.                 "
         echo "\_   ___ \_____  |  | __ ____\_ |__   _______  ___"
         echo "/    \  \/\__  \ |  |/ // __ \| __ \ /  _ \  \/  /"
-        echo "\     \____/ __ \|    <\  ___/| \_\ (  <_> >    < " 
+        echo "\     \____/ __ \|    <\  ___/| \_\ (  <_> >    < "
         echo " \______  (____  /__|_ \\___  >___  /\____/__/\_  \\"
         echo "        \/     \/     \/    \/    \/            \/"
         echo -e "\n"
