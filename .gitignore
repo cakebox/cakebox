@@ -5,4 +5,4 @@ composer.lock
 /public/.htaccess
 /public/components
 
-/app/config/*.php
+/config/*.php
