@@ -33,7 +33,13 @@ $app->get("/api/directory/content/{dir}", function (Request $request, $dir) use 
     $dirContent = array();
 
     $finder = new Finder();
-    $finder->followLinks()->depth('< 1')->in("{$app['cakebox.root']}{$dir}")->sortByType();
+    $finder->followLinks()
+            ->depth('< 1')
+            ->in("{$app['cakebox.root']}{$dir}")
+            ->ignoreVCS(true)
+            ->ignoreDotFiles($app['directory.ignoreDotFiles'])
+            ->notName($app["directory.ignore"])
+            ->sortByType();
 
     foreach ($finder as $file) {
 
@@ -53,15 +59,16 @@ $app->get("/api/directory/content/{dir}", function (Request $request, $dir) use 
         $pathInfo["access"] = "{$app['cakebox.access']}{$dir}{$file->getBasename()}";
 
         $pathInfo["extraType"] = false;
-        if (in_array(strtolower($file->getExtension()), $app["extension.video"]))
+        $ext = strtolower($file->getExtension());
+        if (in_array($ext, $app["extension.video"]))
             $pathInfo["extraType"] = "video";
-        else if (in_array(strtolower($file->getExtension()), $app["extension.audio"]))
+        else if (in_array($ext, $app["extension.audio"]))
             $pathInfo["extraType"] = "audio";
-        else if (in_array(strtolower($file->getExtension()), $app["extension.image"]))
+        else if (in_array($ext, $app["extension.image"]))
             $pathInfo["extraType"] = "image";
-        else if (in_array(strtolower($file->getExtension()), $app["extension.archive"]))
+        else if (in_array($ext, $app["extension.archive"]))
             $pathInfo["extraType"] = "archive";
-        else if (in_array(strtolower($file->getExtension()), $app["extension.subtitle"]))
+        else if (in_array($ext, $app["extension.subtitle"]))
             $pathInfo["extraType"] = "subtitle";
 
         array_push($dirContent, $pathInfo);
