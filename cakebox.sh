@@ -167,7 +167,7 @@ case $1 in
 
         read -p "Entrez le répertoire a scanner : " REP
         if cd $REP 2> /dev/null ; then
-            echo -e "Répertoire scanner par cakebox-light : '$CAKEREP'\n"
+            echo -e "Répertoire scanner par cakebox-light : '$REP'\n"
         else
             mkdir $REP
             echo -e "Répertoire de scan : '$REP' créé.\n"
