@@ -1,14 +1,12 @@
 {
     "require": {
         "php": ">=5.4.0",
-        
-        "silex/silex": "~1.1",
-        "symfony/finder": "~2.3"
+
+        "silex/silex": "1.x",
+        "symfony/finder": "2.x"
     },
     "config": {
         "bin-dir": "bin",
         "vendor-dir": "tmp/composer/"
-    },
-    "autoload": {
     }
 }

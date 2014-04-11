@@ -3,7 +3,6 @@
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Finder\Finder;
 
-
 function get_Size($file) {
 
     $size = 0;
