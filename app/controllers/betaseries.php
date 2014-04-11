@@ -1,8 +1,6 @@
 <?php
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\ParameterBag;
 
 function fetch($url, $params = array(), $method = "get")
 {
@@ -78,4 +76,3 @@ $app->get("/api/betaseries/info/{name}", function (Request $request, $name) use 
 
     return $app->json($data);
 });
-
