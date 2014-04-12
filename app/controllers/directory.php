@@ -25,14 +25,14 @@ function get_Size($file) {
     return $size;
 }
 
-$app->get("/api/directory/content/{dir}", function (Request $request, $dir) use ($app) {
+$app->get("/api/directory/content/{dirpath}", function (Request $request, $dirpath) use ($app) {
 
     $dirContent = array();
 
     $finder = new Finder();
     $finder->followLinks()
             ->depth('< 1')
-            ->in("{$app['cakebox.root']}{$dir}")
+            ->in("{$app['cakebox.root']}{$dirpath}")
             ->ignoreVCS(true)
             ->ignoreDotFiles($app['directory.ignoreDotFiles'])
             ->notName($app["directory.ignore"])
@@ -41,7 +41,7 @@ $app->get("/api/directory/content/{dir}", function (Request $request, $dir) use 
     foreach ($finder as $file) {
 
         if ($file->isLink()) {
-            $linkTo = readlink("{$app['cakebox.root']}{$dir}{$file->getBasename()}");
+            $linkTo = readlink("{$app['cakebox.root']}{$dirpath}{$file->getBasename()}");
             if (file_exists($linkTo) == false)
                 continue;
 
@@ -53,7 +53,7 @@ $app->get("/api/directory/content/{dir}", function (Request $request, $dir) use 
         $pathInfo["type"] = $file->getType();
         $pathInfo["ctime"] = $file->getCTime();
         $pathInfo["size"] = get_Size($file);
-        $pathInfo["access"] = "{$app['cakebox.access']}{$dir}{$file->getBasename()}";
+        $pathInfo["access"] = "{$app['cakebox.access']}{$dirpath}{$file->getBasename()}";
 
         $pathInfo["extraType"] = false;
         $ext = strtolower($file->getExtension());
@@ -73,5 +73,18 @@ $app->get("/api/directory/content/{dir}", function (Request $request, $dir) use 
 
     return $app->json($dirContent);
 })
-->value("dir", "")
-->assert("dir", ".*");
+->value("dirpath", "")
+->assert("dirpath", ".*");
+
+$app->get("/api/directory/download/{dirpath}", function (Request $request, $dirpath) use ($app) {
+
+    $dirname = pathinfo($dirpath)["basename"];
+
+    $p = new PharData("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar");
+    $p->compress(Phar::NONE);
+    $p->buildFromDirectory("{$app['cakebox.root']}{$dirpath}");
+
+    return $app->json("OK");
+})
+->value("dirpath", "")
+->assert("dirpath", ".*");
