@@ -47,7 +47,7 @@ function install-prereq () {
     if hash composer 2>/dev/null; then
         /usr/local/bin/composer self-update
     else
-        curl -s http://getcomposer.org/installer | php
+        curl -sS http://getcomposer.org/installer | php
         mv /tmp/composer.phar /usr/bin/composer
         chmod +x /usr/bin/composer
     fi

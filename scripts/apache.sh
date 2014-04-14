@@ -37,7 +37,7 @@ echo "\n\nDeploiement de la cakebox sur apache"
 read -p "Appuyer sur une touche pour continuer ..."
 
 echo '<VirtualHost *:80>
-    ServerAdmin postmaster@stats.yt
+    ServerAdmin postmaster@domain.com
     ServerName '$SUBDOMAIN'
 
     SetEnv APPLICATION_ENV production
