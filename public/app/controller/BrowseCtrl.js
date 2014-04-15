@@ -29,8 +29,14 @@ app.controller('BrowseCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs',
             getDatas($scope.currentPath);
         });
 
-        $scope.refreshDatas = function() {
-            getDatas($scope.currentPath);
+        $scope.refreshDatas = function(event) {
+
+            // Force unbinding
+            $scope.dirs = 0;
+
+            $(event.target).addClass("spin");
+            getDatas($scope.currentPath); // This is fast too fast to see the spinning
+            $(event.target).removeClass("spin");
         };
     }
 ]);
