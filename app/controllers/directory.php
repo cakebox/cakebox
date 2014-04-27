@@ -7,20 +7,16 @@ function get_Size($file) {
 
     $size = 0;
 
-    if ($file->isFile()) {
-
-        try {
+    try {
+        if ($file->isFile()) {
             $size += $file->getSize();
-        } catch (RuntimeException $e) {}
-    }
-    else {
-
-        foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($file->getRealpath())) as $f) {
-            try {
-                $size += $f->getSize();
-            } catch (RuntimeException $e) {}
         }
-    }
+        else {
+            foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($file->getRealpath())) as $f) {
+                $size += $f->getSize();
+            }
+        }
+    } catch (RuntimeException $e) {}
 
     return $size;
 }
