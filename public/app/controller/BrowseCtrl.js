@@ -3,13 +3,16 @@ app.controller('BrowseCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs',
 
         $scope.currentPath = "";
         $scope.breadcrumbs = breadcrumbs;
-        $scope.informations = "Chargement des fichiers, veuillez patienter ...";
 
         function getDatas(path) {
+
+            $scope.informations = "Chargement des fichiers, veuillez patienter ...";
 
             $http.get('api/directory/content/' + path)
                 .success(function(data, status, headers, config) {
                     $scope.informations = "";
+                    if (data.length == 0)
+                        $scope.informations = "Rien dans ce répertoire.";
                     $scope.dirs = data;
                 })
                 .error(function(data, status, headers, config) {
