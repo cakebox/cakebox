@@ -14,7 +14,7 @@
     <!-- Custom styles for this template -->
     <link href="ressources/css/cakebox.css" rel="stylesheet">
 
-</head> 
+</head>
 <body ng-controller="AppCtrl">
 
     <!-- Wrap all page content here -->
@@ -39,7 +39,7 @@
                     </ul>
                     <form class="navbar-form navbar-right searchbox" ng-if="currentPage == 'browse' || currentPage == ''" role="search">
                         <div class="form-group has-feedback">
-                            <input type="text" class="form-control" placeholder="Rechercher" ng-model="global.searchText">
+                            <input type="text" class="form-control" placeholder="Rechercher dans ce dossier" ng-model="global.searchText">
                             <button ng-if="global.searchText != ''" ng-click="global.searchText = ''" type="button" aria-hidden="true" class="close form-control-feedback close-search hidden-xs">&times;</button>
                             <span class="glyphicon glyphicon-search form-control-feedback hidden-xs"></span>
                         </div>
