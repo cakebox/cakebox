@@ -13,11 +13,11 @@ if (APPLICATION_ENV != "production") {
     $app["debug"] = true;
 }
 
-$app["extension.video"] = array ("mp4", "mov", "mpg", "flv", "avi", "mkv");
-$app["extension.audio"] = array ("mp3", "flac", "ogg", "aac", "wma");
-$app["extension.image"] = array ("png", "gif", "jpg", "jpeg");
-$app["extension.archive"] = array ("zip", "rar", "gz", "bz2", "7z");
-$app["extension.subtitle"] = array ("srt");
+$app["extension.video"]    = ["mp4", "mov", "mpg", "flv", "avi", "mkv"];
+$app["extension.audio"]    = ["mp3", "flac", "ogg", "aac", "wma"];
+$app["extension.image"]    = ["png", "gif", "jpg", "jpeg"];
+$app["extension.archive"]  = ["zip", "rar", "gz", "bz2", "7z"];
+$app["extension.subtitle"] = ["srt"];
 
 // Include specific user conf
 $user = @$_SERVER["PHP_AUTH_USER"];
@@ -31,7 +31,7 @@ if (substr($app["cakebox.root"], -1) !== '/')
     $app["cakebox.root"] .= "/";
 
 // Include controllers and models
-foreach (glob(__DIR__ . "/{controllers,models}/*.php", GLOB_BRACE) as $file) {
+foreach (glob(__DIR__ . "/{controllers}/*.php", GLOB_BRACE) as $file) {
     require_once $file;
 }
 

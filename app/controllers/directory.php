@@ -44,14 +44,14 @@ $app->get("/api/directory/content/{dirpath}", function (Request $request, $dirpa
             $file = new SplFileInfo($linkTo);
         }
 
-        $pathInfo = array();
-        $pathInfo["name"] = $file->getBasename();
-        $pathInfo["type"] = $file->getType();
-        $pathInfo["ctime"] = $file->getCTime();
-        $pathInfo["size"] = get_Size($file);
-        $pathInfo["access"] = "{$app['cakebox.access']}{$dirpath}{$file->getBasename()}";
-
+        $pathInfo              = [];
+        $pathInfo["name"]      = $file->getBasename();
+        $pathInfo["type"]      = $file->getType();
+        $pathInfo["ctime"]     = $file->getCTime();
+        $pathInfo["size"]      = get_Size($file);
+        $pathInfo["access"]    = "{$app['cakebox.access']}{$dirpath}{$file->getBasename()}";
         $pathInfo["extraType"] = false;
+
         $ext = strtolower($file->getExtension());
         if (in_array($ext, $app["extension.video"]))
             $pathInfo["extraType"] = "video";
