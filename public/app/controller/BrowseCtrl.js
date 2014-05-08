@@ -39,10 +39,11 @@ app.controller('BrowseCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs',
         };
 
         $scope.archiveDirectory = function(dirName) {
-            console.log($scope.currentPath + dirName);
+            alertify.log("L'archive " + dirName + ".tar est en cours de création, veuillez patienter.", "success", 0);
+
             $http.get('api/directory/archive/' + $scope.currentPath + dirName)
                 .success(function(data, status, headers, config) {
-                    //alertify.warning("L'archive " + dirName + ".tar est en cours de création, veuillez patienter.");
+                    alertify.log("L'archive " + dirName + ".tar a bien été créée.", "success", 0);
                 })
                 .error(function(data, status, headers, config) {
                     $scope.informations = "Une erreur est survenue (Erreur " + status + ")";
