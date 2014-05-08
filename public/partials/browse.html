@@ -42,6 +42,7 @@
                     {{ dir.size | bytes }}
                 </td>
                 <td class="file-download">
+                    <a ng-if="dir.type == 'dir'" href="" ng-click="archiveDirectory(dir.name)" title="Créer une archive du répertoire" class="glyphicon glyphicon-download"></a>
                     <a ng-if="dir.type == 'file'" ng-href="{{ dir.access }}" title="Télécharger le fichier" class="glyphicon glyphicon-download"></a>
                 </td>
             </tr>

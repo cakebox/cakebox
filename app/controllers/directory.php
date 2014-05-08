@@ -72,7 +72,7 @@ $app->get("/api/directory/content/{dirpath}", function (Request $request, $dirpa
 ->value("dirpath", "")
 ->assert("dirpath", ".*");
 
-$app->get("/api/directory/download/{dirpath}", function (Request $request, $dirpath) use ($app) {
+$app->get("/api/directory/archive/{dirpath}", function (Request $request, $dirpath) use ($app) {
 
     if (file_exists("{$app['cakebox.root']}{$dirpath}") && is_writable("{$app['cakebox.root']}{$dirpath}/../")) {
 
