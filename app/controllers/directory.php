@@ -74,11 +74,25 @@ $app->get("/api/directory/content/{dirpath}", function (Request $request, $dirpa
 
 $app->get("/api/directory/download/{dirpath}", function (Request $request, $dirpath) use ($app) {
 
-    $dirname = pathinfo($dirpath)["basename"];
+    if (file_exists("{$app['cakebox.root']}{$dirpath}") && is_writable("{$app['cakebox.root']}{$dirpath}/../")) {
 
-    $p = new PharData("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar");
-    $p->compress(Phar::NONE);
-    $p->buildFromDirectory("{$app['cakebox.root']}{$dirpath}");
+        $dirpath_info = pathinfo($dirpath);
+        $dirname = $dirpath_info["basename"];
+
+        if (!file_exists("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar.inc")) {
+            file_put_contents("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar.inc", "Tar creation in progress...");
+
+            $p = new PharData("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar");
+            $p->compress(Phar::NONE);
+            $p->buildFromDirectory("{$app['cakebox.root']}{$dirpath}");
+
+            unlink("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar.inc");
+        }
+        else
+            return $app->json("Error: This directory is already under a tar process.");
+    }
+    else
+        return $app->json("Error: Directory doesn't exists or parent directory isn't writable.");
 
     return $app->json("OK");
 })
