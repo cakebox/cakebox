@@ -15,7 +15,7 @@ $app["directory.ignore"] = "//"; // Regex for files exclusion. For exemple : "/(
 /*
   Web player settings
 */
-$app["player.type"] = "HTML5"; // HTML5 or DIVX or VLC
+$app["player.default_type"] = "html5"; // html5 or divx or vlc
 
 /*
   Betaseries account

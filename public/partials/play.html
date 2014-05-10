@@ -7,6 +7,8 @@
         {{ fileinfo.name }} <span class="glyphicon glyphicon-ok" ng-if="betaseries.episode.user.seen == true"></span>
     </div>
 
+    <select ng-model="player" ng-options="p.name for p in avalaible_players"></select><br>
+
     <div class="player">
         <div class="player-container">
             <webplayer class="video-container" playertype="{{ player.type }}" url="{{ fileinfo.access }}" type="{{ fileinfo.mimetype }}"></webplayer>
