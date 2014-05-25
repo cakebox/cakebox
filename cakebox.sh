@@ -13,7 +13,7 @@
 #
 
 function usage () {
-    echo "Usage: ./$0 [install | update]"
+    echo "Usage: ./$0 [install-full | install-cakebox | install-prerequis | update]"
     exit 0
 }
 
@@ -127,6 +127,33 @@ function update () {
 
 }
 
+# --------------------------- [ répertoire D'INSTALLATION + SCAN ] ---------------------------
+
+function repertoire-install {
+
+    read -p "Entrez le répertoire ou installer Cakebox-light (ex /var/www/): " CAKEREP
+    if cd $CAKEREP 2> /dev/null ; then
+        echo -e "Debut de l'intallation dans le répertoire '$CAKEREP'\n"
+    else
+        #mkdir $CAKEREP
+        echo -e "Le répertoire '$CAKEREP' a été créé \n"
+    fi
+    echo $CAKEREP
+}
+
+function repertoire-scan {
+
+    read -p "Entrez le répertoire a scanner : " REP
+    if cd $REP 2> /dev/null ; then
+        echo -e "Répertoire scanner par cakebox-light : '$REP'\n"
+    else
+        #mkdir $REP
+        echo -e "Répertoire de scan : '$REP' créé.\n"
+    fi
+
+    chmod -R 0755 $REP
+    echo $REP
+}  
 
 # --------------------------- [ VERIFICATION DE L'UTILISATEUR ROOT ] ---------------------------
 
@@ -139,45 +166,31 @@ fi
 
 # --------------------------- [ CHOIX UTILISATEUR ] ---------------------------
 
+echo "_________         __         ___.                 "
+echo "\_   ___ \_____  |  | __ ____\_ |__   _______  ___"
+echo "/    \  \/\__  \ |  |/ // __ \| __ \ /  _ \  \/  /"
+echo "\     \____/ __ \|    <\  ___/| \_\ (  <_> >    < "
+echo " \______  (____  /__|_ \\___  >___  /\____/__/\_  \\"
+echo "        \/     \/     \/    \/    \/            \/"
+echo -e "\n"
+echo -e "Début de l'installation de cakebox-light....\n"
 
 case $1 in
-    install)
-
-        # --------------------------- [ répertoire D'INSTALLATION ] ---------------------------
-
-        echo "_________         __         ___.                 "
-        echo "\_   ___ \_____  |  | __ ____\_ |__   _______  ___"
-        echo "/    \  \/\__  \ |  |/ // __ \| __ \ /  _ \  \/  /"
-        echo "\     \____/ __ \|    <\  ___/| \_\ (  <_> >    < "
-        echo " \______  (____  /__|_ \\___  >___  /\____/__/\_  \\"
-        echo "        \/     \/     \/    \/    \/            \/"
-        echo -e "\n"
-        echo -e "Début de l'installation de cakebox-light....\n"
-
-        read -p "Entrez le répertoire ou installer Cakebox-light (ex /var/www/): " CAKEREP
-        if cd $CAKEREP 2> /dev/null ; then
-            echo -e "Debut de l'intallation dans le répertoire '$CAKEREP'\n"
-        else
-            mkdir $CAKEREP
-            echo -e "Le répertoire '$CAKEREP' a été créé \n"
-        fi
-
-        # --------------------------- [ répertoire DE SCAN ] ---------------------------
-
-
-        read -p "Entrez le répertoire a scanner : " REP
-        if cd $REP 2> /dev/null ; then
-            echo -e "Répertoire scanner par cakebox-light : '$REP'\n"
-        else
-            mkdir $REP
-            echo -e "Répertoire de scan : '$REP' créé.\n"
-        fi
-
-        chmod -R 0755 $REP
-
-        # --------------------------- [ INSTALLATION CAKEBOX-LIGHT ] ---------------------------
-
+    install-prerequis)
+        # --------------------------- [ INSTALLATION ONLY PREREQUIS] ---------------------------
         install-prereq
+        ;;
+    install-full)
+        # --------------------------- [ INSTALLATION CAKEBOX-LIGHT + PREREQUIS] ---------------------------
+        CAKEREP=$(repertoire-install)
+        REP=$(repertoire-scan)
+        install-prereq
+        install-cakebox $CAKEREP $REP
+        ;;
+    install-cakebox)
+        # --------------------------- [ INSTALLATION ONLY CAKEBOX-LIGHT] ---------------------------
+        CAKEREP=$(repertoire-install)
+        REP=$(repertoire-scan)
         install-cakebox $CAKEREP $REP
         ;;
     update)
