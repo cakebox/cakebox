@@ -13,7 +13,7 @@
 #
 
 function usage () {
-    echo "Usage: ./$0 [install-full | install-cakebox | update]"
+    echo "Usage: ./$0 [install-full | install-cakebox | install-prerequis | update]"
     exit 0
 }
 
@@ -176,6 +176,10 @@ echo -e "\n"
 echo -e "Début de l'installation de cakebox-light....\n"
 
 case $1 in
+    install-prerequis)
+        # --------------------------- [ INSTALLATION ONLY PREREQUIS] ---------------------------
+        install-prereq
+        ;;
     install-full)
         # --------------------------- [ INSTALLATION CAKEBOX-LIGHT + PREREQUIS] ---------------------------
         CAKEREP=$(repertoire-install)
@@ -184,7 +188,7 @@ case $1 in
         install-cakebox $CAKEREP $REP
         ;;
     install-cakebox)
-        # --------------------------- [ INSTALLATION CAKEBOX-LIGHT] ---------------------------
+        # --------------------------- [ INSTALLATION ONLY CAKEBOX-LIGHT] ---------------------------
         CAKEREP=$(repertoire-install)
         REP=$(repertoire-scan)
         install-cakebox $CAKEREP $REP
