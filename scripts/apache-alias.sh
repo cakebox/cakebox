@@ -49,7 +49,7 @@ echo '<VirtualHost *:80>
         SetEnv APPLICATION_ENV production
 
         RewriteEngine On
-        RewriteBase /cakebox/
+        RewriteBase /'$ALIAS'/
         RewriteCond %{REQUEST_FILENAME} !-f
         RewriteRule ^ index.php [QSA,L]
     </Directory>
