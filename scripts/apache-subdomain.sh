@@ -14,15 +14,15 @@
 # Script de création d'un sous domaine pour cakebox-light ex : cakebox.domain.com
 # 
 
-read -p "Avant de lancer ce script, assurez vous d'avoir une version d'Apache installée sur votre serveur et d'avoir déjà installé cakebox-light"
-read -p "Appuyez sur une touche pour continuer ou Ctrl-c pour annuler."
-
-read -p "Après l'éxécution du script, vous pourrez accéder à cakebox via un sous-domaine ex : cakebox.yourdomain.com"
+echo "Avant de lancer ce script, assurez vous d'avoir une version d'Apache installée sur votre serveur et d'avoir déjà installé cakebox-light"
+echo "Après l'éxécution du script, vous pourrez accéder à cakebox via un sous-domaine ex : cakebox.yourdomain.com"
 read -p "Appuyez sur une touche pour continuer ou Ctrl-c pour annuler."
 
 read -p "Nom du sous-domaine  (cakebox.exemple.com): " SUBDOMAIN
-read -p "Quel est le répertoire d'installation de cakebox ? ( ex : /home/cakebox/ ) : " CAKEBOXREP
-read -p "Quel est le répertoire de scan de cakebox ? (ex : /home/video/ ) : " VIDEOREP
+echo "Quel est le répertoire d'installation de cakebox ? (ex : /home/cakebox ) :"
+read CAKEBOXREP
+echo "Quel est le répertoire de scan de cakebox ? (ex : /home/video ) :" 
+read VIDEOREP
 
 
 echo "\n\nDeploiement des modules pour apache"
@@ -42,8 +42,8 @@ echo '<VirtualHost *:80>
 
     SetEnv APPLICATION_ENV production
 
-    DocumentRoot "'$CAKEBOXREP'public"
-    <Directory "'$CAKEBOXREP'public">
+    DocumentRoot "'$CAKEBOXREP'/public"
+    <Directory "'$CAKEBOXREP'/public">
         Options Indexes MultiViews FollowSymLinks
         AllowOverride none
         Order allow,deny
@@ -55,8 +55,8 @@ echo '<VirtualHost *:80>
         RewriteRule ^ index.php [L]
     </Directory>
 
-    Alias /access '$VIDEOREP'
-    <Directory '$VIDEOREP'>
+    Alias /access '$VIDEOREP'/
+    <Directory '$VIDEOREP'/>
         Order allow,deny
         Allow from all
         Header set Content-Disposition "attachment"
