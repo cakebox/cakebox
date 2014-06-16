@@ -36,7 +36,7 @@ read -p "Appuyer sur une touche pour continuer ..."
 
 echo '<VirtualHost *:80>
 
-    Alias '$ALIAS' '$CAKEBOXREP'/public/
+    Alias /'$ALIAS' '$CAKEBOXREP'/public/
 
     <Directory "'$CAKEBOXREP'/public/">
         Options Indexes MultiViews FollowSymLinks
@@ -69,10 +69,10 @@ echo '<VirtualHost *:80>
     CustomLog "/var/log/apache2/'$ALIAS'-access.log" common
 </VirtualHost>
 
-' > /etc/apache2/sites-available/$ALIAS
+' > /etc/apache2/sites-available/$ALIAS.conf
 
 
-a2ensite $ALIAS
+a2ensite $ALIAS.conf
 /etc/init.d/apache2 restart
 
 echo "\n\nCréation de l'alias est terminé, bon stream !"
