@@ -87,10 +87,6 @@ function install-cakebox () {
 
     # Update Root directory Cakebox have to scan
     sed -i 's%\$app\[\"cakebox.root\"\] = \"\/var\/www\/\"\;%\$app\[\"cakebox.root\"] = \"'$2'\"\;%'  config/default.php
-    echo -e "Modification terminé du répertoire de scan cakebox-light terminé.\n\n"
-
-    # update locate for update
-    updatedb
 
     echo -e "----------------------- CAKEBOX-LIGHT ---------------------\n"
     echo -e "Cakebox-light est maintenant installé dans le répertoire "$1".\n"
@@ -126,10 +122,10 @@ function repertoire-install {
 
     read -p "Entrez le répertoire ou installer Cakebox-light (ex /var/www/): " CAKEREP
     if cd $CAKEREP 2> /dev/null ; then
-        echo -e "Debut de l'intallation dans le répertoire '$CAKEREP'\n"
+        echo -e "Debut de l'intallation dans le répertoire '$CAKEREP'\n" 1>&2
     else
-        #mkdir $CAKEREP
-        echo -e "Le répertoire '$CAKEREP' a été créé \n"
+        mkdir $CAKEREP
+        echo -e "Le répertoire '$CAKEREP' a été créé \n" 1>&2
     fi
     echo $CAKEREP
 }
@@ -138,10 +134,10 @@ function repertoire-scan {
 
     read -p "Entrez le répertoire a scanner : " REP
     if cd $REP 2> /dev/null ; then
-        echo -e "Répertoire scanner par cakebox-light : '$REP'\n"
+        echo -e "Répertoire scanner par cakebox-light : '$REP'\n" 1>&2
     else
-        #mkdir $REP
-        echo -e "Répertoire de scan : '$REP' créé.\n"
+        mkdir $REP
+        echo -e "Répertoire de scan : '$REP' créé.\n" 1>&2
     fi
 
     chmod -R 0755 $REP
