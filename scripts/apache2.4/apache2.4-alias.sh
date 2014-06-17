@@ -42,8 +42,7 @@ echo '<VirtualHost *:80>
         Options Indexes MultiViews FollowSymLinks
         AllowOverride All
 
-        Order allow,deny
-        Allow from all
+        Require all granted
 
         # use debug instead of production to get more log
         SetEnv APPLICATION_ENV production
