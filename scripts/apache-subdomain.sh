@@ -66,10 +66,10 @@ echo '<VirtualHost *:80>
     CustomLog "/var/log/apache2/'$SUBDOMAIN'-access.log" common
 </VirtualHost>
 
-' > /etc/apache2/sites-available/$SUBDOMAIN
+' > /etc/apache2/sites-available/$SUBDOMAIN.conf
 
 
-a2ensite $SUBDOMAIN
+a2ensite $SUBDOMAIN.conf
 /etc/init.d/apache2 restart
 
 echo "\n\nCréation du sous-domaine terminé, rendez-vous sur '$SUBDOMAIN' pour streamer !"
