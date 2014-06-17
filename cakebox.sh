@@ -12,14 +12,14 @@
 #       @martialdidit
 #
 
-function usage () {
+function usage {
     echo "Usage: ./$0 [install-full | install-cakebox | install-prerequis | update]"
     exit 0
 }
 
 # --------------------------- [ INSTALLATION PREREQUIS ] ---------------------------
 
-function install-prereq () {
+function install-prereq {
     echo "Installation des prérequis de Cakebox-light :"
     read -p "Appuyer sur une touche pour continuer ..."
 
@@ -73,13 +73,15 @@ function install-prereq () {
 # --------------------------- [ INSTALLATION CAKEBOX ] ---------------------------
 
 
-function install-cakebox () {
+function install-cakebox {
 
     echo "Installation de Cakebox-light ..."
     read -p "Appuyer sur une touche pour continuer ..."
     cd $1 #répertoire d'installation cakebox passer en parametre
 
     git clone https://github.com/Cakebox/Cakebox-light.git cakebox && cd cakebox
+    LASTEST=$(git describe --abbrev=0)
+    git checkout tags/$LASTEST
     composer install
     bower install --allow-root
 
@@ -99,14 +101,16 @@ function install-cakebox () {
 
 # --------------------------- [ UPDATE CAKEBOX ] ---------------------------
 
-function update () {
+function update {
     echo "Mise à jour de Cakebox-light ..."
     read -p "Appuyer sur une touche pour continuer ..."
     read -p "Ou ce trouve votre repertoire Cakebox ? (ex /home/cakebox) " REP2
 
     if cd $REP2 2> /dev/null ; then
 
-        git pull origin master
+        git fetch --tags
+        LASTEST=$(git describe --abbrev=0)
+        git checkout tags/$LASTEST
         composer self-update
         bower update --allow-root
         echo "Mise à jour terminée."
