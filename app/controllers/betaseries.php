@@ -56,7 +56,7 @@ $app->post("/api/betaseries/watched/{id}", function (Request $request, $id) use 
 });
 
 // not used yet
-$app->delete("/api/betaseries/watched/{name}", function (Request $request, $name) use ($app) {
+$app->delete("/api/betaseries/watched/{id}", function (Request $request, $id) use ($app) {
 
     $auth = fetch("/members/auth", [
         "key"      => $app["bs.apikey"],
