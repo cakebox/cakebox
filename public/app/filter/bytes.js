@@ -1,7 +1,5 @@
 app.filter('bytes', function() {
-
     return function(bytes, precision) {
-
         var units = ['octets', 'ko', 'Mo', 'Go', 'To', 'Po'];
 
         if (bytes == 0 || isNaN(parseFloat(bytes)) || !isFinite(bytes))
