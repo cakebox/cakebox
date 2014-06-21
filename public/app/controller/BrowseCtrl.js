@@ -6,11 +6,13 @@ app.controller('BrowseCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs', 
         function retrieveDirectories(path) {
             $scope.informations = "Chargement des fichiers, veuillez patienter ...";
 
-            $scope.dirs = Directory.query({'path': path});
-
-            $scope.informations = "";
-            if ($scope.dirs.length == 0)
-                $scope.informations = "Rien dans ce répertoire.";
+            $scope.dirs = Directory.query({'path': path}, function(data) {
+                $scope.informations = "";
+                if (data.length == 0)
+                    $scope.informations = "Rien dans ce répertoire.";
+            }, function(error) {
+                $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
+            });
         }
 
         $scope.$watch('location.path()', function(event, current) {
@@ -35,7 +37,11 @@ app.controller('BrowseCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs', 
         $scope.archiveDirectory = function(dirName) {
             alertify.log("L'archive " + dirName + ".tar est en cours de création, veuillez patienter.", "success", 0);
 
-            Directory.archive({'path': $scope.currentPath + dirName});
+            Directory.archive({'path': $scope.currentPath + dirName}, function(data) {
+                alertify.log("L'archive " + dirName + ".tar a bien été créée.", "success", 0);
+            }, function(error) {
+                $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
+            });
         };
     }
 ]);
