@@ -4,12 +4,9 @@ app.factory('Directory', ['$resource', function ($resource) {
     actions = {
         archive: {
             method: 'GET',
-            url: '/api/directory/archive/:path',
-            params: {
-                path: '@path'
-            }
+            url: '/api/directory/archive',
         }
     };
 
-    return Directory = $resource('/api/directory/content/:path', null, actions);
+    return Directory = $resource('/api/directory/content', null, actions);
 }]);

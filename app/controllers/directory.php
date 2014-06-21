@@ -21,8 +21,9 @@ function get_Size($file) {
     return $size;
 }
 
-$app->get("/api/directory/content/{dirpath}", function (Request $request, $dirpath) use ($app) {
+$app->get("/api/directory/content", function (Request $request) use ($app) {
 
+    $dirpath    = $request->get('path');
     $dirContent = array();
 
     $finder = new Finder();
@@ -68,11 +69,11 @@ $app->get("/api/directory/content/{dirpath}", function (Request $request, $dirpa
     }
 
     return $app->json($dirContent);
-})
-->value("dirpath", "")
-->assert("dirpath", ".*");
+});
 
-$app->get("/api/directory/archive/{dirpath}", function (Request $request, $dirpath) use ($app) {
+$app->get("/api/directory/archive", function (Request $request) use ($app) {
+
+    $dirpath    = $request->get('path');
 
     if (file_exists("{$app['cakebox.root']}{$dirpath}") && is_writable("{$app['cakebox.root']}{$dirpath}/../")) {
 
@@ -95,6 +96,4 @@ $app->get("/api/directory/archive/{dirpath}", function (Request $request, $dirpa
         return $app->json("Error: Directory doesn't exists or parent directory isn't writable.");
 
     return $app->json("OK: File {$dirname}.tar created.");
-})
-->value("dirpath", "")
-->assert("dirpath", ".*");
+});
