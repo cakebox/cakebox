@@ -4,7 +4,7 @@ app.controller('MediaCtrl', ['$scope', '$http', '$routeParams', 'File', 'Player'
         $scope.player = Player.get();
 
         $scope.fileinfo = File.get({'path': $routeParams.path}, function(data) {
-            $scope.betaseries = Betaseries.query({'filename': data.name});
+            $scope.betaseries = Betaseries.get({'filename': data.name});
         });
 
         $scope.watched = function (event, id) {
