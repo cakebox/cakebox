@@ -7,11 +7,11 @@
         {{ fileinfo.name }} <span class="glyphicon glyphicon-ok" ng-if="betaseries.episode.user.seen == true"></span>
     </div>
 
-    <select ng-model="player" ng-options="p.name for p in avalaible_players"></select><br>
+    <select ng-model="player.default_type" ng-options="player.name for (key, player) in player.avalaible_types"></select><br>
 
     <div class="player">
         <div class="player-container">
-            <webplayer class="video-container" player="{{ player.type }}" url="{{ fileinfo.access }}" mimetype="{{ fileinfo.mimetype }}"></webplayer>
+            <webplayer class="video-container" player="{{ player.default_type.type }}" url="{{ fileinfo.access }}" mimetype="{{ fileinfo.mimetype }}"></webplayer>
         </div>
 
         <div class="betaseries" ng-if="(betaseries.episode || betaseries.movie) && betaseries.errors.length == 0">
