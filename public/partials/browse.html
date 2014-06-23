@@ -12,7 +12,7 @@
         {{ informations }}
     </div>
 
-    <div ng-if="dirs" class="sortInfo pull-right">
+    <div ng-if="dirs.length > 0" class="sortInfo pull-right">
         Trier:
         <a href="" ng-click="global.predicate = ''">par nom</a>,
         <a href="" ng-click="global.predicate = 'ctime'; global.reverse=!global.reverse">par date</a>,
