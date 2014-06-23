@@ -149,6 +149,14 @@ td {
   position: absolute;
 }
 
+#header-player {
+  margin-bottom: 15px;
+}
+
+#header-player > .row > select.form-control {
+    width: 16%;
+} 
+
 @media screen and (min-width:992px) {
 
   .player-container {
@@ -157,6 +165,8 @@ td {
   }
 
 }
+
+
 
 .spin {
   -webkit-animation: spin 2s infinite linear;
