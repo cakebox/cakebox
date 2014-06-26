@@ -85,7 +85,7 @@ app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Director
             if (entry.type == "dir") {
                 url = "#/browse/" + $scope.currentPath + entry.name;
             }
-            else if (entry.type == "file") {
+            else if (entry.type == "file" && $scope.rights.canPlayMedia) {
                 url = entry.access;
                 if (entry.extraType == "video")
                     url = "#/play/" + $scope.currentPath + entry.name;

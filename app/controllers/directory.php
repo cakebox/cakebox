@@ -86,6 +86,10 @@ function get_content(Application $app, Request $request) {
 
 function archive_directory(Application $app, Request $request) {
 
+    if ($app["rights.canArchiveDirectory"] == false) {
+        $app->abort(403, "This user doesn't have the rights to archive a directory.");
+    }
+
     $dirpath = $request->get('path');
 
     if (!isset($dirpath)) {
@@ -100,8 +104,8 @@ function archive_directory(Application $app, Request $request) {
         if (!file_exists("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar.inc") && !file_exists("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar")) {
             file_put_contents("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar.inc", "Creation of {$dirname}.tar.inc is in progress... If not, remove this file manualy.");
 
-            $p = new PharData("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar");
-            $p->compress(Phar::NONE);
+            $p = new \PharData("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar");
+            $p->compress(\Phar::NONE);
             $p->buildFromDirectory("{$app['cakebox.root']}{$dirpath}");
 
             unlink("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar.inc");

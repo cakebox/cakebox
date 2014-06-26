@@ -10,6 +10,10 @@ $app->get("/api/file/info/{filepath}",  __NAMESPACE__ . "\\get_infos");
 
 function get_infos(Application $app, $filepath) {
 
+    if ($app["rights.canPlayMedia"] == false) {
+        $app->abort(403, "This user doesn't have the rights to retrieve file informations.");
+    }
+
     $file     = new \SPLFileInfo($app["cakebox.root"].$filepath);
 
     $fileinfo             = [];

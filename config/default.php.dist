@@ -19,6 +19,13 @@ $app["player.default_type"] = "html5"; // html5 or divx or vlc
 $app["player.auto_play"] = "false";
 
 /*
+  User rights
+*/
+$app["rights.canPlayMedia"] = true;
+$app["rights.canDownloadFile"] = true;
+$app["rights.canArchiveDirectory"] = false;
+
+/*
   Betaseries account
   NB: Ask API key here http://www.betaseries.com/api/
 */

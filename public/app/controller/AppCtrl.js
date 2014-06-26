@@ -1,11 +1,13 @@
-app.controller('AppCtrl', ['$scope', '$http', '$location',
-    function($scope, $http, $location) {
+app.controller('AppCtrl', ['$scope', '$http', '$location', 'Rights',
+    function($scope, $http, $location, Rights) {
         $scope.global = {
             predicate: "",
             reverse: "",
             searchText: "",
             versions: {}
         };
+
+        $scope.rights = Rights.get();
 
         $scope.$on('$locationChangeSuccess',function(eventt, newurl, oldurl) {
             $scope.previouspage = oldurl;

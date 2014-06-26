@@ -45,6 +45,10 @@ function fetch($url, $params = [], $method = "get")
 
 function get_infos(Application $app, $name) {
 
+    if ($app["rights.canPlayMedia"] == false) {
+        $app->abort(403, "This user doesn't have the rights to retrieve episode informations.");
+    }
+
     $auth_params = [
         "key" => $app["bs.apikey"]
     ];
@@ -73,6 +77,10 @@ function get_infos(Application $app, $name) {
 
 function set_watched(Application $app, $id) {
 
+    if ($app["rights.canPlayMedia"] == false) {
+        $app->abort(403, "This user doesn't have the rights to set an episode as watched.");
+    }
+
     $auth = fetch("/members/auth", [
         "key"      => $app["bs.apikey"],
         "login"    => $app["bs.login"],
@@ -93,6 +101,10 @@ function set_watched(Application $app, $id) {
 
 // not used yet
 function unset_watched(Application $app, $id) {
+
+    if ($app["rights.canPlayMedia"] == false) {
+        $app->abort(403, "This user doesn't have the rights to unset an episode as watched.");
+    }
 
     $auth = fetch("/members/auth", [
         "key"      => $app["bs.apikey"],

@@ -10,6 +10,10 @@ $app->get("/api/player/settings",  __NAMESPACE__ . "\\get_settings");
 
 function get_settings(Application $app) {
 
+    if ($app["rights.canPlayMedia"] == false) {
+        $app->abort(403, "This user doesn't have the rights to retrieve player informations.");
+    }
+
     $settings                    = [];
     $settings["default_type"]    = strtolower($app["player.default_type"]);
     $settings["avalaible_types"] = [
