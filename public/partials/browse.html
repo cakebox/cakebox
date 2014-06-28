@@ -5,7 +5,7 @@
             <a ng-if="$middle" ng-href="#/browse{{ breadcrumb.path }}">{{ breadcrumb.name }}</a>
             <span ng-if="$last">{{ breadcrumb.name }}</span>
         </li>
-        <ng-click="refreshDatas($event)" title="Recharger le contenu" class="glyphicon glyphicon-refresh pull-right"></a>
+        <a ng-click="refreshDatas($event)" title="Recharger le contenu" class="glyphicon glyphicon-refresh pull-right"></a>
     </ol>
 
     <div ng-show="informations" class="informations">

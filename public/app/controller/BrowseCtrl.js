@@ -52,25 +52,27 @@ app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Director
             else if (entry.type == "file") {
                 extraclasses = "glyphicon-file";
 
-                switch (entry.extratype) {
-                    case "video":
-                        extraclasses = "glyphicon-film";
-                        break;
-                    case "audio":
-                        extraclasses = "glyphicon-music";
-                        break;
-                    case "image":
-                        extraclasses = "glyphicon-picture";
-                        break;
-                    case "archive":
-                        extraclasses = "glyphicon-compressed";
-                        break;
-                    case "subtitle":
-                        extraclasses = "glyphicon-subtitles";
-                        break;
-                    default:
-                        console.log ("No glyphicon class defined for " + entry.extratype);
-                        break;
+                if (entry.extratype) {
+                    switch (entry.extratype) {
+                        case "video":
+                            extraclasses = "glyphicon-film";
+                            break;
+                        case "audio":
+                            extraclasses = "glyphicon-music";
+                            break;
+                        case "image":
+                            extraclasses = "glyphicon-picture";
+                            break;
+                        case "archive":
+                            extraclasses = "glyphicon-compressed";
+                            break;
+                        case "subtitle":
+                            extraclasses = "glyphicon-subtitles";
+                            break;
+                        default:
+                            console.log ("No glyphicon class defined for " + entry.extratype);
+                            break;
+                    }
                 }
             }
 

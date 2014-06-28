@@ -51,7 +51,7 @@ $app->get("/api/directory/content", function (Request $request) use ($app) {
         $pathInfo["ctime"]     = $file->getCTime();
         $pathInfo["size"]      = get_Size($file);
         $pathInfo["access"]    = "{$app['cakebox.access']}{$dirpath}{$file->getBasename()}";
-        $pathInfo["extraType"] = false;
+        $pathInfo["extraType"] = "";
 
         $ext = strtolower($file->getExtension());
         if (in_array($ext, $app["extension.video"]))
