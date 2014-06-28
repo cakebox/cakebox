@@ -90,16 +90,16 @@ td {
   white-space: nowrap;
 }
 
-.file-type {
+.entry-type {
   width: 30px;
   color: #428bca;
 }
 
-.file-download {
+.entry-download {
   width: 30px;
 }
 
-.file-size {
+.entry-size {
   width: 90px;
 }
 
@@ -155,7 +155,7 @@ td {
 
 #header-player > .row > select.form-control {
     width: 16%;
-} 
+}
 
 @media screen and (min-width:992px) {
 
@@ -165,8 +165,6 @@ td {
   }
 
 }
-
-
 
 .spin {
   -webkit-animation: spin 2s infinite linear;

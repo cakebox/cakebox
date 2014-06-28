@@ -1,18 +1,18 @@
 <div class="view">
     <ol class="breadcrumb">
-        <li ng-repeat="breadcrumb in breadcrumbs.getAll()" ng-class="{'active' : $last}">
-            <a ng-if="$first" href="#/" ng-class="{'glyphicon glyphicon-home': $first}"></a>
+        <li ng-repeat="breadcrumb in breadcrumbs.getAll()" ng-class="{active:$last}">
+            <a ng-if="$first" href="#/" ng-class="{'glyphicon glyphicon-home':$first}"></a>
             <a ng-if="$middle" ng-href="#/browse{{ breadcrumb.path }}">{{ breadcrumb.name }}</a>
             <span ng-if="$last">{{ breadcrumb.name }}</span>
         </li>
-        <a href="" ng-click="refreshDatas($event)" title="Recharger le contenu" class="glyphicon glyphicon-refresh pull-right"></a>
+        <ng-click="refreshDatas($event)" title="Recharger le contenu" class="glyphicon glyphicon-refresh pull-right"></a>
     </ol>
 
-    <div class="informations">
+    <div ng-show="informations" class="informations">
         {{ informations }}
     </div>
 
-    <div ng-if="dirs.length > 0" class="sortInfo pull-right">
+    <div ng-show="entries.length" class="sortInfo pull-right">
         Trier:
         <a href="" ng-click="global.predicate = ''">par nom</a>,
         <a href="" ng-click="global.predicate = 'ctime'; global.reverse=!global.reverse">par date</a>,
@@ -21,32 +21,22 @@
 
     <table class="table table-condensed">
         <tbody>
-
-            <tr class="file" ng-repeat="dir in dirs | orderBy:global.predicate:global.reverse | filter:global.searchText">
-                <td class="file-type">
-                    <span ng-if="dir.type == 'dir'" class="glyphicon glyphicon-folder-open"></span>
-                    <span ng-if="dir.type == 'file' && !dir.extraType" class="glyphicon glyphicon-file"></span>
-                    <span ng-if="dir.type == 'file' && dir.extraType == 'video'" class="glyphicon glyphicon-film"></span>
-                    <span ng-if="dir.type == 'file' && dir.extraType == 'audio'" class="glyphicon glyphicon-music"></span>
-                    <span ng-if="dir.type == 'file' && dir.extraType == 'image'" class="glyphicon glyphicon-picture"></span>
-                    <span ng-if="dir.type == 'file' && dir.extraType == 'archive'" class="glyphicon glyphicon-compressed"></span>
-                    <span ng-if="dir.type == 'file' && dir.extraType == 'subtitle'" class="glyphicon glyphicon-subtitles"></span>
+            <tr ng-repeat="entry in entries | orderBy:global.predicate:global.reverse | filter:global.searchText">
+                <td class="entry-type">
+                    <span ng-class="getExtraClasses(entry)"></span>
                 </td>
-                <td class="file-name">
-                    <a ng-if="dir.type == 'dir'" ng-href="#/browse/{{ currentPath + dir.name }}">{{ dir.name }}/</a>
-                    <a ng-if="dir.type == 'file' && dir.extraType != 'video'" ng-href="{{ dir.access }}">{{ dir.name }}</a>
-                    <a ng-if="dir.type == 'file' && dir.extraType == 'video'" ng-href="#/play/{{ currentPath + dir.name }}">{{ dir.name }}</a>
-                    <small><span ng-if="dir.type == 'file' && ((currentTS - dir.ctime) / 3600) <= 24" title="Fichier récent" class="glyphicon glyphicon-star"></span></small>
+                <td class="entry-name">
+                    <a ng-href="{{ getUrl(entry) }}">{{ entry.name }}</a>
+                    <small ng-show="isRecentFile(entry)"><span title="Fichier récent" class="glyphicon glyphicon-star"></span></small>
                 </td>
-                <td class="file-size hidden-xs">
-                    {{ dir.size | bytes }}
+                <td class="entry-size hidden-xs">
+                    {{ entry.size | bytes }}
                 </td>
-                <td class="file-download">
-                    <a ng-if="dir.type == 'dir'" href="" ng-click="archiveDirectory(dir.name)" title="Créer une archive du répertoire" class="glyphicon glyphicon-compressed"></a>
-                    <a ng-if="dir.type == 'file'" ng-href="{{ dir.access }}" title="Télécharger le fichier" class="glyphicon glyphicon-download"></a>
+                <td class="entry-download">
+                    <a ng-show="entry.type == 'dir'" href="" ng-click="archiveDirectory(entry.name)" title="Créer une archive du répertoire" class="glyphicon glyphicon-compressed"></a>
+                    <a ng-show="entry.type == 'file'" ng-href="{{ entry.access }}" title="Télécharger le fichier" class="glyphicon glyphicon-download"></a>
                 </td>
             </tr>
-
         </tbody>
     </table>
 </div>

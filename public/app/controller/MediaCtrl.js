@@ -1,5 +1,5 @@
-app.controller('MediaCtrl', ['$scope', '$http', '$routeParams', 'File', 'Player', 'Betaseries',
-    function($scope, $http, $routeParams, File, Player, Betaseries) {
+app.controller('MediaCtrl', ['$scope', '$routeParams', 'File', 'Player', 'Betaseries',
+    function($scope, $routeParams, File, Player, Betaseries) {
 
         $scope.player = Player.get(null, function(data) {
             data.default_type = data.avalaible_types[data.default_type];

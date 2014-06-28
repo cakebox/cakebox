@@ -1,12 +1,12 @@
-app.controller('BrowseCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs', 'Directory',
-    function($scope, $http, $routeParams, breadcrumbs, Directory) {
+app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Directory',
+    function($scope, $routeParams, breadcrumbs, Directory) {
         $scope.currentPath = "";
         $scope.breadcrumbs = breadcrumbs;
 
         function retrieveDirectories(path) {
             $scope.informations = "Chargement des fichiers, veuillez patienter ...";
 
-            $scope.dirs = Directory.query({'path': path}, function(data) {
+            $scope.entries = Directory.query({'path': path}, function(data) {
                 $scope.informations = "";
                 if (data.length == 0)
                     $scope.informations = "Rien dans ce répertoire.";
@@ -16,8 +16,7 @@ app.controller('BrowseCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs', 
         }
 
         $scope.$watch('location.path()', function(event, current) {
-            $scope.dirs = [];
-            $scope.currentTS = Math.round(new Date().getTime() / 1000);
+            $scope.entries = [];
 
             if ($routeParams.path != "")
                 $scope.currentPath += $routeParams.path + "/";
@@ -27,7 +26,7 @@ app.controller('BrowseCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs', 
 
         $scope.refreshDatas = function(event) {
             // Force unbinding
-            $scope.dirs = 0;
+            $scope.entries = [];
 
             $(event.target).addClass("spin");
             retrieveDirectories($scope.currentPath); // This is fast too fast to see the spinning
@@ -43,5 +42,64 @@ app.controller('BrowseCtrl', ['$scope', '$http', '$routeParams', 'breadcrumbs', 
                 $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
             });
         };
+
+        $scope.getExtraClasses = function(entry) {
+            extraclasses = "";
+
+            if (entry.type == "dir") {
+                extraclasses = "glyphicon-folder-open";
+            }
+            else if (entry.type == "file") {
+                extraclasses = "glyphicon-file";
+
+                switch (entry.extratype) {
+                    case "video":
+                        extraclasses = "glyphicon-film";
+                        break;
+                    case "audio":
+                        extraclasses = "glyphicon-music";
+                        break;
+                    case "image":
+                        extraclasses = "glyphicon-picture";
+                        break;
+                    case "archive":
+                        extraclasses = "glyphicon-compressed";
+                        break;
+                    case "subtitle":
+                        extraclasses = "glyphicon-subtitles";
+                        break;
+                    default:
+                        console.log ("No glyphicon class defined for " + entry.extratype);
+                        break;
+                }
+            }
+
+            return "glyphicon " + extraclasses;
+        }
+
+        $scope.getUrl = function(entry) {
+            url = ""
+
+            if (entry.type == "dir") {
+                url = "#/browse/" + $scope.currentPath + entry.name;
+            }
+            else if (entry.type == "file") {
+                url = entry.access;
+                if (entry.extratype == "video")
+                    url = "#/play/" + $scope.currentPath + entry.name;
+            }
+
+            return url;
+        }
+
+        $scope.isRecentFile = function(entry) {
+            currentTS = Math.round(new Date().getTime() / 1000);
+
+            if (entry.type == "file") {
+                if (((currentTS - entry.ctime) / 3600) <= 24)
+                    return true;
+            }
+            return false;
+        }
     }
 ]);

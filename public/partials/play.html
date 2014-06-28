@@ -1,13 +1,13 @@
 <div class="view">
     <div id="header-player">
-        <div class="row">   
+        <div class="row">
             <a ng-href="{{ previouspage }}">Retour</a>
             <select class="form-control pull-right" ng-model="player.default_type" ng-options="player.name for (key, player) in player.avalaible_types"></select>
         </div>
     </div>
 
     <div class="video-header">
-        {{ fileinfo.name }} <span class="glyphicon glyphicon-ok" ng-if="betaseries.episode.user.seen == true"></span>
+        {{ fileinfo.name }} <span class="'glyphicon glyphicon-ok':betaseries.episode.user.seen"></span>
     </div>
 
     <div class="player">
@@ -16,10 +16,10 @@
             <webplayer class="video-container" player="{{ player.default_type.type }}" url="{{ fileinfo.access }}" mimetype="{{ fileinfo.mimetype }}"></webplayer>
         </div>
 
-        <div class="betaseries" ng-if="(betaseries.episode || betaseries.movie) && betaseries.errors.length == 0">
+        <div class="betaseries" ng-show="(betaseries.episode || betaseries.movie) && betaseries.errors.length == 0">
 
             <div id="seen">
-                <a ng-if="betaseries.episode.user.seen == false" ng-click="watched($event, betaseries.episode.id)">Marquer l'épisode comme vu sur BetaSeries</a>
+                <a ng-hide="betaseries.episode.user.seen" ng-click="watched($event, betaseries.episode.id)">Marquer l'épisode comme vu sur BetaSeries</a>
             </div>
 
             <div id="informations">

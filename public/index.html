@@ -34,10 +34,10 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-cakebox">
                     <ul class="nav navbar-nav">
-                        <li ng-class="{'active': !currentPage || currentPage == 'browse'}"><a href="#/browse/">Parcourir</a></li>
-                        <li ng-class="{'active': currentPage == 'about'}"><a href="#/about">A propos</a></li>
+                        <li ng-class="{'active':!currentPage || currentPage == 'browse'}"><a href="#/browse/">Parcourir</a></li>
+                        <li ng-class="{'active':currentPage == 'about'}"><a href="#/about">A propos</a></li>
                     </ul>
-                    <form class="navbar-form navbar-right searchbox" ng-if="currentPage == 'browse' || currentPage == ''" role="search">
+                    <form ng-show="currentPage == 'browse' || currentPage == ''" class="navbar-form navbar-right searchbox" role="search">
                         <div class="form-group has-feedback">
                             <input type="text" class="form-control" placeholder="Rechercher dans ce dossier" ng-model="global.searchText">
                             <button ng-if="global.searchText != ''" ng-click="global.searchText = ''" type="button" aria-hidden="true" class="close form-control-feedback close-search hidden-xs">&times;</button>
