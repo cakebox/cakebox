@@ -11,6 +11,7 @@ $app->get("/api/player/settings", function (Request $request) use ($app) {
         'vlc'  => ['name'=> "VLC Web Player", "type"  => "vlc"],
         'divx' => ['name'=> "DivX Web Player", "type" => "divx"]
     ];
+    $settings["auto_play"] = $app["player.auto_play"];
 
     return $app->json($settings);
 });
