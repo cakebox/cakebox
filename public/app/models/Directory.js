@@ -8,7 +8,7 @@ app.factory('Directory', ['$resource', function ($resource) {
         },
         deleteDir: {
             method: 'GET',
-            url: '/api/directory/deleteDir',
+            url: '/api/directory/delete',
         }
     };
 

@@ -43,7 +43,7 @@ app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Director
             });
         };
 
-        $scope.rmDirectory = function(dirName) {
+        $scope.removeDirectory = function(dirName) {
 
             Directory.deleteDir({'path': $scope.currentPath + dirName}, function(data) {
                 alertify.log("Le dossier " + dirName + " est bien supprimé.", "success", 0);
@@ -53,7 +53,7 @@ app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Director
             });   
         };
 
-        $scope.rmFile = function(fileName) {
+        $scope.removeFile = function(fileName) {
 
             File.deleteFile({'path': $scope.currentPath + fileName}, function(data) {
                 alertify.log("Le fichier " + fileName + " est bien supprimé.", "success", 0);
