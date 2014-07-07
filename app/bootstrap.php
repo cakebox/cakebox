@@ -5,6 +5,7 @@ namespace Cakebox;
 require_once __DIR__ . "/../tmp/composer/autoload.php";
 
 use Silex\Application;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 define("APPLICATION_ENV", getenv("APPLICATION_ENV") ?: "production");
 
@@ -34,5 +35,9 @@ if (substr($app["cakebox.root"], -1) !== '/')
 foreach (glob(__DIR__ . "/{controllers}/*.php", GLOB_BRACE) as $file) {
     require_once $file;
 }
+
+$app->error(function (\Exception $e, $code) use ($app) {
+    return new JsonResponse(["status_code" => $code, "message" => $e->getMessage()]);
+});
 
 return $app;

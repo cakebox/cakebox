@@ -1,8 +1,14 @@
 <?php
 
-use Symfony\Component\HttpFoundation\Request;
+namespace App\Controllers\Player;
 
-$app->get("/api/player/settings", function (Request $request) use ($app) {
+use Silex\Application;
+
+
+$app->get("/api/player/settings",  __NAMESPACE__ . "\\get_settings");
+
+
+function get_settings(Application $app) {
 
     $settings                    = [];
     $settings["default_type"]    = strtolower($app["player.default_type"]);
@@ -11,7 +17,7 @@ $app->get("/api/player/settings", function (Request $request) use ($app) {
         'vlc'  => ['name'=> "VLC Web Player", "type"  => "vlc"],
         'divx' => ['name'=> "DivX Web Player", "type" => "divx"]
     ];
-    $settings["auto_play"] = $app["player.auto_play"];
+    $settings["auto_play"]       = $app["player.auto_play"];
 
     return $app->json($settings);
-});
+}

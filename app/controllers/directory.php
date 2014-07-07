@@ -1,7 +1,15 @@
 <?php
 
+namespace App\Controllers\Directory;
+
+use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Finder\Finder;
+
+
+$app->get("/api/directory/content",  __NAMESPACE__ . "\\get_content");
+$app->get("/api/directory/archive",  __NAMESPACE__ . "\\archive_directory");
+
 
 function get_Size($file) {
 
@@ -12,19 +20,24 @@ function get_Size($file) {
             $size += $file->getSize();
         }
         else {
-            foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($file->getRealpath())) as $f) {
+            foreach(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($file->getRealpath())) as $f) {
                 $size += $f->getSize();
             }
         }
-    } catch (RuntimeException $e) {}
+    } catch (\RuntimeException $e) {}
 
     return $size;
 }
 
-$app->get("/api/directory/content", function (Request $request) use ($app) {
+function get_content(Application $app, Request $request) {
 
-    $dirpath    = $request->get('path');
-    $dirContent = array();
+    $dirpath = $request->get('path');
+
+    if (!isset($dirpath)) {
+        $app->abort(400, "Missing parameters.");
+    }
+
+    $dirContent = [];
 
     $finder = new Finder();
     $finder->followLinks()
@@ -69,11 +82,15 @@ $app->get("/api/directory/content", function (Request $request) use ($app) {
     }
 
     return $app->json($dirContent);
-});
+}
 
-$app->get("/api/directory/archive", function (Request $request) use ($app) {
+function archive_directory(Application $app, Request $request) {
 
-    $dirpath    = $request->get('path');
+    $dirpath = $request->get('path');
+
+    if (!isset($dirpath)) {
+        $app->abort(400, "Missing parameters.");
+    }
 
     if (file_exists("{$app['cakebox.root']}{$dirpath}") && is_writable("{$app['cakebox.root']}{$dirpath}/../")) {
 
@@ -96,4 +113,4 @@ $app->get("/api/directory/archive", function (Request $request) use ($app) {
         return $app->json("Error: Directory doesn't exists or parent directory isn't writable.");
 
     return $app->json("OK: File {$dirname}.tar created.");
-});
+}

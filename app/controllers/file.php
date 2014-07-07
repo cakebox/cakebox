@@ -1,11 +1,16 @@
 <?php
 
-use Symfony\Component\HttpFoundation\Request;
+namespace App\Controllers\File;
 
-$app->get("/api/file/info", function (Request $request) use ($app) {
+use Silex\Application;
 
-    $filepath = $request->get('path');
-    $file     = new SPLFileInfo($app["cakebox.root"].$filepath);
+
+$app->get("/api/file/info/{filepath}",  __NAMESPACE__ . "\\get_infos");
+
+
+function get_infos(Application $app, $filepath) {
+
+    $file     = new \SPLFileInfo($app["cakebox.root"].$filepath);
 
     $fileinfo             = [];
     $fileinfo["name"]     = $file->getBasename(".".$file->getExtension());
@@ -15,4 +20,4 @@ $app->get("/api/file/info", function (Request $request) use ($app) {
     $fileinfo["size"]     = $file->getSize();
 
     return $app->json($fileinfo);
-});
+}

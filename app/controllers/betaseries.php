@@ -1,6 +1,14 @@
 <?php
 
-use Symfony\Component\HttpFoundation\Request;
+namespace App\Controllers\BetaSeries;
+
+use Silex\Application;
+
+
+$app->get("/api/betaseries/info/{name}",     __NAMESPACE__ . "\\get_infos");
+$app->post("/api/betaseries/watched/{id}",   __NAMESPACE__ . "\\set_watched");
+$app->delete("/api/betaseries/watched/{id}", __NAMESPACE__ . "\\unset_watched");
+
 
 function fetch($url, $params = [], $method = "get")
 {
@@ -35,47 +43,7 @@ function fetch($url, $params = [], $method = "get")
     return json_decode($data);
 }
 
-$app->post("/api/betaseries/watched/{id}", function (Request $request, $id) use ($app) {
-
-    $auth = fetch("/members/auth", [
-        "key"      => $app["bs.apikey"],
-        "login"    => $app["bs.login"],
-        "password" => md5($app["bs.passwd"])
-    ],  "post");
-
-    if (empty($auth->errors)) {
-        $watched = fetch("/episodes/watched", [
-            "key"   => $app["bs.apikey"],
-            "token" => $auth->token,
-            "id"    => $id,
-            "bulk"  => true
-        ],  "post");
-    }
-
-    return (isset($watched)) ? $app->json($watched) : $app->json($auth);
-});
-
-// not used yet
-$app->delete("/api/betaseries/watched/{id}", function (Request $request, $id) use ($app) {
-
-    $auth = fetch("/members/auth", [
-        "key"      => $app["bs.apikey"],
-        "login"    => $app["bs.login"],
-        "password" => md5($app["bs.passwd"])
-    ],  "post");
-
-    if (empty($auth->errors)) {
-        $watched = fetch("/episodes/watched", [
-            "key"   => $app["bs.apikey"],
-            "token" => $auth->token,
-            "id"    => $id
-        ],  "delete");
-    }
-
-    return (isset($watched)) ? $app->json($watched) : $app->json($auth);
-});
-
-$app->get("/api/betaseries/info/{name}", function (Request $request, $name) use ($app) {
+function get_infos(Application $app, $name) {
 
     $auth_params = [
         "key" => $app["bs.apikey"]
@@ -101,4 +69,44 @@ $app->get("/api/betaseries/info/{name}", function (Request $request, $name) use 
     }
 
     return $app->json($data);
-});
+}
+
+function set_watched(Application $app, $id) {
+
+    $auth = fetch("/members/auth", [
+        "key"      => $app["bs.apikey"],
+        "login"    => $app["bs.login"],
+        "password" => md5($app["bs.passwd"])
+    ],  "post");
+
+    if (empty($auth->errors)) {
+        $watched = fetch("/episodes/watched", [
+            "key"   => $app["bs.apikey"],
+            "token" => $auth->token,
+            "id"    => $id,
+            "bulk"  => true
+        ],  "post");
+    }
+
+    return (isset($watched)) ? $app->json($watched) : $app->json($auth);
+}
+
+// not used yet
+function unset_watched(Application $app, $id) {
+
+    $auth = fetch("/members/auth", [
+        "key"      => $app["bs.apikey"],
+        "login"    => $app["bs.login"],
+        "password" => md5($app["bs.passwd"])
+    ],  "post");
+
+    if (empty($auth->errors)) {
+        $watched = fetch("/episodes/watched", [
+            "key"   => $app["bs.apikey"],
+            "token" => $auth->token,
+            "id"    => $id
+        ],  "delete");
+    }
+
+    return (isset($watched)) ? $app->json($watched) : $app->json($auth);
+}
