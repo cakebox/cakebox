@@ -5,8 +5,8 @@ namespace App\Controllers\File;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
-$app->get("/api/file/info",  __NAMESPACE__ . "\\get_infos");
-$app->get("/api/file/deleteFile",  __NAMESPACE__ . "\\rm_file");
+$app->get("/api/file/info",    __NAMESPACE__ . "\\get_infos");
+$app->get("/api/file/delete",  __NAMESPACE__ . "\\remove_file");
 
 
 function get_infos(Application $app, Request $request) {
@@ -33,7 +33,7 @@ function get_infos(Application $app, Request $request) {
     return $app->json($fileinfo);
 }
 
-function rm_file(Application $app, Request $request) {
+function remove_file(Application $app, Request $request) {
 
     if ($app["rights.canDelete"] == false) {
         $app->abort(403, "This user doesn't have the rights to delete this file.");

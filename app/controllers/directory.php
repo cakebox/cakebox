@@ -7,10 +7,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Finder\Finder;
 
 
-$app->get("/api/directory/content",  __NAMESPACE__ . "\\get_content");
-$app->get("/api/directory/archive",  __NAMESPACE__ . "\\archive_directory");
-$app->get("/api/directory/deleteDir",  __NAMESPACE__ . "\\rm_directory");
 
+$app->get("/api/directory/content",  __NAMESPACE__ . "\\get_content");
+$app->get("/api/directory/delete",   __NAMESPACE__ . "\\remove_directory");
+$app->get("/api/directory/archive",  __NAMESPACE__ . "\\archive_directory");
 
 function get_Size($file) {
 
@@ -121,7 +121,7 @@ function archive_directory(Application $app, Request $request) {
 }
 
 
-function rm_directory(Application $app, Request $request) {
+function remove_directory(Application $app, Request $request) {
 
     if ($app["rights.canDelete"] == false) {
         $app->abort(403, "This user doesn't have the rights to delete this directory.");
@@ -134,18 +134,18 @@ function rm_directory(Application $app, Request $request) {
     }
 
     $dirpath_info = pathinfo($dirpath);
-    $dirname = $dirpath_info["basename"];
-    $dir = "{$app['cakebox.root']}{$dirpath}";
+    $dirname      = $dirpath_info["basename"];
+    $dir          = "{$app['cakebox.root']}{$dirpath}";
 
     if (is_dir($dir)) { 
 
         $iterator = new \RecursiveDirectoryIterator($dir);  
         foreach (new \RecursiveIteratorIterator($iterator, \RecursiveIteratorIterator::CHILD_FIRST) as $file) {  
-          if ($file->isDir()) {  
-             rmdir($file->getPathname());  
-          } else {  
-             unlink($file->getPathname());  
-          }  
+            if ($file->isDir()) {  
+                rmdir($file->getPathname());  
+            } else {  
+                unlink($file->getPathname());  
+            }  
         }  
         rmdir($dir); 
     }

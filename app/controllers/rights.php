@@ -14,7 +14,7 @@ function get_rights(Application $app) {
     $rights["canPlayMedia"]        = $app["rights.canPlayMedia"];
     $rights["canDownloadFile"]     = $app["rights.canDownloadFile"];
     $rights["canArchiveDirectory"] = $app["rights.canArchiveDirectory"];
-    $rights["canDelete"] 		   = $app["rights.canDelete"];
+    $rights["canDelete"]           = $app["rights.canDelete"];
 
     return $app->json($rights);
 }
