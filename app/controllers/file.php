@@ -3,15 +3,21 @@
 namespace App\Controllers\File;
 
 use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
+
+$app->get("/api/file/info",  __NAMESPACE__ . "\\get_infos");
 
 
-$app->get("/api/file/info/{filepath}",  __NAMESPACE__ . "\\get_infos");
-
-
-function get_infos(Application $app, $filepath) {
+function get_infos(Application $app, Request $request) {
 
     if ($app["rights.canPlayMedia"] == false) {
         $app->abort(403, "This user doesn't have the rights to retrieve file informations.");
+    }
+
+    $filepath = $request->get('path');
+
+    if (!isset($filepath)) {
+        $app->abort(400, "Missing parameters.");
     }
 
     $file     = new \SPLFileInfo($app["cakebox.root"].$filepath);
