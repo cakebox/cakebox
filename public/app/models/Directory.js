@@ -5,6 +5,10 @@ app.factory('Directory', ['$resource', function ($resource) {
         archive: {
             method: 'GET',
             url: '/api/directory/archive',
+        },
+        deleteDir: {
+            method: 'GET',
+            url: '/api/directory/deleteDir',
         }
     };
 

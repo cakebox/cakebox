@@ -1,5 +1,12 @@
 app.factory('File', ['$resource', function ($resource) {
-    var File;
+    var File, actions;
 
-    return File = $resource('/api/file/info', null, null);
+    actions = {
+        deleteFile: {
+            method: 'GET',
+            url: '/api/file/deleteFile',
+        }
+    };
+
+    return File = $resource('/api/file/info', null, actions);
 }]);

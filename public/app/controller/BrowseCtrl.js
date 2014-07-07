@@ -1,5 +1,5 @@
-app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Directory',
-    function($scope, $routeParams, breadcrumbs, Directory) {
+app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Directory', 'File',
+    function($scope, $routeParams, breadcrumbs, Directory, File) {
         $scope.currentPath = "";
         $scope.breadcrumbs = breadcrumbs;
 
@@ -38,6 +38,26 @@ app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Director
 
             Directory.archive({'path': $scope.currentPath + dirName}, function(data) {
                 alertify.log("L'archive " + dirName + ".tar a bien été créée.", "success", 0);
+            }, function(error) {
+                $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
+            });
+        };
+
+        $scope.rmDirectory = function(dirName) {
+
+            Directory.deleteDir({'path': $scope.currentPath + dirName}, function(data) {
+                alertify.log("Le dossier " + dirName + " est bien supprimé.", "success", 0);
+                retrieveDirectories($scope.currentPath);
+            }, function(error) {
+                $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
+            });   
+        };
+
+        $scope.rmFile = function(fileName) {
+
+            File.deleteFile({'path': $scope.currentPath + fileName}, function(data) {
+                alertify.log("Le fichier " + fileName + " est bien supprimé.", "success", 0);
+                retrieveDirectories($scope.currentPath);
             }, function(error) {
                 $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
             });

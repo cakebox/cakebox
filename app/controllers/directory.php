@@ -9,6 +9,7 @@ use Symfony\Component\Finder\Finder;
 
 $app->get("/api/directory/content",  __NAMESPACE__ . "\\get_content");
 $app->get("/api/directory/archive",  __NAMESPACE__ . "\\archive_directory");
+$app->get("/api/directory/deleteDir",  __NAMESPACE__ . "\\rm_directory");
 
 
 function get_Size($file) {
@@ -118,3 +119,40 @@ function archive_directory(Application $app, Request $request) {
 
     return $app->json("OK: File {$dirname}.tar created.");
 }
+
+
+function rm_directory(Application $app, Request $request) {
+
+    if ($app["rights.canDelete"] == false) {
+        $app->abort(403, "This user doesn't have the rights to delete this directory.");
+    }  
+
+    $dirpath = $request->get('path');
+
+    if (!isset($dirpath)) {
+        $app->abort(400, "Missing parameters.");
+    }
+
+    $dirpath_info = pathinfo($dirpath);
+    $dirname = $dirpath_info["basename"];
+    $dir = "{$app['cakebox.root']}{$dirpath}";
+
+    if (is_dir($dir)) { 
+
+        $iterator = new \RecursiveDirectoryIterator($dir);  
+        foreach (new \RecursiveIteratorIterator($iterator, \RecursiveIteratorIterator::CHILD_FIRST) as $file) {  
+          if ($file->isDir()) {  
+             rmdir($file->getPathname());  
+          } else {  
+             unlink($file->getPathname());  
+          }  
+        }  
+        rmdir($dir); 
+    }
+    else {
+        return $app->json("Error: This is not a directory");
+    }
+
+    return $app->json("OK: File {$dirname} deleted.");
+
+} 
