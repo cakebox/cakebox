@@ -30,7 +30,7 @@
 
         </div>
 
-        <div id="download">
+        <div id="download" ng-show="rights.canDownloadFile">
             <a ng-href="{{ fileinfo.access }}"><span class="glyphicon glyphicon-download"></span> Télécharger le fichier</a> <small>({{ fileinfo.size | bytes }})</small>
         </div>
 
