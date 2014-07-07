@@ -16,4 +16,4 @@ function get_rights(Application $app) {
     $rights["canArchiveDirectory"] = $app["rights.canArchiveDirectory"];
 
     return $app->json($rights);
-});
+}
