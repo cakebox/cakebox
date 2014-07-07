@@ -65,14 +65,14 @@ function get_infos(Application $app, $name) {
         }
     }
 
-    $data = [];
     if ($app["bs.apikey"]) {
-        $data = fetch("/episodes/scraper", array_merge($auth_params, ["file" => $name]));
-        if (!empty($data->errors))
-            $data = fetch("/movies/scraper", array_merge($auth_params, ["file" => $name]));
+        $file_info = fetch("/episodes/scraper", array_merge($auth_params, ["file" => $name]));
+        if (!empty($file_info->errors)) {
+            $file_info = fetch("/movies/scraper", array_merge($auth_params, ["file" => $name]));
+        }
     }
 
-    return $app->json($data);
+    return (isset($file_info)) ? $app->json($file_info) : $app->json($auth);
 }
 
 function set_watched(Application $app, $id) {
