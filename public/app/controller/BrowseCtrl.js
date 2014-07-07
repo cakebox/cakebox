@@ -52,8 +52,8 @@ app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Director
             else if (entry.type == "file") {
                 extraclasses = "glyphicon-file";
 
-                if (entry.extratype) {
-                    switch (entry.extratype) {
+                if (entry.extraType) {
+                    switch (entry.extraType) {
                         case "video":
                             extraclasses = "glyphicon-film";
                             break;
@@ -70,7 +70,7 @@ app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Director
                             extraclasses = "glyphicon-subtitles";
                             break;
                         default:
-                            console.log ("No glyphicon class defined for " + entry.extratype);
+                            console.log ("No glyphicon class defined for " + entry.extraType);
                             break;
                     }
                 }
@@ -87,7 +87,7 @@ app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Director
             }
             else if (entry.type == "file") {
                 url = entry.access;
-                if (entry.extratype == "video")
+                if (entry.extraType == "video")
                     url = "#/play/" + $scope.currentPath + entry.name;
             }
 

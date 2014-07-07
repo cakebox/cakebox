@@ -55,7 +55,7 @@ function get_content(Application $app, Request $request) {
             if (file_exists($linkTo) == false)
                 continue;
 
-            $file = new SplFileInfo($linkTo);
+            $file = new \SplFileInfo($linkTo);
         }
 
         $pathInfo              = [];
