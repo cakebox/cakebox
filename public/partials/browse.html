@@ -33,14 +33,14 @@
                     {{ entry.size | bytes }}
                 </td>
                 <td class="entry-download">
-                    <a ng-show="entry.type == 'dir' && rights.canArchiveDirectory" href="" ng-click="archiveDirectory(entry.name)" title="Créer une archive du répertoire" class="glyphicon glyphicon-compressed"></a>
+                    <a ng-show="entry.type == 'dir' && rights.canArchiveDirectory" href="" ng-click="archiveDirectory(entry)" title="Créer une archive du répertoire" class="glyphicon glyphicon-compressed"></a>
                     <a ng-show="entry.type == 'file' && rights.canDownloadFile" ng-href="{{ entry.access }}" title="Télécharger le fichier" class="glyphicon glyphicon-download"></a>
                 </td>
                 <td class="entry-delete" ng-show="entry.type == 'dir' && rights.canDelete">
-                    <a href="" title="supprimer le dossier" class="glyphicon glyphicon-remove-circle" ng-click="removeDirectory(entry.name)"></a>
+                    <a href="" title="Supprimer le dossier" class="glyphicon glyphicon-remove-circle" ng-click="removeDirectory(entry)"></a>
                 </td>
                 <td class="entry-delete" ng-show="entry.type == 'file' && rights.canDelete">
-                    <a href="" title="supprimer le fichier" class="glyphicon glyphicon-remove" ng-click="removeFile(entry.name)"></a>
+                    <a href="" title="Supprimer le fichier" class="glyphicon glyphicon-remove" ng-click="removeFile(entry)"></a>
                 </td>
             </tr>
         </tbody>

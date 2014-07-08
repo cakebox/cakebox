@@ -33,30 +33,28 @@ app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Director
             $(event.target).removeClass("spin");
         };
 
-        $scope.archiveDirectory = function(dirName) {
-            alertify.log("L'archive " + dirName + ".tar est en cours de création, veuillez patienter.", "success", 0);
+        $scope.archiveDirectory = function(directory) {
+            alertify.log("L'archive " + directory.name + ".tar est en cours de création, veuillez patienter.", "success", 0);
 
-            Directory.archive({'path': $scope.currentPath + dirName}, function(data) {
-                alertify.log("L'archive " + dirName + ".tar a bien été créée.", "success", 0);
+            Directory.archive({'path': $scope.currentPath + directory.name}, function(data) {
+                alertify.log("L'archive " + directory.name + ".tar a bien été créée.", "success", 0);
             }, function(error) {
                 $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
             });
         };
 
-        $scope.removeDirectory = function(dirName) {
-
-            Directory.deleteDir({'path': $scope.currentPath + dirName}, function(data) {
-                alertify.log("Le dossier " + dirName + " est bien supprimé.", "success", 0);
+        $scope.removeDirectory = function(directory) {
+            Directory.delete({'path': $scope.currentPath + directory.name}, function(data) {
+                alertify.log("Le dossier " + directory.name + " est bien supprimé.", "success", 0);
                 retrieveDirectories($scope.currentPath);
             }, function(error) {
                 $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
-            });   
+            });
         };
 
-        $scope.removeFile = function(fileName) {
-
-            File.deleteFile({'path': $scope.currentPath + fileName}, function(data) {
-                alertify.log("Le fichier " + fileName + " est bien supprimé.", "success", 0);
+        $scope.removeFile = function(file) {
+            File.delete({'path': $scope.currentPath + file.name}, function(data) {
+                alertify.log("Le fichier " + file.name + " est bien supprimé.", "success", 0);
                 retrieveDirectories($scope.currentPath);
             }, function(error) {
                 $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;

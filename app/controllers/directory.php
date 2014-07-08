@@ -125,7 +125,7 @@ function remove_directory(Application $app, Request $request) {
 
     if ($app["rights.canDelete"] == false) {
         $app->abort(403, "This user doesn't have the rights to delete this directory.");
-    }  
+    }
 
     $dirpath = $request->get('path');
 
@@ -137,17 +137,18 @@ function remove_directory(Application $app, Request $request) {
     $dirname      = $dirpath_info["basename"];
     $dir          = "{$app['cakebox.root']}{$dirpath}";
 
-    if (is_dir($dir)) { 
-
-        $iterator = new \RecursiveDirectoryIterator($dir);  
-        foreach (new \RecursiveIteratorIterator($iterator, \RecursiveIteratorIterator::CHILD_FIRST) as $file) {  
-            if ($file->isDir()) {  
-                rmdir($file->getPathname());  
-            } else {  
-                unlink($file->getPathname());  
-            }  
-        }  
-        rmdir($dir); 
+    if (is_dir($dir)) {
+        // Remove directory content
+        $iterator = new \RecursiveDirectoryIterator($dir);
+        foreach (new \RecursiveIteratorIterator($iterator, \RecursiveIteratorIterator::CHILD_FIRST) as $file) {
+            if ($file->isDir()) {
+                rmdir($file->getPathname());
+            } else {
+                unlink($file->getPathname());
+            }
+        }
+        // Remove directory itself
+        rmdir($dir);
     }
     else {
         return $app->json("Error: This is not a directory");
@@ -155,4 +156,4 @@ function remove_directory(Application $app, Request $request) {
 
     return $app->json("OK: File {$dirname} deleted.");
 
-} 
+}

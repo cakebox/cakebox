@@ -2,7 +2,7 @@ app.factory('File', ['$resource', function ($resource) {
     var File, actions;
 
     actions = {
-        deleteFile: {
+        delete: {
             method: 'GET',
             url: '/api/file/delete',
         }
