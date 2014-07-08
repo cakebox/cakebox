@@ -2,8 +2,8 @@
     "require": {
         "php": ">=5.4.0",
 
-        "silex/silex": "1.x",
-        "symfony/finder": "2.x"
+        "silex/silex": "~1.2",
+        "symfony/finder": "~2.5"
     },
     "config": {
         "bin-dir": "bin",

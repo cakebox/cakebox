@@ -1,13 +1,13 @@
 {
   "name": "Cakebox-light",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "dependencies": {
-    "bootstrap": "~3.1.1",
-    "angular": "~1.2.2",
-    "angular-i18n": "~1.2.6",
-    "angular-resource": "~1.2.2",
-    "angular-route": "~1.2.2",
-    "angular-bootstrap": "~0.7.0",
+    "bootstrap": "~3.2.0",
+    "angular": "~1.2.19",
+    "angular-i18n": "~1.2.19",
+    "angular-resource": "~1.2.19",
+    "angular-route": "~1.2.19",
+    "angular-bootstrap": "~0.11.0",
     "alertify": "~0.3.10"
   }
 }
