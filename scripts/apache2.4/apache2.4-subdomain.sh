@@ -57,8 +57,7 @@ echo '<VirtualHost *:80>
 
     Alias /access '$VIDEOREP'/
     <Directory '$VIDEOREP'/>
-        Order allow,deny
-        Allow from all
+        Require all granted
         Header set Content-Disposition "attachment"
     </Directory>
 
