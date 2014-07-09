@@ -109,9 +109,9 @@ function update {
     if cd $REP2 2> /dev/null ; then
 
         git fetch --tags
-        LASTEST=$(git describe --abbrev=0)
-        git checkout tags/$LASTEST
+        git checkout $(git describe --tags $(git rev-list --tags --max-count=1))
         composer self-update
+        composer update
         bower update --allow-root
         echo "Mise à jour terminée."
     else
