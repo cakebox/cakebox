@@ -57,10 +57,8 @@ echo '<VirtualHost *:80>
     <Directory '$VIDEOREP'/>
         Options -Indexes
 
-        Order allow,deny 
-        Allow from all
-        Satisfy Any
-
+        Require all granted
+        
         Header set Content-Disposition "attachment"
     </Directory>
 
