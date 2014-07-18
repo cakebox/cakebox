@@ -97,22 +97,27 @@ function archive_directory(Application $app, Request $request) {
         $app->abort(400, "Missing parameters.");
     }
 
-    if (file_exists("{$app['cakebox.root']}{$dirpath}") && is_writable("{$app['cakebox.root']}{$dirpath}/../")) {
+    if (file_exists("{$app['cakebox.root']}{$dirpath}")) {
 
-        $dirpath_info = pathinfo($dirpath);
-        $dirname = $dirpath_info["basename"];
+        if(is_writable("{$app['cakebox.root']}{$dirpath}/../")) {
 
-        if (!file_exists("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar.inc") && !file_exists("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar")) {
-            file_put_contents("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar.inc", "Creation of {$dirname}.tar.inc is in progress... If not, remove this file manualy.");
+            $dirpath_info = pathinfo($dirpath);
+            $dirname = $dirpath_info["basename"];
 
-            $p = new \PharData("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar");
-            $p->compress(\Phar::NONE);
-            $p->buildFromDirectory("{$app['cakebox.root']}{$dirpath}");
+            if (!file_exists("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar.inc") && !file_exists("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar")) {
+                file_put_contents("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar.inc", "Creation of {$dirname}.tar.inc is in progress... If not, remove this file manualy.");
 
-            unlink("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar.inc");
+                $p = new \PharData("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar");
+                $p->compress(\Phar::NONE);
+                $p->buildFromDirectory("{$app['cakebox.root']}{$dirpath}");
+
+                unlink("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar.inc");
+            }
+            else
+                return $app->json("Error: This directory already have a tar file or is already under a tar process.");
         }
         else
-            return $app->json("Error: This directory already have a tar file or is already under a tar process.");
+            $app->abort(403, "This directory is not writable");
     }
     else
         return $app->json("Error: Directory doesn't exists or parent directory isn't writable.");

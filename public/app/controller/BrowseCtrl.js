@@ -39,6 +39,9 @@ app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Director
             Directory.archive({'path': $scope.currentPath + directory.name}, function(data) {
                 alertify.log("L'archive " + directory.name + ".tar a bien été créée.", "success", 0);
             }, function(error) {
+                if(error.status == 403) {
+                    alertify.log("Le repertoire de destination n'a pas les droits necessaires.", "error", 0);
+                }
                 $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
             });
         };
