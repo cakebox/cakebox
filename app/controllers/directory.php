@@ -138,17 +138,23 @@ function remove_directory(Application $app, Request $request) {
     $dir          = "{$app['cakebox.root']}{$dirpath}";
 
     if (is_dir($dir)) {
-        // Remove directory content
-        $iterator = new \RecursiveDirectoryIterator($dir);
-        foreach (new \RecursiveIteratorIterator($iterator, \RecursiveIteratorIterator::CHILD_FIRST) as $file) {
-            if ($file->isDir()) {
-                rmdir($file->getPathname());
-            } else {
-                unlink($file->getPathname());
+
+        if(is_writable($dir)) {
+            // Remove directory content
+            $iterator = new \RecursiveDirectoryIterator($dir);
+            foreach (new \RecursiveIteratorIterator($iterator, \RecursiveIteratorIterator::CHILD_FIRST) as $file) {
+                if ($file->isDir()) {
+                    rmdir($file->getPathname());
+                } else {
+                    unlink($file->getPathname());
+                }
             }
+            // Remove directory itself
+            rmdir($dir);
+        } 
+        else {
+            $app->abort(403, "This directory is not writable");
         }
-        // Remove directory itself
-        rmdir($dir);
     }
     else {
         return $app->json("Error: This is not a directory");

@@ -45,7 +45,12 @@ function remove_file(Application $app, Request $request) {
         $app->abort(400, "Missing parameters.");
     }
 
-    unlink("{$app['cakebox.root']}{$filepath}");
+    if(is_writable("{$app['cakebox.root']}{$filepath}")) {
+        unlink("{$app['cakebox.root']}{$filepath}");
+    } 
+    else {
+        $app->abort(403, "This file is not writable");
+    }
 
     return $app->json("Ok file deleted");
 
