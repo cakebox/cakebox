@@ -23,7 +23,7 @@ function install-prereq {
     echo "Installation des prérequis de Cakebox-light :"
     read -p "Appuyer sur une touche pour continuer ..."
 
-    read -p "Quelle est votre distribution linux ? (debian = d | ubuntu = u)" DISTRIB
+    read -e -p "Quelle est votre distribution linux ? (debian = d | ubuntu = u)" DISTRIB
 
     cd /tmp
 
@@ -104,7 +104,7 @@ function install-cakebox {
 function update {
     echo "Mise à jour de Cakebox-light ..."
     read -p "Appuyer sur une touche pour continuer ..."
-    read -p "Ou ce trouve votre repertoire Cakebox ? (ex /home/cakebox) " REP2
+    read -e -p "Ou ce trouve votre repertoire Cakebox ? (ex /home/cakebox) " REP2
 
     if cd $REP2 2> /dev/null ; then
 
@@ -124,7 +124,7 @@ function update {
 
 function repertoire-install {
 
-    read -p "Entrez le répertoire ou installer Cakebox-light (ex /var/www/): " CAKEREP
+    read -e -p "Entrez le répertoire ou installer Cakebox-light (ex /var/www/): " CAKEREP
     if cd $CAKEREP 2> /dev/null ; then
         echo -e "Debut de l'intallation dans le répertoire '$CAKEREP'\n" 1>&2
     else
@@ -136,7 +136,7 @@ function repertoire-install {
 
 function repertoire-scan {
 
-    read -p "Entrez le répertoire a scanner : " REP
+    read -e -p "Entrez le répertoire a scanner : " REP
     if cd $REP 2> /dev/null ; then
         echo -e "Répertoire scanner par cakebox-light : '$REP'\n" 1>&2
     else
@@ -144,7 +144,7 @@ function repertoire-scan {
         echo -e "Répertoire de scan : '$REP' créé.\n" 1>&2
     fi
 
-    chmod -R 0755 $REP
+    chmod -R 0770 $REP
     echo $REP
 }  
 
