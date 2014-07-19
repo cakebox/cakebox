@@ -1,7 +1,8 @@
 var app = angular.module('cakebox',  [
     'ngResource',
     'ngRoute',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ngClipboard'
 ]);
 
 app.config(['$routeProvider',

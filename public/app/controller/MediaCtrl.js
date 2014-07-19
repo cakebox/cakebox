@@ -1,5 +1,5 @@
-app.controller('MediaCtrl', ['$scope', '$routeParams', 'File', 'Player', 'Betaseries',
-    function($scope, $routeParams, File, Player, Betaseries) {
+app.controller('MediaCtrl', ['$location', '$scope', '$routeParams', 'File', 'Player', 'Betaseries',
+    function($location, $scope, $routeParams, File, Player, Betaseries) {
 
         $scope.player = Player.get(null, function(data) {
             data.default_type = data.avalaible_types[data.default_type];
@@ -13,6 +13,13 @@ app.controller('MediaCtrl', ['$scope', '$routeParams', 'File', 'Player', 'Betase
             Betaseries.watched({'id': id}, function(data) {
                 $(event.target).text("Épisode vu !");
             });
+        }
+        $scope.copyText = function(data) {
+
+            return $location.protocol() + "://" + $location.host() + data.access;
+        }
+        $scope.copyfileinfo = function(){
+            alertify.log("Le lien a bien êtes copié", "success", 10000);
         }
     }
 ]);

@@ -31,7 +31,7 @@
         </div>
 
         <div id="download" ng-show="rights.canDownloadFile">
-            <a ng-href="{{ fileinfo.access }}"><span class="glyphicon glyphicon-download"></span> Télécharger le fichier</a> <small>({{ fileinfo.size | bytes }})</small>
+            <a ng-href="{{ fileinfo.access }}"><span class="glyphicon glyphicon-download"></span> Télécharger le fichier</a> <small>({{ fileinfo.size | bytes }})</small> | <i class="glyphicon glyphicon-link"></i> <span type="button" clip-copy="copyText(fileinfo)" clip-click="copyfileinfo()">Copier le lien</span>
         </div>
 
     </div>
