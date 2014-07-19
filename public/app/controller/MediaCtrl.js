@@ -14,12 +14,5 @@ app.controller('MediaCtrl', ['$location', '$scope', '$routeParams', 'File', 'Pla
                 $(event.target).text("Épisode vu !");
             });
         }
-        $scope.copyText = function(data) {
-
-            return $location.protocol() + "://" + $location.host() + data.access;
-        }
-        $scope.copyfileinfo = function(){
-            alertify.log("Le lien a bien êtes copié", "success", 10000);
-        }
     }
 ]);

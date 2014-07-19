@@ -1,5 +1,5 @@
-app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Directory', 'File',
-    function($scope, $routeParams, breadcrumbs, Directory, File) {
+app.controller('BrowseCtrl', ['$location', '$scope', '$routeParams', 'breadcrumbs', 'Directory', 'File',
+    function($location, $scope, $routeParams, breadcrumbs, Directory, File) {
         $scope.currentPath = "";
         $scope.breadcrumbs = breadcrumbs;
 
@@ -68,6 +68,15 @@ app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Director
                 }
                 $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
             });
+        };
+
+
+        $scope.copyText = function(data) {
+
+            return $location.protocol() + "://" + $location.host() + data.access;
+        };
+        $scope.copyfileinfo = function(){
+            alertify.log("Le lien a bien été copié", "success", 6000);
         };
 
         $scope.getExtraClasses = function(entry) {
