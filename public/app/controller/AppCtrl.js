@@ -14,11 +14,11 @@ app.controller('AppCtrl', ['$scope', '$http', '$location', 'Rights',
         });
 
         $scope.copyText = function(data) {
-
             return $location.protocol() + "://" + $location.host() + data.access;
         }
-        $scope.copyfileinfo = function(){
-            alertify.log("Le lien a bien êtes copié", "success", 10000);
+
+        $scope.copyfileinfo = function() {
+            alertify.log("Le lien a bien été copié", "success", 10000);
         }
 
         $http.get('api/app/version')

@@ -70,15 +70,6 @@ app.controller('BrowseCtrl', ['$location', '$scope', '$routeParams', 'breadcrumb
             });
         };
 
-
-        $scope.copyText = function(data) {
-
-            return $location.protocol() + "://" + $location.host() + data.access;
-        };
-        $scope.copyfileinfo = function(){
-            alertify.log("Le lien a bien été copié", "success", 6000);
-        };
-
         $scope.getExtraClasses = function(entry) {
             extraclasses = "";
 
