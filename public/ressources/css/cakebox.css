@@ -103,6 +103,13 @@ td {
   width: 30px;
 }
 
+.entry-copy {
+    width: 30px;
+}
+
+.entry-copy > i {
+    color: #428bca;
+}
 
 .entry-size {
   width: 90px;

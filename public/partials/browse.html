@@ -32,6 +32,9 @@
                 <td class="entry-size hidden-xs">
                     {{ entry.size | bytes }}
                 </td>
+                <td class="entry-copy">
+                    <i ng-show="entry.type == 'file'" title="Copier le lien du fichier" class="glyphicon glyphicon-link" clip-copy="copyText(entry)" clip-click="copyfileinfo()"></i>
+                </td>
                 <td class="entry-download">
                     <a ng-show="entry.type == 'dir' && rights.canArchiveDirectory" href="" ng-click="archiveDirectory(entry)" title="Créer une archive du répertoire" class="glyphicon glyphicon-compressed"></a>
                     <a ng-show="entry.type == 'file' && rights.canDownloadFile" ng-href="{{ entry.access }}" title="Télécharger le fichier" class="glyphicon glyphicon-download"></a>

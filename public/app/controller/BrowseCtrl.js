@@ -1,5 +1,5 @@
-app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Directory', 'File',
-    function($scope, $routeParams, breadcrumbs, Directory, File) {
+app.controller('BrowseCtrl', ['$location', '$scope', '$routeParams', 'breadcrumbs', 'Directory', 'File',
+    function($location, $scope, $routeParams, breadcrumbs, Directory, File) {
         $scope.currentPath = "";
         $scope.breadcrumbs = breadcrumbs;
 
@@ -34,13 +34,13 @@ app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Director
         };
 
         $scope.archiveDirectory = function(directory) {
-            alertify.log("L'archive " + directory.name + ".tar est en cours de création, veuillez patienter.", "success", 0);
+            alertify.log("L'archive " + directory.name + ".tar est en cours de création, veuillez patienter.", "success", 6000);
 
             Directory.archive({'path': $scope.currentPath + directory.name}, function(data) {
-                alertify.log("L'archive " + directory.name + ".tar a bien été créée.", "success", 0);
+                alertify.log("L'archive " + directory.name + ".tar a bien été créée.", "success", 6000);
             }, function(error) {
                 if(error.status == 403) {
-                    alertify.log("Le repertoire de destination n'a pas les droits necessaires.", "error", 0);
+                    alertify.log("Le repertoire de destination n'a pas les droits necessaires.", "error", 6000);
                 }
                 $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
             });
@@ -48,11 +48,11 @@ app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Director
 
         $scope.removeDirectory = function(directory) {
             Directory.delete({'path': $scope.currentPath + directory.name}, function(data) {
-                alertify.log("Le dossier " + directory.name + " est bien supprimé.", "success", 0);
+                alertify.log("Le dossier " + directory.name + " est bien supprimé.", "success", 6000);
                 retrieveDirectories($scope.currentPath);
             }, function(error) {
                 if(error.status == 403) {
-                    alertify.log("Le dossier " + directory.name + " n'a pas les droits necessaires pour être supprimé.", "error", 0);
+                    alertify.log("Le dossier " + directory.name + " n'a pas les droits necessaires pour être supprimé.", "error", 6000);
                 }
                 $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
             });
@@ -60,11 +60,11 @@ app.controller('BrowseCtrl', ['$scope', '$routeParams', 'breadcrumbs', 'Director
 
         $scope.removeFile = function(file) {
             File.delete({'path': $scope.currentPath + file.name}, function(data) {
-                alertify.log("Le fichier " + file.name + " est bien supprimé.", "success", 0);
+                alertify.log("Le fichier " + file.name + " est bien supprimé.", "success", 6000);
                 retrieveDirectories($scope.currentPath);
             }, function(error) {
                 if(error.status == 403) {
-                    alertify.log("Le fichier " + file.name + " n'a pas les droits necessaires pour être supprimé.", "error", 0);
+                    alertify.log("Le fichier " + file.name + " n'a pas les droits necessaires pour être supprimé.", "error", 6000);
                 }
                 $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
             });

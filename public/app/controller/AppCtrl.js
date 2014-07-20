@@ -13,6 +13,14 @@ app.controller('AppCtrl', ['$scope', '$http', '$location', 'Rights',
             $scope.previouspage = oldurl;
         });
 
+        $scope.copyText = function(data) {
+            return $location.protocol() + "://" + $location.host() + data.access;
+        }
+
+        $scope.copyfileinfo = function() {
+            alertify.log("Le lien a bien été copié", "success", 10000);
+        }
+
         $http.get('api/app/version')
             .success(function(data, status, headers, config) {
                 $scope.global.versions = data;

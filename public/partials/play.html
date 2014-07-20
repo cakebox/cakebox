@@ -2,7 +2,7 @@
     <div id="header-player">
         <div class="row">
             <a ng-href="{{ previouspage }}">Retour</a>
-            <select class="form-control pull-right" ng-model="player.default_type" ng-options="player.name for (key, player) in player.avalaible_types"></select>
+            <select class="form-control pull-right" ng-model="player.default_type" ng-options="player.name for (key, player) in player.avalaible_types"></select><button type="button" class="btn btn-default pull-right"><i title="Copier le lien du fichier" class="glyphicon glyphicon-link" clip-copy="copyText(fileinfo)" clip-click="copyfileinfo()"></i></button>
         </div>
     </div>
 
