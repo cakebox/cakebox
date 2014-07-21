@@ -1,5 +1,5 @@
-app.controller('BrowseCtrl', ['$location', '$scope', '$routeParams', 'breadcrumbs', 'Directory', 'File',
-    function($location, $scope, $routeParams, breadcrumbs, Directory, File) {
+app.controller('BrowseCtrl', ['$window', '$location', '$scope', '$routeParams', 'breadcrumbs', 'Directory', 'File',
+    function($window, $location, $scope, $routeParams, breadcrumbs, Directory, File) {
         $scope.currentPath = "";
         $scope.breadcrumbs = breadcrumbs;
 
@@ -39,7 +39,7 @@ app.controller('BrowseCtrl', ['$location', '$scope', '$routeParams', 'breadcrumb
             Directory.archive({'path': $scope.currentPath + directory.name}, function(data) {
                 alertify.log("L'archive " + directory.name + ".tar a bien été créée.", "success", 6000);
             }, function(error) {
-                if(error.status == 403) {
+                if (error.status == 403) {
                     alertify.log("Le repertoire de destination n'a pas les droits necessaires.", "error", 6000);
                 }
                 $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
@@ -47,27 +47,35 @@ app.controller('BrowseCtrl', ['$location', '$scope', '$routeParams', 'breadcrumb
         };
 
         $scope.removeDirectory = function(directory) {
-            Directory.delete({'path': $scope.currentPath + directory.name}, function(data) {
-                alertify.log("Le dossier " + directory.name + " est bien supprimé.", "success", 6000);
-                retrieveDirectories($scope.currentPath);
-            }, function(error) {
-                if(error.status == 403) {
-                    alertify.log("Le dossier " + directory.name + " n'a pas les droits necessaires pour être supprimé.", "error", 6000);
-                }
-                $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
-            });
+            var sure = $window.confirm("Are you sure you want to delete this ?");
+
+            if (sure) {
+                Directory.delete({'path': $scope.currentPath + directory.name}, function(data) {
+                    alertify.log("Le dossier " + directory.name + " est bien supprimé.", "success", 6000);
+                    retrieveDirectories($scope.currentPath);
+                }, function(error) {
+                    if (error.status == 403) {
+                        alertify.log("Le dossier " + directory.name + " n'a pas les droits necessaires pour être supprimé.", "error", 6000);
+                    }
+                    $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
+                });
+            }
         };
 
         $scope.removeFile = function(file) {
-            File.delete({'path': $scope.currentPath + file.name}, function(data) {
-                alertify.log("Le fichier " + file.name + " est bien supprimé.", "success", 6000);
-                retrieveDirectories($scope.currentPath);
-            }, function(error) {
-                if(error.status == 403) {
-                    alertify.log("Le fichier " + file.name + " n'a pas les droits necessaires pour être supprimé.", "error", 6000);
-                }
-                $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
-            });
+            var sure = $window.confirm("Are you sure you want to delete this ?");
+
+            if (sure) {
+                File.delete({'path': $scope.currentPath + file.name}, function(data) {
+                    alertify.log("Le fichier " + file.name + " est bien supprimé.", "success", 6000);
+                    retrieveDirectories($scope.currentPath);
+                }, function(error) {
+                    if (error.status == 403) {
+                        alertify.log("Le fichier " + file.name + " n'a pas les droits necessaires pour être supprimé.", "error", 6000);
+                    }
+                    $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
+                });
+            }
         };
 
         $scope.getExtraClasses = function(entry) {
