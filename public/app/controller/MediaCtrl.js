@@ -2,7 +2,7 @@ app.controller('MediaCtrl', ['$location', '$scope', '$routeParams', 'File', 'Pla
     function($location, $scope, $routeParams, File, Player, Betaseries) {
 
         $scope.player = Player.get(null, function(data) {
-            data.default_type = data.avalaible_types[data.default_type];
+            data.default_type = data.available_types[data.default_type];
         });
 
         $scope.fileinfo = File.get({'path': $routeParams.path}, function(data) {
