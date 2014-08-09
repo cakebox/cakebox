@@ -16,7 +16,7 @@ function get_settings(Application $app) {
 
     $settings                    = [];
     $settings["default_type"]    = strtolower($app["player.default_type"]);
-    $settings["avalaible_types"] = [
+    $settings["available_types"] = [
         'html5'=> ['name'=> "HTML 5 Web Player", "type"=> "html5"],
         'vlc'  => ['name'=> "VLC Web Player", "type"  => "vlc"],
         'divx' => ['name'=> "DivX Web Player", "type" => "divx"]
