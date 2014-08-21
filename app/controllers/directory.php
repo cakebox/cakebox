@@ -114,7 +114,7 @@ function archive_directory(Application $app, Request $request) {
                 unlink("{$app['cakebox.root']}{$dirpath}/../{$dirname}.tar.inc");
             }
             else
-                return $app->json("Error: This directory already have a tar file or is already under a tar process.");
+                $app->abort(406, "This directory already have a tar file or is already under a tar process.");
         }
         else
             $app->abort(403, "This directory is not writable");

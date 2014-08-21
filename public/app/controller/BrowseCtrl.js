@@ -42,6 +42,9 @@ app.controller('BrowseCtrl', ['$window', '$location', '$scope', '$routeParams', 
                 if (error.status == 403) {
                     alertify.log("Le repertoire de destination n'a pas les droits necessaires.", "error", 6000);
                 }
+                if (error.status == 406) {
+                    alertify.log("L'archive existe déjà ou le processus de compression de ce repertoire est déjà en cours.", "error", 6000);
+                }
                 $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
             });
         };
