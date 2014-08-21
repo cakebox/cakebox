@@ -62,7 +62,6 @@ function get_infos(Application $app, $name) {
             $app->abort(401, "BetaSeries: " . $auth->errors[0]->text);
         }
 
-        print_r($auth);
         $auth_params = array_merge($auth_params, ["token" => $auth->token]);
     }
 
