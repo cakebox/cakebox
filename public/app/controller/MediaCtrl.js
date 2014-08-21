@@ -10,9 +10,11 @@ app.controller('MediaCtrl', ['$location', '$scope', '$routeParams', 'File', 'Pla
         });
 
         $scope.watched = function (event, id) {
-            Betaseries.watched({'id': id}, function(data) {
-                $(event.target).text("Épisode vu !");
-            });
+            $scope.betaseries = Betaseries.watched({'id': id});
+        }
+
+        $scope.unwatched = function (event, id) {
+            $scope.betaseries = Betaseries.unwatched({'id': id});
         }
     }
 ]);

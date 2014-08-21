@@ -20,6 +20,7 @@
 
             <div id="seen">
                 <a ng-hide="betaseries.episode.user.seen" ng-click="watched($event, betaseries.episode.id)">Marquer l'épisode comme vu sur BetaSeries</a>
+                <a ng-show="betaseries.episode.user.seen" ng-click="unwatched($event, betaseries.episode.id)">Marquer l'épisode comme non-vu sur BetaSeries</a>
             </div>
 
             <div id="informations">

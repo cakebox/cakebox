@@ -10,28 +10,26 @@ $app->post("/api/betaseries/watched/{id}",   __NAMESPACE__ . "\\set_watched");
 $app->delete("/api/betaseries/watched/{id}", __NAMESPACE__ . "\\unset_watched");
 
 
-function fetch($url, $params = [], $method = "get")
+function fetch($url, $params = [], $method = "GET")
 {
     $query = '';
-    if ($method == "get") {
+    if ($method == "GET" || $method != "POST") {
         $query = '?' . http_build_query($params);
     }
-    $url = "https://api.betaseries.com" . $url . $query;
+    $url = "https://api.betaseries.com{$url}{$query}";
 
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_HEADER, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-    if ($method == "post") {
+    if ($method == "POST") {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
     }
 
-    /*
-    if ($method != "get" || $method != "post") {
+    if ($method != "GET" && $method != "POST") {
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
     }
-    */
 
     $response = curl_exec($ch);
 
@@ -49,30 +47,33 @@ function get_infos(Application $app, $name) {
         $app->abort(403, "This user doesn't have the rights to retrieve episode informations.");
     }
 
-    $auth_params = [
-        "key" => $app["bs.apikey"]
-    ];
+    $auth = fetch("/members/auth", [
+        "key"      => $app["bs.apikey"],
+        "login"    => $app["bs.login"],
+        "password" => md5($app["bs.passwd"])
+    ],  "POST");
 
-    if ($app["bs.login"] && $app["bs.passwd"]) {
-        $auth = fetch("/members/auth", [
-            "key"      => $app["bs.apikey"],
-            "login"    => $app["bs.login"],
-            "password" => md5($app["bs.passwd"])
-        ],  "post");
-
-        if (empty($auth->errors)) {
-            $auth_params = array_merge($auth_params, ["token" => $auth->token]);
-        }
+    if (!empty($auth->errors)) {
+        $app->abort(401, "BetaSeries: " . $auth->errors[0]->text);
     }
 
-    if ($app["bs.apikey"]) {
-        $file_info = fetch("/episodes/scraper", array_merge($auth_params, ["file" => $name]));
-        if (!empty($file_info->errors)) {
-            $file_info = fetch("/movies/scraper", array_merge($auth_params, ["file" => $name]));
-        }
+    // First, check if it's a TV Show
+    $file_info = fetch("/episodes/scraper", [
+        "key"   => $app["bs.apikey"],
+        "token" => $auth->token,
+        "file" => $name
+    ]);
+
+    // if it's not a TV Show it should be a Movie
+    if (!empty($file_info->errors)) {
+        $file_info = fetch("/movies/scraper", [
+            "key"   => $app["bs.apikey"],
+            "token" => $auth->token,
+            "file" => $name
+        ]);
     }
 
-    return (isset($file_info)) ? $app->json($file_info) : $app->json($auth);
+    return $app->json($file_info);
 }
 
 function set_watched(Application $app, $id) {
@@ -85,21 +86,22 @@ function set_watched(Application $app, $id) {
         "key"      => $app["bs.apikey"],
         "login"    => $app["bs.login"],
         "password" => md5($app["bs.passwd"])
-    ],  "post");
+    ],  "POST");
 
-    if (empty($auth->errors)) {
-        $watched = fetch("/episodes/watched", [
-            "key"   => $app["bs.apikey"],
-            "token" => $auth->token,
-            "id"    => $id,
-            "bulk"  => true
-        ],  "post");
+    if (!empty($auth->errors)) {
+        $app->abort(401, "BetaSeries: " . $auth->errors[0]->text);
     }
 
-    return (isset($watched)) ? $app->json($watched) : $app->json($auth);
+    $watched = fetch("/episodes/watched", [
+        "key"   => $app["bs.apikey"],
+        "token" => $auth->token,
+        "id"    => $id,
+        "bulk"  => true
+    ],  "POST");
+
+    return $app->json($watched);
 }
 
-// not used yet
 function unset_watched(Application $app, $id) {
 
     if ($app["rights.canPlayMedia"] == false) {
@@ -110,15 +112,17 @@ function unset_watched(Application $app, $id) {
         "key"      => $app["bs.apikey"],
         "login"    => $app["bs.login"],
         "password" => md5($app["bs.passwd"])
-    ],  "post");
+    ],  "POST");
 
-    if (empty($auth->errors)) {
-        $watched = fetch("/episodes/watched", [
-            "key"   => $app["bs.apikey"],
-            "token" => $auth->token,
-            "id"    => $id
-        ],  "delete");
+    if (!empty($auth->errors)) {
+        $app->abort(401, "BetaSeries: " . $auth->errors[0]->text);
     }
 
-    return (isset($watched)) ? $app->json($watched) : $app->json($auth);
+    $unwatched = fetch("/episodes/watched", [
+        "key"   => $app["bs.apikey"],
+        "token" => $auth->token,
+        "id"    => $id
+    ],  "DELETE");
+
+    return $app->json($unwatched);
 }
