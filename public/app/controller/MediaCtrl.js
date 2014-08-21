@@ -5,16 +5,25 @@ app.controller('MediaCtrl', ['$location', '$scope', '$routeParams', 'File', 'Pla
             data.default_type = data.available_types[data.default_type];
         });
 
+        $scope.bsConfig = Betaseries.getConfig();
+
         $scope.fileinfo = File.get({'path': $routeParams.path}, function(data) {
-            $scope.betaseries = Betaseries.get({'filename': data.name});
+            if ($scope.bsConfig.apikey)
+                $scope.betaseries = Betaseries.get({'filename': data.name});
         });
 
         $scope.watched = function (event, id) {
-            $scope.betaseries = Betaseries.watched({'id': id});
+            if ($scope.bsConfig.apikey && $scope.bsConfig.login && $scope.bsConfig.passwd)
+                $scope.betaseries = Betaseries.setWatched({'id': id});
+            else
+                alertify.log("Les accès BetaSeries ne sont pas correctement renseignés dans le fichier de configuration.", "error", 6000);
         }
 
         $scope.unwatched = function (event, id) {
-            $scope.betaseries = Betaseries.unwatched({'id': id});
+            if ($scope.bsConfig.apikey && $scope.bsConfig.login && $scope.bsConfig.passwd)
+                $scope.betaseries = Betaseries.setUnwatched({'id': id});
+            else
+                alertify.log("Les accès BetaSeries ne sont pas correctement renseignés dans le fichier de configuration.", "error", 6000);
         }
     }
 ]);

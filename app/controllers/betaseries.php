@@ -5,6 +5,7 @@ namespace App\Controllers\BetaSeries;
 use Silex\Application;
 
 
+$app->get("/api/betaseries/config",          __NAMESPACE__ . "\\get_config");
 $app->get("/api/betaseries/info/{name}",     __NAMESPACE__ . "\\get_infos");
 $app->post("/api/betaseries/watched/{id}",   __NAMESPACE__ . "\\set_watched");
 $app->delete("/api/betaseries/watched/{id}", __NAMESPACE__ . "\\unset_watched");
@@ -39,6 +40,16 @@ function fetch($url, $params = [], $method = "GET")
     curl_close($ch);
 
     return json_decode($data);
+}
+
+function get_config(Application $app) {
+
+    $bs_config           = [];
+    $bs_config["apikey"] = (!empty($app["bs.apikey"])) ? true : false;
+    $bs_config["login"]  = (!empty($app["bs.login"])) ? true : false;
+    $bs_config["passwd"] = (!empty($app["bs.passwd"])) ? true : false;
+
+    return $app->json($bs_config);
 }
 
 function get_infos(Application $app, $name) {

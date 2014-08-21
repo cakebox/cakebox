@@ -2,14 +2,18 @@ app.factory('Betaseries', ['$resource', function ($resource) {
     var Betaseries, actions;
 
     actions = {
-        watched: {
+        getConfig: {
+            method: 'GET',
+            url: 'api/betaseries/config'
+        },
+        setWatched: {
             method: 'POST',
             url: 'api/betaseries/watched/:id',
             params: {
                 id: '@id',
             }
         },
-        unwatched: {
+        setUnwatched: {
             method: 'DELETE',
             url: 'api/betaseries/watched/:id',
             params: {
