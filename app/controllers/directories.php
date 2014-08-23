@@ -92,7 +92,7 @@ function delete(Application $app, Request $request) {
 
     $dirname = dirname($dir);
 
-    if (is_writable("{$app['cakebox.root']}/{$dirname}") === false) {
+    if (is_writable($dirname) === false) {
         $app->abort(403, "Parent directory is not writable");
     }
 
@@ -139,13 +139,13 @@ function archive(Application $app, Request $request) {
     $dirname      = $dirpath_info["dirname"];
     $basename     = $dirpath_info["basename"];
 
-    if (is_writable("{$app['cakebox.root']}/{$dirname}") === false) {
+    if (is_writable($dir) === false) {
         $app->abort(403, "Parent directory is not writable");
     }
 
-    $archive_path = "{$app['cakebox.root']}/{$dirname}/{$basename}.tar";
-
-    if (file_exists("{$archive_path}.inc") && file_exists($archive_path)) {
+    $archive_path = "{$app['cakebox.root']}{$dirpath}/../{$basename}.tar";  
+ 
+    if (file_exists("{$archive_path}.inc") || file_exists($archive_path)) {
         $app->abort(406, "This directory already have a tar file or is already under a tar process");
     }
 
