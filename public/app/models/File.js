@@ -3,10 +3,10 @@ app.factory('File', ['$resource', function ($resource) {
 
     actions = {
         delete: {
-            method: 'GET',
-            url: 'api/file/delete',
+            method: 'DELETE',
+            url: 'api/files',
         }
     };
 
-    return File = $resource('api/file/info', null, actions);
+    return File = $resource('api/files', null, actions);
 }]);

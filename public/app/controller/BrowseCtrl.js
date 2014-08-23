@@ -70,7 +70,7 @@ app.controller('BrowseCtrl', ['$window', '$location', '$scope', '$routeParams', 
             if (sure) {
                 File.delete({'path': $scope.currentPath + file.name}, function(data) {
                     alertify.log("Le fichier " + file.name + " est bien supprimé.", "success", 6000);
-                    retrieveDirectories($scope.currentPath);
+                    $scope.entries = data;
                 }, function(error) {
                     if (error.status == 403) {
                         alertify.log("Le fichier " + file.name + " n'a pas les droits nécessaires pour être supprimé.", "error", 6000);
