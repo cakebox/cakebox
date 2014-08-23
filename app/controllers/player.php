@@ -5,13 +5,13 @@ namespace App\Controllers\Player;
 use Silex\Application;
 
 
-$app->get("/api/player/settings",  __NAMESPACE__ . "\\get_settings");
+$app->get("/api/player",  __NAMESPACE__ . "\\get_infos");
 
 
-function get_settings(Application $app) {
+function get_infos(Application $app) {
 
     if ($app["rights.canPlayMedia"] == false) {
-        $app->abort(403, "This user doesn't have the rights to retrieve player informations.");
+        $app->abort(403, "This user doesn't have the rights to retrieve player informations");
     }
 
     $settings                    = [];

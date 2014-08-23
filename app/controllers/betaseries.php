@@ -55,7 +55,7 @@ function get_config(Application $app) {
 function get_infos(Application $app, $name) {
 
     if ($app["rights.canPlayMedia"] == false) {
-        $app->abort(403, "This user doesn't have the rights to retrieve episode informations.");
+        $app->abort(403, "This user doesn't have the rights to retrieve episode informations");
     }
 
     $auth_params = ["key" => $app["bs.apikey"]];
@@ -90,7 +90,7 @@ function get_infos(Application $app, $name) {
 function set_watched(Application $app, $id) {
 
     if ($app["rights.canPlayMedia"] == false) {
-        $app->abort(403, "This user doesn't have the rights to set an episode as watched.");
+        $app->abort(403, "This user doesn't have the rights to set an episode as watched");
     }
 
     $auth = fetch("/members/auth", [
@@ -116,7 +116,7 @@ function set_watched(Application $app, $id) {
 function unset_watched(Application $app, $id) {
 
     if ($app["rights.canPlayMedia"] == false) {
-        $app->abort(403, "This user doesn't have the rights to unset an episode as watched.");
+        $app->abort(403, "This user doesn't have the rights to unset an episode as watched");
     }
 
     $auth = fetch("/members/auth", [

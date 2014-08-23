@@ -5,10 +5,10 @@ namespace App\Controllers\Rights;
 use Silex\Application;
 
 
-$app->get("/api/rights",  __NAMESPACE__ . "\\get_rights");
+$app->get("/api/rights",  __NAMESPACE__ . "\\get");
 
 
-function get_rights(Application $app) {
+function get(Application $app) {
 
     $rights                        = [];
     $rights["canPlayMedia"]        = $app["rights.canPlayMedia"];
