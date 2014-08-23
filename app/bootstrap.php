@@ -32,7 +32,7 @@ if (substr($app["cakebox.root"], -1) !== '/')
     $app["cakebox.root"] .= "/";
 
 // Include controllers and models
-foreach (glob(__DIR__ . "/{controllers}/*.php", GLOB_BRACE) as $file) {
+foreach (glob(__DIR__ . "/{models,controllers}/*.php", GLOB_BRACE) as $file) {
     require_once $file;
 }
 
