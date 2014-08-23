@@ -7,10 +7,10 @@ app.factory('Directory', ['$resource', function ($resource) {
             url: 'api/directory/archive',
         },
         delete: {
-            method: 'GET',
-            url: 'api/directory/delete',
+            method: 'DELETE',
+            url: 'api/directory',
         }
     };
 
-    return Directory = $resource('api/directory/content', null, actions);
+    return Directory = $resource('api/directory', null, actions);
 }]);
