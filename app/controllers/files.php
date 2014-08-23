@@ -61,8 +61,8 @@ function delete(Application $app, Request $request) {
         $app->abort(403, "This file is not writable");
     }
 
-    $dirpath_info = pathinfo($dir);
-    $dirname      = $dirpath_info["dirname"];
+    $filepath_info = pathinfo($file);
+    $dirname      = $filepath_info["dirname"];
 
     unlink($file);
 
