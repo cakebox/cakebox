@@ -18,7 +18,7 @@ function get_content(Application $app, Request $request) {
     $dirpath = $request->get('path');
 
     if (!isset($dirpath)) {
-        $app->abort(400, "Missing parameters.");
+        $app->abort(400, "Missing parameters");
     }
 
     $finder = new Finder();
@@ -71,13 +71,13 @@ function get_content(Application $app, Request $request) {
 function delete(Application $app, Request $request) {
 
     if ($app["rights.canDelete"] == false) {
-        $app->abort(403, "This user doesn't have the rights to delete this directory.");
+        $app->abort(403, "This user doesn't have the rights to delete this directory");
     }
 
     $dirpath = $request->get('path');
 
     if (!isset($dirpath)) {
-        $app->abort(400, "Missing parameters.");
+        $app->abort(400, "Missing parameters");
     }
 
     $dir = "{$app['cakebox.root']}{$dirpath}";
@@ -90,8 +90,7 @@ function delete(Application $app, Request $request) {
         $app->abort(403, "This is not a directory");
     }
 
-    $dirpath_info = pathinfo($dir);
-    $dirname      = $dirpath_info["dirname"];
+    $dirname = dirname($dir);
 
     if (is_writable("{$app['cakebox.root']}/{$dirname}") === false) {
         $app->abort(403, "Parent directory is not writable");
@@ -109,7 +108,7 @@ function delete(Application $app, Request $request) {
     // Remove directory itself
     rmdir($dir);
 
-    $subRequest = Request::create('/api/directories', 'GET', ['path' => $dirname]);
+    $subRequest = Request::create('/api/directories', 'GET', ['path' => dirname($dirpath)]);
     return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
 }
 
@@ -117,13 +116,13 @@ function delete(Application $app, Request $request) {
 function archive(Application $app, Request $request) {
 
     if ($app["rights.canArchiveDirectory"] == false) {
-        $app->abort(403, "This user doesn't have the rights to archive a directory.");
+        $app->abort(403, "This user doesn't have the rights to archive a directory");
     }
 
     $dirpath = $request->get('path');
 
     if (!isset($dirpath)) {
-        $app->abort(400, "Missing parameters.");
+        $app->abort(400, "Missing parameters");
     }
 
     $dir = "{$app['cakebox.root']}{$dirpath}";
@@ -158,6 +157,6 @@ function archive(Application $app, Request $request) {
 
     unlink("{$archive_path}.inc");
 
-    $subRequest = Request::create('/api/directories', 'GET', ['path' => $dirname]);
+    $subRequest = Request::create('/api/directories', 'GET', ['path' => dirname($dirpath)]);
     return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
 }

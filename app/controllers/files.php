@@ -61,11 +61,8 @@ function delete(Application $app, Request $request) {
         $app->abort(403, "This file is not writable");
     }
 
-    $filepath_info = pathinfo($file);
-    $dirname      = $filepath_info["dirname"];
-
     unlink($file);
 
-    $subRequest = Request::create('/api/directories', 'GET', ['path' => $dirname]);
+    $subRequest = Request::create('/api/directories', 'GET', ['path' => dirname($filepath)]);
     return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
 }

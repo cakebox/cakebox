@@ -5,6 +5,7 @@ app.factory('File', ['$resource', function ($resource) {
         delete: {
             method: 'DELETE',
             url: 'api/files',
+            isArray: true
         }
     };
 
