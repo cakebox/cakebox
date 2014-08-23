@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Directory;
+namespace App\Controllers\Directories;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
@@ -8,9 +8,9 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 
-$app->get("/api/directory",          __NAMESPACE__ . "\\get_content");
-$app->delete("/api/directory",       __NAMESPACE__ . "\\delete");
-$app->get("/api/directory/archive",  __NAMESPACE__ . "\\archive");
+$app->get("/api/directories",          __NAMESPACE__ . "\\get_content");
+$app->delete("/api/directories",       __NAMESPACE__ . "\\delete");
+$app->get("/api/directories/archive",  __NAMESPACE__ . "\\archive");
 
 
 function get_content(Application $app, Request $request) {
@@ -109,7 +109,7 @@ function delete(Application $app, Request $request) {
     // Remove directory itself
     rmdir($dir);
 
-    $subRequest = Request::create('/api/directory', 'GET', ['path' => $dirname]);
+    $subRequest = Request::create('/api/directories', 'GET', ['path' => $dirname]);
     return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
 }
 
@@ -158,6 +158,6 @@ function archive(Application $app, Request $request) {
 
     unlink("{$archive_path}.inc");
 
-    $subRequest = Request::create('/api/directory', 'GET', ['path' => $dirname]);
+    $subRequest = Request::create('/api/directories', 'GET', ['path' => $dirname]);
     return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
 }
