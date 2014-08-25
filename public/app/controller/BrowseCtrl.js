@@ -1,17 +1,17 @@
-app.controller('BrowseCtrl', ['$window', '$location', '$scope', '$routeParams', 'breadcrumbs', 'Directory', 'File',
-    function($window, $location, $scope, $routeParams, breadcrumbs, Directory, File) {
+app.controller('BrowseCtrl', ['$window', '$location', '$scope', '$routeParams', 'breadcrumbs', 'Directory', 'File', '$translate',
+    function($window, $location, $scope, $routeParams, breadcrumbs, Directory, File, $translate) {
         $scope.currentPath = "";
         $scope.breadcrumbs = breadcrumbs;
 
         function retrieveDirectories(path) {
-            $scope.informations = "Chargement des fichiers, veuillez patienter ...";
+            $scope.informations = $translate.instant('NOTIFICATIONS.LOAD_FILE');
 
             $scope.entries = Directory.query({'path': path}, function(data) {
                 $scope.informations = "";
                 if (data.length == 0)
-                    $scope.informations = "Rien dans ce répertoire.";
+                    $scope.informations = $translate.instant('NOTIFICATIONS.NOT_FOUND');
             }, function(error) {
-                $scope.informations = "Erreur " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
+                $scope.informations = "Error " + error.status + " (" + error.statusText + "): " + error.config.method + " " + error.config.url;
             });
         }
 
@@ -34,46 +34,46 @@ app.controller('BrowseCtrl', ['$window', '$location', '$scope', '$routeParams', 
         };
 
         $scope.archiveDirectory = function(directory) {
-            alertify.log("L'archive " + directory.name + ".tar est en cours de création, veuillez patienter.", "success", 6000);
+            alertify.log($translate.instant('NOTIFICATIONS.ARCHIVE.ARCHIVE_N') + directory.name + $translate.instant('NOTIFICATIONS.ARCHIVE.IN_CREATION'), "success", 6000);
 
             Directory.archive({'path': $scope.currentPath + directory.name}, function(data) {
                 $scope.entries = data;
-                alertify.log("L'archive " + directory.name + ".tar a bien été créée.", "success", 6000);
+                alertify.log($translate.instant('NOTIFICATIONS.ARCHIVE.ARCHIVE_N') + directory.name + $translate.instant('NOTIFICATIONS.ARCHIVE.SUCCESS'), "success", 6000);
             }, function(error) {
                 if (error.status == 403) {
-                    alertify.log("Le répertoire de destination n'a pas les droits nécessaires.", "error", 6000);
+                    alertify.log($translate.instant('NOTIFICATIONS.ARCHIVE.ERROR_RIGHT'), "error", 6000);
                 }
                 if (error.status == 406) {
-                    alertify.log("L'archive existe déjà ou le processus de compression de ce répertoire est déjà en cours.", "error", 6000);
+                    alertify.log($translate.instant('NOTIFICATIONS.ARCHIVE.ERROR_EXIST'), "error", 6000);
                 }
             });
         };
 
         $scope.removeDirectory = function(directory) {
-            var sure = $window.confirm("Are you sure you want to delete this ?");
+            var sure = $window.confirm($translate.instant('NOTIFICATIONS.SURE'));
 
             if (sure) {
                 Directory.delete({'path': $scope.currentPath + directory.name}, function(data) {
                     $scope.entries = data;
-                    alertify.log("Le dossier " + directory.name + " est bien supprimé.", "success", 6000);
+                    alertify.log(directory.name + $translate.instant('NOTIFICATIONS.DELETE_OK'), "success", 6000);
                 }, function(error) {
                     if (error.status == 403) {
-                        alertify.log("Le dossier " + directory.name + " n'a pas les droits nécessaires pour être supprimé.", "error", 6000);
+                        alertify.log(directory.name + $translate.instant('NOTIFICATIONS.DELETE_NOTOK'), "error", 6000);
                     }
                 });
             }
         };
 
         $scope.removeFile = function(file) {
-            var sure = $window.confirm("Are you sure you want to delete this ?");
+            var sure = $window.confirm($translate.instant('NOTIFICATIONS.SURE'));
 
             if (sure) {
                 File.delete({'path': $scope.currentPath + file.name}, function(data) {
-                    alertify.log("Le fichier " + file.name + " est bien supprimé.", "success", 6000);
+                    alertify.log(file.name + $translate.instant('NOTIFICATIONS.DELETE_OK'), "success", 6000);
                     $scope.entries = data;
                 }, function(error) {
                     if (error.status == 403) {
-                        alertify.log("Le fichier " + file.name + " n'a pas les droits nécessaires pour être supprimé.", "error", 6000);
+                        alertify.log(file.name + $translate.instant('NOTIFICATIONS.DELETE_NOTOK'), "error", 6000);
                     }
                 });
             }

@@ -9,6 +9,8 @@
     "angular-route": "~1.2.19",
     "angular-bootstrap": "~0.11.0",
     "alertify": "~0.3.10",
-    "ng-clip": "0.2.1"
+    "ng-clip": "0.2.1",
+    "angular-translate": "~2.2.0",
+    "angular-translate-loader-static-files": "~2.2.0"
   }
 }

@@ -1,11 +1,19 @@
-app.controller('AppCtrl', ['$scope', '$http', '$location', 'Rights',
-    function($scope, $http, $location, Rights) {
-        $scope.global = {
+app.controller('AppCtrl', ['$scope', '$http', '$location', '$translate', 'Rights', 'App',
+    function($scope, $http, $location, $translate, Rights, App) {
+        $scope.search = {
             predicate: "",
             reverse: "",
-            searchText: "",
+            text: "",
             versions: {}
         };
+
+        $scope.app = App.get(null, function(data) {
+            $translate.use(data.language);
+
+            $scope.search.versions = data.version;
+            if ($scope.search.versions.local != $scope.search.versions.remote)
+                alertify.log("Cakebox-light " + $scope.search.versions.remote + $translate.instant('NOTIFICATIONS.AVAILABLE'), "success", 1000); 
+        });
 
         $scope.rights = Rights.get();
 
@@ -18,19 +26,7 @@ app.controller('AppCtrl', ['$scope', '$http', '$location', 'Rights',
         }
 
         $scope.copyfileinfo = function() {
-            alertify.log("Le lien a bien été copié", "success", 10000);
+            alertify.log($translate.instant('NOTIFICATIONS.LINK_COPY') , "success", 10000);
         }
-
-        $http.get('api/app/version')
-            .success(function(data, status, headers, config) {
-                $scope.global.versions = data;
-
-                alertify.set({ delay: 10000 });
-                if ($scope.global.versions.local != $scope.global.versions.remote)
-                    alertify.success("Cakebox-light " + $scope.global.versions.remote + " est disponnible !");
-            })
-            .error(function(data, status, headers, config) {
-                console.error("Cakebox: API is unreachable on /api/app/version");
-            });
     }
 ]);

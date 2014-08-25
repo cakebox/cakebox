@@ -1,5 +1,9 @@
-app.controller('MediaCtrl', ['$location', '$scope', '$routeParams', 'File', 'Player', 'Betaseries',
-    function($location, $scope, $routeParams, File, Player, Betaseries) {
+app.controller('MediaCtrl', ['$location', '$scope', '$routeParams', 'File', 'Player', 'Betaseries', '$translate',
+    function($location, $scope, $routeParams, File, Player, Betaseries, $translate) {
+
+        $translate(['NOTIFICATIONS.BETASERIES_ERROR']).then(function (translations) {
+            $scope.betaseries_error = translations['NOTIFICATIONS.BETASERIES_ERROR'];
+        });
 
         $scope.player = Player.get(null, function(data) {
             data.default_type = data.available_types[data.default_type];
@@ -16,14 +20,14 @@ app.controller('MediaCtrl', ['$location', '$scope', '$routeParams', 'File', 'Pla
             if ($scope.bsConfig.apikey && $scope.bsConfig.login && $scope.bsConfig.passwd)
                 $scope.betaseries = Betaseries.setWatched({'id': id});
             else
-                alertify.log("Les accès BetaSeries ne sont pas correctement renseignés dans le fichier de configuration.", "error", 6000);
+                alertify.log($scope.betaseries_error, "error", 6000);
         }
 
         $scope.unwatched = function (event, id) {
             if ($scope.bsConfig.apikey && $scope.bsConfig.login && $scope.bsConfig.passwd)
                 $scope.betaseries = Betaseries.setUnwatched({'id': id});
             else
-                alertify.log("Les accès BetaSeries ne sont pas correctement renseignés dans le fichier de configuration.", "error", 6000);
+                alertify.log($scope.betaseries_error, "error", 6000);
         }
     }
 ]);

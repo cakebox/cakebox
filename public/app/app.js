@@ -2,11 +2,13 @@ var app = angular.module('cakebox',  [
     'ngResource',
     'ngRoute',
     'ui.bootstrap',
-    'ngClipboard'
+    'ngClipboard',
+    'pascalprecht.translate'
 ]);
 
-app.config(['$routeProvider',
-    function($routeProvider) {
+app.config(['$routeProvider', '$translateProvider',
+
+    function($routeProvider, $translateProvider) {
         $routeProvider.
         when('/', {
             templateUrl: 'partials/browse.html',
@@ -29,6 +31,12 @@ app.config(['$routeProvider',
         }).
         otherwise({
             redirectTo: '/'
+        });        
+
+        $translateProvider.useStaticFilesLoader({
+            prefix: 'ressources/languages/locale-',
+            suffix: '.json'
         });
+        $translateProvider.preferredLanguage('fr');
     }
 ]);

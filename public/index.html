@@ -34,13 +34,13 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-cakebox">
                     <ul class="nav navbar-nav">
-                        <li ng-class="{'active':!currentPage || currentPage == 'browse'}"><a href="#/browse/">Parcourir</a></li>
-                        <li ng-class="{'active':currentPage == 'about'}"><a href="#/about">A propos</a></li>
+                        <li ng-class="{'active':!currentPage || currentPage == 'browse'}"><a href="#/browse/" translate> NAVBAR.LOOK_INTO </a></li>
+                        <li ng-class="{'active':currentPage == 'about'}"><a href="#/about" translate> NAVBAR.ABOUT </a></li>
                     </ul>
                     <form ng-show="currentPage == 'browse' || currentPage == ''" class="navbar-form navbar-right searchbox" role="search">
                         <div class="form-group has-feedback">
-                            <input type="text" class="form-control" placeholder="Rechercher dans ce dossier" ng-model="global.searchText">
-                            <button ng-if="global.searchText != ''" ng-click="global.searchText = ''" type="button" aria-hidden="true" class="close form-control-feedback close-search hidden-xs">&times;</button>
+                            <input type="text" class="form-control" placeholder="{{ 'NAVBAR.SEARCH' | translate }}" ng-model="search.text">
+                            <button ng-if="search.text != ''" ng-click="search.text = ''" type="button" aria-hidden="true" class="close form-control-feedback close-search hidden-xs">&times;</button>
                             <span class="glyphicon glyphicon-search form-control-feedback hidden-xs"></span>
                         </div>
                     </form>
@@ -71,8 +71,11 @@
     <script src="components/alertify/alertify.min.js"></script>
     <script src="components/zeroclipboard/dist/ZeroClipboard.js"></script>
     <script src="components/ng-clip/src/ngClip.js"></script>
-    
+    <script src="components/angular-translate/angular-translate.min.js"></script> 
+    <script src="components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>  
+
     <script src="app/app.js"></script>
+    <script src="app/models/App.js"></script>
     <script src="app/models/Rights.js"></script>
     <script src="app/models/Directory.js"></script>
     <script src="app/models/File.js"></script>

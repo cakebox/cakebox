@@ -1,0 +1,56 @@
+{
+    "NAVBAR": {
+        "ABOUT": "A propos",
+        "LOOK_INTO": "Parcourir",
+        "SEARCH": "Rechercher un fichier"
+    },
+    "ABOUT_PAGE": {
+        "VERSION": "Vous utilisez la version <a href='https://github.com/Cakebox/Cakebox-light/releases/tag/v{{ versions.local }}'>{{ versions.local }}</a> de Cakebox-light.",
+        "TITLE2": "Conception et développement",
+        "MORE": "Cakekox est developpé sur notre temps libre, n'hésitez pas à contribuer au projet !",
+        "THANKS": "Remerciement",
+        "THANKS_FOR": "pour les conseils, les tests, le wiki ... leurs contributions.",
+        "THANKS_CANDLE": "pour le background et les conseils graphiques."
+    },
+    "BROWSE_PAGE": {
+        "REFRESH": "Recharger le contenu",
+        "SORT": "trier:",
+        "NAME": "par nom",
+        "DATE": "par date",
+        "SIZE": "par taille",
+        "STAR": "Fichier récent",
+        "COPY": "Copier le lien du fichier",
+        "ARCHIVE" : "Créer une archive du répertoire",
+        "DOWNLOAD": "Télécharger le fichier",
+        "DELETE_DIR": "Supprimer le dossier",
+        "DELETE_FILE": "Supprimer le fichier"
+    },
+    "PLAY_PAGE": {
+        "BACK": "Retour",
+        "DOWNLOAD": "Télécharger le fichier",
+        "BETASERIE": {
+            "VIEW": "Marquer l'épisode comme vu sur BetaSeries",
+            "NO_VIEW": "Marquer l'épisode comme non-vu sur BetaSeries",
+            "SCORE": "Noté {{ (episode.note.mean || movie.notes.mean) | number:1 }} sur 5 ({{ episode.note.total || movie.notes.total }} participant)",
+            "RECORDED": "Noté ",
+            "RELEASED_ON": "Diffusé le "
+        }
+    },
+    "NOTIFICATIONS": {
+        "ARCHIVE": {
+            "ARCHIVE_N": "L'archive ",
+            "IN_CREATION": ".tar est en cours de création, veuillez patienter.",
+            "SUCCESS": ".tar a bien été créée.",
+            "ERROR_RIGHT": "Le répertoire de destination n'a pas les droits nécessaires.",
+            "ERROR_EXIST": "L'archive existe déjà ou le processus de compression de ce répertoire est déjà en cours."
+        },
+        "LINK_COPY": "Le lien a bien été copié",
+        "AVAILABLE": " est disponible !",
+        "BETASERIES_ERROR": "Les accès BetaSeries ne sont pas correctement renseignés dans le fichier de configuration.",
+        "LOAD_FILE": "Chargement des fichiers, veuillez patienter ...",
+        "NOT_FOUND": "Rien dans ce répertoire.",
+        "SURE": "Etes vous sûr de vouloir supprimer cet élement ?",
+        "DELETE_OK": " est bien supprimé.",
+        "DELETE_NOTOK": " n'a pas les droits nécessaires pour être supprimé."
+    }
+}
