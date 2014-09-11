@@ -32,7 +32,6 @@
             "VIEW": "Marquer l'épisode comme vu sur BetaSeries",
             "NO_VIEW": "Marquer l'épisode comme non-vu sur BetaSeries",
             "SCORE": "Noté {{ (episode.note.mean || movie.notes.mean) | number:1 }} sur 5 ({{ episode.note.total || movie.notes.total }} participant)",
-            "RECORDED": "Noté ",
             "RELEASED_ON": "Diffusé le "
         }
     },

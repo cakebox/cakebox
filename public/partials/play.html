@@ -20,13 +20,13 @@
 
             <div id="seen" ng-show="bsConfig.login && bsConfig.passwd">
                 <a ng-hide="betaseries.episode.user.seen" ng-click="watched($event, betaseries.episode.id)" translate>PLAY_PAGE.BETASERIE.VIEW</a>
-                <a ng-show="betaseries.episode.user.seen" ng-click="unwatched($event, betaseries.episode.id)" translte>PLAY_PAGE.BETASERIE.NO_VIEW</a>
+                <a ng-show="betaseries.episode.user.seen" ng-click="unwatched($event, betaseries.episode.id)" translate>PLAY_PAGE.BETASERIE.NO_VIEW</a>
             </div>
 
             <div id="informations">
                 <p>{{ betaseries.episode.description || betaseries.movie.synopsis }}</p>
-                <p translate translate-values="{{ betaseries }}">SCORE<span ng-if="betaseries.episode.note.total > 1 || betaseries.movie.notes.total > 1">s</span>)</p>
-                <p>{{ 'PLAY_PAGE.BETASERIE.RECORDED' | translate }} {{ (betaseries.episode.date || betaseries.movie.release_date) | date:'dd MMMM yyyy' }}</p>
+                <p><span translate="PLAY_PAGE.BETASERIE.SCORE" translate-values="{{ betaseries }}"><span><span ng-if="betaseries.episode.note.total > 1 || betaseries.movie.notes.total > 1">s</span>)</p>
+                <p>{{ 'PLAY_PAGE.BETASERIE.RELEASED_ON' | translate }} {{ (betaseries.episode.date || betaseries.movie.release_date) | date:'dd MMMM yyyy' }}</p>
             </div>
 
         </div>

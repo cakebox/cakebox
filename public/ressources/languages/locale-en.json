@@ -32,7 +32,6 @@
             "VIEW": "Mark the episode as seen on BetaSeries",
             "NO_VIEW": "Mark the episode as not seen on BetaSeries",
             "SCORE": "Recorded {{ (episode.note.mean || movie.notes.mean) | number:1 }} of 5 ({{ episode.note.total || movie.notes.total }} participant)",
-            "RECORDED": "Recorded ",
             "RELEASED_ON": "Released on "
         }
     },
