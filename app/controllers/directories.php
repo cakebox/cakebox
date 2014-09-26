@@ -47,7 +47,7 @@ function get_content(Application $app, Request $request) {
         $pathInfo["type"]      = $file->getType();
         $pathInfo["ctime"]     = $file->getCTime();
         $pathInfo["size"]      = \App\Models\Utils\get_size($file);
-        $pathInfo["access"]    = "{$app['cakebox.access']}{$dirpath}{$file->getBasename()}";
+        $pathInfo["access"]    = str_replace('%2F', '/', rawurlencode("{$app['cakebox.access']}{$dirpath}{$file->getBasename()}"));
         $pathInfo["extraType"] = "";
 
         $ext = strtolower($file->getExtension());
@@ -143,8 +143,8 @@ function archive(Application $app, Request $request) {
         $app->abort(403, "Parent directory is not writable");
     }
 
-    $archive_path = "{$app['cakebox.root']}{$dirpath}/../{$basename}.tar";  
- 
+    $archive_path = "{$app['cakebox.root']}{$dirpath}/../{$basename}.tar";
+
     if (file_exists("{$archive_path}.inc") || file_exists($archive_path)) {
         $app->abort(406, "This directory already have a tar file or is already under a tar process");
     }

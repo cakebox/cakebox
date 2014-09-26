@@ -29,7 +29,7 @@ function get_infos(Application $app, Request $request) {
     $fileinfo["name"]     = $file->getBasename(".".$file->getExtension());
     $fileinfo["fullname"] = $file->getFilename();
     $fileinfo["mimetype"] = mime_content_type($file->getPathName());
-    $fileinfo["access"]   = $app["cakebox.access"] . preg_replace('/ /',"%20", $filepath);
+    $fileinfo["access"]   = str_replace('%2F', '/', rawurlencode($app["cakebox.access"] . $filepath));
     $fileinfo["size"]     = $file->getSize();
 
     return $app->json($fileinfo);
