@@ -22,7 +22,7 @@ app.controller('AppCtrl', ['$scope', '$http', '$location', '$translate', 'Rights
         });
 
         $scope.copyText = function(data) {
-            return $location.protocol() + "://" + $location.host() + data.access;
+            return encodeURI($location.protocol() + "://" + $location.host() + data.access);
         }
 
         $scope.copyfileinfo = function() {
