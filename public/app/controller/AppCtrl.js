@@ -12,7 +12,7 @@ app.controller('AppCtrl', ['$scope', '$http', '$location', '$translate', 'Rights
 
             $scope.search.versions = data.version;
             if ($scope.search.versions.local != $scope.search.versions.remote)
-                alertify.log("Cakebox-light " + $scope.search.versions.remote + $translate.instant('NOTIFICATIONS.AVAILABLE'), "success", 1000); 
+                alertify.log("Cakebox-light " + $scope.search.versions.remote + $translate.instant('NOTIFICATIONS.AVAILABLE'), "success", 10000); 
         });
 
         $scope.rights = Rights.get();
