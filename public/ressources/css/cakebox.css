@@ -142,11 +142,7 @@ td {
   margin-top: 10px;
 }
 
-#show {
-  cursor: pointer;
-}
-
-#hide {
+#show, #hide {
  cursor: pointer;
 }
 
