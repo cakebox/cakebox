@@ -19,8 +19,8 @@
         <div class="betaseries" ng-show="betaseries.episode || betaseries.movie">
 
             <div id="seen" ng-show="bsConfig.login && bsConfig.passwd">
-                <a ng-hide="betaseries.episode.user.seen" ng-click="watched($event, betaseries.episode.id)" translate>PLAY_PAGE.BETASERIE.VIEW</a>
-                <a ng-show="betaseries.episode.user.seen" ng-click="unwatched($event, betaseries.episode.id)" translate>PLAY_PAGE.BETASERIE.NO_VIEW</a>
+                <a id="hide" ng-hide="betaseries.episode.user.seen" ng-click="watched($event, betaseries.episode.id)" translate>PLAY_PAGE.BETASERIE.VIEW</a>
+                <a id="show" ng-show="betaseries.episode.user.seen" ng-click="unwatched($event, betaseries.episode.id)" translate>PLAY_PAGE.BETASERIE.NO_VIEW</a>
             </div>
 
             <div id="informations">
