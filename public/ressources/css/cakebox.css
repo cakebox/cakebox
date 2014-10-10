@@ -146,6 +146,10 @@ td {
   cursor: pointer;
 }
 
+#hide {
+ cursor: pointer;
+}
+
 .player #download {
   font-size: 130%;
   text-align: center;
