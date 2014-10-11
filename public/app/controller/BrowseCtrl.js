@@ -16,10 +16,11 @@ app.controller('BrowseCtrl', ['$window', '$location', '$scope', '$routeParams', 
         }
 
         $scope.$watch('location.path()', function(event, current) {
+            // Force unbinding
             $scope.entries = [];
 
             if ($routeParams.path != "")
-                $scope.currentPath += $routeParams.path + "/";
+                $scope.currentPath += $routeParams.path;
 
             retrieveDirectories($scope.currentPath);
         });
@@ -36,7 +37,7 @@ app.controller('BrowseCtrl', ['$window', '$location', '$scope', '$routeParams', 
         $scope.archiveDirectory = function(directory) {
             alertify.log($translate.instant('NOTIFICATIONS.ARCHIVE.ARCHIVE_N') + directory.name + $translate.instant('NOTIFICATIONS.ARCHIVE.IN_CREATION'), "success", 6000);
 
-            Directory.archive({'path': $scope.currentPath + directory.name}, function(data) {
+            Directory.archive({'path': $scope.currentPath + "/" + directory.name}, function(data) {
                 $scope.entries = data;
                 alertify.log($translate.instant('NOTIFICATIONS.ARCHIVE.ARCHIVE_N') + directory.name + $translate.instant('NOTIFICATIONS.ARCHIVE.SUCCESS'), "success", 6000);
             }, function(error) {
@@ -53,7 +54,7 @@ app.controller('BrowseCtrl', ['$window', '$location', '$scope', '$routeParams', 
             var sure = $window.confirm($translate.instant('NOTIFICATIONS.SURE'));
 
             if (sure) {
-                Directory.delete({'path': $scope.currentPath + directory.name}, function(data) {
+                Directory.delete({'path': $scope.currentPath + "/" + directory.name}, function(data) {
                     $scope.entries = data;
                     alertify.log(directory.name + $translate.instant('NOTIFICATIONS.DELETE_OK'), "success", 6000);
                 }, function(error) {
@@ -68,7 +69,7 @@ app.controller('BrowseCtrl', ['$window', '$location', '$scope', '$routeParams', 
             var sure = $window.confirm($translate.instant('NOTIFICATIONS.SURE'));
 
             if (sure) {
-                File.delete({'path': $scope.currentPath + file.name}, function(data) {
+                File.delete({'path': $scope.currentPath + "/" + file.name}, function(data) {
                     alertify.log(file.name + $translate.instant('NOTIFICATIONS.DELETE_OK'), "success", 6000);
                     $scope.entries = data;
                 }, function(error) {
@@ -119,12 +120,12 @@ app.controller('BrowseCtrl', ['$window', '$location', '$scope', '$routeParams', 
             url = ""
 
             if (entry.type == "dir") {
-                url = "#/browse/" + $scope.currentPath + entry.name;
+                url = "#/browse" + ($scope.currentPath ? "/" + $scope.currentPath : "") + "/" + entry.name;
             }
             else if (entry.type == "file" && $scope.rights.canPlayMedia) {
                 url = entry.access;
                 if (entry.extraType == "video")
-                    url = "#/play/" + $scope.currentPath + entry.name;
+                    url = "#/play" + ($scope.currentPath ? "/" + $scope.currentPath : "") + "/" + entry.name;
             }
 
             return url;

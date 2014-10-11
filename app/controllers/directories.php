@@ -24,7 +24,7 @@ function get_content(Application $app, Request $request) {
     $finder = new Finder();
     $finder->followLinks()
             ->depth('< 1')
-            ->in("{$app['cakebox.root']}{$dirpath}")
+            ->in("{$app['cakebox.root']}/{$dirpath}")
             ->ignoreVCS(true)
             ->ignoreDotFiles($app['directory.ignoreDotFiles'])
             ->notName($app["directory.ignore"])
@@ -35,7 +35,7 @@ function get_content(Application $app, Request $request) {
     foreach ($finder as $file) {
 
         if ($file->isLink()) {
-            $linkTo = readlink("{$app['cakebox.root']}{$dirpath}{$file->getBasename()}");
+            $linkTo = readlink("{$app['cakebox.root']}/{$dirpath}/{$file->getBasename()}");
             if (file_exists($linkTo) == false)
                 continue;
 
@@ -47,7 +47,7 @@ function get_content(Application $app, Request $request) {
         $pathInfo["type"]      = $file->getType();
         $pathInfo["ctime"]     = $file->getCTime();
         $pathInfo["size"]      = \App\Models\Utils\get_size($file);
-        $pathInfo["access"]    = str_replace('%2F', '/', rawurlencode("{$app['cakebox.access']}{$dirpath}{$file->getBasename()}"));
+        $pathInfo["access"]    = str_replace('%2F', '/', rawurlencode("{$app['cakebox.access']}/{$dirpath}/{$file->getBasename()}"));
         $pathInfo["extraType"] = "";
 
         $ext = strtolower($file->getExtension());
@@ -80,7 +80,7 @@ function delete(Application $app, Request $request) {
         $app->abort(400, "Missing parameters");
     }
 
-    $dir = "{$app['cakebox.root']}{$dirpath}";
+    $dir = "{$app['cakebox.root']}/{$dirpath}";
 
     if (file_exists($dir) === false) {
         $app->abort(404, "Directory not found");
@@ -125,7 +125,7 @@ function archive(Application $app, Request $request) {
         $app->abort(400, "Missing parameters");
     }
 
-    $dir = "{$app['cakebox.root']}{$dirpath}";
+    $dir = "{$app['cakebox.root']}/{$dirpath}";
 
     if (file_exists($dir) === false) {
         $app->abort(404, "Directory not found");
@@ -143,7 +143,7 @@ function archive(Application $app, Request $request) {
         $app->abort(403, "Parent directory is not writable");
     }
 
-    $archive_path = "{$app['cakebox.root']}{$dirpath}/../{$basename}.tar";
+    $archive_path = "{$app['cakebox.root']}/{$dirpath}/../{$basename}.tar";
 
     if (file_exists("{$archive_path}.inc") || file_exists($archive_path)) {
         $app->abort(406, "This directory already have a tar file or is already under a tar process");

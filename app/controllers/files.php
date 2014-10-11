@@ -23,13 +23,13 @@ function get_infos(Application $app, Request $request) {
         $app->abort(400, "Missing parameters");
     }
 
-    $file     = new \SPLFileInfo($app["cakebox.root"].$filepath);
+    $file     = new \SPLFileInfo("{$app['cakebox.root']}/{$filepath}");
 
     $fileinfo             = [];
     $fileinfo["name"]     = $file->getBasename(".".$file->getExtension());
     $fileinfo["fullname"] = $file->getFilename();
     $fileinfo["mimetype"] = mime_content_type($file->getPathName());
-    $fileinfo["access"]   = str_replace('%2F', '/', rawurlencode($app["cakebox.access"] . $filepath));
+    $fileinfo["access"]   = str_replace('%2F', '/', rawurlencode("{$app['cakebox.access']}/{$filepath}"));
     $fileinfo["size"]     = $file->getSize();
 
     return $app->json($fileinfo);
@@ -47,7 +47,7 @@ function delete(Application $app, Request $request) {
         $app->abort(400, "Missing parameters");
     }
 
-    $file = "{$app['cakebox.root']}{$filepath}";
+    $file = "{$app['cakebox.root']}/{$filepath}";
 
     if (file_exists($file) === false) {
         $app->abort(404, "File not found");

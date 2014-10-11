@@ -31,7 +31,7 @@ app.config(['$routeProvider', '$translateProvider',
         }).
         otherwise({
             redirectTo: '/'
-        });        
+        });
 
         $translateProvider.useStaticFilesLoader({
             prefix: 'ressources/languages/locale-',

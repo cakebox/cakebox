@@ -27,9 +27,11 @@ if (isset($user) && file_exists(__DIR__ . "/../config/{$user}.php"))
 else
     require_once __DIR__ . "/../config/default.php";
 
-// Append ending slash if needed
-if (substr($app["cakebox.root"], -1) !== '/')
-    $app["cakebox.root"] .= "/";
+// Remove ending slash if needed
+if (substr($app["cakebox.root"], -1) == '/')
+    $app["cakebox.root"] = rtrim($app["cakebox.root"], "/");
+if (substr($app["cakebox.access"], -1) == '/')
+    $app["cakebox.access"] = rtrim($app["cakebox.access"], "/");
 
 // Include controllers and models
 foreach (glob(__DIR__ . "/{models,controllers}/*.php", GLOB_BRACE) as $file) {
