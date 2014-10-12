@@ -13,6 +13,14 @@ $app->delete("/api/directories",       __NAMESPACE__ . "\\delete");
 $app->get("/api/directories/archive",  __NAMESPACE__ . "\\archive");
 
 
+/**
+ * Retrieve directory content, directories and files
+ *
+ * @param Application $app Silex Application
+ * @param Request $request Request parameters
+ *
+ * @return JsonResponse Array of objects
+ */
 function get_content(Application $app, Request $request) {
 
     $dirpath = $request->get('path');
@@ -68,6 +76,14 @@ function get_content(Application $app, Request $request) {
     return $app->json($dirContent);
 }
 
+/**
+ * Delete a directory
+ *
+ * @param Application $app Silex Application
+ * @param Request $request Request parameters
+ *
+ * @return JsonResponse Array of objects, directory content after the delete process
+ */
 function delete(Application $app, Request $request) {
 
     if ($app["rights.canDelete"] == false) {
@@ -112,7 +128,14 @@ function delete(Application $app, Request $request) {
     return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
 }
 
-
+/**
+ * Archive a directory
+ *
+ * @param Application $app Silex Application
+ * @param Request $request Request parameters
+ *
+ * @return JsonResponse Array of objects, directory content after the archive process
+ */
 function archive(Application $app, Request $request) {
 
     if ($app["rights.canArchiveDirectory"] == false) {

@@ -42,6 +42,13 @@ function fetch($url, $params = [], $method = "GET")
     return json_decode($data);
 }
 
+/**
+ * Get betaseries configuration
+ *
+ * @param Application $app Silex Application
+ *
+ * @return JsonResponse Object containing betaseries informations
+ */
 function get_config(Application $app) {
 
     $bs_config           = [];
@@ -52,6 +59,14 @@ function get_config(Application $app) {
     return $app->json($bs_config);
 }
 
+/**
+ * Get file informations (note, resume, imdb_id ...)
+ *
+ * @param Application $app Silex Application
+ * @param String $name File name
+ *
+ * @return JsonResponse
+ */
 function get_infos(Application $app, $name) {
 
     if ($app["rights.canPlayMedia"] == false) {
@@ -87,6 +102,14 @@ function get_infos(Application $app, $name) {
     return $app->json($file_info);
 }
 
+/**
+ * Set a show or movie as watched
+ *
+ * @param Application $app Silex Application
+ * @param Number $id show/movie id
+ *
+ * @return JsonResponse
+ */
 function set_watched(Application $app, $id) {
 
     if ($app["rights.canPlayMedia"] == false) {
@@ -113,6 +136,14 @@ function set_watched(Application $app, $id) {
     return $app->json($watched);
 }
 
+/**
+ * Unset a show or movie as watched
+ *
+ * @param Application $app Silex Application
+ * @param Number $id show/movie id
+ *
+ * @return JsonResponse
+ */
 function unset_watched(Application $app, $id) {
 
     if ($app["rights.canPlayMedia"] == false) {

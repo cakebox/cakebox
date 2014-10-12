@@ -11,6 +11,14 @@ $app->get("/api/files",    __NAMESPACE__ . "\\get_infos");
 $app->delete("/api/files", __NAMESPACE__ . "\\delete");
 
 
+/**
+ * Get file informations (size, name ...)
+ *
+ * @param Application $app Silex Application
+ * @param Request $request Request parameters
+ *
+ * @return JsonResponse Object containing file informations
+ */
 function get_infos(Application $app, Request $request) {
 
     if ($app["rights.canPlayMedia"] == false) {
@@ -35,6 +43,14 @@ function get_infos(Application $app, Request $request) {
     return $app->json($fileinfo);
 }
 
+/**
+ * Delete a file
+ *
+ * @param Application $app Silex Application
+ * @param Request $request Request parameters
+ *
+ * @return JsonResponse Array of objects, directory content after the delete process
+ */
 function delete(Application $app, Request $request) {
 
     if ($app["rights.canDelete"] == false) {

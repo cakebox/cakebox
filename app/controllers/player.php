@@ -8,6 +8,13 @@ use Silex\Application;
 $app->get("/api/player",  __NAMESPACE__ . "\\get_infos");
 
 
+/**
+ * Get player configuration
+ *
+ * @param Application $app Silex Application
+ *
+ * @return JsonResponse Object containing player informations
+ */
 function get_infos(Application $app) {
 
     if ($app["rights.canPlayMedia"] == false) {

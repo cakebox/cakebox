@@ -8,6 +8,13 @@ use Silex\Application;
 $app->get("/api/rights",  __NAMESPACE__ . "\\get");
 
 
+/**
+ * Get rights configuration
+ *
+ * @param Application $app Silex Application
+ *
+ * @return JsonResponse Object containing rights informations
+ */
 function get(Application $app) {
 
     $rights                        = [];
