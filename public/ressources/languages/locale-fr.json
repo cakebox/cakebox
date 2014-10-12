@@ -5,7 +5,7 @@
         "SEARCH": "Rechercher un fichier"
     },
     "ABOUT_PAGE": {
-        "VERSION": "Vous utilisez la version <a href='https://github.com/Cakebox/Cakebox-light/releases/tag/v{{ versions.local }}'>{{ versions.local }}</a> de Cakebox-light.",
+        "VERSION": "Vous utilisez la version <a href='https://github.com/Cakebox/Cakebox-light/releases/tag/v{{ local }}'>{{ local }}</a> de Cakebox-light.",
         "TITLE2": "Conception et développement",
         "MORE": "Cakekox est developpé sur notre temps libre, n'hésitez pas à contribuer au projet !",
         "THANKS": "Remerciement",

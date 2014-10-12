@@ -1,18 +1,19 @@
 app.controller('AppCtrl', ['$scope', '$http', '$location', '$translate', 'Rights', 'App',
     function($scope, $http, $location, $translate, Rights, App) {
-        $scope.search = {
-            predicate: "",
-            reverse: "",
-            text: "",
-            versions: {}
+        $scope.searchText =  "";
+        $scope.sortOptions =
+        {
+            sortBy: "",
+            reverse: false
         };
+        $scope.appVersions = {};
 
         $scope.app = App.get(null, function(data) {
             $translate.use(data.language);
 
-            $scope.search.versions = data.version;
-            if ($scope.search.versions.local != $scope.search.versions.remote)
-                alertify.log("Cakebox-light " + $scope.search.versions.remote + $translate.instant('NOTIFICATIONS.AVAILABLE'), "success", 10000); 
+            $scope.appVersions = data.version;
+            if ($scope.appVersions.local != $scope.appVersions.remote)
+                alertify.log("Cakebox-light " + $scope.appVersions.remote + $translate.instant('NOTIFICATIONS.AVAILABLE'), "success", 10000);
         });
 
         $scope.rights = Rights.get();
