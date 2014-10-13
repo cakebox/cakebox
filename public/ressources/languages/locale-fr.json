@@ -15,6 +15,7 @@
     "BROWSE_PAGE": {
         "REFRESH": "Recharger le contenu",
         "SORT": "trier:",
+        "NONE": "aucun",
         "NAME": "par nom",
         "DATE": "par date",
         "SIZE": "par taille",

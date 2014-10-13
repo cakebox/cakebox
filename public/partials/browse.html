@@ -14,7 +14,8 @@
 
     <div ng-show="entries.length" class="sortInfo pull-right">
         {{ 'BROWSE_PAGE.SORT' | translate }}
-        <a href="" ng-click="sortOptions.sortBy = ''" translate>BROWSE_PAGE.NAME</a>,
+        <a href="" ng-click="sortOptions.sortBy = ''" translate>BROWSE_PAGE.NONE</a>,
+        <a href="" ng-click="sortOptions.sortBy = 'name'; sortOptions.reverse=!sortOptions.reverse" translate>BROWSE_PAGE.NAME</a>,
         <a href="" ng-click="sortOptions.sortBy = 'ctime'; sortOptions.reverse=!sortOptions.reverse" translate>BROWSE_PAGE.DATE</a>,
         <a href="" ng-click="sortOptions.sortBy = 'size'; sortOptions.reverse=!sortOptions.reverse" translate>BROWSE_PAGE.SIZE</a>
     </div>
