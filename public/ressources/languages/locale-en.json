@@ -15,6 +15,7 @@
     "BROWSE_PAGE": {
         "REFRESH": "Reload content",
         "SORT": "sort:",
+        "NONE": "none",
         "NAME": "by name",
         "DATE": "by date",
         "SIZE": "by size",

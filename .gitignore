@@ -1,6 +1,6 @@
 .DS_Store
 composer.lock
-
+.htpasswd
 /tmp
 /public/.htaccess
 /public/components
