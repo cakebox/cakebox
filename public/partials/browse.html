@@ -22,7 +22,7 @@
 
     <table class="table table-condensed">
         <tbody>
-            <tr ng-repeat="entry in entries | orderBy:sortOptions.sortBy:sortOptions.reverse | filter:searchText">
+            <tr ng-repeat="entry in entries | orderBy:sortOptions.sortBy:sortOptions.reverse | filter:search.text">
                 <td class="entry-type">
                     <span ng-class="getExtraClasses(entry)"></span>
                 </td>

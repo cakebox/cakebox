@@ -39,8 +39,8 @@
                     </ul>
                     <form ng-show="currentPage == 'browse' || currentPage == ''" class="navbar-form navbar-right searchbox" role="search">
                         <div class="form-group has-feedback">
-                            <input type="text" class="form-control" placeholder="{{ 'NAVBAR.SEARCH' | translate }}" ng-model="searchText">
-                            <button ng-if="searchText != ''" ng-click="searchText = ''" type="button" aria-hidden="true" class="close form-control-feedback close-search hidden-xs">&times;</button>
+                            <input type="text" class="form-control" placeholder="{{ 'NAVBAR.SEARCH' | translate }}" ng-model="search.text">
+                            <button ng-if="search.text != ''" ng-click="search.text = ''" type="button" aria-hidden="true" class="close form-control-feedback close-search hidden-xs">&times;</button>
                             <span class="glyphicon glyphicon-search form-control-feedback hidden-xs"></span>
                         </div>
                     </form>

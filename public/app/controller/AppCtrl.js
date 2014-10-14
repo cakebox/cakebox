@@ -1,6 +1,9 @@
 app.controller('AppCtrl', ['$scope', '$http', '$location', '$translate', 'Rights', 'App',
     function($scope, $http, $location, $translate, Rights, App) {
-        $scope.searchText =  "";
+        $scope.search =
+        {
+            text: ""
+        };
         $scope.sortOptions =
         {
             sortBy: "",
