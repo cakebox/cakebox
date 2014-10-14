@@ -9,19 +9,17 @@ app.controller('AppCtrl', ['$scope', '$http', '$location', '$translate', 'Rights
             sortBy: "",
             reverse: false
         };
-        $scope.appVersions = {};
+
+        $scope.rights = Rights.get();
 
         $scope.app = App.get(null, function(data) {
             $translate.use(data.language);
 
-            $scope.appVersions = data.version;
-            if ($scope.appVersions.local != $scope.appVersions.remote)
-                alertify.log("Cakebox-light " + $scope.appVersions.remote + $translate.instant('NOTIFICATIONS.AVAILABLE'), "success", 10000);
+            if (data.version.local != data.version.remote)
+                alertify.log("Cakebox-light " + data.version.remote + $translate.instant('NOTIFICATIONS.AVAILABLE'), "success", 10000);
         });
 
-        $scope.rights = Rights.get();
-
-        $scope.$on('$locationChangeSuccess',function(eventt, newurl, oldurl) {
+        $scope.$on('$locationChangeSuccess',function(event, newurl, oldurl) {
             $scope.previouspage = oldurl;
         });
 
