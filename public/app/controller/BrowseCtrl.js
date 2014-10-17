@@ -135,7 +135,7 @@ app.controller('BrowseCtrl', ['$window', '$location', '$scope', '$routeParams', 
             currentTS = Math.round(new Date().getTime() / 1000);
 
             if (entry.type == "file") {
-                if (((currentTS - entry.ctime) / 3600) <= 24)
+                if (((currentTS - entry.mtime) / 3600) <= 24)
                     return true;
             }
             return false;

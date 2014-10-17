@@ -53,7 +53,7 @@ function get_content(Application $app, Request $request) {
         $pathInfo              = [];
         $pathInfo["name"]      = $file->getBasename();
         $pathInfo["type"]      = $file->getType();
-        $pathInfo["ctime"]     = $file->getCTime();
+        $pathInfo["mtime"]     = $file->getMTime();
         $pathInfo["size"]      = \App\Models\Utils\get_size($file);
         $pathInfo["access"]    = str_replace('%2F', '/', rawurlencode("{$app['cakebox.access']}/{$dirpath}/{$file->getBasename()}"));
         $pathInfo["extraType"] = "";
