@@ -84,6 +84,11 @@ table {
   border-top: none !important;
 }
 
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: rgba(249, 249, 249, 0.5);
+}
+
 td {
   overflow: hidden;
   text-overflow: ellipsis;
