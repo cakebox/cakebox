@@ -3,7 +3,8 @@ var app = angular.module('cakebox',  [
     'ngRoute',
     'ui.bootstrap',
     'ngClipboard',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'kdarcel.vlc-player'
 ]);
 
 app.config(['$routeProvider', '$translateProvider',
