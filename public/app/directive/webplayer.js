@@ -7,13 +7,13 @@ app.directive('webplayer',
             link: function (scope, element, attributes) {
                 var setupVlcPlayer = function(vlcData) {
                     if (vlcData.url && vlcData.filename) {
-                        var vlc = document.getElementById("vlc");
-                        if (vlc)
+                        scope.vlc = document.getElementById("vlc");
+                        if (scope.vlc)
                         {
                             var options = [":vout-filter=deinterlace", ":deinterlace-mode=linear"];
-                            var id = vlc.playlist.add(vlcData.url, vlcData.filename, options);
+                            var id = scope.vlc.playlist.add(vlcData.url, vlcData.filename, options);
                             if (vlcData.autoplay == 'true')
-                                vlc.playlist.playItem(id);
+                                scope.vlc.playlist.playItem(id);
                         }
                     }
                 }

@@ -14,6 +14,7 @@
 
         <div class="player-container">
             <webplayer class="video-container" vlc-url="{{ fileinfo.access }}" vlc-filename="{{ fileinfo.name }}" vlc-autoplay="{{ player.auto_play }}"></webplayer>
+            <button type="button" class="btn btn-default" ng-click="vlcTogglePause()">Pause</button>
         </div>
 
         <div class="betaseries" ng-show="betaseries.episode || betaseries.movie">
