@@ -4,7 +4,8 @@ var app = angular.module('cakebox',  [
     'ui.bootstrap',
     'ngClipboard',
     'pascalprecht.translate',
-    'kdarcel.vlc-player'
+    'kdarcel.vlc-player',
+    'kdarcel.vlc-player.tpl'
 ]);
 
 app.config(['$routeProvider', '$translateProvider',
