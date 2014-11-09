@@ -29,9 +29,5 @@ app.controller('MediaCtrl', ['$location', '$scope', '$routeParams', 'File', 'Pla
             else
                 alertify.log($scope.betaseries_error, "error", 6000);
         }
-
-        $scope.vlcTogglePause = function() {
-            $scope.vlc.playlist.togglePause();
-        }
     }
 ]);

@@ -6,16 +6,12 @@
         </div>
     </div>
 
-    <div class="video-header">
-        {{ fileinfo.name }}
-    </div>
-
-    <div class="player">
-
-        <div class="player-container">
-            <vlcplayer class="video-container" vlc-url="{{ fileinfo.access }}" vlc-filename="{{ fileinfo.name }}" vlc-autoplay="{{ player.auto_play }}"></vlcplayer>
-            <button type="button" class="btn btn-default" ng-click="vlcTogglePause()">Pause</button>
+    <div class="file">
+        <div class="name">
+            {{ fileinfo.name }}
         </div>
+
+        <vlcplayer class="player" vlc-url="{{ fileinfo.access }}" vlc-filename="{{ fileinfo.name }}" vlc-autoplay="{{ player.auto_play }}"></vlcplayer>
 
         <div class="betaseries" ng-show="betaseries.episode || betaseries.movie">
 
