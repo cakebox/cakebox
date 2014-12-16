@@ -3,7 +3,7 @@ Cakebox-light
 
 A small web interface written with [AngularJS](https://angularjs.org/) and [Silex](http://silex.sensiolabs.org/), to allows you to browse, watch, manage and share the files you want.
 
-[![MIT License](https://i.creativecommons.org/l/by-sa/4.0/80x15.png)](http://creativecommons.org/licenses/by-sa/4.0/)
+[![GPL V2](http://img.shields.io/badge/license-GPL_V2-blue.svg?style=flat)](http://opensource.org/licenses/GPL-2.0)
 
 
 ## Screenshots
@@ -35,8 +35,7 @@ You can find installation informations (in french) on the [wiki](https://github.
 
 ## License
 
-Cakebox is licensed under a
-Creative Commons Attribution-ShareAlike 4.0 Unported License. [http://creativecommons.org/licenses/by-sa/4.0/](http://creativecommons.org/licenses/by-sa/4.0/)
+You may use, distribute and copy Cakebox-light under the terms of GNU General Public License version 2, which is displayed [here](https://github.com/Cakebox/Cakebox-light/blob/master/LICENSE).
 
 
 ## Authors
