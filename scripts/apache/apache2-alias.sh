@@ -39,7 +39,7 @@ read -p "Appuyer sur une touche pour continuer ..."
 IFS=''
 while read line
 do
-    eval echo "'$line'" >> > /etc/apache2/sites-available/$ALIAS.conf
+    eval echo "'$line'" >> /etc/apache2/sites-available/$ALIAS.conf
 done < ../../webconf-example/apache2-alias.conf.example
 
 sed "s%\$ALIAS%$ALIAS%g;s%\$CAKEBOXREP%$CAKEBOXREP%g;s%\$VIDEOREP%$VIDEOREP%g" ../../webconf-example/apache2-alias.conf.example >/etc/apache2/sites-available/$ALIAS.conf
