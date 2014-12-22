@@ -1,29 +1,45 @@
-Alias /cakebox /var/www/cakebox/public/
-<Directory /var/www/cakebox/public/>
-    Options Indexes MultiViews FollowSymLinks
-    AllowOverride All
+<VirtualHost *:80>
+    Alias /$ALIAS $CAKEBOXREP/public/
+    <Directory $CAKEBOXREP/public/>
+        Options Indexes MultiViews FollowSymLinks
+        AllowOverride All
 
-    Order allow,deny
-    Allow from all
+        <IfVersion >= 2.4>
+            Require all granted
+        </IfVersion>
+        <IfVersion < 2.4>
+            Order allow,deny
+            Allow from all
+        </IfVersion>
 
-    # use debug instead of production to get more log
-    SetEnv APPLICATION_ENV production
+        # use debug instead of production to get more log
+        SetEnv APPLICATION_ENV production
 
-    RewriteEngine On
-    RewriteBase /cakebox/
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [QSA,L]
-</Directory>
+        RewriteEngine On
+        RewriteBase /$ALIAS/
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteRule ^ index.php [QSA,L]
+    </Directory>
 
-# alias for download and streaming, it must point to your download directory
-# replace /YOUR/PATH with the same path as cakebox.root variable in app/config/
-Alias /access /YOUR/PATH
-<Directory /YOUR/PATH/>
-    Options -Indexes
+    # alias for download and streaming, it must point to your download directory
+    # replace $VIDEOREP with the same path as cakebox.root variable in app/config/
+    Alias /access $VIDEOREP/
+    <Directory "$VIDEOREP">
+        Options -Indexes
 
-    Order allow,deny 
-    Allow from all
-    Satisfy Any
+        <IfVersion >= 2.4>
+            Require all granted
+        </IfVersion>
+        <IfVersion < 2.4>
+            Order allow,deny
+            Allow from all
+        </IfVersion>
+        Satisfy Any
 
-    Header set Content-Disposition "attachment"
-</Directory>
+        Header set Content-Disposition "attachment"
+    </Directory>
+
+    ErrorLog "/var/log/apache2/$ALIAS-error.log"
+    CustomLog "/var/log/apache2/$ALIAS-access.log" common
+</VirtualHost>
+

@@ -1,30 +1,36 @@
- <VirtualHost *:80>
-    # here replace with the subdomain you have created, you must own YOURDOMAIN.COM
-    ServerName SUBDOMAIN.YOURDOMAIN.COM
+<VirtualHost *:80>
+    # here replace with the subdomain you have created, you must own $SUBDOMAIN
+    ServerName $SUBDOMAIN
 
     # use debug instead of production to get more log
     SetEnv APPLICATION_ENV production 
 
     # alias for download and streaming, it must point to your download directory
-    # replace /YOUR/PATH with the same path as cakebox.root variable in app/config/
-    Alias /access /YOUR/PATH
-    <Directory /YOUR/PATH/>
-        Options -Indexes
-
-        Order allow,deny 
-        Allow from all
-        Satisfy Any
-
+    # replace $VIDEOREP with the same path as cakebox.root variable in app/config/
+    Alias /access $VIDEOREP/
+    <Directory $VIDEOREP>
+        <IfVersion >= 2.4>
+            Require all granted
+        </IfVersion>
+        <IfVersion < 2.4>
+            Order allow,deny
+            Allow from all
+        </IfVersion>
         Header set Content-Disposition "attachment"
     </Directory>
 
-    DocumentRoot /var/www/cakebox/public/
-    <Directory /var/www/cakebox/public/>
+    DocumentRoot "$CAKEBOXREP/public"
+    <Directory "$CAKEBOXREP/public">
         Options Indexes MultiViews FollowSymLinks
         AllowOverride none
 
-        Order allow,deny
-        Allow from all
+        <IfVersion >= 2.4>
+            Require all granted
+        </IfVersion>
+        <IfVersion < 2.4>
+            Order allow,deny
+            Allow from all
+        </IfVersion>
 
         RewriteEngine On
         RewriteBase /
@@ -32,6 +38,7 @@
         RewriteRule ^ index.php [L]
     </Directory>
 
-    ErrorLog "/var/log/apache2/cakebox-error.log"
-    CustomLog "/var/log/apache2/cakebox-access.log" common
+    ErrorLog "/var/log/apache2/$SUBDOMAIN-error.log"
+    CustomLog "/var/log/apache2/$SUBDOMAIN-access.log" common
 </VirtualHost>
+
