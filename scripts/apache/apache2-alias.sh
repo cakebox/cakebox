@@ -33,8 +33,6 @@ service apache2 restart
 
 echo "\n\nDeploiement de la cakebox sur apache"
 read -p "Appuyer sur une touche pour continuer ..."
-echo "\n\nDeploiement de la cakebox sur apache"
-read -p "Appuyer sur une touche pour continuer ..."
 
 IFS=''
 while read line
