@@ -3,10 +3,12 @@
 namespace App\Controllers\Files;
 
 use Silex\Application;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use App\Models\Utils;
 
-
+/** @var $app Application */
 $app->get("/api/files",    __NAMESPACE__ . "\\get_infos");
 $app->delete("/api/files", __NAMESPACE__ . "\\delete");
 
@@ -31,6 +33,7 @@ function get_infos(Application $app, Request $request) {
         $app->abort(400, "Missing parameters");
     }
 
+    $filepath = Utils\sanitize_path($filepath);
     $file     = new \SPLFileInfo("{$app['cakebox.root']}/{$filepath}");
 
     $fileinfo             = [];
@@ -63,6 +66,7 @@ function delete(Application $app, Request $request) {
         $app->abort(400, "Missing parameters");
     }
 
+    $filepath = Utils\sanitize_path($filepath);
     $file = "{$app['cakebox.root']}/{$filepath}";
 
     if (file_exists($file) === false) {

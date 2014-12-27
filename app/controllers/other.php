@@ -3,8 +3,9 @@
 namespace App\Controllers\Other;
 
 use Silex\Application;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
-
+/** @var $app Application */
 $app->get("/api/app",  __NAMESPACE__ . "\\get");
 
 
