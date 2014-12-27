@@ -2,6 +2,13 @@
 
 namespace App\Models\Utils;
 
+use Symfony\Component\HttpFoundation\File\File;
+
+/**
+ * @param File $file
+ *
+ * @return int
+ */
 function get_size($file) {
 
     $size = 0;
@@ -18,4 +25,21 @@ function get_size($file) {
     } catch (\RuntimeException $e) {}
 
     return $size;
+}
+
+/**
+ * Secure a path
+ *
+ * @param string $path
+ *
+ * @return string
+ */
+function sanitize_path($path)
+{
+    $path = basename($path);
+    if($path == '..'){
+        $path = '';
+    }
+
+    return $path;
 }

@@ -3,8 +3,9 @@
 namespace App\Controllers\BetaSeries;
 
 use Silex\Application;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
-
+/** @var $app Application */
 $app->get("/api/betaseries/config",          __NAMESPACE__ . "\\get_config");
 $app->get("/api/betaseries/info/{name}",     __NAMESPACE__ . "\\get_infos");
 $app->post("/api/betaseries/watched/{id}",   __NAMESPACE__ . "\\set_watched");

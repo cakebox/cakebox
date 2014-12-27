@@ -3,11 +3,14 @@
 namespace App\Controllers\Directories;
 
 use Silex\Application;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use App\Models\Utils;
 
-
+/** @var $app Application */
 $app->get("/api/directories",          __NAMESPACE__ . "\\get_content");
 $app->delete("/api/directories",       __NAMESPACE__ . "\\delete");
 $app->get("/api/directories/archive",  __NAMESPACE__ . "\\archive");
@@ -40,6 +43,7 @@ function get_content(Application $app, Request $request) {
 
     $dirContent = [];
 
+    /** @var File $file */
     foreach ($finder as $file) {
 
         if ($file->isLink()) {
@@ -96,6 +100,8 @@ function delete(Application $app, Request $request) {
         $app->abort(400, "Missing parameters");
     }
 
+    $dirpath = Utils\sanitize_path($dirpath);
+
     $dir = "{$app['cakebox.root']}/{$dirpath}";
 
     if (file_exists($dir) === false) {
@@ -147,6 +153,8 @@ function archive(Application $app, Request $request) {
     if (!isset($dirpath)) {
         $app->abort(400, "Missing parameters");
     }
+
+    $dirpath = Utils\sanitize_path($dirpath);
 
     $dir = "{$app['cakebox.root']}/{$dirpath}";
 
