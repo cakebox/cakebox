@@ -33,11 +33,19 @@ function get_size(SplFileInfo $file) {
 /**
  * Check if the path contains .. to avoid directory traversing
  *
- * @param string $path
+ * @param string $basePath
+ * @param string $userPath
  *
  * @return string
  */
-function check_path($path)
+function check_path($basePath, $userPath)
 {
-    return (basename($path) != "..") ? $path : "";
+    $realBase = realpath($basePath);
+    $realUser = realpath($basePath . "/" . $userPath);
+
+    if ($realUser === false || strpos($realUser, $realBase) !== 0) {
+        return "";
+    }
+
+    return $userPath;
 }

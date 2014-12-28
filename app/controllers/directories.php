@@ -30,7 +30,7 @@ $app->get("/api/directories/archive",  __NAMESPACE__ . "\\archive");
  */
 function get_content(Application $app, Request $request) {
 
-    $dirpath = Utils\check_path($request->get('path'));
+    $dirpath = Utils\check_path($app['cakebox.root'], $request->get('path'));
 
     if (!isset($dirpath)) {
         $app->abort(400, "Missing parameters");
@@ -97,7 +97,7 @@ function delete(Application $app, Request $request) {
         $app->abort(403, "This user doesn't have the rights to delete this directory");
     }
 
-    $dirpath = Utils\check_path($request->get('path'));
+    $dirpath = Utils\check_path($app['cakebox.root'], $request->get('path'));
 
     if (!isset($dirpath)) {
         $app->abort(400, "Missing parameters");
@@ -149,7 +149,7 @@ function archive(Application $app, Request $request) {
         $app->abort(403, "This user doesn't have the rights to archive a directory");
     }
 
-    $dirpath = Utils\check_path($request->get('path'));
+    $dirpath = Utils\check_path($app['cakebox.root'], $request->get('path'));
 
     if (!isset($dirpath)) {
         $app->abort(400, "Missing parameters");
