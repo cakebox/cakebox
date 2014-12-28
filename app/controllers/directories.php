@@ -4,10 +4,17 @@ namespace App\Controllers\Directories;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\Finder\Finder;
+use App\Models\Utils;
 
 
+/**
+ * Route declaration
+ *
+ * @var Application $app Silex Application
+ */
 $app->get("/api/directories",          __NAMESPACE__ . "\\get_content");
 $app->delete("/api/directories",       __NAMESPACE__ . "\\delete");
 $app->get("/api/directories/archive",  __NAMESPACE__ . "\\archive");
@@ -23,7 +30,7 @@ $app->get("/api/directories/archive",  __NAMESPACE__ . "\\archive");
  */
 function get_content(Application $app, Request $request) {
 
-    $dirpath = $request->get('path');
+    $dirpath = Utils\sanitize_path($request->get('path'));
 
     if (!isset($dirpath)) {
         $app->abort(400, "Missing parameters");
@@ -54,7 +61,7 @@ function get_content(Application $app, Request $request) {
         $pathInfo["name"]      = $file->getBasename();
         $pathInfo["type"]      = $file->getType();
         $pathInfo["mtime"]     = $file->getMTime();
-        $pathInfo["size"]      = \App\Models\Utils\get_size($file);
+        $pathInfo["size"]      = Utils\get_size($file);
         $pathInfo["access"]    = str_replace('%2F', '/', rawurlencode("{$app['cakebox.access']}/{$dirpath}/{$file->getBasename()}"));
         $pathInfo["extraType"] = "";
 
@@ -90,7 +97,7 @@ function delete(Application $app, Request $request) {
         $app->abort(403, "This user doesn't have the rights to delete this directory");
     }
 
-    $dirpath = $request->get('path');
+    $dirpath = Utils\sanitize_path($request->get('path'));
 
     if (!isset($dirpath)) {
         $app->abort(400, "Missing parameters");
@@ -142,7 +149,7 @@ function archive(Application $app, Request $request) {
         $app->abort(403, "This user doesn't have the rights to archive a directory");
     }
 
-    $dirpath = $request->get('path');
+    $dirpath = Utils\sanitize_path($request->get('path'));
 
     if (!isset($dirpath)) {
         $app->abort(400, "Missing parameters");

@@ -3,8 +3,14 @@
 namespace App\Controllers\Player;
 
 use Silex\Application;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
+/**
+ * Route declaration
+ *
+ * @var Application $app Silex Application
+ */
 $app->get("/api/player",  __NAMESPACE__ . "\\get_infos");
 
 

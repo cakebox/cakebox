@@ -3,8 +3,14 @@
 namespace App\Controllers\Rights;
 
 use Silex\Application;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
+/**
+ * Route declaration
+ *
+ * @var Application $app Silex Application
+ */
 $app->get("/api/rights",  __NAMESPACE__ . "\\get");
 
 

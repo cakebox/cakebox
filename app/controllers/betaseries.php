@@ -3,14 +3,29 @@
 namespace App\Controllers\BetaSeries;
 
 use Silex\Application;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
+/**
+ * Route declaration
+ *
+ * @var Application $app Silex Application
+ */
 $app->get("/api/betaseries/config",          __NAMESPACE__ . "\\get_config");
 $app->get("/api/betaseries/info/{name}",     __NAMESPACE__ . "\\get_infos");
 $app->post("/api/betaseries/watched/{id}",   __NAMESPACE__ . "\\set_watched");
 $app->delete("/api/betaseries/watched/{id}", __NAMESPACE__ . "\\unset_watched");
 
 
+/**
+* Execute routes to Betaseries API and retrieve informations
+*
+* @param String $url Betaseries route
+* @param Array $params Url parameters
+* @param String $method Specify the route method, default GET
+*
+* @return JsonResponse Object containing betaseries informations
+*/
 function fetch($url, $params = [], $method = "GET")
 {
     $query = '';

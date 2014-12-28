@@ -4,9 +4,15 @@ namespace App\Controllers\Files;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 
+/**
+ * Route declaration
+ *
+ * @var Application $app Silex Application
+ */
 $app->get("/api/files",    __NAMESPACE__ . "\\get_infos");
 $app->delete("/api/files", __NAMESPACE__ . "\\delete");
 
@@ -25,7 +31,7 @@ function get_infos(Application $app, Request $request) {
         $app->abort(403, "This user doesn't have the rights to retrieve file informations");
     }
 
-    $filepath = $request->get('path');
+    $filepath = Utils\sanitize_path($request->get('path'));
 
     if (!isset($filepath)) {
         $app->abort(400, "Missing parameters");
@@ -57,7 +63,7 @@ function delete(Application $app, Request $request) {
         $app->abort(403, "This user doesn't have the rights to delete this file");
     }
 
-    $filepath = $request->get('path');
+    $filepath = Utils\sanitize_path($request->get('path'));
 
     if (!isset($filepath)) {
         $app->abort(400, "Missing parameters");
