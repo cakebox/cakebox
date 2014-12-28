@@ -6,6 +6,7 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use App\Models\Utils;
 
 
 /**
@@ -63,7 +64,7 @@ function delete(Application $app, Request $request) {
         $app->abort(403, "This user doesn't have the rights to delete this file");
     }
 
-    $filepath = Utils\sanitize_path($request->get('path'));
+    $filepath = Utils\check_path($request->get('path'));
 
     if (!isset($filepath)) {
         $app->abort(400, "Missing parameters");

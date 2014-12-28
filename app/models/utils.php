@@ -31,13 +31,13 @@ function get_size(SplFileInfo $file) {
 }
 
 /**
- * Sanitize a path to avoid directory traversing
+ * Check if the path contains .. to avoid directory traversing
  *
  * @param string $path
  *
  * @return string
  */
-function sanitize_path($path)
+function check_path($path)
 {
-    return preg_replace("/([\.]{2,})/", '', $path);
+    return (basename($path) != "..") ? $path : "";
 }
