@@ -12,7 +12,7 @@ use Symfony\Component\Finder\SplFileInfo;
  *
  * @return int The calculated size
  */
-function get_size(SplFileInfo $file) {
+function get_size(\SplFileInfo $file) {
 
     $size = 0;
 
