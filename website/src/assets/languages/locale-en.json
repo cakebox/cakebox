@@ -1,0 +1,56 @@
+{
+    "NAVBAR": {
+        "ABOUT": "About",
+        "LOOK_INTO": "Browse",
+        "SEARCH": "Search a file"
+    },
+    "ABOUT_PAGE": {
+        "VERSION": "You use the version <a href='https://github.com/Cakebox/Cakebox-light/releases/tag/v{{ local }}'>{{ local }}</a> of Cakebox-light.",
+        "TITLE2": "Design and development",
+        "MORE": "Cakekox is developed on our free time, feel free to contribute to the project!",
+        "THANKS": "Thanking",
+        "THANKS_FOR": "for counseling, testing, wiki ... their contributions.",
+        "THANKS_CANDLE": "for the background and graphics recommendations."
+    },
+    "BROWSE_PAGE": {
+        "REFRESH": "Reload content",
+        "SORT": "sort:",
+        "NONE": "none",
+        "NAME": "by name",
+        "DATE": "by date",
+        "SIZE": "by size",
+        "STAR": "Recent files",
+        "COPY": "Copy the file link",
+        "ARCHIVE" : "Create an archive of the directory",
+        "DOWNLOAD": "Download file",
+        "DELETE_DIR": "Delete folder",
+        "DELETE_FILE": "Delete file"
+    },
+    "PLAY_PAGE": {
+        "BACK": "Back",
+        "DOWNLOAD": "Download file",
+        "BETASERIE": {
+            "VIEW": "Mark the episode as seen on BetaSeries",
+            "NO_VIEW": "Mark the episode as not seen on BetaSeries",
+            "SCORE": "Recorded {{ (episode.note.mean || movie.notes.mean) | number:1 }} of 5 ({{ episode.note.total || movie.notes.total }} participant)",
+            "RELEASED_ON": "Released on "
+        }
+    },
+    "NOTIFICATIONS": {
+        "ARCHIVE": {
+            "ARCHIVE_N": "The archive ",
+            "IN_CREATION": ".tar is in progress, please wait.",
+            "SUCCESS": ".tar has been created.",
+            "ERROR_RIGHT": "The destination directory does not have the necessary rights.",
+            "ERROR_EXIST": "The archive already exists or the compression process of this directory is already underway."
+        },
+        "LINK_COPY": "The link has been copied",
+        "AVAILABLE": " is available!",
+        "BETASERIES_ERROR": "The BetaSeries access are not properly informed in the configuration file.",
+        "LOAD_FILE": "Loading files, please wait ...",
+        "NOT_FOUND": "Nothing in this directory.",
+        "SURE": "Are you sure you want to remove this element ?",
+        "DELETE_OK": " is deleted.",
+        "DELETE_NOTOK": " does not have the rights to be removed."
+    }
+}
