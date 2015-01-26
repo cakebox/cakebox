@@ -20,9 +20,9 @@ read -p "Appuyez sur une touche pour continuer ou Ctrl-c pour annuler."
 
 read -e -p "Nom du sous-domaine  (cakebox.exemple.com): " SUBDOMAIN
 echo "Quel est le répertoire d'installation de cakebox ? (ex : /home/cakebox ) :"
-read -e -p CAKEBOXREP
+read -e CAKEBOXREP
 echo "Quel est le répertoire de scan de cakebox ? (ex : /home/video ) :" 
-read -e -p VIDEOREP
+read -e VIDEOREP
 
 
 echo "\n\nDeploiement des modules pour apache"
