@@ -32,7 +32,7 @@
         </div>
 
         <div id="download" ng-show="rights.canDownloadFile">
-            <a ng-href="{{ fileinfo.access }}" translate><span class="glyphicon glyphicon-download"></span> PLAY_PAGE.DOWNLOAD </a> <small>({{ fileinfo.size | bytes }})</small>
+            <a ng-href="{{ fileinfo.access }}" download="{{ fileinfo.name }}" translate><span class="glyphicon glyphicon-download"></span> PLAY_PAGE.DOWNLOAD </a> <small>({{ fileinfo.size | bytes }})</small>
         </div>
 
     </div>
