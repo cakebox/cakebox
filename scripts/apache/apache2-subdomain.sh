@@ -9,8 +9,7 @@
 # Version: Light
 # Author: 
 #       @Tuxity
-#       @martialdidit
-#
+#       @mpgn
 # Script de création d'un sous domaine pour cakebox-light ex : cakebox.domain.com
 # 
 

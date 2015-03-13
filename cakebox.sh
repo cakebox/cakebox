@@ -9,7 +9,7 @@
 # Version: Light
 # Author:
 #       @Tuxity
-#       @martialdidit
+#       @mpgn
 #
 
 function usage {
