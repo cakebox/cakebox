@@ -39,7 +39,7 @@ function install-prereq {
     else
         add-apt-repository ppa:ondrej/php5
         apt-get update
-        apt-get install php5 php5-curl git build-essential
+        apt-get install php5 php5-curl curl git build-essential
     fi
 
     echo "Installation/Mise à jour de Composer ..."
