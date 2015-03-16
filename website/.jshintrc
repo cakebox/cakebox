@@ -1,6 +1,5 @@
 {
-  "node": true,
-  "esnext": true,
+  "globalstrict": true,
   "bitwise": true,
   "camelcase": true,
   "curly": true,
@@ -23,6 +22,7 @@
     "angular": false,
     // Angular Mocks
     "inject": false,
+    "module": false,
     // JASMINE
     "describe": false,
     "it": false,
