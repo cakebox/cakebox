@@ -1,6 +1,6 @@
 {
   "name": "Cakebox-light",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "dependencies": {
     "bootstrap": "~3.2.0",
     "angular": "~1.2.19",
