@@ -25,5 +25,6 @@ angular.module('cakebox')
         }
     };
 
-    return Betaseries = $resource('api/betaseries/info/:filename', null, actions);
+    Betaseries = $resource('api/betaseries/info/:filename', null, actions);
+    return Betaseries;
 });

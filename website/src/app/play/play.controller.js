@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cakebox')
-.controller('PlayCtrl', function ($scope) {
+.controller('PlayCtrl', function ($scope, $routeParams, $translate, File, Player, Betaseries) {
 
     $translate(['NOTIFICATIONS.BETASERIES_ERROR']).then(function (translations) {
         $scope.betaseries_error = translations['NOTIFICATIONS.BETASERIES_ERROR'];
@@ -23,15 +23,15 @@ angular.module('cakebox')
         if ($scope.bsConfig.apikey && $scope.bsConfig.login && $scope.bsConfig.passwd) {
             $scope.betaseries = Betaseries.setWatched({'id': id});
         } else {
-            alertify.log($scope.betaseries_error, "error", 6000);
+            alertify.log($scope.betaseries_error, 'error', 6000);
         }
-    }
+    };
 
     $scope.unwatched = function (event, id) {
         if ($scope.bsConfig.apikey && $scope.bsConfig.login && $scope.bsConfig.passwd) {
             $scope.betaseries = Betaseries.setUnwatched({'id': id});
         } else {
-            alertify.log($scope.betaseries_error, "error", 6000);
+            alertify.log($scope.betaseries_error, 'error', 6000);
         }
-    }
+    };
 });

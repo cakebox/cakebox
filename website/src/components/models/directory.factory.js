@@ -17,5 +17,6 @@ angular.module('cakebox')
         }
     };
 
-    return Directory = $resource('api/directories', null, actions);
+    Directory = $resource('api/directories', null, actions);
+    return Directory;
 });

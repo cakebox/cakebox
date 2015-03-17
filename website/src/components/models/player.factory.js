@@ -4,5 +4,6 @@ angular.module('cakebox')
 .factory('Player', function ($resource) {
     var Player;
 
-    return Player = $resource('api/player', null, null);
+    Player = $resource('api/player', null, null);
+    return Player;
 });

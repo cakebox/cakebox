@@ -5,10 +5,11 @@ angular.module('cakebox')
     var breadcrumbs = [];
     var breadcrumbsService = {};
 
-    var loadBreadcrumbs = function(event, current) {
+    var loadBreadcrumbs = function() {
 
-        if (angular.isUndefined($routeParams.path))
+        if (angular.isUndefined($routeParams.path)) {
             $routeParams.path = '';
+        }
 
         var path = '/' + $routeParams.path;
         var pathElements = path.split('/'), result = [], i;

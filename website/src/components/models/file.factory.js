@@ -12,5 +12,6 @@ angular.module('cakebox')
         }
     };
 
-    return File = $resource('api/files', null, actions);
+    File = $resource('api/files', null, actions);
+    return File;
 });

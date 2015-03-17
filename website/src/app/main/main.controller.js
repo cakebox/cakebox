@@ -5,11 +5,11 @@ angular.module('cakebox')
 
     $scope.search =
     {
-        text: ""
+        text: ''
     };
     $scope.sortOptions =
     {
-        sortBy: "",
+        sortBy: '',
         reverse: false
     };
 
@@ -18,8 +18,8 @@ angular.module('cakebox')
     $scope.app = App.get(null, function(data) {
         $translate.use(data.language);
 
-        if (data.version.local != data.version.remote) {
-            alertify.log("Cakebox-light " + data.version.remote + $translate.instant('NOTIFICATIONS.AVAILABLE'), "success", 10000);
+        if (data.version.local !== data.version.remote) {
+            alertify.log('Cakebox-light ' + data.version.remote + $translate.instant('NOTIFICATIONS.AVAILABLE'), 'success', 10000);
         }
     });
 
@@ -28,11 +28,11 @@ angular.module('cakebox')
     });
 
     $scope.copyText = function(data) {
-        return $location.protocol() + "://" + $location.host() + data.access;
-    }
+        return $location.protocol() + '://' + $location.host() + data.access;
+    };
 
     $scope.copyfileinfo = function() {
-        alertify.log($translate.instant('NOTIFICATIONS.LINK_COPY') , "success", 10000);
-    }
+        alertify.log($translate.instant('NOTIFICATIONS.LINK_COPY') , 'success', 10000);
+    };
 
 });
