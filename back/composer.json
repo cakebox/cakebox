@@ -1,0 +1,14 @@
+{
+  "name": "cakebox",
+  "type": "project",
+  "description": "",
+  "require": {
+    "php": ">=5.4.0",
+
+    "silex/silex": "~1.3",
+    "symfony/finder": "~2.7"
+  },
+  "autoload": {
+    "psr-0": {"Cakebox": "src/"}
+  }
+}
