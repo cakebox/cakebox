@@ -1,13 +1,10 @@
 <?php
 
-namespace Sheaker\Service;
+namespace Cakebox\Service;
 
 use Silex\Application;
 use Symfony\Component\Finder\SplFileInfo;
 
-/**
- * Provides a way to handle Sheaker Client
- */
 class MainService
 {
     /**

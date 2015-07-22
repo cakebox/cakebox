@@ -35,7 +35,7 @@ if (substr($app['cakebox.access'], -1) == '/')
  * Register our custom services
  */
 $app['service.main'] = $app->share(function ($app) {
-    return new Sheaker\Service\MainService($app);
+    return new Cakebox\Service\MainService($app);
 });
 
 /**
