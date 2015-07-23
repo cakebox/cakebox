@@ -4,8 +4,8 @@
     angular.module('cakebox')
     .filter('bytes', function() {
         return function(bytes, precision) {
-            var units = ['o', 'ko', 'Mo', 'Go', 'To', 'Po'],
-                number = 0;
+            var units = ['bytes', 'kb', 'Mb', 'Gb', 'Tb', 'Pb'],
+                pow = 0;
 
             if (bytes === 0 || isNaN(parseFloat(bytes)) || !isFinite(bytes)) {
                 return '0 ' + units[0];
@@ -15,8 +15,13 @@
                 precision = 1;
             }
 
-            number = Math.floor(Math.log(bytes) / Math.log(1024));
-            return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) + ' ' + units[number];
+            pow = Math.floor(Math.log(bytes) / Math.log(1024));
+
+            if (pow === 0) {
+                precision = 0;
+            }
+
+            return (bytes / Math.pow(1024, Math.floor(pow))).toFixed(precision) + ' ' + units[pow];
         };
     });
 
