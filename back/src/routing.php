@@ -3,9 +3,7 @@
 /**
  * App routes
  */
-$app->get('/api/app',        'Cakebox\Controller\MainController::get');
-$app->get('/api/app/player', 'Cakebox\Controller\MainController::get_infos');
-$app->get('/api/app/rights', 'Cakebox\Controller\MainController::get');
+$app->get('/api/app', 'Cakebox\Controller\MainController::getAppInfos');
 
 /**
  * Directories routes
