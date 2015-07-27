@@ -1,0 +1,56 @@
+{
+    "NAVBAR": {
+        "ABOUT": "Informazioni",
+        "LOOK_INTO": "Sfoglia",
+        "SEARCH": "Cerca un file"
+    },
+    "ABOUT_PAGE": {
+        "VERSION": "Stai usando la versione <a href='https://github.com/Cakebox/Cakebox-light/releases/tag/v{{ local }}'>{{ local }}</a> di Cakebox-light.",
+        "TITLE2": "Concetto e sviluppo",
+        "MORE": "Cakebox è sviluppato nel nostro tempo libero, sentiti libero di partecipare al progetto!",
+        "THANKS": "Ringraziamenti",
+        "THANKS_FOR": "per consigli, test, wiki... le loro contribuzioni",
+        "THANKS_CANDLE": "per sfondo e consigli grafici."
+    },
+    "BROWSE_PAGE": {
+        "REFRESH": "Ricarica contenuto",
+        "SORT": "Ordina per:",
+        "NONE": "niente",
+        "NAME": "nome",
+        "DATE": "data",
+        "SIZE": "dimensione",
+        "STAR": "File recente",
+        "COPY": "Copia il link del file",
+        "ARCHIVE" : "Crea un archivio della cartella",
+        "DOWNLOAD": "Scarica file",
+        "DELETE_DIR": "Elimina cartella",
+        "DELETE_FILE": "Elimina file"
+    },
+    "PLAY_PAGE": {
+        "BACK": "Indietro",
+        "DOWNLOAD": "Scarica il file",
+        "BETASERIE": {
+            "VIEW": "Segna l'episodio come visto su BetaSeries",
+            "NO_VIEW": "Segna l'episodio come non visto su BetaSeries",
+            "SCORE": "Voto {{ (episode.note.mean || movie.notes.mean) | number:1 }} su 5 ({{ episode.note.total || movie.notes.total }} partecipanti)",
+            "RELEASED_ON": "Rilasciato il "
+        }
+    },
+    "NOTIFICATIONS": {
+        "ARCHIVE": {
+            "ARCHIVE_N": "L'archivio ",
+            "IN_CREATION": ".tar è in creazione, attendere prego.",
+            "SUCCESS": ".tar è stato creato.",
+            "ERROR_RIGHT": "La cartella di destinazione non ha i diritti necessari.",
+            "ERROR_EXIST": "L'archivio esiste già o il processo di compressione di questa cartella è già stato avviato."
+        },
+        "LINK_COPY": "Il link è stato copiato",
+        "AVAILABLE": " è disponibile!",
+        "BETASERIES_ERROR": "Le informazioni di accesso di BetaSeries non sono state configurate correttamente nel file di configurazione",
+        "LOAD_FILE": "Caricamento files, attendere prego ...",
+        "NOT_FOUND": "La cartella è vuota.",
+        "SURE": "Sei sicuro di voler eliminare questo elemento?",
+        "DELETE_OK": " è stato eliminato.",
+        "DELETE_NOTOK": " non può essere eliminato. Diritti non sufficienti."
+    }
+}
