@@ -5,25 +5,8 @@
     <div class="view">
         <div id="header-player">
             <div class="row">
-                <div class="col-sm-4">
-                    <a ng-href="{{ previouspage }}" translate>PLAY_PAGE.BACK</a>
-                </div>
-                <div class="col-sm-4 text-center">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <a ng-href="{{ prevplay }}" ng-show="prevplay" translate>PLAY_PAGE.PREV</a>
-                        </div>
-                        <div class="col-sm-6">
-                            <a ng-href="{{ nextplay }}" ng-show="nextplay" translate>PLAY_PAGE.NEXT</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <form class="form-inline pull-right">
-                        <span class="btn btn-default"><i title="{{ 'BROWSE_PAGE.COPY' | translate }}" class="glyphicon glyphicon-link" clip-copy="copyText(fileinfo)" clip-click="copyfileinfo()"></i></span>
-                        <select class="form-control" ng-model="player.default_type" ng-options="player.name for (key, player) in player.available_types"></select>
-                    </form>
-                </div>
+                <a ng-href="{{ previouspage }}" translate>PLAY_PAGE.BACK</a>
+                <select class="form-control pull-right" ng-model="player.default_type" ng-options="player.name for (key, player) in player.available_types"></select><button type="button" class="btn btn-default pull-right"><i title="{{ 'BROWSE_PAGE.COPY' | translate }}" class="glyphicon glyphicon-link" clip-copy="copyText(fileinfo)" clip-click="copyfileinfo()"></i></button>
             </div>
         </div>
 
@@ -51,6 +34,15 @@
 
             <div id="download" ng-show="rights.canDownloadFile">
                 <a ng-href="{{ fileinfo.access }}" translate><span class="glyphicon glyphicon-download"></span> PLAY_PAGE.DOWNLOAD </a> <small>({{ fileinfo.size | bytes }})</small>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <a ng-href="{{ prevplay }}" ng-show="prevplay" translate>PLAY_PAGE.PREV</a>
+                </div>
+                <div class="col-sm-6">
+                    <a ng-href="{{ nextplay }}" ng-show="nextplay" translate>PLAY_PAGE.NEXT</a>
+                </div>
             </div>
         </div>
     </div>
