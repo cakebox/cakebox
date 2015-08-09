@@ -28,6 +28,8 @@
     },
     "PLAY_PAGE": {
         "BACK": "Retour",
+        "PREV": "Vidéo prédédente",
+        "NEXT": "Vidéo suivante",
         "DOWNLOAD": "Télécharger le fichier",
         "BETASERIE": {
             "VIEW": "Marquer l'épisode comme vu sur BetaSeries",

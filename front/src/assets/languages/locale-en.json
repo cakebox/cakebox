@@ -28,6 +28,8 @@
     },
     "PLAY_PAGE": {
         "BACK": "Back",
+        "PREV": "Previous video",
+        "NEXT": "Next video",
         "DOWNLOAD": "Download file",
         "BETASERIE": {
             "VIEW": "Mark the episode as seen on BetaSeries",
