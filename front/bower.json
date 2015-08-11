@@ -2,6 +2,7 @@
   "name": "cakebox",
   "version": "2.0.0",
   "dependencies": {
+    "alertify": "~0.3.10",
     "angular-resource": "~1.4.0",
     "angular-route": "~1.4.0",
     "bootstrap": "~3.3.4",
