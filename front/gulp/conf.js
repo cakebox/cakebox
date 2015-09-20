@@ -39,3 +39,7 @@ exports.errorHandler = function(title) {
     this.emit('end');
   };
 };
+
+exports.options = {
+  mode: 'production'
+}

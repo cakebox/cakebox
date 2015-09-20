@@ -4,3 +4,4 @@ bower_components/
 .idea/
 .tmp/
 dist/
+src/app/index.constants-env.js

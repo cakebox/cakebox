@@ -1,0 +1,10 @@
+{
+  "production": {
+    "FRONTEND_URL": "//cakebox.com",
+    "BACKEND_URL": "//api.cakebox.com"
+  },
+  "developement": {
+    "FRONTEND_URL": "//cakebox.io",
+    "BACKEND_URL": "//api.cakebox.io"
+  }
+}

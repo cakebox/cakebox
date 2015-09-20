@@ -38,7 +38,9 @@ function browserSyncInit(baseDir, browser) {
   browserSync.instance = browserSync.init({
     startPath: '/',
     server: server,
-    browser: browser
+    browser: browser,
+    host: 'cakebox.io',
+    open: 'external'
   });
 }
 
@@ -46,7 +48,11 @@ browserSync.use(browserSyncSpa({
   selector: '[ng-app]'// Only needed for angular apps
 }));
 
-gulp.task('serve', ['watch'], function () {
+gulp.task('serve-config', function () {
+  conf.options.mode = 'developement';
+});
+
+gulp.task('serve', ['serve-config', 'watch'], function () {
   browserSyncInit([path.join(conf.paths.tmp, '/serve'), conf.paths.src]);
 });
 
