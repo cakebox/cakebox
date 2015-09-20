@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module('cakebox')
-    .factory('Rights', function ($resource) {
+    .factory('Rights', function ($resource, BACKEND_URL) {
         var Rights;
 
-        Rights = $resource('api/rights', null, null);
+        Rights = $resource(BACKEND_URL + '/rights', null, null);
         return Rights;
     });
 

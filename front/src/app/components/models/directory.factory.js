@@ -2,23 +2,23 @@
     'use strict';
 
     angular.module('cakebox')
-    .factory('Directory', function ($resource) {
+    .factory('Directory', function ($resource, BACKEND_URL) {
         var Directory, actions;
 
         actions = {
             archive: {
                 method: 'GET',
-                url: 'api/directories/archive',
+                url: BACKEND_URL + '/directories/archive',
                 isArray: true
             },
             delete: {
                 method: 'DELETE',
-                url: 'api/directories',
+                url: BACKEND_URL + '/directories',
                 isArray: true
             }
         };
 
-        Directory = $resource('api/directories', null, actions);
+        Directory = $resource(BACKEND_URL + '/directories', null, actions);
         return Directory;
     });
 
