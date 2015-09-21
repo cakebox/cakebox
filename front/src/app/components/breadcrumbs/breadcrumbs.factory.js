@@ -1,8 +1,11 @@
 (function() {
     'use strict';
 
-    angular.module('cakebox')
-    .factory('breadcrumbs', function($rootScope, $location, $routeParams) {
+    angular
+        .module('cakebox')
+        .factory('breadcrumbs', breadcrumbs);
+
+    function breadcrumbs($rootScope, $location, $routeParams) {
         var breadcrumbs = [];
         var breadcrumbsService = {};
 
@@ -41,6 +44,6 @@
         };
 
         return breadcrumbsService;
-    });
+    }
 
 })();

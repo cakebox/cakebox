@@ -1,8 +1,11 @@
 (function() {
     'use strict';
 
-    angular.module('cakebox')
-    .factory('Directory', function ($resource, BACKEND_URL) {
+    angular
+        .module('cakebox')
+        .factory('Directory', Directory);
+
+    function Directory($resource, BACKEND_URL) {
         var Directory, actions;
 
         actions = {
@@ -20,6 +23,6 @@
 
         Directory = $resource(BACKEND_URL + '/directories', null, actions);
         return Directory;
-    });
+    }
 
 })();

@@ -1,8 +1,11 @@
 (function() {
     'use strict';
 
-    angular.module('cakebox')
-    .factory('File', function ($resource, BACKEND_URL) {
+    angular
+        .module('cakebox')
+        .factory('File', File);
+
+    function File($resource, BACKEND_URL) {
         var File, actions;
 
         actions = {
@@ -15,6 +18,6 @@
 
         File = $resource(BACKEND_URL + '/files', null, actions);
         return File;
-    });
+    }
 
 })();

@@ -1,8 +1,11 @@
 (function() {
     'use strict';
 
-    angular.module('cakebox')
-    .filter('bytes', function() {
+    angular
+        .module('cakebox')
+        .filter('bytes', bytes);
+
+    function bytes() {
         return function(bytes, precision) {
             var units = ['bytes', 'kb', 'Mb', 'Gb', 'Tb', 'Pb'],
                 pow = 0;
@@ -23,6 +26,6 @@
 
             return (bytes / Math.pow(1024, Math.floor(pow))).toFixed(precision) + ' ' + units[pow];
         };
-    });
+    }
 
 })();

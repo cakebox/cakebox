@@ -1,9 +1,11 @@
 (function() {
     'use strict';
 
-    angular.module('cakebox')
-    .controller('NavbarCtrl', function ($scope, $location) {
+    angular
+        .module('cakebox')
+        .controller('NavbarCtrl', NavbarCtrl);
 
+    function NavbarCtrl($scope, $location) {
         $scope.currentPage = '';
 
         $scope.isActive = function(path) {
@@ -16,6 +18,6 @@
         $scope.$on('$routeChangeSuccess', function() {
             $scope.currentPage = $location.path().slice(1).split('/')[0];
         });
-    });
+    }
 
 })();

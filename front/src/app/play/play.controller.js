@@ -1,47 +1,48 @@
 (function() {
     'use strict';
 
-    angular.module('cakebox')
-        .controller('PlayCtrl', function ($scope, $routeParams, $translate, File, Player, Betaseries, App) {
+    angular
+        .module('cakebox')
+        .controller('PlayCtrl', PlayCtrl);
 
-            $translate(['NOTIFICATIONS.BETASERIES_ERROR']).then(function (translations) {
-                $scope.betaseries_error = translations['NOTIFICATIONS.BETASERIES_ERROR'];
-            });
+    /** ngInject */
+    function PlayCtrl($scope, $routeParams, $translate, File, Player, Betaseries) {
 
-            $scope.app = App.get(null, function(data) {
-                $scope.player = data.player;
-            });
+        $translate(['NOTIFICATIONS.BETASERIES_ERROR']).then(function (translations) {
+            $scope.betaseries_error = translations['NOTIFICATIONS.BETASERIES_ERROR'];
+        });
 
-            $scope.bsConfig = Betaseries.getConfig();
+        // $scope.player = Player.get(null, function(data) {
+        //     data.default_type = data.available_types[data.default_type];
+        // });
 
-            $scope.fileinfo = File.get({'path': $routeParams.path}, function(data) {
+        $scope.bsConfig = Betaseries.getConfig();
+
+         File
+            .get({'path': $routeParams.path}).$promise
+            .then(function(data) {
+                $scope.fileinfo = data;
+
                 if ($scope.bsConfig.apikey) {
                     $scope.betaseries = Betaseries.get({'filename': data.name});
                 }
-
-                if (data.previousFile) {
-                    $scope.prevplay = '#/play' + data.previousFile;
-                }
-                if (data.nextFile) {
-                    $scope.nextplay = '#/play' + data.nextFile;
-                }
             });
 
-            $scope.watched = function (event, id) {
-                if ($scope.bsConfig.apikey && $scope.bsConfig.login && $scope.bsConfig.passwd) {
-                    $scope.betaseries = Betaseries.setWatched({'id': id});
-                } else {
-                    alertify.log($scope.betaseries_error, 'error', 6000);
-                }
-            };
+        $scope.watched = function (event, id) {
+            if ($scope.bsConfig.apikey && $scope.bsConfig.login && $scope.bsConfig.passwd) {
+                $scope.betaseries = Betaseries.setWatched({'id': id});
+            } else {
+                alertify.log($scope.betaseries_error, 'error', 6000);
+            }
+        };
 
-            $scope.unwatched = function (event, id) {
-                if ($scope.bsConfig.apikey && $scope.bsConfig.login && $scope.bsConfig.passwd) {
-                    $scope.betaseries = Betaseries.setUnwatched({'id': id});
-                } else {
-                    alertify.log($scope.betaseries_error, 'error', 6000);
-                }
-            };
-        });
+        $scope.unwatched = function (event, id) {
+            if ($scope.bsConfig.apikey && $scope.bsConfig.login && $scope.bsConfig.passwd) {
+                $scope.betaseries = Betaseries.setUnwatched({'id': id});
+            } else {
+                alertify.log($scope.betaseries_error, 'error', 6000);
+            }
+        };
+    }
 
 })();

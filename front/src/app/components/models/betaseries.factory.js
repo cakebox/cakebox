@@ -1,8 +1,11 @@
 (function() {
     'use strict';
 
-    angular.module('cakebox')
-    .factory('Betaseries', function ($resource, BACKEND_URL) {
+    angular
+        .module('cakebox')
+        .factory('Betaseries', Betaseries);
+
+    function Betaseries($resource, BACKEND_URL) {
         var Betaseries, actions;
 
         actions = {
@@ -28,6 +31,6 @@
 
         Betaseries = $resource(BACKEND_URL + '/betaseries/info/:filename', null, actions);
         return Betaseries;
-    });
+    }
 
 })();
