@@ -1,0 +1,52 @@
+.searchbox input {
+    background-color: rgba(255, 255, 255, 0.62);
+}
+
+.close-search {
+    margin-right: 20px;
+    outline: none;
+}
+
+table {
+    table-layout: fixed;
+}
+
+.table th, .table td {
+    border-top: none !important;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: rgba(249, 249, 249, 0.5);
+}
+
+td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.entry-type {
+    width: 30px;
+    color: #428bca;
+}
+
+.entry-download {
+    width: 30px;
+}
+
+.entry-delete {
+    width: 30px;
+}
+
+.entry-copy {
+    width: 30px;
+}
+
+.entry-copy > i {
+    color: #428bca;
+}
+
+.entry-size {
+    width: 90px;
+}

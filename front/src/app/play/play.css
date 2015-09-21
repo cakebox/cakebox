@@ -1,0 +1,62 @@
+.video-header {
+    color: #777;
+    font-size: 150%;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.betaseries #seen {
+    text-align: right;
+}
+
+.betaseries #informations {
+    color: #777;
+    text-align: left;
+    margin-top: 10px;
+}
+
+#show, #hide {
+    cursor: pointer;
+}
+
+.player #download {
+    font-size: 130%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.video-container {
+    width: 100%; height: 0;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+    position: relative;
+}
+
+#vlc, #divx, #html5 {
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    position: absolute;
+}
+
+#header-player {
+    margin-bottom: 15px;
+}
+
+#header-player > .row > select.form-control {
+    width: 16%;
+}
+
+@media screen and (min-width:992px) {
+
+    .player-container {
+        margin: auto;
+        width: 70%;
+    }
+
+}
