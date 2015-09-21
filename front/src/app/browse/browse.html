@@ -1,27 +1,30 @@
-<div class="container">
+<div ng-include="'app/components/navbar/navbar.html'"></div>
 
-    <div ng-include="'app/components/navbar/navbar.html'"></div>
+<div class="container view">
+        <div class="navigation">
+            <a class="btn pull-left" ng-click="refreshDatas($event)" title="{{ 'BROWSE_PAGE.REFRESH' | translate }}">
+                <span class="fa fa-refresh"></span>
+            </a>
 
-    <div class="view">
-        <ol class="breadcrumb">
-            <li ng-repeat="breadcrumb in breadcrumbs.getAll()" ng-class="{active:$last}">
-                <a ng-if="$first" href="#/" ng-class="{'glyphicon glyphicon-home':$first}"></a>
-                <a ng-if="$middle" ng-href="#/browse{{ breadcrumb.path }}">{{ breadcrumb.name }}</a>
-                <span ng-if="$last">{{ breadcrumb.name }}</span>
-            </li>
-            <a ng-click="refreshDatas($event)" title="{{ 'BROWSE_PAGE.REFRESH' | translate }}" class="glyphicon glyphicon-refresh pull-right"></a>
-        </ol>
+            <div ng-show="entries.length" class="pull-right">
+                {{ 'BROWSE_PAGE.SORT' | translate }}
+                <a href="" ng-click="sortOptions.sortBy = ''" translate>BROWSE_PAGE.NONE</a>,
+                <a href="" ng-click="sortOptions.sortBy = 'name'; sortOptions.reverse=!sortOptions.reverse" translate>BROWSE_PAGE.NAME</a>,
+                <a href="" ng-click="sortOptions.sortBy = 'mtime'; sortOptions.reverse=!sortOptions.reverse" translate>BROWSE_PAGE.DATE</a>,
+                <a href="" ng-click="sortOptions.sortBy = 'size'; sortOptions.reverse=!sortOptions.reverse" translate>BROWSE_PAGE.SIZE</a>
+            </div>
+
+            <ol class="breadcrumb">
+                <li ng-repeat="breadcrumb in breadcrumbs.getAll()" ng-class="{active: $last}">
+                    <a ng-if="$first" href="#/"><span class="fa fa-home"></span></a>
+                    <a ng-if="$middle" ng-href="#/browse{{ breadcrumb.path }}">{{ breadcrumb.name }}</a>
+                    <span ng-if="$last">{{ breadcrumb.name }}</span>
+                </li>
+            </ol>
+        </div>
 
         <div ng-show="informations" class="informations">
             {{ informations }}
-        </div>
-
-        <div ng-show="entries.length" class="sortInfo pull-right">
-            {{ 'BROWSE_PAGE.SORT' | translate }}
-            <a href="" ng-click="sortOptions.sortBy = ''" translate>BROWSE_PAGE.NONE</a>,
-            <a href="" ng-click="sortOptions.sortBy = 'name'; sortOptions.reverse=!sortOptions.reverse" translate>BROWSE_PAGE.NAME</a>,
-            <a href="" ng-click="sortOptions.sortBy = 'mtime'; sortOptions.reverse=!sortOptions.reverse" translate>BROWSE_PAGE.DATE</a>,
-            <a href="" ng-click="sortOptions.sortBy = 'size'; sortOptions.reverse=!sortOptions.reverse" translate>BROWSE_PAGE.SIZE</a>
         </div>
 
         <table class="table table-condensed table-striped">
@@ -53,6 +56,6 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-
 </div>
+
+<div ng-include="'app/components/footer/footer.html'"></div>
