@@ -6,10 +6,10 @@
         .factory('App', App);
 
     function App($resource, BACKEND_URL) {
-        var App;
+        var resource;
 
-        App = $resource(BACKEND_URL + '/app', null, null);
-        return App;
+        resource = $resource(BACKEND_URL + '/app', null, null);
+        return resource;
     }
 
 })();

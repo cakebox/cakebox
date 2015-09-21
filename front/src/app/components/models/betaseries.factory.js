@@ -6,7 +6,7 @@
         .factory('Betaseries', Betaseries);
 
     function Betaseries($resource, BACKEND_URL) {
-        var Betaseries, actions;
+        var resource, actions;
 
         actions = {
             getConfig: {
@@ -29,8 +29,8 @@
             }
         };
 
-        Betaseries = $resource(BACKEND_URL + '/betaseries/info/:filename', null, actions);
-        return Betaseries;
+        resource = $resource(BACKEND_URL + '/betaseries/info/:filename', null, actions);
+        return resource;
     }
 
 })();

@@ -3,9 +3,9 @@
 
     angular
         .module('cakebox')
-        .factory('breadcrumbs', breadcrumbs);
+        .factory('breadcrumbs', breadcrumbsFactory);
 
-    function breadcrumbs($rootScope, $location, $routeParams) {
+    function breadcrumbsFactory($rootScope, $location, $routeParams) {
         var breadcrumbs = [];
         var breadcrumbsService = {};
 
