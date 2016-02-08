@@ -21,7 +21,7 @@
             })
             .when('/play/:path*', {
                 templateUrl: 'app/play/play.html',
-                controller:  'MediaCtrl'
+                controller:  'PlayCtrl'
             })
             .when('/about', {
                 templateUrl: 'app/about/about.html'

@@ -28,7 +28,7 @@
 
             var action = function(data) {
                 if (data.url) {
-                    scope.url = $location.protocol() + '://' + $location.host() +  data.url;
+                    scope.url = $location.protocol() + "://" + $location.host() + ":" + $location.port + data.url;
 
                     var $_clone = element.clone(),
                         content = '';

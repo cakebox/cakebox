@@ -25,7 +25,7 @@
                     }
                 })
                 .catch(function(error) {
-                    $scope.informations = 'Error ' + error.status + ' (' + error.statusText + '): ' + error.config.method + ' ' + error.config.url;
+                    $scope.informations = 'Error ' + error.status + ' (' + error.statusText + '): ';
                 });
         }
 

@@ -5,7 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use Silex\Application;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'production');
+define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'dev');
 
 $app = new Application();
 if (APPLICATION_ENV != 'production') {

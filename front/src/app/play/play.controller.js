@@ -6,15 +6,17 @@
         .controller('PlayCtrl', PlayCtrl);
 
     /** ngInject */
-    function PlayCtrl($scope, $routeParams, $translate, File, Player, Betaseries) {
+    function PlayCtrl($scope, $routeParams, $translate, File, App, Betaseries) {
 
         $translate(['NOTIFICATIONS.BETASERIES_ERROR']).then(function (translations) {
             $scope.betaseries_error = translations['NOTIFICATIONS.BETASERIES_ERROR'];
         });
 
-        // $scope.player = Player.get(null, function(data) {
-        //     data.default_type = data.available_types[data.default_type];
-        // });
+        App.get(null, function(data) {
+            $scope.player = data.player;
+            $scope.player.default_type = data.player.available_types[data.player.default_type];
+            //data.default_type = data.player.available_types[data.player.default_type];
+        });
 
         $scope.bsConfig = Betaseries.getConfig();
 
