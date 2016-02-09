@@ -11,18 +11,18 @@
         actions = {
             getConfig: {
                 method: 'GET',
-                url: BACKEND_URL + '/betaseries/config'
+                url:    BACKEND_URL + '/betaseries/config'
             },
             setWatched: {
                 method: 'POST',
-                url: BACKEND_URL + '/betaseries/watched/:id',
+                url:    BACKEND_URL + '/betaseries/watched/:id',
                 params: {
                     id: '@id',
                 }
             },
             setUnwatched: {
                 method: 'DELETE',
-                url: BACKEND_URL + '/betaseries/watched/:id',
+                url:    BACKEND_URL + '/betaseries/watched/:id',
                 params: {
                     id: '@id',
                 }

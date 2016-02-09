@@ -15,8 +15,9 @@ $app->get('/directories/archive', 'Cakebox\Controller\DirectoryController::archi
 /**
  * Files routes
  */
-$app->get('/files',    'Cakebox\Controller\FileController::get');
-$app->delete('/files', 'Cakebox\Controller\FileController::delete');
+$app->get('/files',          'Cakebox\Controller\FileController::get');
+$app->delete('/files',       'Cakebox\Controller\FileController::delete');
+$app->get('/files/download', 'Cakebox\Controller\FileController::download');
 
 /**
  * Betaseries routes

@@ -6,7 +6,7 @@
         .controller('BrowseCtrl', BrowseCtrl);
 
     /** ngInject */
-    function BrowseCtrl($rootScope, $window, $location, $routeParams, $scope, $translate, breadcrumbs, Directory, File) {
+    function BrowseCtrl($rootScope, $window, $location, $routeParams, $scope, $translate, breadcrumbs, Directory, File, BACKEND_URL) {
 
         $scope.currentPath = '';
         $scope.breadcrumbs = breadcrumbs;
@@ -166,12 +166,16 @@
             return false;
         };
 
-        $scope.copyText = function(data) {
-            return $location.protocol() + '://' + $location.host() + data.access;
+        $scope.copyText = function(entry) {
+            return $location.protocol() + '://' + $location.host() + ($location.port() !== 80 ? ':' + $location.port() : '') + '/#/play/' + $scope.currentPath + '/' + entry.name;
         };
 
         $scope.copyfileinfo = function() {
             alertify.log($translate.instant('NOTIFICATIONS.LINK_COPY') , 'success', 10000);
+        };
+
+        $scope.getDownloadLink = function(entry) {
+            return BACKEND_URL + '/files/download?path=' + $scope.currentPath + '/' + entry.name;
         };
     }
 

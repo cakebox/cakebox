@@ -10,8 +10,8 @@
 
         actions = {
             delete: {
-                method: 'DELETE',
-                url: BACKEND_URL + '/files',
+                method:  'DELETE',
+                url:     BACKEND_URL + '/files',
                 isArray: true
             }
         };

@@ -52,7 +52,6 @@ class DirectoryController
             $pathInfo["type"]      = $file->getType();
             $pathInfo["mtime"]     = $file->getMTime();
             $pathInfo["size"]      = $app['service.main']->getSize($file);
-            $pathInfo["access"]    = str_replace('%2F', '/', rawurlencode("{$app['cakebox.access']}/{$dirpath}/{$file->getBasename()}"));
             $pathInfo["extraType"] = "";
 
             $ext = strtolower($file->getExtension());

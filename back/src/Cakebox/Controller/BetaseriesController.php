@@ -8,46 +8,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class BetaseriesController
 {
     /**
-    * Execute routes to Betaseries API and retrieve informations
-    *
-    * @param String $url Betaseries route
-    * @param Array $params Url parameters
-    * @param String $method Specify the route method, default GET
-    *
-    * @return JsonResponse Object containing betaseries informations
-    */
-    function fetch($url, $params = [], $method = "GET")
-    {
-        $query = '';
-        if ($method == "GET" || $method != "POST") {
-            $query = '?' . http_build_query($params);
-        }
-        $url = "https://api.betaseries.com{$url}{$query}";
-
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_HEADER, 1);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        if ($method == "POST") {
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-        }
-
-        if ($method != "GET" && $method != "POST") {
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
-        }
-
-        $response = curl_exec($ch);
-
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
-        $data = substr($response, $headerSize);
-        curl_close($ch);
-
-        return json_decode($data);
-    }
-
-    /**
      * Get betaseries configuration
      *
      * @param Application $app Silex Application
@@ -88,7 +48,7 @@ class BetaseriesController
                 "password" => md5($app["bs.passwd"])
             ]);
 
-            $auth = fetch("/members/auth", $auth_params, "POST");
+            $auth = $this->fetch("/members/auth", $auth_params, "POST");
             if (!empty($auth->errors)) {
                 $app->abort(401, "BetaSeries: " . $auth->errors[0]->text);
             }
@@ -121,7 +81,7 @@ class BetaseriesController
             $app->abort(403, "This user doesn't have the rights to set an episode as watched");
         }
 
-        $auth = fetch("/members/auth", [
+        $auth = $this->fetch("/members/auth", [
             "key"      => $app["bs.apikey"],
             "login"    => $app["bs.login"],
             "password" => md5($app["bs.passwd"])
@@ -131,7 +91,7 @@ class BetaseriesController
             $app->abort(401, "BetaSeries: " . $auth->errors[0]->text);
         }
 
-        $watched = fetch("/episodes/watched", [
+        $watched = $this->fetch("/episodes/watched", [
             "key"   => $app["bs.apikey"],
             "token" => $auth->token,
             "id"    => $id,
@@ -155,7 +115,7 @@ class BetaseriesController
             $app->abort(403, "This user doesn't have the rights to unset an episode as watched");
         }
 
-        $auth = fetch("/members/auth", [
+        $auth = $this->fetch("/members/auth", [
             "key"      => $app["bs.apikey"],
             "login"    => $app["bs.login"],
             "password" => md5($app["bs.passwd"])
@@ -165,12 +125,52 @@ class BetaseriesController
             $app->abort(401, "BetaSeries: " . $auth->errors[0]->text);
         }
 
-        $unwatched = fetch("/episodes/watched", [
+        $unwatched = $this->fetch("/episodes/watched", [
             "key"   => $app["bs.apikey"],
             "token" => $auth->token,
             "id"    => $id
         ],  "DELETE");
 
         return $app->json($unwatched);
+    }
+
+    /**
+    * Execute routes to Betaseries API and retrieve informations
+    *
+    * @param String $url Betaseries route
+    * @param Array $params Url parameters
+    * @param String $method Specify the route method, default GET
+    *
+    * @return JsonResponse Object containing betaseries informations
+    */
+    private function fetch($url, $params = [], $method = "GET")
+    {
+        $query = '';
+        if ($method == "GET" || $method != "POST") {
+            $query = '?' . http_build_query($params);
+        }
+        $url = "https://api.betaseries.com{$url}{$query}";
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_HEADER, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        if ($method == "POST") {
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+        }
+
+        if ($method != "GET" && $method != "POST") {
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
+        }
+
+        $response = curl_exec($ch);
+
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+        $data = substr($response, $headerSize);
+        curl_close($ch);
+
+        return json_decode($data);
     }
 }

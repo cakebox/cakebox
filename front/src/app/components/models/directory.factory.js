@@ -10,13 +10,13 @@
 
         actions = {
             archive: {
-                method: 'GET',
-                url: BACKEND_URL + '/directories/archive',
+                method:  'GET',
+                url:     BACKEND_URL + '/directories/archive',
                 isArray: true
             },
             delete: {
-                method: 'DELETE',
-                url: BACKEND_URL + '/directories',
+                method:  'DELETE',
+                url:     BACKEND_URL + '/directories',
                 isArray: true
             }
         };

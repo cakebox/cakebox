@@ -5,17 +5,17 @@
         <div id="header-player">
             <div class="row">
                 <a ng-href="{{ previouspage }}" translate>PLAY_PAGE.BACK</a>
-                <select class="form-control pull-right" ng-model="player.default_type" ng-options="player.name for (key, player) in player.available_types"></select><button type="button" class="btn btn-default pull-right"><i title="{{ 'BROWSE_PAGE.COPY' | translate }}" class="glyphicon glyphicon-link" clip-copy="copyText(fileinfo)" clip-click="copyfileinfo()"></i></button>
+                <select class="form-control pull-right" ng-model="player.default_type" ng-options="player.name for (key, player) in player.available_types"></select><button type="button" class="btn btn-default pull-right"><i title="{{ 'BROWSE_PAGE.COPY' | translate }}" class="glyphicon glyphicon-link" clip-copy="copyText(file)" clip-click="copyfile()"></i></button>
             </div>
         </div>
 
         <div class="video-header">
-            {{ fileinfo.name }}
+            {{ file.name }}
         </div>
 
         <div class="player">
             <div class="player-container">
-                <webplayer class="video-container" autoplay="{{ player.auto_play }}" player="{{ player.default_type.type }}" url="{{ fileinfo.access }}" mimetype="{{ fileinfo.mimetype }}"></webplayer>
+                <webplayer class="video-container" autoplay="{{ player.auto_play }}" player="{{ player.default_type.type }}" url="{{ file.access }}" mimetype="{{ file.mimetype }}"></webplayer>
             </div>
 
             <div class="betaseries" ng-show="betaseries.episode || betaseries.movie">
@@ -32,7 +32,7 @@
             </div>
 
             <div id="download" ng-show="rights.canDownloadFile">
-                <a ng-href="{{ fileinfo.access }}" translate><span class="glyphicon glyphicon-download"></span> PLAY_PAGE.DOWNLOAD </a> <small>({{ fileinfo.size | bytes }})</small>
+                <a ng-href="{{ getDownloadLink(file) }}" translate><span class="glyphicon glyphicon-download"></span> PLAY_PAGE.DOWNLOAD </a> <small>({{ file.size | bytes }})</small>
             </div>
 
             <div class="row">

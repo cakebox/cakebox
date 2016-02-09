@@ -32,8 +32,6 @@ else
 // Remove ending slash if needed
 if (substr($app['cakebox.root'], -1) == '/')
     $app['cakebox.root'] = rtrim($app['cakebox.root'], '/');
-if (substr($app['cakebox.access'], -1) == '/')
-    $app['cakebox.access'] = rtrim($app['cakebox.access'], '/');
 
 /**
  * Register service providers

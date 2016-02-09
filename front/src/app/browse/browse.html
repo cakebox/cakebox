@@ -29,29 +29,29 @@
 
         <table class="table table-condensed table-striped">
             <tbody>
-                <tr ng-repeat="entry in entries | orderBy:sortOptions.sortBy:sortOptions.reverse | filter:search.text">
+                <tr ng-repeat="e in entries | orderBy:sortOptions.sortBy:sortOptions.reverse | filter:search.text">
                     <td class="entry-type">
-                        <span ng-class="getExtraClasses(entry)"></span>
+                        <span ng-class="getExtraClasses(e)"></span>
                     </td>
                     <td class="entry-name">
-                        <a ng-href="{{ getUrl(entry) }}">{{ entry.name }}</a>
-                        <small ng-show="isRecentFile(entry)"><span title=" {{ 'BROWSE_PAGE.STAR' | translate }} " class="glyphicon glyphicon-star"></span></small>
+                        <a ng-href="{{ getUrl(e) }}">{{ e.name }}</a>
+                        <small ng-show="isRecentFile(e)"><span title="{{ 'BROWSE_PAGE.STAR' | translate }}" class="glyphicon glyphicon-star"></span></small>
                     </td>
                     <td class="entry-size hidden-xs">
-                        {{ entry.size | bytes }}
+                        {{ e.size | bytes }}
                     </td>
                     <td class="entry-copy">
-                        <i ng-show="entry.type == 'file'" title="{{ 'BROWSE_PAGE.COPY' | translate }}" class="glyphicon glyphicon-link" clip-copy="copyText(entry)" clip-click="copyfileinfo()"></i>
+                        <i title="{{ 'BROWSE_PAGE.COPY' | translate }}" class="glyphicon glyphicon-link" ng-show="e.type == 'file'" clip-copy="copyText(e)" clip-click="copyfileinfo()"></i>
                     </td>
                     <td class="entry-download">
-                        <a ng-show="entry.type == 'dir' && rights.canArchiveDirectory" href="" ng-click="archiveDirectory(entry)" title="{{ 'BROWSE_PAGE.ARCHIVE' | translate }}" class="glyphicon glyphicon-compressed"></a>
-                        <a ng-show="entry.type == 'file' && rights.canDownloadFile" ng-href="{{ entry.access }}" title="{{ 'BROWSE_PAGE.DOWNLOAD' | translate }}" class="glyphicon glyphicon-download"></a>
+                        <a href="" title="{{ 'BROWSE_PAGE.ARCHIVE' | translate }}" class="glyphicon glyphicon-compressed" ng-show="e.type == 'dir' && rights.canArchiveDirectory" ng-click="archiveDirectory(e)"></a>
+                        <a ng-href="{{ getDownloadLink(e) }}" title="{{ 'BROWSE_PAGE.DOWNLOAD' | translate }}" class="glyphicon glyphicon-download" ng-show="e.type == 'file' && rights.canDownloadFile"></a>
                     </td>
-                    <td class="entry-delete" ng-show="entry.type == 'dir' && rights.canDelete">
-                        <a href="" title="{{ 'BROWSE_PAGE.DELETE_DIR' | translate }}" class="glyphicon glyphicon-remove-circle" ng-click="removeDirectory(entry)"></a>
+                    <td class="entry-delete" ng-show="e.type == 'dir' && rights.canDelete">
+                        <a href="" title="{{ 'BROWSE_PAGE.DELETE_DIR' | translate }}" class="glyphicon glyphicon-remove-circle" ng-click="removeDirectory(e)"></a>
                     </td>
-                    <td class="entry-delete" ng-show="entry.type == 'file' && rights.canDelete">
-                        <a href="" title="{{ 'BROWSE_PAGE.DELETE_FILE' | translate }}" class="glyphicon glyphicon-remove" ng-click="removeFile(entry)"></a>
+                    <td class="entry-delete" ng-show="e.type == 'file' && rights.canDelete">
+                        <a href="" title="{{ 'BROWSE_PAGE.DELETE_FILE' | translate }}" class="glyphicon glyphicon-remove" ng-click="removeFile(e)"></a>
                     </td>
                 </tr>
             </tbody>

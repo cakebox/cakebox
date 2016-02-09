@@ -7,6 +7,7 @@ use SPLFileInfo;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
@@ -40,8 +41,6 @@ class FileController {
         $fileinfo["name"]     = $file->getBasename("." . $file->getExtension());
         $fileinfo["fullname"] = $file->getFilename();
         $fileinfo["mimetype"] = mime_content_type($file->getPathName());
-        $fileinfo["access"]   =
-            str_replace('%2F', '/', rawurlencode("{$app['cakebox.access']}/{$filepath}"));
         $fileinfo["size"]     = $file->getSize();
 
         $arrDirectory = $this->getCurrentDirectoryFiles($file, $app);
@@ -106,6 +105,31 @@ class FileController {
         $subRequest = Request::create('/api/directories', 'GET', ['path' => dirname($filepath)]);
 
         return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
+    }
+
+    /**
+     * Download file
+     *
+     * @param Application $app     Silex Application
+     * @param Request     $request Request parameters
+     *
+     * @return BinaryFileResponse
+     */
+    public function download(Application $app, Request $request) {
+        $filepath = $app['service.main']->checkPath($app['cakebox.root'], $request->get('path'));
+
+        if (!isset($filepath)) {
+            $app->abort(400, "Missing parameters");
+        }
+
+        $file = "{$app['cakebox.root']}/{$filepath}";
+
+        if (!file_exists($file)) {
+            $app->abort(404, "File not found");
+        }
+
+        return $app->sendFile($file)
+                   ->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT);
     }
 
     /**
