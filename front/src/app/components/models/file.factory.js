@@ -6,7 +6,7 @@
         .factory('File', File);
 
     function File($resource, BACKEND_URL) {
-        var resource, actions;
+        var actions;
 
         actions = {
             delete: {
@@ -16,8 +16,7 @@
             }
         };
 
-        resource = $resource(BACKEND_URL + '/files', null, actions);
-        return resource;
+        return $resource(BACKEND_URL + '/files', null, actions);
     }
 
 })();

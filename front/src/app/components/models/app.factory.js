@@ -3,13 +3,10 @@
 
     angular
         .module('cakebox')
-        .factory('App', App);
+        .factory('Application', Application);
 
-    function App($resource, BACKEND_URL) {
-        var resource;
-
-        resource = $resource(BACKEND_URL + '/app', null, null);
-        return resource;
+    function Application($resource, BACKEND_URL) {
+        return $resource(BACKEND_URL + '/app', null, null);
     }
 
 })();

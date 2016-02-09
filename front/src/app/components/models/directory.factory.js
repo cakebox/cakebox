@@ -6,7 +6,7 @@
         .factory('Directory', Directory);
 
     function Directory($resource, BACKEND_URL) {
-        var resource, actions;
+        var actions;
 
         actions = {
             archive: {
@@ -21,8 +21,7 @@
             }
         };
 
-        resource = $resource(BACKEND_URL + '/directories', null, actions);
-        return resource;
+        return $resource(BACKEND_URL + '/directories', null, actions);
     }
 
 })();
