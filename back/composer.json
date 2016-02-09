@@ -3,10 +3,12 @@
   "type": "project",
   "description": "",
   "require": {
-    "php": ">=5.4.0",
+    "php": ">=5.5.0",
 
     "silex/silex": "~1.3",
-    "symfony/finder": "~2.7"
+    "symfony/finder": "~3.0",
+    "monolog/monolog": "1.x",
+    "jdesrosiers/silex-cors-provider": "~0.1"
   },
   "autoload": {
     "psr-0": {"Cakebox": "src/"}

@@ -3,7 +3,11 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Silex\Application;
+use Monolog\Logger;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Silex\Provider\MonologServiceProvider;
+use JDesrosiers\Silex\Provider\CorsServiceProvider;
+
 
 define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'dev');
 
@@ -32,6 +36,22 @@ if (substr($app['cakebox.access'], -1) == '/')
     $app['cakebox.access'] = rtrim($app['cakebox.access'], '/');
 
 /**
+ * Register service providers
+ */
+$app->register(new CorsServiceProvider, [
+    'cors.allowOrigin'  => '*',
+    'cors.allowMethods' => 'GET, POST, PUT, DELETE, OPTIONS'
+]);
+
+$app->after($app['cors']);
+
+$app->register(new MonologServiceProvider(), [
+    'monolog.logfile' => __DIR__ . '/../logs/application.log',
+    'monolog.level'   => Logger::WARNING,
+    'monolog.name'    => 'api'
+]);
+
+/**
  * Register our custom services
  */
 $app['service.main'] = $app->share(function ($app) {
@@ -44,9 +64,6 @@ $app['service.main'] = $app->share(function ($app) {
 $app->error(function (\Exception $e, $code) use ($app) {
     return new JsonResponse(['status_code' => $code, 'message' => $e->getMessage()]);
 });
-
-// Black magic to handle OPTIONS with the API
-$app->match('{url}', function($url) use ($app) { return 'OK'; })->assert('url', '.*')->method('OPTIONS');
 
 require_once __DIR__ . '/routing.php';
 
