@@ -1,10 +1,10 @@
 {
   "production": {
     "FRONTEND_URL": "//cakebox.com",
-    "BACKEND_URL": "//api.cakebox.com"
+    "BACKEND_URL": "http://127.0.0.1:8042"
   },
   "developement": {
     "FRONTEND_URL": "//cakebox.io",
-    "BACKEND_URL": "//api.cakebox.io"
+    "BACKEND_URL": "http://127.0.0.1:8042"
   }
 }
