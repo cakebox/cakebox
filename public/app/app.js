@@ -6,9 +6,9 @@ var app = angular.module('cakebox',  [
     'pascalprecht.translate'
 ]);
 
-app.config(['$routeProvider', '$translateProvider',
+app.config(['$routeProvider', '$translateProvider', 'ngClipProvider',
 
-    function($routeProvider, $translateProvider) {
+    function($routeProvider, $translateProvider, ngClipProvider) {
         $routeProvider.
         when('/', {
             templateUrl: 'partials/browse.html',
@@ -38,5 +38,7 @@ app.config(['$routeProvider', '$translateProvider',
             suffix: '.json'
         });
         $translateProvider.preferredLanguage('fr');
+        $translateProvider.useSanitizeValueStrategy(null);
+        ngClipProvider.setPath("../components/zeroclipboard/dist/ZeroClipboard.swf");
     }
 ]);

@@ -92,7 +92,7 @@ function install-cakebox {
 
     echo -e "----------------------- CAKEBOX-LIGHT ---------------------\n"
     echo -e "Cakebox-light est maintenant installé dans le répertoire "$1".\n"
-    echo -e "Il vous faut maintenant configurer votre serveur pour pouvoir acceder à cakebox depuis le web\n"
+    echo -e "Il vous faut maintenant configurer votre serveur pour pouvoir accéder à cakebox depuis le web\n"
     echo -e "Pour cela, rendez vous sur le wiki, rubrique : Comment configurer votre serveur web Apache 2, NGinx ou LigHttpd ?\n";
     echo -e "Bon stream !\n"
     read -p "Appuyer sur une touche pour terminer ..."
@@ -104,7 +104,7 @@ function install-cakebox {
 function update {
     echo "Mise à jour de Cakebox-light ..."
     read -p "Appuyer sur une touche pour continuer ..."
-    read -e -p "Ou ce trouve votre repertoire Cakebox ? (ex /home/cakebox) " REP2
+    read -e -p "Où ce trouve votre repertoire Cakebox ? (ex /home/cakebox) " REP2
 
     if cd $REP2 2> /dev/null ; then
 
@@ -124,9 +124,9 @@ function update {
 
 function repertoire-install {
 
-    read -e -p "Entrez le répertoire ou installer Cakebox-light (ex /var/www/): " CAKEREP
+    read -e -p "Entrez le répertoire où installer Cakebox-light (ex /var/www/) : " CAKEREP
     if cd $CAKEREP 2> /dev/null ; then
-        echo -e "Debut de l'intallation dans le répertoire '$CAKEREP'\n" 1>&2
+        echo -e "Début de l'installation dans le répertoire '$CAKEREP'\n" 1>&2
     else
         mkdir $CAKEREP
         echo -e "Le répertoire '$CAKEREP' a été créé \n" 1>&2

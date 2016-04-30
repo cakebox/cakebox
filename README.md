@@ -1,6 +1,8 @@
 Cakebox-light
 ===========
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Cakebox/cakebox?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
+
 A small web interface written with [AngularJS](https://angularjs.org/) and [Silex](http://silex.sensiolabs.org/), to allows you to browse, watch, manage and share the files you want.
 
 [![GPL V2](http://img.shields.io/badge/license-GPL_V2-blue.svg?style=flat)](http://opensource.org/licenses/GPL-2.0)
@@ -18,6 +20,7 @@ A small web interface written with [AngularJS](https://angularjs.org/) and [Sile
 * Play videos directly in streaming
 * Easily share a link to download the file
 * Delete or archive a directory or a file
+* Create folder
 * Link to your [BetaSeries](http://www.betaseries.com) account
 
 
@@ -46,7 +49,7 @@ You may use, distribute and copy Cakebox-light under the terms of GNU General Pu
 
 ## Special thanks for assistance and contributions:
 
-* [martialdidit](https://github.com/martialdidit)
+* [mpgn](https://github.com/martialdidit)
 * [Magicalex](https://github.com/Magicalex)
 * [ahyear](https://github.com/ahyear)
 * Candle

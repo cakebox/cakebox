@@ -31,9 +31,20 @@
 
         </div>
 
-        <div id="download" ng-show="rights.canDownloadFile">
-            <a ng-href="{{ fileinfo.access }}" translate><span class="glyphicon glyphicon-download"></span> PLAY_PAGE.DOWNLOAD </a> <small>({{ fileinfo.size | bytes }})</small>
+        <div class="row">
+            <div class="col-sm-4" id="second">
+            <a ng-href="{{ prevplay }}" ng-show="prevplay">
+                <span class="glyphicon glyphicon-triangle-left"></span><span translate>PLAY_PAGE.PREV</span>
+            </a>
+            </div>
+            <div class="col-sm-4" id="download" ng-show="rights.canDownloadFile">
+                <a ng-href="{{ fileinfo.access }}" translate><span class="glyphicon glyphicon-download"></span> PLAY_PAGE.DOWNLOAD </a> <small>({{ fileinfo.size | bytes }})</small>
+            </div>
+            <div class="col-sm-4" id="second">
+                <a ng-href="{{ nextplay }}" ng-show="nextplay">
+                    <span translate>PLAY_PAGE.NEXT </span> <span class="glyphicon glyphicon-triangle-right"></span> 
+                </a>
+            </div>
         </div>
-
     </div>
 </div>

@@ -4,5 +4,5 @@ composer.lock
 /tmp
 /public/.htaccess
 /public/components
-
+/config/default.php
 /config/*.php
