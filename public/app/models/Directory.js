@@ -16,6 +16,11 @@ app.factory('Directory', ['$resource', function ($resource) {
             method: 'DELETE',
             url: 'api/directories/delete',
             isArray: true
+        },
+        rename: {
+            method: 'GET',
+            url: 'api/directories/rename',
+            isArray: true
         }
     };
 

@@ -19,6 +19,7 @@ $app->get("/api/directories",          __NAMESPACE__ . "\\get_content");
 $app->delete("/api/directories/delete",__NAMESPACE__ . "\\delete");
 $app->get("/api/directories/archive",  __NAMESPACE__ . "\\archive");
 $app->get("/api/directories/create",   __NAMESPACE__ . "\\create");
+$app->get("/api/directories/rename",   __NAMESPACE__ . "\\rename");
 
 /**
  * Retrieve directory content, directories and files
@@ -104,6 +105,30 @@ function create(Application $app, Request $request) {
     }
 
     mkdir("{$dir}", 0777, true);
+
+    $subRequest = Request::create('/api/directories', 'GET', ['path' => dirname($dirpath)]);
+    return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
+}
+
+/**
+ * Rename a directory or a file
+ *
+ * @param Application $app Silex Application
+ * @param Request $request Request parameters
+ *
+ * @return JsonResponse Array of objects
+ */
+function rename(Application $app, Request $request) {
+
+    if ($app["rights.canRename"] == false) {
+        $app->abort(403, "This user doesn't have the rights to rename this directory or file");
+    }
+
+    $dir = "{$app['cakebox.root']}{$request->get('path')}";
+    $filename = "{$dir}/{$request->get('name')}";
+    $oldfilename = "{$dir}/{$request->get('oldname')}";
+
+    rename("{$oldfilename}", "{$filename}");
 
     $subRequest = Request::create('/api/directories', 'GET', ['path' => dirname($dirpath)]);
     return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);

@@ -27,6 +27,7 @@ $app["rights.canDownloadFile"] = true;
 $app["rights.canArchiveDirectory"] = false;
 $app["rights.canDelete"] = false;
 $app["rights.canCreate"] = true;
+$app["rights.canRename"] = true;
 
 /*
   Betaseries account

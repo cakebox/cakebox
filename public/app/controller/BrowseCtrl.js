@@ -1,6 +1,11 @@
 app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, breadcrumbs, Directory, File, $translate) {
     $scope.currentPath = "";
     $scope.breadcrumbs = breadcrumbs;
+    $scope.actionedit = false;
+    $scope.editkey = -1;
+    $scope.file = [];
+    $scope.file.name = "";
+    $scope.file.oldname = "";
 
     function retrieveDirectories(path) {
         $scope.informations = $translate.instant('NOTIFICATIONS.LOAD_FILE');
@@ -50,16 +55,18 @@ app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, 
     };
 
     $scope.addDirectory = function() {
-        var folder = $window.prompt("Enter folder name :")
-        Directory.create({'path': $scope.currentPath + "/" + folder}, function(data) {
-            $scope.entries = data;
-            alertify.log(name + ' ' + $translate.instant('NOTIFICATIONS.CREATE_DIR_OK'), "success", 6000);
-        }, function(error) {
-            if (error.status == 403) {
-                alertify.log(name + ' ' + $translate.instant('NOTIFICATIONS.CREATE_DIR_NOTOK'), "error", 6000);
-            }
-        });
-        $scope.refreshDatas($scope.currentPath) // because php have some error
+        var folder = $window.prompt("Enter folder name :");
+        if (folder) {
+            Directory.create({'path': $scope.currentPath + "/" + folder}, function(data) {
+                $scope.entries = data;
+                alertify.log(name + ' ' + $translate.instant('NOTIFICATIONS.CREATE_DIR_OK'), "success", 6000);
+            }, function(error) {
+                if (error.status == 403) {
+                    alertify.log(name + ' ' + $translate.instant('NOTIFICATIONS.CREATE_DIR_NOTOK'), "error", 6000);
+                }
+            });
+            $scope.refreshDatas($scope.currentPath) // because php have some error
+        }
     };
 
     $scope.removeDirectory = function(directory) {
@@ -92,6 +99,17 @@ app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, 
                 }
             });
         }
+    };
+
+    $scope.ddclick = function(key) {
+        $scope.actionedit = true;
+        $scope.editkey = key;
+    };
+
+    $scope.changeName = function(file) {
+        $scope.actionedit = false;
+        $scope.editkey = -1;
+        Directory.rename({'path': $scope.currentPath,'name': file.name, 'oldname': file.oldname}, function(data) {});
     };
 
     $scope.getExtraClasses = function(entry) {

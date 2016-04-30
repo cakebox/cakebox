@@ -176,6 +176,16 @@ td {
   position: absolute;
 }
 
+.editFile > a {
+  color: #4FBF4F;
+  cursor:pointer;
+}
+
+.editFile > input {
+  width: 300px; 
+  height: 25px;
+}
+
 #header-player {
   margin-bottom: 15px;
 }
