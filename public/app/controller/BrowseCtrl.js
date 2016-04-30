@@ -49,6 +49,19 @@ app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, 
         });
     };
 
+    $scope.addDirectory = function() {
+        var folder = $window.prompt("Enter folder name :")
+        Directory.create({'path': $scope.currentPath + "/" + folder}, function(data) {
+            $scope.entries = data;
+            alertify.log(name + ' ' + $translate.instant('NOTIFICATIONS.CREATE_DIR_OK'), "success", 6000);
+        }, function(error) {
+            if (error.status == 403) {
+                alertify.log(name + ' ' + $translate.instant('NOTIFICATIONS.CREATE_DIR_NOTOK'), "error", 6000);
+            }
+        });
+        $scope.refreshDatas($scope.currentPath) // because php have some error
+    };
+
     $scope.removeDirectory = function(directory) {
         var sure = $window.confirm($translate.instant('NOTIFICATIONS.SURE'));
 
@@ -61,6 +74,8 @@ app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, 
                     alertify.log(directory.name + $translate.instant('NOTIFICATIONS.DELETE_NOTOK'), "error", 6000);
                 }
             });
+            $scope.refreshDatas($scope.currentPath) // because php have some error
+            $scope.refreshDatas($scope.currentPath) // because php have some error
         }
     };
 

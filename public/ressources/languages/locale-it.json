@@ -23,6 +23,7 @@
         "COPY": "Copia il link del file",
         "ARCHIVE" : "Crea un archivio della cartella",
         "DOWNLOAD": "Scarica file",
+        "CREATE_DIR": "Create a folder",
         "DELETE_DIR": "Elimina cartella",
         "DELETE_FILE": "Elimina file"
     },
@@ -53,6 +54,8 @@
         "NOT_FOUND": "La cartella è vuota.",
         "SURE": "Sei sicuro di voler eliminare questo elemento?",
         "DELETE_OK": " è stato eliminato.",
-        "DELETE_NOTOK": " non può essere eliminato. Diritti non sufficienti."
+        "DELETE_NOTOK": " non può essere eliminato. Diritti non sufficienti.",
+        "CREATE_DIR_OK": "Folder created",
+        "CREATE_DIR_NOTOK": "Error, folder not created"
     }
 }

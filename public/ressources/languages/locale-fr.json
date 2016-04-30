@@ -23,6 +23,7 @@
         "COPY": "Copier le lien du fichier",
         "ARCHIVE" : "Créer une archive du répertoire",
         "DOWNLOAD": "Télécharger le fichier",
+        "CREATE_DIR": "Créer un dossier",
         "DELETE_DIR": "Supprimer le dossier",
         "DELETE_FILE": "Supprimer le fichier"
     },
@@ -53,6 +54,8 @@
         "NOT_FOUND": "Rien dans ce répertoire.",
         "SURE": "Etes vous sûr de vouloir supprimer cet élement ?",
         "DELETE_OK": " est bien supprimé.",
-        "DELETE_NOTOK": " n'a pas les droits nécessaires pour être supprimé."
+        "DELETE_NOTOK": " n'a pas les droits nécessaires pour être supprimé.",
+        "CREATE_DIR_OK": "Le dossier est bien crée",
+        "CREATE_DIR_NOTOK": "Erreur, le dossier n'est pas crée"
     }
 }

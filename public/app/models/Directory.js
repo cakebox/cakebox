@@ -7,9 +7,14 @@ app.factory('Directory', ['$resource', function ($resource) {
             url: 'api/directories/archive',
             isArray: true
         },
+        create: {
+            method: 'GET',
+            url: 'api/directories/create',
+            isArray: true
+        },
         delete: {
             method: 'DELETE',
-            url: 'api/directories',
+            url: 'api/directories/delete',
             isArray: true
         }
     };

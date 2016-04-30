@@ -6,6 +6,7 @@
             <span ng-if="$last">{{ breadcrumb.name }}</span>
         </li>
         <a ng-click="refreshDatas($event)" title="{{ 'BROWSE_PAGE.REFRESH' | translate }}" class="glyphicon glyphicon-refresh pull-right"></a>
+        <a ng-click="addDirectory()" style="margin-right: 10px;" title="{{ 'BROWSE_PAGE.CREATE_DIR' | translate }}" class="glyphicon glyphicon-plus pull-right"></a>
     </ol>
 
     <div ng-show="informations" class="informations">

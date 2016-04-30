@@ -26,6 +26,7 @@ $app["rights.canPlayMedia"] = true;
 $app["rights.canDownloadFile"] = true;
 $app["rights.canArchiveDirectory"] = false;
 $app["rights.canDelete"] = false;
+$app["rights.canCreate"] = true;
 
 /*
   Betaseries account

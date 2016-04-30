@@ -23,6 +23,7 @@
         "COPY": "Copy the file link",
         "ARCHIVE" : "Create an archive of the directory",
         "DOWNLOAD": "Download file",
+        "CREATE_DIR": "Create a folder",
         "DELETE_DIR": "Delete folder",
         "DELETE_FILE": "Delete file"
     },
@@ -53,6 +54,8 @@
         "NOT_FOUND": "Nothing in this directory.",
         "SURE": "Are you sure you want to remove this element ?",
         "DELETE_OK": " is deleted.",
-        "DELETE_NOTOK": " does not have the rights to be removed."
+        "DELETE_NOTOK": " does not have the rights to be removed.",
+        "CREATE_DIR_OK": "Folder created",
+        "CREATE_DIR_NOTOK": "Folder not created"
     }
 }

@@ -16,9 +16,9 @@ use App\Models\Utils;
  * @var Application $app Silex Application
  */
 $app->get("/api/directories",          __NAMESPACE__ . "\\get_content");
-$app->delete("/api/directories",       __NAMESPACE__ . "\\delete");
+$app->delete("/api/directories/delete",__NAMESPACE__ . "\\delete");
 $app->get("/api/directories/archive",  __NAMESPACE__ . "\\archive");
-
+$app->get("/api/directories/create",   __NAMESPACE__ . "\\create");
 
 /**
  * Retrieve directory content, directories and files
@@ -84,6 +84,32 @@ function get_content(Application $app, Request $request) {
 }
 
 /**
+ * Create a directory
+ *
+ * @param Application $app Silex Application
+ * @param Request $request Request parameters
+ *
+ * @return JsonResponse Array of objects
+ */
+function create(Application $app, Request $request) {
+
+    if ($app["rights.canDelete"] == false) {
+        $app->abort(403, "This user doesn't have the rights to delete this directory");
+    }
+
+    $dir = "{$app['cakebox.root']}{$request->get('path')}";
+
+    if (file_exists($dir) === true) {
+        $app->abort(403, "Directory already exist");
+    }
+
+    mkdir("{$dir}", 0777, true);
+
+    $subRequest = Request::create('/api/directories', 'GET', ['path' => dirname($dirpath)]);
+    return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
+}
+
+/**
  * Delete a directory
  *
  * @param Application $app Silex Application
@@ -99,14 +125,14 @@ function delete(Application $app, Request $request) {
 
     $dirpath = Utils\check_path($app['cakebox.root'], $request->get('path'));
 
-    if (!isset($dirpath)) {
-        $app->abort(400, "Missing parameters");
+    if (empty($dirpath)) {
+        $app->abort(403, "Missing parameters");
     }
 
     $dir = "{$app['cakebox.root']}/{$dirpath}";
 
     if (file_exists($dir) === false) {
-        $app->abort(404, "Directory not found");
+        $app->abort(403, "Directory not found");
     }
 
     if (is_dir($dir) === false) {
@@ -129,7 +155,7 @@ function delete(Application $app, Request $request) {
     }
 
     // Remove directory itself
-    rmdir($dir);
+    rmdir("{$dir}");
 
     $subRequest = Request::create('/api/directories', 'GET', ['path' => dirname($dirpath)]);
     return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
@@ -151,7 +177,7 @@ function archive(Application $app, Request $request) {
 
     $dirpath = Utils\check_path($app['cakebox.root'], $request->get('path'));
 
-    if (!isset($dirpath)) {
+    if (empty($dirpath)) {
         $app->abort(400, "Missing parameters");
     }
 
