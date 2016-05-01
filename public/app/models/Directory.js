@@ -10,17 +10,17 @@ app.factory('Directory', ['$resource', function ($resource) {
         create: {
             method: 'GET',
             url: 'api/directories/create',
-            isArray: true
+            isArray: false
         },
         delete: {
             method: 'DELETE',
             url: 'api/directories/delete',
-            isArray: true
+            isArray: false
         },
         rename: {
             method: 'GET',
             url: 'api/directories/rename',
-            isArray: true
+            isArray: false
         }
     };
 

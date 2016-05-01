@@ -87,13 +87,13 @@ function upload(Application $app, Request $request) {
     $filepath = Utils\check_path($app['cakebox.root'], $request->get('path'));
 
     $uploaddir = "{$app['cakebox.root']}/{$request->get('path')}";
-    $uploadfile = $uploaddir . basename($_FILES['file']['name']);
+
+    $uploadfile = $uploaddir. '/' . basename($_FILES['file']['name']);
 
     if (!(move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)))
         $app->abort(403, "Error, file not upload");
 
-    $subRequest = Request::create('/api/directories', 'GET', ['path' => dirname($filepath)]);
-    return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
+    return $app->json("File upload");
 }
 
 /**

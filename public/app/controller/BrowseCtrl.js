@@ -58,7 +58,6 @@ app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, 
         var folder = $window.prompt("Enter folder name :");
         if (folder) {
             Directory.create({'path': $scope.currentPath + "/" + folder}, function(data) {
-                $scope.entries = data;
                 alertify.log(name + ' ' + $translate.instant('NOTIFICATIONS.CREATE_DIR_OK'), "success", 6000);
             }, function(error) {
                 if (error.status == 403) {
@@ -74,15 +73,13 @@ app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, 
 
         if (sure) {
             Directory.delete({'path': $scope.currentPath + "/" + directory.name}, function(data) {
-                $scope.entries = data;
                 alertify.log(directory.name + $translate.instant('NOTIFICATIONS.DELETE_OK'), "success", 6000);
             }, function(error) {
                 if (error.status == 403) {
                     alertify.log(directory.name + $translate.instant('NOTIFICATIONS.DELETE_NOTOK'), "error", 6000);
                 }
             });
-            $scope.refreshDatas($scope.currentPath) // because php have some error
-            $scope.refreshDatas($scope.currentPath) // because php have some error
+            window.location.reload();
         }
     };
 
@@ -110,6 +107,7 @@ app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, 
         $scope.actionedit = false;
         $scope.editkey = -1;
         Directory.rename({'path': $scope.currentPath,'name': file.name, 'oldname': file.oldname}, function(data) {});
+        $scope.refreshDatas($scope.currentPath) // because php have some error
     };
 
     // upload on file select or drop
@@ -121,7 +119,7 @@ app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, 
             sendFieldsAs: 'form',
             headers: {'Content-Type': 'multipart/form-data'}
         }).then(function (resp) {
-            $scope.entries = resp.data;
+            $scope.refreshDatas($scope.currentPath) // because php have some error
         }, function (resp) {
             console.log('Error status: ' + resp.status);
         }, function (evt) {

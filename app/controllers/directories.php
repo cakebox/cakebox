@@ -98,15 +98,17 @@ function create(Application $app, Request $request) {
         $app->abort(403, "This user doesn't have the rights to delete this directory");
     }
 
-    $dir = "{$app['cakebox.root']}{$request->get('path')}";
+    $dir = "{$app['cakebox.root']}/{$request->get('path')}";
 
     if (file_exists($dir) === true) {
         $app->abort(403, "Directory already exist");
     }
-
+    $fp = fopen('C:\wamp\www\cakebox\app\controllers\data.txt', 'w');
+    fwrite($fp, $dir);
+    fclose($fp);
     mkdir("{$dir}", 0777, true);
 
-    return $app->json("File created");
+    return $app->json("Folder created");
 }
 
 /**
@@ -123,7 +125,7 @@ function rename(Application $app, Request $request) {
         $app->abort(403, "This user doesn't have the rights to rename this directory or file");
     }
 
-    $dir = "{$app['cakebox.root']}{$request->get('path')}";
+    $dir = "{$app['cakebox.root']}/{$request->get('path')}";
     $filename = "{$dir}/{$request->get('name')}";
     $oldfilename = "{$dir}/{$request->get('oldname')}";
 
@@ -180,8 +182,7 @@ function delete(Application $app, Request $request) {
     // Remove directory itself
     rmdir("{$dir}");
 
-    $subRequest = Request::create('/api/directories', 'GET', ['path' => dirname($dirpath)]);
-    return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
+    return $app->json("Folder deleted");
 }
 
 /**
