@@ -24,7 +24,7 @@ app.controller('AppCtrl', function($scope, $http, $location, $translate, Rights,
     });
 
     $scope.copyText = function(data) {
-        return $location.protocol() + "://" + $location.host() + $location.port() + data.access;
+        return $location.protocol() + "://" + $location.host() + ":" + $location.port() + data.access;
     }
 
     $scope.copyfileinfo = function() {

@@ -40,6 +40,6 @@ app.config(['$routeProvider', '$translateProvider', 'ngClipProvider',
         });
         $translateProvider.preferredLanguage('fr');
         $translateProvider.useSanitizeValueStrategy(null);
-        ngClipProvider.setPath("../components/zeroclipboard/dist/ZeroClipboard.swf");
+        ngClipProvider.setPath("components/zeroclipboard/dist/ZeroClipboard.swf");
     }
 ]);
