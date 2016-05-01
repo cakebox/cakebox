@@ -5,7 +5,8 @@ namespace App\Controllers\Other;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\Finder\Finder;
 
 /**
  * Route declaration
@@ -13,7 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  * @var Application $app Silex Application
  */
 $app->get("/api/app",    __NAMESPACE__ . "\\get");
-$app->post("/api/login",  __NAMESPACE__ . "\\login");
+$app->get("/api/login",  __NAMESPACE__ . "\\login");
 
 /**
  * Get informations about cakebox
@@ -38,7 +39,6 @@ function get(Application $app) {
     return $app->json($app_infos);
 }
 
-
 /**
  * Login check
  *
@@ -47,5 +47,12 @@ function get(Application $app) {
  * @return JsonResponse Object containing application informations
  */
 function login(Application $app, Request $request) {
-    return $app->json("login readyet");
+
+    $username = $app["user.name"];
+    $password = $app["user.password"];
+
+    if ($username === $request->get('username'))
+        if ($password === $request->get('password'))
+            return $app->json("login ok");
+    $app->abort(403, "Wrong crendential");
 }

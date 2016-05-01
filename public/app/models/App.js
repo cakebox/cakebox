@@ -3,14 +3,12 @@ app.factory('App', ['$resource', function ($resource) {
 
     actions = {
         login: {
-            method: 'POST',
-            url: 'api/login',
-            isArray: false
+            method: 'GET', //not in POST because SILEX is the worst backend ever
+            url: 'api/login'
         },
         infos: {
             method: 'GET',
-            url: 'api/app',
-            isArray: false
+            url: 'api/app'
         },
     };
 

@@ -106,7 +106,8 @@ app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, 
     $scope.changeName = function(file) {
         $scope.actionedit = false;
         $scope.editkey = -1;
-        Directory.rename({'path': $scope.currentPath,'name': file.name, 'oldname': file.oldname}, function(data) {});
+        Directory.rename({'path': $scope.currentPath,'name': file.name, 'oldname': file.oldname}, function(data) {
+        });
         $scope.refreshDatas($scope.currentPath) // because php have some error
     };
 

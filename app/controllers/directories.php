@@ -103,10 +103,6 @@ function create(Application $app, Request $request) {
     if (file_exists($dir) === true) {
         $app->abort(403, "Directory already exist");
     }
-    $fp = fopen('C:\wamp\www\cakebox\app\controllers\data.txt', 'w');
-    fwrite($fp, $dir);
-    fclose($fp);
-    mkdir("{$dir}", 0777, true);
 
     return $app->json("Folder created");
 }

@@ -20,7 +20,7 @@ app.factory('Directory', ['$resource', function ($resource) {
         rename: {
             method: 'GET',
             url: 'api/directories/rename',
-            isArray: false
+            isArray: true
         }
     };
 

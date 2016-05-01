@@ -31,6 +31,12 @@ $app["rights.canRename"] = true;
 $app["rights.canUpload"] = true;
 
 /*
+User credentials
+*/
+$app["user.name"] = "john";
+$app["user.password"] = "96d9632f363564cc3032521409cf22a852f2032eec099ed5967c0d000cec607a";
+
+/*
   Betaseries account
   NB: Ask API key here http://www.betaseries.com/api/
 */
