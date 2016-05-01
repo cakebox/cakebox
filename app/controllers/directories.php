@@ -106,8 +106,7 @@ function create(Application $app, Request $request) {
 
     mkdir("{$dir}", 0777, true);
 
-    $subRequest = Request::create('/api/directories', 'GET', ['path' => dirname($dirpath)]);
-    return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
+    return $app->json("File created");
 }
 
 /**
@@ -130,8 +129,7 @@ function rename(Application $app, Request $request) {
 
     rename("{$oldfilename}", "{$filename}");
 
-    $subRequest = Request::create('/api/directories', 'GET', ['path' => dirname($dirpath)]);
-    return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
+    return $app->json("File rename");
 }
 
 /**

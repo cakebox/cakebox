@@ -15,8 +15,9 @@ use App\Models\Utils;
  *
  * @var Application $app Silex Application
  */
-$app->get("/api/files",    __NAMESPACE__ . "\\get_infos");
-$app->delete("/api/files", __NAMESPACE__ . "\\delete");
+$app->get("/api/files",         __NAMESPACE__ . "\\get_infos");
+$app->delete("/api/files",      __NAMESPACE__ . "\\delete");
+$app->post("/api/files/upload", __NAMESPACE__ . "\\upload");
 
 
 /**
@@ -67,6 +68,32 @@ function get_infos(Application $app, Request $request) {
     }
 
     return $app->json($fileinfo);
+}
+
+/**
+ * Upload a file
+ *
+ * @param Application $app Silex Application
+ * @param Request $request Request parameters
+ *
+ * @return JsonResponse Array of objects, directory content after the delete process
+ */
+function upload(Application $app, Request $request) {
+
+    if ($app["rights.canUpload"] == false) {
+        $app->abort(403, "This user doesn't have the rights to delete this file");
+    }
+
+    $filepath = Utils\check_path($app['cakebox.root'], $request->get('path'));
+
+    $uploaddir = "{$app['cakebox.root']}/{$request->get('path')}";
+    $uploadfile = $uploaddir . basename($_FILES['file']['name']);
+
+    if (!(move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)))
+        $app->abort(403, "Error, file not upload");
+
+    $subRequest = Request::create('/api/directories', 'GET', ['path' => dirname($filepath)]);
+    return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
 }
 
 /**

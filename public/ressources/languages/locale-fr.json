@@ -25,7 +25,8 @@
         "DOWNLOAD": "Télécharger le fichier",
         "CREATE_DIR": "Créer un dossier",
         "DELETE_DIR": "Supprimer le dossier",
-        "DELETE_FILE": "Supprimer le fichier"
+        "DELETE_FILE": "Supprimer le fichier",
+        "UPLOAD_FILE": "Uploader un fichier"
     },
     "PLAY_PAGE": {
         "BACK": "Retour",

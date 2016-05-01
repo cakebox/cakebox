@@ -18,6 +18,8 @@ A small web interface written with [AngularJS](https://angularjs.org/) and [Sile
 * Easily share a link to download the file
 * Delete or archive a directory or a file
 * Create folder
+* Rename file and folder
+* Upload a file
 * Link to your [BetaSeries](http://www.betaseries.com) account
 
 

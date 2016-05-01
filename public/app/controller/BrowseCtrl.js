@@ -1,4 +1,4 @@
-app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, breadcrumbs, Directory, File, $translate) {
+app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, breadcrumbs, Directory, File, $translate, Upload) {
     $scope.currentPath = "";
     $scope.breadcrumbs = breadcrumbs;
     $scope.actionedit = false;
@@ -110,6 +110,24 @@ app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, 
         $scope.actionedit = false;
         $scope.editkey = -1;
         Directory.rename({'path': $scope.currentPath,'name': file.name, 'oldname': file.oldname}, function(data) {});
+    };
+
+    // upload on file select or drop
+    $scope.upload = function (file) {
+        Upload.upload({
+            url: 'api/files/upload',
+            method: 'POST',
+            data: {'file': file, 'path': $scope.currentPath},
+            sendFieldsAs: 'form',
+            headers: {'Content-Type': 'multipart/form-data'}
+        }).then(function (resp) {
+            $scope.entries = resp.data;
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
     };
 
     $scope.getExtraClasses = function(entry) {

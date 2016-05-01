@@ -10,7 +10,6 @@ app.controller('MediaCtrl', function($location, $scope, $routeParams, File, Play
 
     $scope.bsConfig = Betaseries.getConfig();
     $scope.fileinfo = File.get({'path': $routeParams.path}, function(data) {
-        console.log(data)
         if ($scope.bsConfig.apikey)
             $scope.betaseries = Betaseries.get({'filename': data.name});
         if (data.previousFile)
