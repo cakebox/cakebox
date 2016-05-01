@@ -12,7 +12,7 @@ app.controller('AppCtrl', function($scope, $http, $location, $translate, Rights,
 
     $scope.rights = Rights.get();
 
-    $scope.app = App.get(null, function(data) {
+    $scope.app = App.infos(null, function(data) {
         $translate.use(data.language);
 
         if (data.version.local != data.version.remote)

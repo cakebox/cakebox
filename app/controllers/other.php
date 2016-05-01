@@ -3,6 +3,7 @@
 namespace App\Controllers\Other;
 
 use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 
@@ -11,8 +12,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  *
  * @var Application $app Silex Application
  */
-$app->get("/api/app",  __NAMESPACE__ . "\\get");
-
+$app->get("/api/app",    __NAMESPACE__ . "\\get");
+$app->post("/api/login",  __NAMESPACE__ . "\\login");
 
 /**
  * Get informations about cakebox
@@ -35,4 +36,16 @@ function get(Application $app) {
     );
 
     return $app->json($app_infos);
+}
+
+
+/**
+ * Login check
+ *
+ * @param Application $app Silex Application
+ *
+ * @return JsonResponse Object containing application informations
+ */
+function login(Application $app, Request $request) {
+    return $app->json("login readyet");
 }

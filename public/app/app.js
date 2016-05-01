@@ -30,6 +30,10 @@ app.config(['$routeProvider', '$translateProvider', 'ngClipProvider',
         when('/about', {
             templateUrl: 'partials/about.html'
         }).
+        when('/login', {
+            templateUrl: 'partials/login.html',
+            controller:  'LoginCtrl'
+        }).
         otherwise({
             redirectTo: '/'
         });
