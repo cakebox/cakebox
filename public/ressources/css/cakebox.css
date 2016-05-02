@@ -71,9 +71,11 @@ footer > .container {
   background-color: rgba(255, 255, 255, 0.62);
 }
 
-.close-search {
+.clear-search {
   margin-right: 20px;
-  outline: none;
+  pointer-events: auto;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 table {
