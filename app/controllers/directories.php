@@ -31,6 +31,10 @@ $app->get("/api/directories/rename",   __NAMESPACE__ . "\\rename");
  */
 function get_content(Application $app, Request $request) {
 
+    if(!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+        $app->abort(410, "Wrong cookie");
+    }
+
     $dirpath = Utils\check_path($app['cakebox.root'], $request->get('path'));
 
     if (!isset($dirpath)) {
@@ -94,6 +98,12 @@ function get_content(Application $app, Request $request) {
  */
 function create(Application $app, Request $request) {
 
+    if ($app["user.auth"]) {
+        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+            $app->abort(410, "Wrong cookie");
+        }
+    }
+
     if ($app["rights.canDelete"] == false) {
         $app->abort(403, "This user doesn't have the rights to delete this directory");
     }
@@ -103,6 +113,8 @@ function create(Application $app, Request $request) {
     if (file_exists($dir) === true) {
         $app->abort(403, "Directory already exist");
     }
+
+    mkdir("{$dir}", 0777, true);
 
     return $app->json("Folder created");
 }
@@ -117,8 +129,20 @@ function create(Application $app, Request $request) {
  */
 function rename(Application $app, Request $request) {
 
+    if ($app["user.auth"]) {
+        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+            $app->abort(410, "Wrong cookie");
+        }
+    }
+
     if ($app["rights.canRename"] == false) {
         $app->abort(403, "This user doesn't have the rights to rename this directory or file");
+    }
+
+    $dirpath = Utils\check_path($app['cakebox.root'], $request->get('path'));
+
+    if (empty($dirpath)) {
+        $app->abort(403, "Missing parameters");
     }
 
     $dir = "{$app['cakebox.root']}/{$request->get('path')}";
@@ -139,6 +163,12 @@ function rename(Application $app, Request $request) {
  * @return JsonResponse Array of objects, directory content after the delete process
  */
 function delete(Application $app, Request $request) {
+
+    if ($app["user.auth"]) {
+        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+            $app->abort(410, "Wrong cookie");
+        }
+    }
 
     if ($app["rights.canDelete"] == false) {
         $app->abort(403, "This user doesn't have the rights to delete this directory");
@@ -190,6 +220,12 @@ function delete(Application $app, Request $request) {
  * @return JsonResponse Array of objects, directory content after the archive process
  */
 function archive(Application $app, Request $request) {
+
+    if ($app["user.auth"]) {
+        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+            $app->abort(410, "Wrong cookie");
+        }
+    }
 
     if ($app["rights.canArchiveDirectory"] == false) {
         $app->abort(403, "This user doesn't have the rights to archive a directory");

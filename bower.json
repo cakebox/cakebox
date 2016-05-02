@@ -14,6 +14,7 @@
     "zeroclipboard": "~2.2.0",
     "ng-clip": "~0.2.6",
     "ng-file-upload": "~12.0.4",
-    "sha256": "https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"
+    "sha256": "https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js",
+    "angular-cookies": "~1.5.5"
   }
 }

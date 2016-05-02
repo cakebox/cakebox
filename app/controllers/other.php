@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Finder\Finder;
+use App\Models\Utils;
 
 /**
  * Route declaration
@@ -15,6 +16,8 @@ use Symfony\Component\Finder\Finder;
  */
 $app->get("/api/app",    __NAMESPACE__ . "\\get");
 $app->get("/api/login",  __NAMESPACE__ . "\\login");
+$app->get("/api/cookie",  __NAMESPACE__ . "\\cookie_checker");
+$app->get("/api/diconnect",  __NAMESPACE__ . "\\disconnect");
 
 /**
  * Get informations about cakebox
@@ -52,7 +55,39 @@ function login(Application $app, Request $request) {
     $password = $app["user.password"];
 
     if ($username === $request->get('username'))
-        if ($password === $request->get('password'))
+        if ($password === $request->get('password')) {
+            setcookie("cakebox", hash('sha256', $request->get('username')+$request->get('password')), time()+60*60*24*30, '/', $app["cakebox.host"], false, false);
             return $app->json("login ok");
-    $app->abort(403, "Wrong crendential");
+        }
+    $app->abort(410, "Wrong crendential");
+}
+
+/**
+ * Disconnect
+ *
+ * @param Application $app Silex Application
+ *
+ * @return JsonResponse Object containing application informations
+ */
+function disconnect(Application $app) {
+    unset($_COOKIE['cakebox']);
+    setcookie("cakebox","", time()-3600, '/', $app["cakebox.host"], false, false);
+    return $app->json("cookie destroyed");
+}
+
+/**
+ * Cookie checker
+ *
+ * @param Application $app Silex Application
+ *
+ * @return JsonResponse Object containing application informations
+ */
+function cookie_checker(Application $app, Request $request) {
+
+    if ($app["user.auth"]) {
+        if ((Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+            return $app->json("logged");
+        }
+    }
+    $app->abort(410, "Wrong crendential");
 }

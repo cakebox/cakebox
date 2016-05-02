@@ -1,4 +1,4 @@
-app.controller('AppCtrl', function($scope, $http, $location, $translate, Rights, App) {
+app.controller('AppCtrl', function($scope, $http, $location, $translate, $cookies, Rights, App, Auth) {
 
     $scope.search =
     {
@@ -10,7 +10,23 @@ app.controller('AppCtrl', function($scope, $http, $location, $translate, Rights,
         reverse: false
     };
 
-    $scope.rights = Rights.get();
+
+    $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
+        if(!value && oldValue) {
+            $location.path('/login');
+        }
+        if(value) {
+            console.log("Connect LogginCtrl");
+            $scope.rights = Rights.get();
+            $location.path('/');
+        }
+    }, true);
+
+    $scope.disconnect = function () {
+        App.disconnect({}, function (data) {
+            window.location.reload();
+        });
+    }
 
     $scope.app = App.infos(null, function(data) {
         $translate.use(data.language);

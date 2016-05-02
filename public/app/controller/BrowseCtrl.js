@@ -60,6 +60,7 @@ app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, 
             Directory.create({'path': $scope.currentPath + "/" + folder}, function(data) {
                 alertify.log(name + ' ' + $translate.instant('NOTIFICATIONS.CREATE_DIR_OK'), "success", 6000);
             }, function(error) {
+                console.log(error)
                 if (error.status == 403) {
                     alertify.log(name + ' ' + $translate.instant('NOTIFICATIONS.CREATE_DIR_NOTOK'), "error", 6000);
                 }

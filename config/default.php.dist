@@ -6,6 +6,7 @@
 $app["cakebox.root"] = "/var/www/"; // Root directory Cakebox have to scan
 $app["cakebox.access"] = "/access/"; // Alias used in web server for direct access
 $app["cakebox.language"] = "fr"; //Language of Cakebox. Could be : fr, en
+$app["cakebox.host"] = ""; //domain where cakebox is hosted
 
 /*
   Directory settings
@@ -33,6 +34,7 @@ $app["rights.canUpload"] = true;
 /*
 User credentials
 */
+$app["user.auth"] = 0;
 $app["user.name"] = "john";
 $app["user.password"] = "96d9632f363564cc3032521409cf22a852f2032eec099ed5967c0d000cec607a";
 

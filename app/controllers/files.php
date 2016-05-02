@@ -30,6 +30,12 @@ $app->post("/api/files/upload", __NAMESPACE__ . "\\upload");
  */
 function get_infos(Application $app, Request $request) {
 
+    if ($app["user.auth"]) {
+        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+            $app->abort(410, "Wrong cookie");
+        }
+    }
+
     if ($app["rights.canPlayMedia"] == false) {
         $app->abort(403, "This user doesn't have the rights to retrieve file informations");
     }
@@ -80,11 +86,21 @@ function get_infos(Application $app, Request $request) {
  */
 function upload(Application $app, Request $request) {
 
+    if ($app["user.auth"]) {
+        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+            $app->abort(410, "Wrong cookie");
+        }
+    }
+
     if ($app["rights.canUpload"] == false) {
         $app->abort(403, "This user doesn't have the rights to delete this file");
     }
 
     $filepath = Utils\check_path($app['cakebox.root'], $request->get('path'));
+
+    if (!isset($filepath)) {
+        $app->abort(400, "Missing parameters");
+    }
 
     $uploaddir = "{$app['cakebox.root']}/{$request->get('path')}";
 
@@ -105,6 +121,12 @@ function upload(Application $app, Request $request) {
  * @return JsonResponse Array of objects, directory content after the delete process
  */
 function delete(Application $app, Request $request) {
+
+    if ($app["user.auth"]) {
+        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+            $app->abort(410, "Wrong cookie");
+        }
+    }
 
     if ($app["rights.canDelete"] == false) {
         $app->abort(403, "This user doesn't have the rights to delete this file");
@@ -145,6 +167,7 @@ function delete(Application $app, Request $request) {
  * @return array
  */
 function getCurrentDirectoryFiles(SPLFileInfo $file, Application $app) {
+
     $finder = new Finder();
     $finder->files()->in($file->getPath())->depth('== 0')->ignoreVCS(true)
            ->ignoreDotFiles($app['directory.ignoreDotFiles'])->notName($app["directory.ignore"])

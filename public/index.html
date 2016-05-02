@@ -37,6 +37,9 @@
                         <li ng-class="{'active':!currentPage || currentPage == 'browse'}"><a href="#/browse/" translate> NAVBAR.LOOK_INTO </a></li>
                         <li ng-class="{'active':currentPage == 'about'}"><a href="#/about" translate> NAVBAR.ABOUT </a></li>
                     </ul>
+                    <ul ng-if="cookie != '1'" ng-click="disconnect();" class="nav navbar-nav navbar-right" style="    background: rgba(255, 255, 255, 0.35);">
+                        <li><a href="#/login"> Disconnect </a></li>
+                    </ul>
                     <form ng-show="currentPage == 'browse' || currentPage == ''" class="navbar-form navbar-right searchbox" role="search">
                         <div class="form-group has-feedback">
                             <input type="text" class="form-control" placeholder="{{ 'NAVBAR.SEARCH' | translate }}" ng-model="search.text">
@@ -75,8 +78,10 @@
     <script src="components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
     <script src="components/ng-file-upload/ng-file-upload.min.js"></script>
     <script src="components/sha256/index.js"></script>
+    <script src="components/angular-cookies/angular-cookies.min.js"></script>
 
     <script src="app/app.js"></script>
+    <script src="app/models/Auth.js"></script>
     <script src="app/models/App.js"></script>
     <script src="app/models/Rights.js"></script>
     <script src="app/models/Directory.js"></script>

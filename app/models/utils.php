@@ -49,3 +49,20 @@ function check_path($basePath, $userPath)
 
     return $userPath;
 }
+
+/**
+ * Check if the cookie is good
+ *
+ * @param string $cookie
+ * @param string $username
+ * @param string $password
+ *
+ * @return string
+ */
+function check_cookie($cookie, $username, $password)
+{
+    if ((hash('sha256', $username+$password)) === $cookie)
+        return true;
+    return false;
+}
+
