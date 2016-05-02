@@ -10,7 +10,6 @@ app.controller('AppCtrl', function($scope, $http, $location, $translate, $cookie
         reverse: false
     };
 
-
     $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
         if(!value && oldValue) {
             $location.path('/login');

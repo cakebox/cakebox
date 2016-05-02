@@ -31,8 +31,10 @@ $app->get("/api/directories/rename",   __NAMESPACE__ . "\\rename");
  */
 function get_content(Application $app, Request $request) {
 
-    if(!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
-        $app->abort(410, "Wrong cookie");
+    if ($app["user.auth"]) {
+        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+            $app->abort(410, "Wrong cookie");
+        }
     }
 
     $dirpath = Utils\check_path($app['cakebox.root'], $request->get('path'));

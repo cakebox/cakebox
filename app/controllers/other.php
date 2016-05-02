@@ -51,6 +51,9 @@ function get(Application $app) {
  */
 function login(Application $app, Request $request) {
 
+    if(!$app["user.auth"])
+        return $app->json("login ok");
+
     $username = $app["user.name"];
     $password = $app["user.password"];
 
@@ -84,10 +87,15 @@ function disconnect(Application $app) {
  */
 function cookie_checker(Application $app, Request $request) {
 
+    if(!$app["user.auth"])
+        return $app->json("login ok");
+
     if ($app["user.auth"]) {
         if ((Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
             return $app->json("logged");
+        } else {
+            $app->abort(410, "Wrong crendential");
         }
     }
-    $app->abort(410, "Wrong crendential");
+
 }
