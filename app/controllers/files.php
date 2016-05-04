@@ -30,6 +30,8 @@ $app->post("/api/files/upload", __NAMESPACE__ . "\\upload");
  */
 function get_infos(Application $app, Request $request) {
 
+    Utils\get_infos($app, $_SESSION['username']);
+
     if ($app["user.auth"]) {
         if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
             $app->abort(410, "Wrong cookie");
@@ -86,6 +88,8 @@ function get_infos(Application $app, Request $request) {
  */
 function upload(Application $app, Request $request) {
 
+    Utils\get_infos($app, $_SESSION['username']);
+
     if ($app["user.auth"]) {
         if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
             $app->abort(410, "Wrong cookie");
@@ -99,7 +103,7 @@ function upload(Application $app, Request $request) {
     $filepath = Utils\check_path($app['cakebox.root'], $request->get('path'));
 
     if (!isset($filepath)) {
-        $app->abort(400, "Missing parameters");
+        $app->abort(403, "Missing parameters");
     }
 
     $uploaddir = "{$app['cakebox.root']}/{$request->get('path')}";
@@ -121,6 +125,8 @@ function upload(Application $app, Request $request) {
  * @return JsonResponse Array of objects, directory content after the delete process
  */
 function delete(Application $app, Request $request) {
+
+    Utils\get_infos($app, $_SESSION['username']);
 
     if ($app["user.auth"]) {
         if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
@@ -167,6 +173,8 @@ function delete(Application $app, Request $request) {
  * @return array
  */
 function getCurrentDirectoryFiles(SPLFileInfo $file, Application $app) {
+
+    Utils\get_infos($app, $_SESSION['username']);
 
     $finder = new Finder();
     $finder->files()->in($file->getPath())->depth('== 0')->ignoreVCS(true)

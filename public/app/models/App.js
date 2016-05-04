@@ -16,7 +16,7 @@ app.factory('App', ['$resource', function ($resource) {
         },
         disconnect: {
             method: 'GET',
-            url: 'api/diconnect'
+            url: 'api/disconnect'
         }
     };
 

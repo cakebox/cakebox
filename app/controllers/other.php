@@ -17,7 +17,7 @@ use App\Models\Utils;
 $app->get("/api/app",    __NAMESPACE__ . "\\get");
 $app->get("/api/login",  __NAMESPACE__ . "\\login");
 $app->get("/api/cookie",  __NAMESPACE__ . "\\cookie_checker");
-$app->get("/api/diconnect",  __NAMESPACE__ . "\\disconnect");
+$app->get("/api/disconnect",  __NAMESPACE__ . "\\disconnect");
 
 /**
  * Get informations about cakebox
@@ -27,6 +27,8 @@ $app->get("/api/diconnect",  __NAMESPACE__ . "\\disconnect");
  * @return JsonResponse Object containing application informations
  */
 function get(Application $app) {
+
+    Utils\get_infos($app, $_SESSION['username']);
 
     $local  = json_decode(file_get_contents("{__DIR___}/../../bower.json"));
     $remote = json_decode(file_get_contents("https://raw.github.com/Cakebox/Cakebox-light/master/bower.json"));
@@ -54,6 +56,12 @@ function login(Application $app, Request $request) {
     if(!$app["user.auth"])
         return $app->json("login ok");
 
+    if (!Utils\get_infos($app, $request->get('username'))) {
+        $app->abort(410, "Wrong crendential");
+    }
+
+    $_SESSION['username'] = $app["user.name"];
+
     $username = $app["user.name"];
     $password = $app["user.password"];
 
@@ -73,8 +81,10 @@ function login(Application $app, Request $request) {
  * @return JsonResponse Object containing application informations
  */
 function disconnect(Application $app) {
+    Utils\get_infos($app, $_SESSION['username']);
     unset($_COOKIE['cakebox']);
     setcookie("cakebox","", time()-3600, '/', $app["cakebox.host"], false, false);
+    unset($_SESSION["username"]);
     return $app->json("cookie destroyed");
 }
 
@@ -86,6 +96,8 @@ function disconnect(Application $app) {
  * @return JsonResponse Object containing application informations
  */
 function cookie_checker(Application $app, Request $request) {
+
+    Utils\get_infos($app, $_SESSION['username']);
 
     if(!$app["user.auth"])
         return $app->json("login ok");

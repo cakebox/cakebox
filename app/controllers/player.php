@@ -13,7 +13,6 @@ use App\Models\Utils;
  */
 $app->get("/api/player",  __NAMESPACE__ . "\\get_infos");
 
-
 /**
  * Get player configuration
  *
@@ -22,6 +21,8 @@ $app->get("/api/player",  __NAMESPACE__ . "\\get_infos");
  * @return JsonResponse Object containing player informations
  */
 function get_infos(Application $app) {
+
+    Utils\get_infos($app, $_SESSION['username']);
 
     if ($app["user.auth"]) {
         if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {

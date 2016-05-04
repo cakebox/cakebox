@@ -9,7 +9,6 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Finder\Finder;
 use App\Models\Utils;
 
-
 /**
  * Route declaration
  *
@@ -30,6 +29,8 @@ $app->get("/api/directories/rename",   __NAMESPACE__ . "\\rename");
  * @return JsonResponse Array of objects
  */
 function get_content(Application $app, Request $request) {
+
+    Utils\get_infos($app, $_SESSION['username']);
 
     if ($app["user.auth"]) {
         if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
@@ -100,6 +101,8 @@ function get_content(Application $app, Request $request) {
  */
 function create(Application $app, Request $request) {
 
+    Utils\get_infos($app, $_SESSION['username']);
+
     if ($app["user.auth"]) {
         if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
             $app->abort(410, "Wrong cookie");
@@ -137,6 +140,8 @@ function create(Application $app, Request $request) {
  */
 function rename(Application $app, Request $request) {
 
+    Utils\get_infos($app, $_SESSION['username']);
+
     if ($app["user.auth"]) {
         if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
             $app->abort(410, "Wrong cookie");
@@ -171,6 +176,8 @@ function rename(Application $app, Request $request) {
  * @return JsonResponse Array of objects, directory content after the delete process
  */
 function delete(Application $app, Request $request) {
+
+    Utils\get_infos($app, $_SESSION['username']);
 
     if ($app["user.auth"]) {
         if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
@@ -228,6 +235,8 @@ function delete(Application $app, Request $request) {
  * @return JsonResponse Array of objects, directory content after the archive process
  */
 function archive(Application $app, Request $request) {
+
+    Utils\get_infos($app, $_SESSION['username']);
 
     if ($app["user.auth"]) {
         if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {

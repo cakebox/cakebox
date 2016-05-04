@@ -124,7 +124,7 @@ app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, 
         }).then(function (resp) {
             $scope.refreshDatas($scope.currentPath) // because php have some error
         }, function (resp) {
-            console.log('Error status: ' + resp.status);
+            console.log(resp);
         }, function (evt) {
             $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             if ($scope.progressPercentage == 100)

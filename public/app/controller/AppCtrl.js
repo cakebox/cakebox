@@ -18,21 +18,22 @@ app.controller('AppCtrl', function($scope, $http, $location, $translate, $cookie
             console.log("Connect LogginCtrl");
             $scope.rights = Rights.get();
             $location.path('/');
+            App.infos(null, function(data) {
+                $translate.use(data.language);
+                $scope.app = data;
+
+                if (data.version.local != data.version.remote)
+                    alertify.log("Cakebox-light " + data.version.remote + $translate.instant('NOTIFICATIONS.AVAILABLE'), "success", 10000);
+            });
         }
     }, true);
 
     $scope.disconnect = function () {
         App.disconnect({}, function (data) {
-            window.location.reload();
+            Auth.setUser('');
+            $location.path('/login');
         });
     }
-
-    $scope.app = App.infos(null, function(data) {
-        $translate.use(data.language);
-
-        if (data.version.local != data.version.remote)
-            alertify.log("Cakebox-light " + data.version.remote + $translate.instant('NOTIFICATIONS.AVAILABLE'), "success", 10000);
-    });
 
     $scope.$on('$locationChangeSuccess',function(event, newurl, oldurl) {
         $scope.previouspage = oldurl;

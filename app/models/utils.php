@@ -2,6 +2,7 @@
 
 namespace App\Models\Utils;
 
+use Silex\Application;
 use Symfony\Component\Finder\SplFileInfo;
 
 
@@ -61,8 +62,29 @@ function check_path($basePath, $userPath)
  */
 function check_cookie($cookie, $username, $password)
 {
+    // need to be improved, this is just for testing case on dev branch
     if ((hash('sha256', $username+$password)) === $cookie)
         return true;
     return false;
 }
 
+/**
+ * Load variable of the user
+ *
+ * @param string $username
+ */
+function get_infos(Application $app, $username) {
+
+    $inc = require_once __DIR__ . "/../../config/{$username}.php";
+    if ($inc) {
+        $vararr = get_defined_vars();
+        foreach($vararr as $varName => $varValue) 
+              $GLOBALS[$varName] = $varValue;
+        global $app;
+        $app = $GLOBALS['app'];
+        return 1;
+    } else {
+        return 0;
+    }
+
+}

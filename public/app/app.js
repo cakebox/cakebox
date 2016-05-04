@@ -60,11 +60,7 @@ app.run(['$rootScope', '$location', '$cookies', 'Auth', 'App', function ($rootSc
             console.log("cookie not ok")
         });
     } else {
-        App.login({}, function(data, status) {
-            Auth.setUser("logged"); //Update the state of the user in the app
-        }, function(data) {
-            console.log(data)
-        });
+        $location.path('/login');
     }
 
     $rootScope.$on('$routeChangeStart', function (event) {
