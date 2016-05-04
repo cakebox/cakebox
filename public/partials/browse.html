@@ -8,6 +8,7 @@
         <a ng-click="refreshDatas($event)" title="{{ 'BROWSE_PAGE.REFRESH' | translate }}" class="glyphicon glyphicon-refresh pull-right"></a>
         <a ng-click="addDirectory()" style="margin-right: 10px;" title="{{ 'BROWSE_PAGE.CREATE_DIR' | translate }}" class="glyphicon glyphicon-plus pull-right"></a>
         <div class="fileUpload" ngf-select="upload($file)"><span class="glyphicon glyphicon-cloud-upload" title="{{ 'BROWSE_PAGE.UPLOAD_FILE' | translate }}"></span></div>
+        <a ng-if="progressPercentage != 0" class="pull-right">{{ progressPercentage }}% </a>
     </ol>
 
     <div ng-show="informations" class="informations">
