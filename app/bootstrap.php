@@ -30,6 +30,7 @@ require_once __DIR__ . "/../config/auth.php";
  */
 if (!$app['user.auth'] || $_SERVER['REQUEST_URI'] === '/api/rss') {
 	$app["user.name"] = "default";
+    require_once __DIR__ . "/../config/default.php";
 }
 
 // Include controllers and models
