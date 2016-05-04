@@ -58,7 +58,7 @@ app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, 
     $scope.addDirectory = function() {
         var folder = $window.prompt("Enter folder name :");
         if (folder) {
-            Directory.create({'path': $scope.currentPath + "/" + folder}, function(data) {
+            Directory.create({'path': $scope.currentPath, 'folder': folder}, function(data) {
                 alertify.log(name + ' ' + $translate.instant('NOTIFICATIONS.CREATE_DIR_OK'), "success", 6000);
             }, function(error) {
                 console.log(error)

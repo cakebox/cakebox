@@ -110,7 +110,13 @@ function create(Application $app, Request $request) {
         $app->abort(403, "This user doesn't have the rights to delete this directory");
     }
 
-    $dir = "{$app['cakebox.root']}/{$request->get('path')}";
+    $dirpath = Utils\check_path($app['cakebox.root'], $request->get('path'));
+
+    if (empty($dirpath)) {
+        $app->abort(403, "Missing parameters");
+    }
+
+    $dir = "{$app['cakebox.root']}/{$request->get('path')}/{$request->get('folder')}";
 
     if (file_exists($dir) === true) {
         $app->abort(403, "Directory already exist");
