@@ -110,9 +110,9 @@ function create(Application $app, Request $request) {
         $app->abort(403, "This user doesn't have the rights to delete this directory");
     }
 
-    $dirpath = Utils\check_path($app['cakebox.root'], $request->get('path'));
+    $filepath = Utils\check_path($app['cakebox.root'], $request->get('path'));
 
-    if (empty($dirpath)) {
+    if (!isset($filepath)) {
         $app->abort(403, "Missing parameters");
     }
 
