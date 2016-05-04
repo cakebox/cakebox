@@ -25,7 +25,10 @@ $app["extension.subtitle"] = ["srt"];
 
 require_once __DIR__ . "/../config/auth.php";
 
-if (!$app['user.auth']) {
+/**
+ * @todo use Silex anonymous route
+ */
+if (!$app['user.auth'] || $_SERVER['REQUEST_URI'] === '/api/rss') {
 	$app["user.name"] = "default";
 }
 

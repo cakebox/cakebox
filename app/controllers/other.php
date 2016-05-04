@@ -3,9 +3,11 @@
 namespace App\Controllers\Other;
 
 use Silex\Application;
+use SimpleXMLElement;
+use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Finder\Finder;
 use App\Models\Utils;
 
@@ -18,6 +20,7 @@ $app->get("/api/app",    __NAMESPACE__ . "\\get");
 $app->get("/api/login",  __NAMESPACE__ . "\\login");
 $app->get("/api/cookie",  __NAMESPACE__ . "\\cookie_checker");
 $app->get("/api/disconnect",  __NAMESPACE__ . "\\disconnect");
+$app->get("/api/rss",  __NAMESPACE__ . "\\rss");
 
 /**
  * Get informations about cakebox
@@ -45,6 +48,8 @@ function get(Application $app) {
 }
 
 /**
+ * @todo Use Silex authentification methods
+ *
  * Login check
  *
  * @param Application $app Silex Application
@@ -110,4 +115,39 @@ function cookie_checker(Application $app, Request $request) {
         }
     }
 
+}
+
+/**
+ * @param Application $app
+ *
+ * @return Response
+ */
+function rss(Application $app) {
+    $finder = new Finder();
+    $finder->followLinks()
+           ->in("{$app['cakebox.root']}/")
+           ->ignoreVCS(true)
+           ->ignoreDotFiles($app['directory.ignoreDotFiles'])
+           ->notName($app["directory.ignore"])
+           ->sortByModifiedTime();
+
+    $xml = new SimpleXMLElement('<rss/>');
+
+    /**
+     * @var SplFileInfo $file
+     */
+    foreach ($finder as $file) {
+        if (in_array(strtolower($file->getExtension()), $app["extension.video"])) {
+            $video = $xml->addChild('channel');
+
+            $date = new \DateTime();
+            $date->setTimestamp($file->getMTime());
+
+            $video->addChild('title', $file->getBasename());
+            $video->addChild('pubDate', $date->format(DATE_W3C));
+        }
+
+    }
+
+    return new Response($xml->asXML(), 200, ['Content-Type' => 'application/xml']);
 }
