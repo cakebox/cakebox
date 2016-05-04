@@ -6,8 +6,8 @@
             <span ng-if="$last">{{ breadcrumb.name }}</span>
         </li>
         <a ng-click="refreshDatas($event)" title="{{ 'BROWSE_PAGE.REFRESH' | translate }}" class="glyphicon glyphicon-refresh pull-right"></a>
-        <a ng-click="addDirectory()" style="margin-right: 10px;" title="{{ 'BROWSE_PAGE.CREATE_DIR' | translate }}" class="glyphicon glyphicon-plus pull-right"></a>
-        <div class="fileUpload" ngf-select="upload($file)"><span class="glyphicon glyphicon-cloud-upload" title="{{ 'BROWSE_PAGE.UPLOAD_FILE' | translate }}"></span></div>
+        <a ng-show="rights.canCreate" ng-click="addDirectory()" style="margin-right: 10px;" title="{{ 'BROWSE_PAGE.CREATE_DIR' | translate }}" class="glyphicon glyphicon-plus pull-right"></a>
+        <div ng-show="rights.canUpload"  class="fileUpload" ngf-select="upload($file)"><span class="glyphicon glyphicon-cloud-upload" title="{{ 'BROWSE_PAGE.UPLOAD_FILE' | translate }}"></span></div>
         <a ng-if="progressPercentage != 0" class="pull-right">{{ progressPercentage }}% </a>
     </ol>
 
@@ -33,7 +33,7 @@
                     <a ng-href="{{ getUrl(entry) }}">{{ entry.name }}</a>
                     <small ng-show="isRecentFile(entry)"><span title=" {{ 'BROWSE_PAGE.STAR' | translate }} " class="glyphicon glyphicon-star"></span></small>
                 </td>
-                <td class="entry-name" ng-if="actionedit && key == editkey">
+                <td class="entry-name" ng-if="actionedit && key == editkey && rights.canRename">
                     <form class="form-inline editFile">
                         <input class="form-control" ng-init="file.name=entry.name;file.oldname=entry.name" ng-model="file.name"/>
                         <a class="editFile" title="Send" ng-click="changeName(file)"><span class="glyphicon glyphicon-send"></span></a>
