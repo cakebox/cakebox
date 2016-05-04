@@ -77,8 +77,11 @@ function get_infos(Application &$app, $username) {
 
     foreach ($app['users'] as $user) {
         if (isset($user['user.name']) && $user['user.name'] === $username) {
-            $app['user.name'] = $user['user.name'];
-            $app['user.password'] = $user['user.password'];
+
+            foreach ($user as $key => $value) {
+                $app[$key] = $value;
+            }
+
             return 1;
         }
     }
