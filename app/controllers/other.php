@@ -56,18 +56,23 @@ function login(Application $app, Request $request) {
     if(!$app["user.auth"])
         return $app->json("login ok");
 
-    if (!Utils\get_infos($app, $request->get('username'))) {
+    if (!Utils\get_infos($app, $request->get('username'), $request->get('password'))) {
         $app->abort(410, "Wrong crendential");
     }
 
-    $_SESSION['username'] = $app["user.name"];
+    /**
+     * @todo sanitize
+     */
+    $_SESSION['username'] = $request->get('username');
 
     $username = $app["user.name"];
+
     $password = $app["user.password"];
 
     if ($username === $request->get('username'))
         if ($password === $request->get('password')) {
             setcookie("cakebox", hash('sha256', $request->get('username')+$request->get('password')), time()+60*60*24*30, '/', $app["cakebox.host"], false, false);
+
             return $app->json("login ok");
         }
     $app->abort(410, "Wrong crendential");

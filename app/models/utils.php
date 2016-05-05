@@ -73,18 +73,18 @@ function check_cookie($cookie, $username, $password)
  *
  * @param string $username
  */
-function get_infos(Application $app, $username) {
+function get_infos(Application &$app, $username) {
 
-    $inc = require_once __DIR__ . "/../../config/{$username}.php";
-    if ($inc) {
-        $vararr = get_defined_vars();
-        foreach($vararr as $varName => $varValue) 
-              $GLOBALS[$varName] = $varValue;
-        global $app;
-        $app = $GLOBALS['app'];
-        return 1;
-    } else {
-        return 0;
+    foreach ($app['users'] as $user) {
+        if (isset($user['user.name']) && $user['user.name'] === $username) {
+
+            foreach ($user as $key => $value) {
+                $app[$key] = $value;
+            }
+
+            return 1;
+        }
     }
 
+    return 0;
 }
