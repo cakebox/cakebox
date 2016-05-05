@@ -22,10 +22,9 @@ $app->get("/api/player",  __NAMESPACE__ . "\\get_infos");
  */
 function get_infos(Application $app) {
 
-    Utils\get_infos($app, $_SESSION['username']);
-
     if ($app["user.auth"]) {
-        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, $_COOKIE["cakebox"]))) {
             $app->abort(410, "Wrong cookie");
         }
     }

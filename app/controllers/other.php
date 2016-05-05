@@ -28,7 +28,8 @@ $app->get("/api/disconnect",  __NAMESPACE__ . "\\disconnect");
  */
 function get(Application $app) {
 
-    Utils\get_infos($app, $_SESSION['username']);
+    if($app['user.auth'])
+        Utils\get_infos($app, $_SESSION['username']);
 
     $local  = json_decode(file_get_contents("{__DIR___}/../../bower.json"));
     $remote = json_decode(file_get_contents("https://raw.github.com/Cakebox/Cakebox-light/master/bower.json"));
@@ -56,22 +57,18 @@ function login(Application $app, Request $request) {
     if(!$app["user.auth"])
         return $app->json("login ok");
 
-    if (!Utils\get_infos($app, $request->get('username'), $request->get('password'))) {
+    if (!Utils\get_infos($app, $request->get('username'))) {
         $app->abort(410, "Wrong crendential");
     }
 
-    /**
-     * @todo sanitize
-     */
-    $_SESSION['username'] = $request->get('username');
+    $_SESSION['username'] = htmlspecialchars($request->get('username'));
 
     $username = $app["user.name"];
-
     $password = $app["user.password"];
 
     if ($username === $request->get('username'))
-        if ($password === $request->get('password')) {
-            setcookie("cakebox", hash('sha256', $request->get('username')+$request->get('password')), time()+60*60*24*30, '/', $app["cakebox.host"], false, false);
+        if (password_verify("{$request->get('password')}{$app["user.salt"]}", $app["user.password"])) {
+            setcookie("cakebox", $request->get('password'), time()+60*60*24*30, '/', $app["cakebox.host"], false, false);
 
             return $app->json("login ok");
         }
@@ -102,10 +99,10 @@ function disconnect(Application $app) {
  */
 function cookie_checker(Application $app, Request $request) {
 
-    Utils\get_infos($app, $_SESSION['username']);
-
     if(!$app["user.auth"])
         return $app->json("login ok");
+
+    Utils\get_infos($app, $_SESSION['username']);
 
     if ($app["user.auth"]) {
         if ((Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {

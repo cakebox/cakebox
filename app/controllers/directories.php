@@ -30,10 +30,9 @@ $app->get("/api/directories/rename",   __NAMESPACE__ . "\\rename");
  */
 function get_content(Application $app, Request $request) {
 
-    Utils\get_infos($app, $_SESSION['username']);
-
     if ($app["user.auth"]) {
-        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, $_COOKIE["cakebox"]))) {
             $app->abort(410, "Wrong cookie");
         }
     }
@@ -101,10 +100,9 @@ function get_content(Application $app, Request $request) {
  */
 function create(Application $app, Request $request) {
 
-    Utils\get_infos($app, $_SESSION['username']);
-
     if ($app["user.auth"]) {
-        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, $_COOKIE["cakebox"]))) {
             $app->abort(410, "Wrong cookie");
         }
     }
@@ -140,10 +138,9 @@ function create(Application $app, Request $request) {
  */
 function rename(Application $app, Request $request) {
 
-    Utils\get_infos($app, $_SESSION['username']);
-
     if ($app["user.auth"]) {
-        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, $_COOKIE["cakebox"]))) {
             $app->abort(410, "Wrong cookie");
         }
     }
@@ -177,10 +174,9 @@ function rename(Application $app, Request $request) {
  */
 function delete(Application $app, Request $request) {
 
-    Utils\get_infos($app, $_SESSION['username']);
-
     if ($app["user.auth"]) {
-        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, $_COOKIE["cakebox"]))) {
             $app->abort(410, "Wrong cookie");
         }
     }
@@ -236,10 +232,9 @@ function delete(Application $app, Request $request) {
  */
 function archive(Application $app, Request $request) {
 
-    Utils\get_infos($app, $_SESSION['username']);
-
     if ($app["user.auth"]) {
-        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, $_COOKIE["cakebox"]))) {
             $app->abort(410, "Wrong cookie");
         }
     }

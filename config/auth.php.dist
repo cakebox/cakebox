@@ -1,3 +1,56 @@
 <?php
 
+/*
+    User need to be authenticate 
+    1 Yes, 0 No
+*/
+
 $app["user.auth"] = 1;
+
+/* 
+    Users informations
+*/
+$app['users'] = [
+    [
+        /*
+          User rights
+        */
+        'user.name'                 => 'user1',
+        'user.password'             => '$2a$12$2rcWyVUmAtspKwaj/Ck1NuAl1kjggLRI3fdpNO7qLN/FY/cAXP5jC', //use https://www.dailycred.com/article/bcrypt-calculator with hash256(password)+salt or check the wiji to generate the password
+        'user.salt'                 => '1589647820365489', //long random number
+        /*
+          General configuration of Cakebox
+        */
+        'cakebox.root'              => "/var/www/videos", // Root directory Cakebox have to scan
+        'cakebox.access'            => "/access/", // Alias used in web server for direct access
+        'cakebox.language'          => "fr", //Language of Cakebox. Could be : fr, en, it
+        'cakebox.host'              => "cakebox.local", //domain where cakebox is hosted
+        /*
+          Directory settings
+        */
+        'directory.ignoreDotFiles'  => true,
+        'directory.ignore'          => "", // Regex for files exclusion. For exemple : "/(\.nfo|\.test)$/"
+        /*
+          Web player settings
+        */
+        'player.default_type'       => "html5",
+        'player.auto_play'          => "false",
+        /*
+          User rights
+        */
+        'rights.canPlayMedia'       => true,
+        'rights.canDownloadFile'    => true,
+        'rights.canArchiveDirectory'=> true, //can archive folder
+        'rights.canDelete'          => true, //can delete file or folder
+        'rights.canCreate'          => true, //can create a folder
+        'rights.canRename'          => true, //can rename file or folder
+        'rights.canUpload'          => true, //can upload a file
+        /*
+          Betaseries account
+          NB: Ask API key here http://www.betaseries.com/api/
+        */
+        'bs.login'                  => "",
+        'bs.passwd'                 => "",
+        'bs.apikey'                 => ""
+    ]
+];
