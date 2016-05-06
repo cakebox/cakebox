@@ -6,6 +6,7 @@ app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, 
     $scope.file = [];
     $scope.file.name = "";
     $scope.file.oldname = "";
+    $scope.progressPercentage = 0;
 
     function retrieveDirectories(path) {
         $scope.informations = $translate.instant('NOTIFICATIONS.LOAD_FILE');
@@ -57,9 +58,10 @@ app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, 
     $scope.addDirectory = function() {
         var folder = $window.prompt("Enter folder name :");
         if (folder) {
-            Directory.create({'path': $scope.currentPath + "/" + folder}, function(data) {
+            Directory.create({'path': $scope.currentPath, 'folder': folder}, function(data) {
                 alertify.log(name + ' ' + $translate.instant('NOTIFICATIONS.CREATE_DIR_OK'), "success", 6000);
             }, function(error) {
+                console.log(error)
                 if (error.status == 403) {
                     alertify.log(name + ' ' + $translate.instant('NOTIFICATIONS.CREATE_DIR_NOTOK'), "error", 6000);
                 }
@@ -122,10 +124,11 @@ app.controller('BrowseCtrl', function($window, $location, $scope, $routeParams, 
         }).then(function (resp) {
             $scope.refreshDatas($scope.currentPath) // because php have some error
         }, function (resp) {
-            console.log('Error status: ' + resp.status);
+            console.log(resp);
         }, function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            if ($scope.progressPercentage == 100)
+                $scope.progressPercentage = 0;
         });
     };
 

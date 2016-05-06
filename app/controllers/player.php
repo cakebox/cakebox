@@ -4,7 +4,7 @@ namespace App\Controllers\Player;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use App\Models\Utils;
 
 /**
  * Route declaration
@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  * @var Application $app Silex Application
  */
 $app->get("/api/player",  __NAMESPACE__ . "\\get_infos");
-
 
 /**
  * Get player configuration
@@ -22,6 +21,13 @@ $app->get("/api/player",  __NAMESPACE__ . "\\get_infos");
  * @return JsonResponse Object containing player informations
  */
 function get_infos(Application $app) {
+
+    if ($app["user.auth"]) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
+            $app->abort(410, "Wrong cookie");
+        }
+    }
 
     if ($app["rights.canPlayMedia"] == false) {
         $app->abort(403, "This user doesn't have the rights to retrieve player informations");

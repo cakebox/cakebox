@@ -4,7 +4,7 @@ namespace App\Controllers\BetaSeries;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use App\Models\Utils;
 
 /**
  * Route declaration
@@ -66,6 +66,13 @@ function fetch($url, $params = [], $method = "GET")
  */
 function get_config(Application $app) {
 
+    if ($app["user.auth"]) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
+            $app->abort(410, "Wrong cookie");
+        }
+    }
+
     $bs_config           = [];
     $bs_config["apikey"] = (!empty($app["bs.apikey"])) ? true : false;
     $bs_config["login"]  = (!empty($app["bs.login"])) ? true : false;
@@ -83,6 +90,13 @@ function get_config(Application $app) {
  * @return JsonResponse
  */
 function get_infos(Application $app, $name) {
+
+    if ($app["user.auth"]) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
+            $app->abort(410, "Wrong cookie");
+        }
+    }
 
     if ($app["rights.canPlayMedia"] == false) {
         $app->abort(403, "This user doesn't have the rights to retrieve episode informations");
@@ -127,6 +141,13 @@ function get_infos(Application $app, $name) {
  */
 function set_watched(Application $app, $id) {
 
+    if ($app["user.auth"]) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
+            $app->abort(410, "Wrong cookie");
+        }
+    }
+
     if ($app["rights.canPlayMedia"] == false) {
         $app->abort(403, "This user doesn't have the rights to set an episode as watched");
     }
@@ -160,6 +181,13 @@ function set_watched(Application $app, $id) {
  * @return JsonResponse
  */
 function unset_watched(Application $app, $id) {
+
+    if ($app["user.auth"]) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
+            $app->abort(410, "Wrong cookie");
+        }
+    }
 
     if ($app["rights.canPlayMedia"] == false) {
         $app->abort(403, "This user doesn't have the rights to unset an episode as watched");

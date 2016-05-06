@@ -2,6 +2,7 @@
 
 namespace App\Models\Utils;
 
+use Silex\Application;
 use Symfony\Component\Finder\SplFileInfo;
 
 
@@ -48,4 +49,36 @@ function check_path($basePath, $userPath)
     }
 
     return $userPath;
+}
+
+/**
+ * Check if the cookie is good
+ *
+ * @param string $cookie
+ *
+ * @return boolean
+ */
+function check_cookie(Application $app, $cookie)
+{
+    if(password_verify("{$cookie}{$app["user.salt"]}", $app["user.password"]))
+        return true;
+    return false;
+}
+
+/**
+ * Load variable of the user
+ *
+ * @param string $username
+ */
+function get_infos(Application &$app, $username) {
+
+    foreach ($app['users'] as $user) {
+        if (isset($user['user.name']) && $user['user.name'] === $username) {
+            foreach ($user as $key => $value) {
+                $app[$key] = $value;
+            }
+            return 1;
+        }
+    }
+    return 0;
 }

@@ -10,6 +10,14 @@ app.factory('App', ['$resource', function ($resource) {
             method: 'GET',
             url: 'api/app'
         },
+        cookie: {
+            method: 'GET',
+            url: 'api/cookie'
+        },
+        disconnect: {
+            method: 'GET',
+            url: 'api/disconnect'
+        }
     };
 
     return Login = $resource('api', null, actions);
