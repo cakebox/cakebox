@@ -32,7 +32,7 @@ function get_infos(Application $app, Request $request) {
 
     if ($app["user.auth"]) {
         Utils\get_infos($app, $_SESSION['username']);
-        if (!(Utils\check_cookie($app, $_COOKIE["cakebox"]))) {
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
             $app->abort(410, "Wrong cookie");
         }
     }
@@ -89,7 +89,7 @@ function upload(Application $app, Request $request) {
 
     if ($app["user.auth"]) {
         Utils\get_infos($app, $_SESSION['username']);
-        if (!(Utils\check_cookie($app, $_COOKIE["cakebox"]))) {
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
             $app->abort(410, "Wrong cookie");
         }
     }
@@ -126,7 +126,7 @@ function delete(Application $app, Request $request) {
 
     if ($app["user.auth"]) {
         Utils\get_infos($app, $_SESSION['username']);
-        if (!(Utils\check_cookie($app, $_COOKIE["cakebox"]))) {
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
             $app->abort(410, "Wrong cookie");
         }
     }

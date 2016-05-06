@@ -32,7 +32,7 @@ function get_content(Application $app, Request $request) {
 
     if ($app["user.auth"]) {
         Utils\get_infos($app, $_SESSION['username']);
-        if (!(Utils\check_cookie($app, $_COOKIE["cakebox"]))) {
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
             $app->abort(410, "Wrong cookie");
         }
     }
@@ -102,7 +102,7 @@ function create(Application $app, Request $request) {
 
     if ($app["user.auth"]) {
         Utils\get_infos($app, $_SESSION['username']);
-        if (!(Utils\check_cookie($app, $_COOKIE["cakebox"]))) {
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
             $app->abort(410, "Wrong cookie");
         }
     }
@@ -140,7 +140,7 @@ function rename(Application $app, Request $request) {
 
     if ($app["user.auth"]) {
         Utils\get_infos($app, $_SESSION['username']);
-        if (!(Utils\check_cookie($app, $_COOKIE["cakebox"]))) {
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
             $app->abort(410, "Wrong cookie");
         }
     }
@@ -176,7 +176,7 @@ function delete(Application $app, Request $request) {
 
     if ($app["user.auth"]) {
         Utils\get_infos($app, $_SESSION['username']);
-        if (!(Utils\check_cookie($app, $_COOKIE["cakebox"]))) {
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
             $app->abort(410, "Wrong cookie");
         }
     }
@@ -234,7 +234,7 @@ function archive(Application $app, Request $request) {
 
     if ($app["user.auth"]) {
         Utils\get_infos($app, $_SESSION['username']);
-        if (!(Utils\check_cookie($app, $_COOKIE["cakebox"]))) {
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
             $app->abort(410, "Wrong cookie");
         }
     }

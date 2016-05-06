@@ -105,7 +105,7 @@ function cookie_checker(Application $app, Request $request) {
     Utils\get_infos($app, $_SESSION['username']);
 
     if ($app["user.auth"]) {
-        if ((Utils\check_cookie($app, $_COOKIE["cakebox"]))) {
+        if ((Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
             return $app->json("logged");
         } else {
             $app->abort(410, "Wrong crendential");
