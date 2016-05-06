@@ -38,6 +38,10 @@ if(!file_exists(__DIR__ . "/../config/auth.php")) {
 
     $app["user.auth"] = 0;
 
+    $app["rights.canCreate"] = false;
+    $app["rights.canRename"] = false;
+    $app["rights.canUpload"] = false;
+
 } else {
 
     require_once __DIR__ . "/../config/auth.php";
