@@ -24,9 +24,22 @@ $app["extension.archive"]  = ["zip", "rar", "gz", "bz2", "7z"];
 $app["extension.subtitle"] = ["srt"];
 
 if(!file_exists(__DIR__ . "/../config/auth.php")) {
-    require_once __DIR__ . "/../config/default.php";
+
+    $user = @$_SERVER["PHP_AUTH_USER"];
+    if (isset($user) && file_exists(__DIR__ . "/../config/{$user}.php"))
+     require_once __DIR__ . "/../config/{$user}.php";
+    else
+     require_once __DIR__ . "/../config/default.php";
+    // Remove ending slash if needed
+    if (substr($app["cakebox.root"], -1) == '/')
+        $app["cakebox.root"] = rtrim($app["cakebox.root"], "/");
+    if (substr($app["cakebox.access"], -1) == '/')
+        $app["cakebox.access"] = rtrim($app["cakebox.access"], "/");
+
     $app["user.auth"] = 0;
+
 } else {
+
     require_once __DIR__ . "/../config/auth.php";
     if (!$app['user.auth']) {
         $app["user.name"] = "default";
