@@ -23,11 +23,15 @@ $app["extension.image"]    = ["png", "gif", "jpg", "jpeg"];
 $app["extension.archive"]  = ["zip", "rar", "gz", "bz2", "7z"];
 $app["extension.subtitle"] = ["srt"];
 
-require_once __DIR__ . "/../config/auth.php";
-
-if (!$app['user.auth']) {
-	$app["user.name"] = "default";
+if(!file_exists(__DIR__ . "/../config/auth.php")) {
     require_once __DIR__ . "/../config/default.php";
+    $app["user.auth"] = 0;
+} else {
+    require_once __DIR__ . "/../config/auth.php";
+    if (!$app['user.auth']) {
+        $app["user.name"] = "default";
+        require_once __DIR__ . "/../config/default.php";
+    }
 }
 
 // Include controllers and models
