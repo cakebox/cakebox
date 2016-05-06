@@ -72,13 +72,16 @@ function check_cookie(Application $app, $cookie)
  */
 function get_infos(Application &$app, $username) {
 
-    foreach ($app['users'] as $user) {
-        if (isset($user['user.name']) && $user['user.name'] === $username) {
-            foreach ($user as $key => $value) {
-                $app[$key] = $value;
+    if ($app['users.auth']) {
+        foreach ($app['users'] as $user) {
+            if (isset($user['user.name']) && $user['user.name'] === $username) {
+                foreach ($user as $key => $value) {
+                    $app[$key] = $value;
+                }
+                return 1;
             }
-            return 1;
         }
+        return 0;
     }
-    return 0;
+    return 1;
 }
