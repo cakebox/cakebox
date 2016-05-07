@@ -30,10 +30,9 @@ $app->post("/api/files/upload", __NAMESPACE__ . "\\upload");
  */
 function get_infos(Application $app, Request $request) {
 
-    Utils\get_infos($app, $_SESSION['username']);
-
     if ($app["user.auth"]) {
-        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
             $app->abort(410, "Wrong cookie");
         }
     }
@@ -88,10 +87,9 @@ function get_infos(Application $app, Request $request) {
  */
 function upload(Application $app, Request $request) {
 
-    Utils\get_infos($app, $_SESSION['username']);
-
     if ($app["user.auth"]) {
-        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
             $app->abort(410, "Wrong cookie");
         }
     }
@@ -126,10 +124,9 @@ function upload(Application $app, Request $request) {
  */
 function delete(Application $app, Request $request) {
 
-    Utils\get_infos($app, $_SESSION['username']);
-
     if ($app["user.auth"]) {
-        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
             $app->abort(410, "Wrong cookie");
         }
     }
@@ -174,7 +171,9 @@ function delete(Application $app, Request $request) {
  */
 function getCurrentDirectoryFiles(SPLFileInfo $file, Application $app) {
 
-    Utils\get_infos($app, $_SESSION['username']);
+    if ($app["user.auth"]) {
+        Utils\get_infos($app, $_SESSION['username']);
+    }
 
     $finder = new Finder();
     $finder->files()->in($file->getPath())->depth('== 0')->ignoreVCS(true)

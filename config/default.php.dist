@@ -34,9 +34,8 @@ $app["rights.canUpload"] = true;
 /*
 User credentials
 */
-$app["user.auth"] = 0;
-$app["user.name"] = "john";
-$app["user.password"] = "96d9632f363564cc3032521409cf22a852f2032eec099ed5967c0d000cec607a";
+$app["user.name"] = "";
+$app["user.password"] = "";
 
 /*
   Betaseries account

@@ -66,10 +66,9 @@ function fetch($url, $params = [], $method = "GET")
  */
 function get_config(Application $app) {
 
-    Utils\get_infos($app, $_SESSION['username']);
-
     if ($app["user.auth"]) {
-        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
             $app->abort(410, "Wrong cookie");
         }
     }
@@ -92,10 +91,9 @@ function get_config(Application $app) {
  */
 function get_infos(Application $app, $name) {
 
-    Utils\get_infos($app, $_SESSION['username']);
-
     if ($app["user.auth"]) {
-        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
             $app->abort(410, "Wrong cookie");
         }
     }
@@ -143,10 +141,9 @@ function get_infos(Application $app, $name) {
  */
 function set_watched(Application $app, $id) {
 
-    Utils\get_infos($app, $_SESSION['username']);
-
     if ($app["user.auth"]) {
-        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
             $app->abort(410, "Wrong cookie");
         }
     }
@@ -185,10 +182,9 @@ function set_watched(Application $app, $id) {
  */
 function unset_watched(Application $app, $id) {
 
-    Utils\get_infos($app, $_SESSION['username']);
-
     if ($app["user.auth"]) {
-        if (!(Utils\check_cookie($_COOKIE["cakebox"], $app["user.name"], $app["user.password"]))) {
+        Utils\get_infos($app, $_SESSION['username']);
+        if (!(Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
             $app->abort(410, "Wrong cookie");
         }
     }

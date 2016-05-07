@@ -43,7 +43,7 @@
                     <form ng-show="currentPage == 'browse' || currentPage == ''" class="navbar-form navbar-right searchbox" role="search">
                         <div class="form-group has-feedback">
                             <input type="text" class="form-control" placeholder="{{ 'NAVBAR.SEARCH' | translate }}" ng-model="search.text">
-                            <button ng-if="search.text != ''" ng-click="search.text = ''" type="button" aria-hidden="true" class="close form-control-feedback close-search hidden-xs">&times;</button>
+                            <a class="clear-search glyphicon glyphicon-remove form-control-feedback" ng-click="search.text = ''" ng-show="search.text.length"></a>
                             <span class="glyphicon glyphicon-search form-control-feedback hidden-xs"></span>
                         </div>
                     </form>
