@@ -26,7 +26,8 @@
         "CREATE_DIR": "Create a folder",
         "DELETE_DIR": "Delete folder",
         "DELETE_FILE": "Delete file",
-        "UPLOAD_FILE": "Upload file"
+        "UPLOAD_FILE": "Upload file",
+        "RSS": "RSS"
     },
     "PLAY_PAGE": {
         "BACK": "Back",

@@ -35,5 +35,9 @@ app.factory('breadcrumbs', function($rootScope, $location, $routeParams) {
         return breadcrumbs[0] || {};
     };
 
+    breadcrumbsService.getLast = function() {
+        return breadcrumbs[breadcrumbs.length - 1] || {};
+    };
+
     return breadcrumbsService;
 });
