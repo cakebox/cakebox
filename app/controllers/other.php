@@ -121,32 +121,48 @@ function cookie_checker(Application $app, Request $request) {
 
 /**
  * @param Application $app
+ * @param Request $request
  *
  * @return Response
  */
-function rss(Application $app) {
+function rss(Application $app, Request $request) {
+
+    $dirpath = Utils\check_path($app['cakebox.root'], $request->get('path', ''));
+
+    if (!isset($dirpath)) {
+        $app->abort(403, "Forbiden");
+    }
+
+    $xml = new SimpleXMLElement('<rss/>');
+    $xml->addAttribute('version', '2.0');
+    $channel = $xml->addChild('channel');
+
     $finder = new Finder();
     $finder->followLinks()
-           ->in("{$app['cakebox.root']}/")
+           ->in("{$app['cakebox.root']}/{$dirpath}")
            ->ignoreVCS(true)
            ->ignoreDotFiles($app['directory.ignoreDotFiles'])
            ->notName($app["directory.ignore"])
            ->sortByModifiedTime();
-
-    $xml = new SimpleXMLElement('<rss/>');
 
     /**
      * @var SplFileInfo $file
      */
     foreach ($finder as $file) {
         if (in_array(strtolower($file->getExtension()), $app["extension.video"])) {
-            $video = $xml->addChild('channel');
+            $item = $channel->addChild('item');
 
             $date = new \DateTime();
             $date->setTimestamp($file->getMTime());
 
-            $video->addChild('title', $file->getBasename());
-            $video->addChild('pubDate', $date->format(DATE_W3C));
+            $item->addChild('title', '<![CDATA['.$file->getBasename().']]>');
+
+            $link = $request->isSecure() ? 'https://' : 'http://';
+            $link .= $app['cakebox.host'] . $app['cakebox.access'] . DIRECTORY_SEPARATOR;
+            $link .= $file->getRelativePath() . DIRECTORY_SEPARATOR . $file->getBasename();
+
+            $item->addChild('link', $link);
+            $item->addChild('pubDate', $date->format(DATE_W3C));
         }
 
     }
