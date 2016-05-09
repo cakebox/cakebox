@@ -1,6 +1,11 @@
 <?php
 
 /*
+  NOTE
+  if you don't want to use default, use this template
+  for security reason, we strongly recommand to set upload, create folder
+  can rename a file, delete a file, archive directory and the rss feed to false
+/*
   General configuration of Cakebox
 */
 $app["cakebox.root"] = "/var/www/"; // Root directory Cakebox have to scan

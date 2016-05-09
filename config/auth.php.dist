@@ -10,47 +10,47 @@ $app["user.auth"] = 1;
 /* 
     Users informations
 */
-$app['users'] = [
+$app["users"] = [
     [
         /*
           User rights
         */
-        'user.name'                 => 'user1',
-        'user.password'             => '$2a$12$2rcWyVUmAtspKwaj/Ck1NuAl1kjggLRI3fdpNO7qLN/FY/cAXP5jC', //use https://www.dailycred.com/article/bcrypt-calculator with hash256(password)+salt or check the wiji to generate the password
-        'user.salt'                 => '1589647820365489', //long random number
+        "user.name"                 => "user1",
+        "user.password"             => "$2a$12$2rcWyVUmAtspKwaj/Ck1NuAl1kjggLRI3fdpNO7qLN/FY/cAXP5jC", //use https://www.dailycred.com/article/bcrypt-calculator with hash256(password)+salt or check the wiki to generate the password (default for user1 is foo)
+        "user.salt"                 => "1589647820365489", //long random number, change it for more security
         /*
           General configuration of Cakebox
         */
-        'cakebox.root'              => "/var/www/videos", // Root directory Cakebox have to scan
-        'cakebox.access'            => "/access/", // Alias used in web server for direct access
-        'cakebox.language'          => "fr", //Language of Cakebox. Could be : fr, en, it
-        'cakebox.host'              => "cakebox.local", //domain where cakebox is hosted
+        "cakebox.root"              => "/var/www/videos", // Root directory Cakebox have to scan don not put an extra "/" at the end
+        "cakebox.access"            => "/access/", // Alias used in web server for direct access
+        "cakebox.language"          => "fr", //Language of Cakebox. Could be : fr, en, it
+        "cakebox.host"              => "cakebox.local", //domain where cakebox is hosted
         /*
           Directory settings
         */
-        'directory.ignoreDotFiles'  => true,
-        'directory.ignore'          => "", // Regex for files exclusion. For exemple : "/(\.nfo|\.test)$/"
+        "directory.ignoreDotFiles"  => true,
+        "directory.ignore"          => "", // Regex for files exclusion. For exemple : "/(\.nfo|\.test)$/"
         /*
           Web player settings
         */
-        'player.default_type'       => "html5",
-        'player.auto_play'          => "false",
+        "player.default_type"       => "html5",
+        "player.auto_play"          => "false",
         /*
           User rights
         */
-        'rights.canPlayMedia'       => true,
-        'rights.canDownloadFile'    => true,
-        'rights.canArchiveDirectory'=> true, //can archive folder
-        'rights.canDelete'          => true, //can delete file or folder
-        'rights.canCreate'          => true, //can create a folder
-        'rights.canRename'          => true, //can rename file or folder
-        'rights.canUpload'          => true, //can upload a file
+        "rights.canPlayMedia"       => true,
+        "rights.canDownloadFile"    => true,
+        "rights.canArchiveDirectory"=> true, //can archive folder
+        "rights.canDelete"          => true, //can delete file or folder
+        "rights.canCreate"          => true, //can create a folder
+        "rights.canRename"          => true, //can rename file or folder
+        "rights.canUpload"          => true, //can upload a file, activate this option only if you are sure to cakebox privately to avoid security issue
         /*
           Betaseries account
           NB: Ask API key here http://www.betaseries.com/api/
         */
-        'bs.login'                  => "",
-        'bs.passwd'                 => "",
-        'bs.apikey'                 => ""
+        "bs.login"                  => "",
+        "bs.passwd"                 => "",
+        "bs.apikey"                 => ""
     ]
 ];

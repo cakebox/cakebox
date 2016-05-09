@@ -59,5 +59,10 @@
         "DELETE_NOTOK": " non può essere eliminato. Diritti non sufficienti.",
         "CREATE_DIR_OK": "Folder created",
         "CREATE_DIR_NOTOK": "Error, folder not created"
+    },
+    "LOGIN_PAGE": {
+        "CONNEXION": "Connessione",
+        "REGISTER": "Crea il tuo account",
+        "INTRO": "È necessario essere collegati ad accedere al tuo account o"
     }
 }

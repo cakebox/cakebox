@@ -59,5 +59,10 @@
         "DELETE_NOTOK": " n'a pas les droits nécessaires pour être supprimé.",
         "CREATE_DIR_OK": "Le dossier est bien crée",
         "CREATE_DIR_NOTOK": "Erreur, le dossier n'est pas crée"
+    },
+    "LOGIN_PAGE": {
+        "CONNEXION": "Connection",
+        "REGISTER": "créer votre compte",
+        "INTRO": "Vous devez vous connecter pour accéder à votre Cakebox ou "
     }
 }

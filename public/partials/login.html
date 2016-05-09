@@ -1,12 +1,12 @@
 <div class="view">
     <center>
         <div class="row">
-            <p>Vous devez vous connecter pour accéder à votre Cakebox ou <a href="#">créer votre compte</a></p>
+            <p>{{ 'LOGIN_PAGE.INTRO' | translate }}<a href="#">{{ 'LOGIN_PAGE.REGISTER' | translate }}</a></p>
             <div class="col-md-push-4 col-md-3" style="margin-left: 50px;">
                 <form class="form-signin" ng-submit="loginUser(user)">
                     <input type="text" class="form-control" placeholder="Username" required autofocus style="margin-bottom: 10px;" ng-model="user.username">
                     <input type="password"class="form-control" placeholder="Password" required style="margin-bottom: 10px;" ng-model="user.password">
-                    <button class="btn btn-default btn-block" type="submit">Connection</button>
+                    <button class="btn btn-default btn-block" type="submit">{{ 'LOGIN_PAGE.CONNEXION' | translate }}</button>
                 </form>
             </div>
         </div>

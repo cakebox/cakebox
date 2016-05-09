@@ -104,19 +104,22 @@ function disconnect(Application $app) {
  */
 function cookie_checker(Application $app, Request $request) {
 
-    if(!$app["user.auth"])
+    if (!$app["user.auth"])
         return $app->json("login ok");
 
-    Utils\get_infos($app, $_SESSION['username']);
+    if (isset($_SESSION['username'])) {
 
-    if ($app["user.auth"]) {
-        if ((Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
-            return $app->json("logged");
-        } else {
-            $app->abort(410, "Wrong crendential");
+        Utils\get_infos($app, $_SESSION['username']);
+
+        if ($app["user.auth"]) {
+            if ((Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
+                return $app->json("logged");
+            } else {
+                $app->abort(410, "Wrong crendential");
+            }
         }
     }
-
+    $app->abort(410, "Wrong crendential");
 }
 
 /**

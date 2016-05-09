@@ -1,4 +1,4 @@
-app.controller('LoginCtrl', function($scope, $location, App, Auth, Rights) {
+app.controller('LoginCtrl', function($scope, $location,$translate, App, Auth, Rights) {
 
     $scope.user = [];
     $scope.user.username = "";

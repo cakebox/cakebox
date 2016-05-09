@@ -20,6 +20,7 @@ A small web interface written with [AngularJS](https://angularjs.org/) and [Sile
 * Create folder
 * Rename file and folder
 * Upload a file
+* RSS feed
 * Link to your [BetaSeries](http://www.betaseries.com) account
 
 
@@ -39,6 +40,9 @@ You can find installation informations (in french) on the [wiki](https://github.
 
 You may use, distribute and copy Cakebox-light under the terms of GNU General Public License version 2, which is displayed [here](https://github.com/Cakebox/Cakebox-light/blob/master/LICENSE).
 
+## Security
+
+We take security very seriously at and this code is 100% open source and peer reviewed. Please if you find or wish to report a security issue do it !
 
 ## Authors
 
@@ -48,7 +52,8 @@ You may use, distribute and copy Cakebox-light under the terms of GNU General Pu
 
 ## Special thanks for assistance and contributions:
 
-* [mpgn](https://github.com/martialdidit)
+* [mpgn](https://github.com/mpgn)
+* [L3o-pold](https://github.com/L3o-pold)
 * [Magicalex](https://github.com/Magicalex)
 * [ahyear](https://github.com/ahyear)
 * Candle
