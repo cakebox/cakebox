@@ -35,6 +35,15 @@ A small web interface written with [AngularJS](https://angularjs.org/) and [Sile
 
 You can find installation informations (in french) on the [wiki](https://github.com/Cakebox/Cakebox-light/wiki)
 
+## Docker
+
+Docker installation : [documentation](https://docs.docker.com/engine/installation/)
+
+Running daemon on port **3001** with videos directory on **/home/johndoe/videos**
+> docker build -t cakebox .
+> docker run -p 3001:80 -v /home/johndoe/videos:/var/www/datas -d cakebox
+
+For more options, edit .docker/auth.php and .docker/default.php and rebuild.
 
 ## License
 
