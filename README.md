@@ -41,7 +41,7 @@ Docker installation : [documentation](https://docs.docker.com/engine/installatio
 
 Running daemon on port **3001** with videos directory on **/home/johndoe/videos**
 > docker build -t cakebox .
-> docker run -p 3001:80 -v /home/johndoe/videos:/var/www/datas -d cakebox
+> docker run -p 3001:80 -v /home/johndoe/videos:/app/datas -d cakebox
 
 For more options, edit .docker/auth.php and .docker/default.php and rebuild.
 
