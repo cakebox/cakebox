@@ -8,7 +8,7 @@
 /*
   General configuration of Cakebox
 */
-$app["cakebox.root"] = "/app/datas"; // Root directory Cakebox have to scan
+$app["cakebox.root"] = "/app/data"; // Root directory Cakebox have to scan
 $app["cakebox.access"] = "/access/"; // Alias used in web server for direct access
 $app["cakebox.language"] = "fr"; //Language of Cakebox. Could be : fr, en
 $app["cakebox.host"] = ""; //domain where cakebox is hosted
