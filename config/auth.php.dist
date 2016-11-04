@@ -16,7 +16,7 @@ $app["users"] = [
           User rights
         */
         "user.name"                 => "user1",
-        "user.password"             => "$2a$12$2rcWyVUmAtspKwaj/Ck1NuAl1kjggLRI3fdpNO7qLN/FY/cAXP5jC", //use https://www.dailycred.com/article/bcrypt-calculator with hash256(password)+salt or check the wiki to generate the password (default for user1 is foo)
+        "user.password"             => '$2a$12$2rcWyVUmAtspKwaj/Ck1NuAl1kjggLRI3fdpNO7qLN/FY/cAXP5jC', //use https://www.dailycred.com/article/bcrypt-calculator with hash256(password)+salt or check the wiki to generate the password (default for user1 is foo)
         "user.salt"                 => "1589647820365489", //long random number, change it for more security
         /*
           General configuration of Cakebox
