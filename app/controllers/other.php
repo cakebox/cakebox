@@ -71,12 +71,13 @@ function login(Application $app, Request $request) {
     $username = $app["user.name"];
     $password = $app["user.password"];
 
-    if ($username === $request->get('username'))
+    if ($username === $request->get('username')) {
         if (password_verify("{$request->get('password')}{$app["user.salt"]}", $app["user.password"])) {
             setcookie("cakebox", $request->get('password'), time()+60*60*24*30, '/', $app["cakebox.host"], false, false);
 
-            return $app->json("login ok");
+            return $app->json("login ok crendential");
         }
+    }
     $app->abort(410, "Wrong crendential");
 }
 
@@ -112,8 +113,12 @@ function cookie_checker(Application $app, Request $request) {
         Utils\get_infos($app, $_SESSION['username']);
 
         if ($app["user.auth"]) {
-            if ((Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
-                return $app->json("logged");
+            if (isset($_COOKIE["cakebox"])) {
+                if ((Utils\check_cookie($app, htmlspecialchars($_COOKIE["cakebox"], ENT_QUOTES)))) {
+                    return $app->json("logged");
+                } else {
+                    $app->abort(410, "Wrong crendential");
+                }
             } else {
                 $app->abort(410, "Wrong crendential");
             }

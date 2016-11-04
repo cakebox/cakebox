@@ -52,6 +52,7 @@ app.config(['$routeProvider', '$translateProvider', 'ngClipProvider',
 app.run(['$rootScope', '$location', '$cookies', 'Auth', 'App', function ($rootScope, $location, $cookies, Auth, App) {
 
     var cookie = $cookies.get('cakebox');
+    console.log(cookie)
     if(cookie !== undefined) {
         App.cookie({ cookie: $cookies.get('cakebox') }, function(data, status) {
             console.log('logged with cookie')
@@ -62,6 +63,7 @@ app.run(['$rootScope', '$location', '$cookies', 'Auth', 'App', function ($rootSc
     } else {
         console.log("redirect from cookie check")
         App.cookie({}, function(data, status) {
+            console.log(data)
             console.log('logged without cookie')
             Auth.setUser("logged"); //Update the state of the user in the app
         }, function(data) {
