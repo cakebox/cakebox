@@ -42,7 +42,7 @@ function get_content(Application $app, Request $request) {
     if (!isset($dirpath)) {
         $app->abort(400, "Missing parameters");
     }
-
+    $dirpath = preg_replace("([\.]{2,})", '', $dirpath);
     $finder = new Finder();
     $finder->followLinks()
             ->depth('< 1')
