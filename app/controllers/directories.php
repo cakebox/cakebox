@@ -43,6 +43,11 @@ function get_content(Application $app, Request $request) {
         $app->abort(400, "Missing parameters");
     }
 
+    // Check if user is allowed to go in this directory, security check
+    if ((realpath($dirpath) != realpath($app["cakebox.access"].$dirpath)) && ($dirpath != '')){
+       $app->abort(400, "Bad directory");
+    }
+
     $finder = new Finder();
     $finder->followLinks()
             ->depth('< 1')
