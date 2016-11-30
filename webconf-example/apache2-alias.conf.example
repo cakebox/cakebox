@@ -1,4 +1,3 @@
-<VirtualHost *:80>
     Alias /$ALIAS $CAKEBOXREP/public/
     <Directory $CAKEBOXREP/public/>
         Options Indexes MultiViews FollowSymLinks
@@ -41,5 +40,4 @@
 
     ErrorLog "/var/log/apache2/$ALIAS-error.log"
     CustomLog "/var/log/apache2/$ALIAS-access.log" common
-</VirtualHost>
 
