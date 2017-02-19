@@ -18,7 +18,7 @@ app.directive('webplayer', ["$location",
                         scope.url = $location.protocol() + "://" + $location.host() + ":" + $location.port() + data.url;
 
                         var handleNextPlay = function(event) {
-                            if (jQuery("input[name='autoplay']").val() != 1 || !jQuery("a[ng-show='nextplay']").length) {
+                            if (angular.element("input[name='autoplay']").val() != 1 || !angular.element("a[ng-show='nextplay']").length) {
                                 return;
                             }
 
@@ -28,7 +28,7 @@ app.directive('webplayer', ["$location",
                              * If its Divx player we have to check if the event is 2 for end of playing
                              */
                             if (isNaN(event) || event === 2) {
-                                window.location.href = jQuery("a[ng-show='nextplay']").attr("href") + "?autoplay=1";
+                                window.location.href = angular.element("a[ng-show='nextplay']").attr("href") + "?autoplay=1";
                             }
                         };
 
