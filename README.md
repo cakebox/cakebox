@@ -1,7 +1,9 @@
-Cakebox-light
+Cakebox-light ⚠️ DEPRECATED ⚠️
 ===========
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Cakebox/cakebox?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge) [![GPL V2](http://img.shields.io/badge/license-GPL_V2-blue.svg?style=flat)](http://opensource.org/licenses/GPL-2.0)
+
+THIS PROJECT IS NO LONGER IN ACTIVE DEVELOPEMENT!
 
 A small web interface written with [AngularJS](https://angularjs.org/) and [Silex](http://silex.sensiolabs.org/), to allows you to browse, watch, manage and share the files you want.
 
