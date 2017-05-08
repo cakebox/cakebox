@@ -2,7 +2,20 @@
     <div id="header-player">
         <div class="row">
             <a ng-href="{{ previouspage }}" translate>PLAY_PAGE.BACK</a>
-            <select class="form-control pull-right" ng-model="player.default_type" ng-options="player.name for (key, player) in player.available_types"></select><button type="button" class="btn btn-default pull-right"><i title="{{ 'BROWSE_PAGE.COPY' | translate }}" class="glyphicon glyphicon-link" clip-copy="copyText(fileinfo)" clip-click="copyfileinfo()"></i></button>
+            <select class="form-control pull-right" ng-model="player.default_type"
+                    ng-options="player.name for (key, player) in player.available_types"></select>
+            <button type="button" class="btn btn-default pull-right">
+                <i title="{{ 'BROWSE_PAGE.COPY' | translate }}"
+                   class="glyphicon glyphicon-link"
+                   clip-copy="copyText(fileinfo)"
+                   clip-click="copyfileinfo()"></i>
+            </button>
+            <button type="button" class="btn pull-right" ng-class="{ 'btn-success': autoplay, 'btn-default': !autoplay }">
+                <i title="{{ 'PLAY_PAGE.AUTOPLAY' | translate }}"
+                   class="glyphicon glyphicon-repeat"
+                   clip-copy="toggleAutoplay()"></i>
+                <input type="hidden" name="autoplay" value="{{ autoplay }}">
+            </button>
         </div>
     </div>
 
@@ -42,7 +55,7 @@
             </div>
             <div class="col-sm-4" id="second">
                 <a ng-href="{{ nextplay }}" ng-show="nextplay">
-                    <span translate>PLAY_PAGE.NEXT </span> <span class="glyphicon glyphicon-triangle-right"></span> 
+                    <span translate>PLAY_PAGE.NEXT </span> <span class="glyphicon glyphicon-triangle-right"></span>
                 </a>
             </div>
         </div>

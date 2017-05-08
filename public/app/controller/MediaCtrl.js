@@ -9,6 +9,9 @@ app.controller('MediaCtrl', function($location, $scope, $routeParams, File, Play
     });
 
     $scope.bsConfig = Betaseries.getConfig();
+
+    $scope.autoplay = $routeParams.autoplay ? 1 : 0;
+
     $scope.fileinfo = File.get({'path': $routeParams.path}, function(data) {
         if ($scope.bsConfig.apikey)
             $scope.betaseries = Betaseries.get({'filename': data.name});
@@ -30,5 +33,11 @@ app.controller('MediaCtrl', function($location, $scope, $routeParams, File, Play
             $scope.betaseries = Betaseries.setUnwatched({'id': id});
         else
             alertify.log($scope.betaseries_error, "error", 6000);
+    }
+
+    $scope.toggleAutoplay = function() {
+        $scope.$apply(function () {
+            $scope.autoplay = ($scope.autoplay == 0 ? 1 : 0);
+        });
     }
 });

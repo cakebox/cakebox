@@ -39,7 +39,8 @@
             "NO_VIEW": "Segna l'episodio come non visto su BetaSeries",
             "SCORE": "Voto {{ (episode.note.mean || movie.notes.mean) | number:1 }} su 5 ({{ episode.note.total || movie.notes.total }} partecipanti)",
             "RELEASED_ON": "Rilasciato il "
-        }
+        },
+        "AUTOPLAY": "Lettura automatica"
     },
     "NOTIFICATIONS": {
         "ARCHIVE": {
